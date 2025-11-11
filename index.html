@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/enhanced-main.css">
+    <!-- 修复：使用绝对路径避免大小写问题 -->
+    <link rel="stylesheet" href="./styles/enhanced-main.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
 </head>
 <body>
@@ -15,13 +16,13 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <div class="nav-logo">侯健</div>
+                <div class="nav-logo">Dr. 张三</div>
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="#about" class="nav-link active">关于我</a></li>
                     <li><a href="#research" class="nav-link">研究领域</a></li>
-                    <li><a href="#publications" class="nav-link">学术成果</a></li>
-                    <li><a href="#projects" class="nav-link">项目作品</a></li>
-                    <li><a href="#contact" class="nav-link">联系方式</a></li>
+                    <li><a href="#publications" class="nav-link">出版物</a></li>
+                    <li><a href="#projects" class="nav-link">研究项目</a></li>
+                    <li><a href="#contact" class="nav-link">联系我</a></li>
                 </ul>
                 <div class="nav-toggle" id="nav-toggle">
                     <span></span>
@@ -32,45 +33,22 @@
         </div>
     </nav>
 
+    <!-- 主要内容 -->
     <main>
-        <!-- 个人信息区 -->
-        <section id="about" class="hero-section">
+        <!-- Hero部分 -->
+        <section class="hero" id="about">
             <div class="container">
                 <div class="hero-content">
-                    <div class="profile-section">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&auto=format&q=80" alt="个人头像" class="profile-avatar">
-                        <div class="profile-info">
-                            <h1 class="profile-name">侯健</h1>
-                            <p class="profile-title">统计学在读博士 | 初级统计师</p>
-                            <p class="profile-description">
-                                专注于机器学习、深度学习和自然语言处理研究。发表SCI论文30余篇，
-                                主持国家自然科学基金项目2项。致力于将前沿AI技术应用于实际问题解决。
-                            </p>
-                            <div class="social-links">
-                                <a href="#" class="social-link" title="Google Scholar">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                        <polyline points="22,6 12,13 2,6"/>
-                                    </svg>
-                                </a>
-                                <a href="#" class="social-link" title="GitHub">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                                    </svg>
-                                </a>
-                                <a href="#" class="social-link" title="ResearchGate">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M9 12l2 2 4-4"/>
-                                        <circle cx="12" cy="12" r="10"/>
-                                    </svg>
-                                </a>
-                                <a href="#" class="social-link" title="ORCID">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M8 12h.01M12 12h.01M16 12h.01"/>
-                                    </svg>
-                                </a>
-                            </div>
+                    <div class="hero-text">
+                        <h1 class="hero-title">Dr. 张三</h1>
+                        <p class="hero-subtitle">计算机科学博士 | 人工智能研究员</p>
+                        <p class="hero-description">
+                            专注于深度学习、计算机视觉和自然语言处理领域的研究。
+                            致力于开发智能系统以解决现实世界的复杂问题。
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#research" class="btn btn-primary">了解我的研究</a>
+                            <a href="#contact" class="btn btn-secondary">联系我</a>
                         </div>
                     </div>
                 </div>
@@ -78,169 +56,110 @@
         </section>
 
         <!-- 研究领域 -->
-        <section id="research" class="section">
+        <section class="section" id="research">
             <div class="container">
                 <h2 class="section-title">研究领域</h2>
                 <div class="research-grid">
-                    <div class="research-item">
-                        <h3 class="research-title">机器学习</h3>
-                        <p class="research-description">
-                            深度学习模型架构设计、优化算法研究、迁移学习等方向，
-                            特别关注在大规模数据集上的模型训练和性能优化。
-                        </p>
-                        <div class="keyword-tags">
-                            <span class="keyword-tag">深度学习</span>
-                            <span class="keyword-tag">神经网络</span>
-                            <span class="keyword-tag">迁移学习</span>
-                        </div>
+                    <div class="research-card">
+                        <div class="research-icon">🧠</div>
+                        <h3>深度学习</h3>
+                        <p>专注于神经网络架构设计、迁移学习和强化学习算法研究。</p>
                     </div>
-                    <div class="research-item">
-                        <h3 class="research-title">自然语言处理</h3>
-                        <p class="research-description">
-                            专注于文本理解、机器翻译、情感分析等NLP任务，
-                            致力于开发更加智能和准确的语言模型。
-                        </p>
-                        <div class="keyword-tags">
-                            <span class="keyword-tag">BERT</span>
-                            <span class="keyword-tag">Transformer</span>
-                            <span class="keyword-tag">语言模型</span>
-                        </div>
+                    <div class="research-card">
+                        <div class="research-icon">👁️</div>
+                        <h3>计算机视觉</h3>
+                        <p>图像识别、目标检测、语义分割等视觉理解技术。</p>
                     </div>
-                    <div class="research-item">
-                        <h3 class="research-title">计算机视觉</h3>
-                        <p class="research-description">
-                            图像识别、目标检测、视频分析等计算机视觉技术研究，
-                            探索多模态学习在视觉任务中的应用。
-                        </p>
-                        <div class="keyword-tags">
-                            <span class="keyword-tag">目标检测</span>
-                            <span class="keyword-tag">图像分割</span>
-                            <span class="keyword-tag">多模态学习</span>
-                        </div>
+                    <div class="research-card">
+                        <div class="research-icon">💬</div>
+                        <h3>自然语言处理</h3>
+                        <p>文本理解、机器翻译、对话系统等语言智能技术。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 学术成果 -->
-        <section id="publications" class="section">
+        <!-- 出版物 -->
+        <section class="section" id="publications">
             <div class="container">
-                <h2 class="section-title">学术成果</h2>
+                <h2 class="section-title">主要出版物</h2>
                 <div class="publications-list">
-                    <article class="publication-card">
-                        <h3 class="publication-title">
-                            <a href="#" target="_blank">基于深度学习的文本情感分析与多模态融合研究</a>
-                        </h3>
-                        <p class="publication-authors">张三, 李四, 王五</p>
-                        <p class="publication-venue">IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024</p>
-                        <div class="publication-links">
-                            <a href="#" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="#" class="pub-link">Code</a>
-                            <span class="separator">·</span>
-                            <a href="#" class="pub-link">DOI</a>
+                    <div class="publication-card">
+                        <div class="publication-year">2024</div>
+                        <div class="publication-content">
+                            <h3>Advanced Deep Learning for Computer Vision Applications</h3>
+                            <p class="publication-authors">张三, 李四, 王五</p>
+                            <p class="publication-venue">IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</p>
+                            <a href="#" class="publication-link">查看论文</a>
                         </div>
-                    </article>
-
-                    <article class="publication-card">
-                        <h3 class="publication-title">
-                            <a href="#" target="_blank">Optimizing Neural Network Architecture for Natural Language Understanding</a>
-                        </h3>
-                        <p class="publication-authors">Zhang, S., Li, M., Wang, L.</p>
-                        <p class="publication-venue">ACL 2024: Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics</p>
-                        <div class="publication-links">
-                            <a href="#" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="#" class="pub-link">Code</a>
-                            <span class="separator">·</span>
-                            <a href="#" class="pub-link">DOI</a>
+                    </div>
+                    <div class="publication-card">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-content">
+                            <h3>Efficient Neural Network Architectures for Mobile Devices</h3>
+                            <p class="publication-authors">张三, 赵六</p>
+                            <p class="publication-venue">International Conference on Machine Learning (ICML)</p>
+                            <a href="#" class="publication-link">查看论文</a>
                         </div>
-                    </article>
-
-                    <article class="publication-card">
-                        <h3 class="publication-title">
-                            <a href="#" target="_blank">多模态学习在医学图像分析中的应用研究</a>
-                        </h3>
-                        <p class="publication-authors">张三, 赵六, 孙七, 周八</p>
-                        <p class="publication-venue">中国科学: 信息科学, 2023, 53(6): 1150-1163</p>
-                        <div class="publication-links">
-                            <a href="#" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="#" class="pub-link">DOI</a>
+                    </div>
+                    <div class="publication-card">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-content">
+                            <h3>Transfer Learning Techniques in Natural Language Processing</h3>
+                            <p class="publication-authors">张三, 孙七</p>
+                            <p class="publication-venue">Association for Computational Linguistics (ACL)</p>
+                            <a href="#" class="publication-link">查看论文</a>
                         </div>
-                    </article>
-
-                    <article class="publication-card">
-                        <h3 class="publication-title">
-                            <a href="#" target="_blank">A Novel Approach to Graph Neural Networks for Recommendation Systems</a>
-                        </h3>
-                        <p class="publication-authors">Zhang, S., Chen, H., Liu, Y.</p>
-                        <p class="publication-venue">ICML 2023: 40th International Conference on Machine Learning</p>
-                        <div class="publication-links">
-                            <a href="#" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="#" class="pub-link">Code</a>
-                        </div>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 项目作品 -->
-        <section id="projects" class="section">
+        <!-- 研究项目 -->
+        <section class="section" id="projects">
             <div class="container">
-                <h2 class="section-title">项目作品</h2>
+                <h2 class="section-title">研究项目</h2>
                 <div class="projects-grid">
                     <div class="project-card">
-                        <h3 class="project-title">智能文本分析平台</h3>
-                        <p class="project-description">
-                            基于Transformer架构的多任务文本分析系统，支持情感分析、
-                            命名实体识别、文本分类等功能。已在多个实际业务场景中部署应用。
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyTorch</span>
-                            <span class="tech-tag">Transformers</span>
-                            <span class="tech-tag">Docker</span>
+                        <div class="project-header">
+                            <h3>智能医疗影像分析系统</h3>
+                            <span class="project-status">进行中</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">GitHub</a>
-                            <a href="#" class="project-link">演示</a>
+                        <p class="project-description">
+                            开发基于深度学习的医疗影像智能诊断系统，辅助医生进行疾病早期筛查。
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">深度学习</span>
+                            <span class="tag">医疗AI</span>
+                            <span class="tag">图像分析</span>
                         </div>
                     </div>
-
                     <div class="project-card">
-                        <h3 class="project-title">医疗图像智能诊断系统</h3>
-                        <p class="project-description">
-                            基于深度学习的医学影像分析工具，辅助医生进行疾病诊断。
-                            支持X光片、CT、MRI等多种医学影像的分析和诊断建议。
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">OpenCV</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">MongoDB</span>
+                        <div class="project-header">
+                            <h3>多模态大语言模型</h3>
+                            <span class="project-status">已完成</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">GitHub</a>
+                        <p class="project-description">
+                            设计并实现多模态大语言模型，支持文本、图像、音频的统一理解和生成。
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">大语言模型</span>
+                            <span class="tag">多模态</span>
+                            <span class="tag">transformer</span>
                         </div>
                     </div>
-
                     <div class="project-card">
-                        <h3 class="project-title">开源NLP工具包</h3>
-                        <p class="project-description">
-                            轻量级的中文自然语言处理工具包，提供常用NLP任务的高效实现。
-                            支持快速原型开发和生产环境部署。
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">spaCy</span>
-                            <span class="tech-tag">scikit-learn</span>
-                            <span class="tech-tag">PyPI</span>
+                        <div class="project-header">
+                            <h3>边缘计算优化算法</h3>
+                            <span class="project-status">进行中</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">GitHub</a>
-                            <a href="#" class="project-link">文档</a>
+                        <p class="project-description">
+                            优化神经网络在边缘设备上的运行效率，降低计算资源需求。
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">模型压缩</span>
+                            <span class="tag">边缘计算</span>
+                            <span class="tag">优化算法</span>
                         </div>
                     </div>
                 </div>
@@ -248,28 +167,35 @@
         </section>
 
         <!-- 联系方式 -->
-        <section id="contact" class="section">
+        <section class="section" id="contact">
             <div class="container">
-                <h2 class="section-title">联系方式</h2>
+                <h2 class="section-title">联系我</h2>
                 <div class="contact-content">
                     <div class="contact-info">
                         <div class="contact-item">
-                            <h3 class="contact-label">邮箱</h3>
-                            <p class="contact-value">
-                                <a href="mailto:zhang.san@university.edu">zhang.san@university.edu</a>
-                            </p>
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h3>电子邮件</h3>
+                                <p>zhangsan@university.edu</p>
+                            </div>
                         </div>
                         <div class="contact-item">
-                            <h3 class="contact-label">机构</h3>
-                            <p class="contact-value">某某大学计算机科学与技术学院</p>
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-details">
+                                <h3>工作地址</h3>
+                                <p>计算机科学系<br>某某大学<br>北京市海淀区</p>
+                            </div>
                         </div>
                         <div class="contact-item">
-                            <h3 class="contact-label">地址</h3>
-                            <p class="contact-value">中国北京市海淀区中关村大街1号</p>
-                        </div>
-                        <div class="contact-item">
-                            <h3 class="contact-label">研究合作</h3>
-                            <p class="contact-value">欢迎学术合作与交流</p>
+                            <div class="contact-icon">🔗</div>
+                            <div class="contact-details">
+                                <h3>学术链接</h3>
+                                <div class="social-links">
+                                    <a href="https://scholar.google.com/citations?user=example" target="_blank">Google Scholar</a>
+                                    <a href="https://orcid.org/0000-0000-0000-0000" target="_blank">ORCID</a>
+                                    <a href="https://www.researchgate.net/" target="_blank">ResearchGate</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -277,12 +203,13 @@
         </section>
     </main>
 
+    <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-text">© 2025 Dr. 张三. 最后更新: 2025年11月</p>
+            <p>&copy; 2024 Dr. 张三. 保留所有权利。</p>
         </div>
     </footer>
 
-    <script src="scripts/main.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 </html>
