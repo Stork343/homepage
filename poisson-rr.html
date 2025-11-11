@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>泊松分布下基于鞍点逼近的相对风险置信区间构造</title>
+
+  <!-- 阅读页专用样式 -->
+  <link rel="stylesheet" href="reader.css" />
+
+  <!-- KaTeX（本地维护纯静态页的最简单方案） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- 可选：页面内目录高亮（不需要可以删除） -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "\\[", right: "\\]", display: true},
+          {left: "$", right: "$", display: false}
+        ],
+        throwOnError: false
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="paper-header">
+    <a class="back-link"
+        href="/package/index.html#poisson-rr"
+        onclick="if (history.length > 1) { history.back(); return false; }">← 返回主页
+    </a>
+    <h1 class="paper-title">泊松分布下基于鞍点逼近的相对风险置信区间构造</h1>
+    <p class="paper-authors">侯健<sup>a,b</sup>，刘硕<sup>a,b</sup>，田茂再<sup>a,b</sup></p>
+    <p class="paper-affil">(中国人民大学 a. 应用统计科学研究中心; b. 统计学院，北京 100872)</p>
+    <p class="paper-meta">统计与信息论坛, 2025, 40(08) · DOI: 10.20207/j.cnki.1007-3116.20250703.001</p>
+  </header>
+
+  <main class="paper-main">
+    <section id="abstract">
+      <h2>摘&nbsp;要</h2>
+      <p>
+        相对风险是流行病学随机对照试验中的常用指标……（将你的摘要原文粘贴到这里）。
+      </p>
+      <p class="keywords"><strong>关键词：</strong>泊松分布；鞍点逼近；区间估计；相对风险；随机对照试验</p>
+    </section>
+
+    <nav class="toc">
+      <h3>目录</h3>
+      <ol>
+        <li><a href="#sec1">一、引言</a></li>
+        <li><a href="#sec2">二、相对风险置信区间的构造</a></li>
+        <li><a href="#sec3">三、基于鞍点逼近的置信区间构造</a></li>
+        <li><a href="#sec4">四、模拟研究</a></li>
+        <li><a href="#sec5">五、真实数据分析</a></li>
+        <li><a href="#sec6">六、结论与启示</a></li>
+        <li><a href="#refs">参考文献</a></li>
+      </ol>
+    </nav>
+
+    <section id="sec1">
+      <h2>一、引言</h2>
+      <p>
+        （将引言原文粘贴到这里。需要行内/行间公式时，直接写 LaTeX：
+        行内如 $RR=\lambda_E/\lambda_C$；行间如：）
+      </p>
+      <p>行间示例：</p>
+      <div class="eq">
+        $$ RR \;=\; \frac{\lambda_E}{\lambda_C}
+           \;=\; \frac{a/t_E}{b/t_C}
+           \;=\; \frac{a\,t_C}{b\,t_E}. $$
+      </div>
+    </section>
+
+    <section id="sec2">
+      <h2>二、相对风险置信区间的构造</h2>
+      <p>
+        例如 Poisson 模型的似然：
+      </p>
+      <div class="eq">
+        $$ L(\lambda_0,\lambda_1;y_0,y_1)=
+        \frac{(\lambda_0 N_0^\*)^{y_0}}{y_0!}e^{-\lambda_0 N_0^\*}
+        \cdot
+        \frac{(\lambda_1 N_1^\*)^{y_1}}{y_1!}e^{-\lambda_1 N_1^\*}. $$
+      </div>
+      <p>
+        （继续把你在论文里的推导逐段粘贴；所有式子照抄为 LaTeX 公式）。
+      </p>
+    </section>
+
+    <section id="sec3">
+      <h2>三、基于鞍点逼近的置信区间构造</h2>
+      <p>（在此放置 SPA 推导、拉普拉斯逼近、鞍点方程、近似尾概率等。）</p>
+      <div class="eq">
+        $$ K_Z(\theta)=N_0\lambda_0\big(e^{\theta N_1}-1\big)
+          +N_1\lambda_1\big(e^{-\theta N_0 r}-1\big), $$
+      </div>
+      <p>（依次粘贴论文各式，保持编号/文字结构一致。）</p>
+    </section>
+
+    <section id="sec4">
+      <h2>四、模拟研究</h2>
+      <p>（把实验设计、评价指标与表格内容粘贴到这里。表格建议用纯 HTML 表。）</p>
+
+      <!-- 示例表格：可复制粘贴多次 -->
+      <figure class="tbl">
+        <figcaption>表 1：R=2, N0=100, N1=100, …</figcaption>
+        <table>
+          <thead>
+            <tr>
+              <th>方法</th><th>平均下限</th><th>平均上限</th><th>平均区间长度</th><th>覆盖率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>SPA</td><td>1.3357</td><td>2.9119</td><td>1.5762</td><td>0.9505</td></tr>
+            <!-- ……其余行照论文填入 -->
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <section id="sec5">
+      <h2>五、真实数据分析</h2>
+      <p>（三组实证数据，表 10–15 的文字与表格照原文粘贴。）</p>
+    </section>
+
+    <section id="sec6">
+      <h2>六、结论与启示</h2>
+      <p>（将结论全文粘贴。）</p>
+    </section>
+
+    <section id="refs">
+      <h2>参考文献</h2>
+      <ol class="refs">
+        <li>（逐条粘贴论文参考文献；如需公式或希腊字母可以直接写 LaTeX。）</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="paper-footer">
+    <p>本文内容来源：已发表论文 PDF（作者上传版本）。:contentReference[oaicite:0]{index=0}</p>
+  </footer>
+</body>
+</html>
