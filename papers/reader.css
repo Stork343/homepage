@@ -305,3 +305,28 @@ p {
     page-break-inside: avoid;
   }
 }
+
+
+/* 缩放百分比临时浮层：默认隐藏，仅缩放时显示并渐隐 */
+.scale-toast{
+  position: fixed;
+  top: calc(var(--bar-h) + 12px);
+  right: 16px;
+  padding: 8px 12px;
+  background: rgba(30, 41, 59, 0.85);  /* 深灰蓝 */
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;   /* 不抢焦点 */
+  z-index: 20;
+}
+
+/* 显示状态 */
+.scale-toast.show{
+  opacity: 1;
+  transform: translateY(0);
+}
