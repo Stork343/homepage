@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. 侯健 - 个人主页</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/enhanced-main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">Dr. Hou Jian</div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#about" class="nav-link active">关于我</a></li>
+                    <li><a href="#research" class="nav-link">研究领域</a></li>
+                    <li><a href="#publications" class="nav-link">学术成果</a></li>
+                    <li><a href="#projects" class="nav-link">项目作品</a></li>
+                    <li><a href="#contact" class="nav-link">联系方式</a></li>
+                </ul>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 个人信息区 -->
+        <section id="about" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="profile-section">
+                        <img src="hj.jpg" alt="个人头像" class="profile-avatar">
+                        <div class="profile-info">
+                            <h1 class="profile-name">侯健</h1>
+                            <p class="profile-title">统计学在读博士 | 初级统计师</p>
+                            <p class="profile-description">
+                                关注分位回归, 鞍点逼近, 混合效应建模等领域, 发表CI论文30余篇.
+                                
+                            </p>
+                            <div class="social-links">
+
+
+                                <a href="#" class="social-link" title="Google Scholar">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                </a>
+
+                                <!-- GitHub -->
+                                <a class="social-link"
+                                    href="https://github.com/Stork343"
+                                    target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                    <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github v-align-middle">
+                                        <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"></path>
+                                    </svg>
+                                </a>
+                                
+                                <!-- ResearchGate -->
+                                <a class="social-link"
+                                    href="https://www.researchgate.net/profile/Hou-Jian-3"
+                                    target="_blank" rel="noopener noreferrer" 
+                                    aria-label="ResearchGate"
+                                    title="ResearchGate">
+                                    <img src="researchgate.png" width="20" height="20" alt="ResearchGate" loading="lazy">
+                                </a>
+
+                                <!-- ORCID -->
+                                <a class="social-link" href="https://orcid.org/my-orcid?orcid=0000-0002-9248-6874" 
+                                    target="_blank" 
+                                    rel="me noopener noreferrer" 
+                                    aria-label="ORCID">
+                                <img src="orcid.png" class="orcid-icon" alt="ORCID iD">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 研究领域 -->
+        <section id="research" class="section">
+            <div class="container">
+                <h2 class="section-title">研究领域</h2>
+                <div class="research-grid">
+                    <div class="research-item">
+                        <h3 class="research-title">机器学习</h3>
+                        <p class="research-description">
+                            深度学习模型架构设计、优化算法研究、迁移学习等方向，
+                            特别关注在大规模数据集上的模型训练和性能优化。
+                        </p>
+                        <div class="keyword-tags">
+                            <span class="keyword-tag">深度学习</span>
+                            <span class="keyword-tag">神经网络</span>
+                            <span class="keyword-tag">迁移学习</span>
+                        </div>
+                    </div>
+                    <div class="research-item">
+                        <h3 class="research-title">自然语言处理</h3>
+                        <p class="research-description">
+                            专注于文本理解、机器翻译、情感分析等NLP任务，
+                            致力于开发更加智能和准确的语言模型。
+                        </p>
+                        <div class="keyword-tags">
+                            <span class="keyword-tag">BERT</span>
+                            <span class="keyword-tag">Transformer</span>
+                            <span class="keyword-tag">语言模型</span>
+                        </div>
+                    </div>
+                    <div class="research-item">
+                        <h3 class="research-title">计算机视觉</h3>
+                        <p class="research-description">
+                            图像识别、目标检测、视频分析等计算机视觉技术研究，
+                            探索多模态学习在视觉任务中的应用。
+                        </p>
+                        <div class="keyword-tags">
+                            <span class="keyword-tag">目标检测</span>
+                            <span class="keyword-tag">图像分割</span>
+                            <span class="keyword-tag">多模态学习</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学术成果 -->
+        <section id="publications" class="section">
+            <div class="container">
+                <h2 class="section-title">学术成果</h2>
+                <div class="publications-list">
+                    <article id="poisson-rr" class="publication-card anchor-target">
+                        <h3 class="publication-title">
+                            <a href="/papers/poisson-rr.html">泊松分布下基于鞍点逼近的相对风险置信区间构造</a>
+                        </h3>
+                        <p class="publication-authors">侯健, 刘硕, 田茂再</p>
+                        <p class="publication-venue">统计与信息论坛. 2025, 40(08): 3-13</p>
+                        <div class="publication-links">
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS" 
+                                 target="_blank" class="pub-link">CNKI</a>
+                            <span class="separator">·</span>
+                            <a href="https://github.com/Stork343/saddlepoint-Poisson-RR"
+                                class="pub-link" target="_blank" rel="noopener">Code</a>
+                            <span class="separator">·</span>
+                            <a href="https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001"
+                                class="pub-link" target="_blank" rel="noopener">DOI</a>
+
+                        </div>
+                    </article>
+
+                    <article class="publication-card">
+                        <h3 class="publication-title">
+                            <a href="https://arxiv.org/abs/2510.24352" target="_blank">Self-Normalized Quantile Empirical Saddlepoint Approximation</a>
+                        </h3>
+                        <p class="publication-authors">Hou Jian, Meng Tan, Tian Maozai</p>
+                        <p class="publication-venue">arXiv</p>
+                        <div class="publication-links">
+                            <a href="https://arxiv.org/pdf/2510.24352" target="_blank" class="pub-link">PDF</a>
+                            <span class="separator">·</span>
+                            <a href="https://github.com/Stork343/self-normalized-quantile-saddlepoint" target="_blank" class="pub-link">Code</a>
+                            <span class="separator">·</span>
+                            <a href="https://doi.org/10.48550/arXiv.2510.24352" target="_blank" class="pub-link">DOI</a>
+                        </div>
+                    </article>
+
+                    <article class="publication-card">
+                        <h3 class="publication-title">
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS" 
+                                target="_blank">基于异窗宽GTWR模型的商品住宅价格影响因素研究</a>
+                        </h3>
+                        <p class="publication-authors">侯健, 王芝皓, 田茂再, 窦燕</p>
+                        <p class="publication-venue">数理统计与管理. 2022, 41(06): 1003-1014</p>
+                        <div class="publication-links">
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS" 
+                                target="_blank" class="pub-link">PDF</a>
+                            <span class="separator">·</span>
+                            <a href="https://github.com/Stork343/self-normalized-quantile-saddlepoint" target="_blank" class="pub-link">Code</a>
+                            <span class="separator">·</span>
+                            <a href="10.13860/j.cnki.sltj.20210722-025" target="_blank" class="pub-link">DOI</a>
+                        </div>
+                    </article>
+
+                    <article class="publication-card">
+                        <h3 class="publication-title">
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS" target="_blank">基于变量选择的混合时空地理加权回归参数估计</a>
+                        </h3>
+                        <p class="publication-authors">侯健, 田茂再</p>
+                        <p class="publication-venue">数学的实践与认识. 2021, 51(07): 110-118</p>
+                        <div class="publication-links">
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS"
+                                target="_blank" class="pub-link">PDF</a>
+                            <span class="separator">·</span>
+                            <a href="#" class="pub-link">Code</a>
+                            <span class="separator">·</span>
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT" 
+                                target="_blank" class="pub-link">DOI</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目作品 -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">项目作品</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3 class="project-title">智能文本分析平台</h3>
+                        <p class="project-description">
+                            基于Transformer架构的多任务文本分析系统，支持情感分析、
+                            命名实体识别、文本分类等功能。已在多个实际业务场景中部署应用。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Transformers</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">GitHub</a>
+                            <a href="#" class="project-link">演示</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">医疗图像智能诊断系统</h3>
+                        <p class="project-description">
+                            基于深度学习的医学影像分析工具，辅助医生进行疾病诊断。
+                            支持X光片、CT、MRI等多种医学影像的分析和诊断建议。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">开源NLP工具包</h3>
+                        <p class="project-description">
+                            轻量级的中文自然语言处理工具包，提供常用NLP任务的高效实现。
+                            支持快速原型开发和生产环境部署。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">spaCy</span>
+                            <span class="tech-tag">scikit-learn</span>
+                            <span class="tech-tag">PyPI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">GitHub</a>
+                            <a href="#" class="project-link">文档</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">联系方式</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h3 class="contact-label">邮箱</h3>
+                            <p class="contact-value">
+                                <a href="mailto:zhang.san@university.edu">houjian1997@ruc.edu.cn</a>
+                            </p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-label">机构</h3>
+                            <p class="contact-value">中国人民大学统计学院</p>
+                            <p class="contact-value">School of Statistics, Renmin University of China</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-label">地址</h3>
+                            <p class="contact-value">中国北京市海淀区中关村大街59号</p>
+                            <p class="contact-value">No. 59 Zhongguancun Street, Haidian District Beijing, 100872, P.R. China </p>
+                        </div>
+                        <div class="contact-item">
+                            <h3 class="contact-label">研究合作</h3>
+                            <p class="contact-value">欢迎学术合作与交流</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 Dr. Hou Jian. 最后更新: 2025年11月</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
