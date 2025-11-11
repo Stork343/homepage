@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. 张三 - 个人主页</title>
+    <title>侯健 - 个人主页</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <div class="nav-logo">Dr. 张三</div>
+                <div class="nav-logo">侯健</div>
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="#about" class="nav-link active">关于我</a></li>
                     <li><a href="#research" class="nav-link">研究领域</a></li>
@@ -36,24 +36,31 @@
     <!-- 主要内容 -->
     <main>
         <!-- Hero部分 -->
-        <section class="hero" id="about">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title">Dr. 张三</h1>
-                        <p class="hero-subtitle">计算机科学博士 | 人工智能研究员</p>
-                        <p class="hero-description">
-                            专注于深度学习、计算机视觉和自然语言处理领域的研究。
-                            致力于开发智能系统以解决现实世界的复杂问题。
-                        </p>
-                        <div class="hero-actions">
-                            <a href="#research" class="btn btn-primary">了解我的研究</a>
-                            <a href="#contact" class="btn btn-secondary">联系我</a>
-                        </div>
-                    </div>
+        <section class="hero-section" id="about">
+          <div class="container hero-content">
+            <div class="profile-section">
+              <!-- 头像：把图片放到仓库 assets/img/avatar.jpg -->
+              <img
+                class="profile-avatar"
+                src="hj.jpg"
+                alt="Dr.侯健 头像" />
+        
+              <!-- 文本信息：类名与 CSS 对齐 -->
+              <div class="profile-info">
+                <h1 class="profile-name">侯健</h1>
+                <div class="profile-title">统计学在读博士 | 初级统计师</div>
+                <p class="profile-description">
+                  主要关注分位回归, 鞍点逼近, 混合效应建模等领域。
+                </p>
+                <div class="social-links">
+                  <a class="social-link" href="#research" aria-label="了解我的研究">🔎</a>
+                  <a class="social-link" href="#contact" aria-label="联系我">✉️</a>
                 </div>
+              </div>
             </div>
+          </div>
         </section>
+
 
         <!-- 研究领域 -->
         <section class="section" id="research">
@@ -176,14 +183,14 @@
                             <div class="contact-icon">📧</div>
                             <div class="contact-details">
                                 <h3>电子邮件</h3>
-                                <p>zhangsan@university.edu</p>
+                                <p>houjian1997@ruc.edu.cn</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">🏢</div>
                             <div class="contact-details">
                                 <h3>工作地址</h3>
-                                <p>计算机科学系<br>某某大学<br>北京市海淀区</p>
+                                <p>统计学院<br>中国人民大学<br>北京市海淀区中关村大街59号</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -206,7 +213,7 @@
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Dr. 张三. 保留所有权利。</p>
+            <p>&copy; 2024 侯健 保留所有权利。</p>
         </div>
     </footer>
 
