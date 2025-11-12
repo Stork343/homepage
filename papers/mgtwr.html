@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>泊松分布下基于鞍点逼近的相对风险置信区间构造</title>
+  <title>基于变量选择的混合时空地理加权回归参数估计</title>
 
   <!-- PDF.js 的 viewer 组件样式（不是整页 demo） -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
@@ -87,7 +87,7 @@
   <!-- 顶部栏：左（返回/下载） 中（标题居中） 右（缩放/适配） -->
   <div class="topbar">
     <div class="left">
-      <a href="index.html#poisson-rr"
+      <a href="index.html#mgtwr"
          class="btn"
          onclick="event.preventDefault(); if(history.length>1){history.back();} else {location.href='index.html#publications';}">
         <span class="btn-icon">←</span> 返回主页
@@ -98,7 +98,7 @@
     </div>
 
     <div class="center">
-      <h1 class="title">泊松分布下基于鞍点逼近的相对风险置信区间构造</h1>
+      <h1 class="title">基于变量选择的混合时空地理加权回归参数估计</h1>
     </div>
 
     <div class="right">
@@ -121,7 +121,7 @@
   <!-- 初始化 PDF.js（模块方式） -->
   <script type="module">
     // 与本 HTML 同目录的 PDF（更稳）
-    const PDF_URL = new URL('./poisson-rr.pdf', location.href).href;
+    const PDF_URL = new URL('./mgtwr.pdf', location.href).href;
     document.getElementById('downloadLink').href = PDF_URL;
 
     // 1) 引入核心与 viewer 组件
