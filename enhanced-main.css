@@ -419,68 +419,95 @@ body {
 
 
 
-/* ---- Publication card with right-side thumbnail ---- */
-.publication-card{
-  display:flex;
-  align-items:flex-start;
-  gap:20px;
-}
-
-/* 左边文本区撑满 */
-.publication-content{
-  flex:1 1 auto;
-  min-width:0;               /* 让省略号工作 */
-}
-
-/* 右侧封面/图片区 */
-.pub-media{
-  flex:0 0 220px;            /* 右侧固定宽度（可改 180–260） */
-  aspect-ratio: 16 / 10;     /* 统一比例，避免抖动 */
-  border-radius: 12px;
-  overflow: hidden;
+/* --- 仅对带缩略图的论文卡片生效 --- */
+.publication-card.has-thumb{
   position: relative;
-  background: linear-gradient(135deg,#eef3ff,#f6f8fb);
-  border: 1px solid rgba(13,71,161,0.08);
-  box-shadow: 0 6px 16px rgba(13,71,161,0.06);
+  padding-right: 260px;       /* 右侧给缩略图留空间 */
+  min-height: 180px;          /* 让缩略图有足够垂直空间 */
 }
 
-/* 图片本体 */
-.pub-media img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition: transform .35s ease, filter .35s ease;
+/* 右侧缩略图容器：绝对定位，不参与布局 */
+.publication-card.has-thumb .pub-media{
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  width: 240px;               /* 缩略图宽度 */
+  height: 150px;              /* 缩略图高度 */
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(13,71,161,0.12);
+  box-shadow: 0 6px 18px rgba(13,71,161,0.10);
+  pointer-events: none;       /* 避免遮挡左侧链接的点击 */
 }
 
-/* 悬停微动效 */
-.publication-card:hover .pub-media img{
-  transform: scale(1.03);
-  filter: saturate(1.05);
+/* 缩略图图片自适应裁剪 */
+.publication-card.has-thumb .pub-media img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* 或用 contain 若想完整展示整图 */
 }
 
-/* 点击区域（可整块可只图片） */
-.pub-media a{
-  position:absolute; inset:0;
-  display:block;
-  text-decoration:none;
+/* 确保左侧标题/作者/按钮依旧按块布局在左边 */
+.publication-card .publication-title,
+.publication-card .publication-authors,
+.publication-card .publication-venue,
+.publication-card .publication-links{
+  max-width: 100%;
 }
 
-/* 当没有图片时的占位符（可放字母/图标） */
-.pub-media .placeholder{
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  color:#0A336D; font-weight:600; letter-spacing:.5px;
-  opacity:.5; user-select:none;
+/* 链接一行排布（你的原样式若已有可忽略） */
+.publication-links{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
-/* 小屏隐藏缩略图，避免拥挤 */
-@media (max-width: 860px){
-  .pub-media{ display:none; }
+/* 响应式：屏宽较窄时把缩略图降到标题下方，避免压缩正文 */
+@media (max-width: 1024px){
+  .publication-card.has-thumb{
+    padding-right: 24px;      /* 取消右侧预留 */
+  }
+  .publication-card.has-thumb .pub-media{
+    position: static;         /* 回到文流 */
+    transform: none;
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    margin-top: 16px;
+    pointer-events: auto;
+  }
+  .publication-card.has-thumb .pub-media img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
-/* 链接样式与之前保持一致（不斜体、不下划线、蓝色悬停） */
+
+/* 让链接排成一行并收紧间距 */
+.publication-links{
+  display: flex;
+  align-items: center;
+  column-gap: 10px;  /* 控制链接之间的基础间距 */
+  row-gap: 6px;      /* 换行时行距 */
+  justify-content: flex-start;
+}
+
+/* 收紧每个链接自身的内边距（否则看起来像“间距过大”） */
 .publication-links .pub-link{
-  font-style: normal;
-  text-decoration: none;
+  padding: 0 2px;     /* 原来若有 4~8px，会显得更散 */
+  margin: 0;
+}
+
+/* 调小分隔点的左右外边距与字号 */
+.publication-links .separator{
+  margin: 0 6px;      /* 原来一般 8~12px，压小一点 */
+  font-size: 14px;
+  line-height: 1;
+  color: #8A8F98;     /* 更淡一点，不抢视觉 */
+  user-select: none;
 }
