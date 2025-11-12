@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>泊松分布下基于鞍点逼近的相对风险置信区间构造</title>
+
+  <!-- PDF.js 的 viewer 组件样式（不是整页 demo） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
+
+  <style>
+    :root{ --bar-h:56px; --accent:#0d47a1; }
+
+    html,body{height:100%;margin:0}
+    body{
+      background:#f3f6f4;
+      color:#1a1d21;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", sans-serif;
+    }
+
+    /* 顶部工具栏：三列布局（左/中/右） */
+    .topbar{
+      position:fixed; inset:0 0 auto 0; height:56px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:8px; padding:0 12px;
+      background:rgba(255,255,255,.92); backdrop-filter: blur(10px);
+      border-bottom:1px solid #e6e8eb; z-index:10;
+    }
+    .left, .right{ display:flex; align-items:center; gap:10px; }
+    .center{
+      position:absolute;
+      left:50%; top:0; height:56px;
+      transform:translateX(-50%);
+      display:flex; align-items:center; justify-content:center;
+      /* 让标题不会挡住左右按钮的点击 */
+      pointer-events:none;
+      /* 给一个合理宽度，避免与左右控件重叠过多；可按需调整 */
+      width:min(70vw, 960px);
+      text-align:center;
+    }
+    .title{
+      margin:0;
+      font-size:16px; font-weight:600; color:#1f2937;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    .btn{
+      appearance:none; border:1px solid #d0d7de; background:#fff; color:var(--accent);
+      padding:8px 14px; border-radius:12px; text-decoration:none;
+      display:inline-flex; align-items:center; gap:8px; font-weight:600;
+      box-shadow:0 1px 0 rgba(0,0,0,.02);
+      transition:background .15s ease, transform .06s ease;
+      line-height:1;
+    }
+    .btn:hover{ background:#eef5ff }
+    .btn:active{ transform:translateY(1px) }
+    .btn-icon{ font-weight:900; font-size:18px; line-height:1; }
+
+    /* PDF 容器 */
+    #viewerContainer{
+      position:absolute; inset:var(--bar-h) 0 0 0;
+      overflow:auto; background:#fff;
+    }
+    #viewer{ padding:16px; }
+
+    /* 缩放百分比浮层（仅缩放时显示） */
+    .scale-toast{
+      position: fixed;
+      top: calc(var(--bar-h) + 12px);
+      right: 16px;
+      padding: 8px 12px;
+      background: rgba(30, 41, 59, 0.88);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .25s ease, transform .25s ease;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .scale-toast.show{ opacity:1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- 顶部栏：左（返回/下载） 中（标题居中） 右（缩放/适配） -->
+  <div class="topbar">
+    <div class="left">
+      <a href="index.html#poisson-rr"
+         class="btn"
+         onclick="event.preventDefault(); if(history.length>1){history.back();} else {location.href='index.html#publications';}">
+        <span class="btn-icon">←</span> 返回主页
+      </a>
+      <a id="downloadLink" class="btn" href="#" download>
+        <span class="btn-icon">↓</span> 下载
+      </a>
+    </div>
+
+    <div class="center">
+      <h1 class="title">泊松分布下基于鞍点逼近的相对风险置信区间构造</h1>
+    </div>
+
+    <div class="right">
+      <button class="btn" id="zoomOut"><span class="btn-icon">➖</span> 缩小</button>
+      <button class="btn" id="zoomIn"><span class="btn-icon">＋</span> 放大</button>
+      <button class="btn" id="fitWidth">适宽</button>
+      <button class="btn" id="fitPage">适页</button>
+      <button class="btn" id="reset100">100%</button>
+    </div>
+  </div>
+
+  <!-- PDF.js Viewer 容器 -->
+  <div id="viewerContainer">
+    <div id="viewer" class="pdfViewer"></div>
+  </div>
+
+  <!-- 缩放百分比浮层 -->
+  <div id="scaleToast" class="scale-toast" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- 初始化 PDF.js（模块方式） -->
+  <script type="module">
+    // 与本 HTML 同目录的 PDF（更稳）
+    const PDF_URL = new URL('./poisson-rr.pdf', location.href).href;
+    document.getElementById('downloadLink').href = PDF_URL;
+
+    // 1) 引入核心与 viewer 组件
+    import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs";
+    import { EventBus, PDFLinkService, PDFFindController, PDFViewer }
+      from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.mjs";
+
+    // 2) 设置 worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.mjs";
+
+    // 3) 创建 EventBus、LinkService、FindController、Viewer
+    const eventBus = new EventBus();
+    const linkService = new PDFLinkService({ eventBus });
+    const findController = new PDFFindController({ eventBus, linkService });
+
+    const container = document.getElementById("viewerContainer");
+    const viewer = new PDFViewer({
+      container,
+      eventBus,
+      linkService,
+      findController,
+      textLayerMode: 1,     // 启用文本层（便于选中文本）
+      annotationMode: 2,    // 启用注释层
+    });
+    linkService.setViewer(viewer);
+
+    // 4) 加载 PDF（包含 CJK 所需资源，避免中文缺字/空白）
+    const loadingTask = pdfjsLib.getDocument({
+      url: PDF_URL,
+      cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/",
+      cMapPacked: true,
+      standardFontDataUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/"
+    });
+    const pdfDocument = await loadingTask.promise;
+    viewer.setDocument(pdfDocument);
+    linkService.setDocument(pdfDocument, null);
+
+    // 5) 初始适配与按钮行为
+    eventBus.on("pagesinit", () => {
+      viewer.currentScaleValue = "page-width"; // 也可改成 "page-fit"
+    });
+
+    // —— 缩放工具 —— //
+    const MIN_SCALE = 0.2, MAX_SCALE = 5, STEP = 1.1;
+
+    const scaleToast = document.getElementById('scaleToast');
+    let scaleToastTimer = null;
+
+    function numericScale(){
+      // _currentScale 永远是数值；currentScaleValue 可能是字符串（page-width等）
+      return viewer._currentScale || viewer.currentScale || 1;
+    }
+    function showScaleToast(scaleNumber){
+      const pct = Math.round(scaleNumber * 100) + '%';
+      scaleToast.textContent = pct;
+      scaleToast.classList.add('show');
+      if (scaleToastTimer) clearTimeout(scaleToastTimer);
+      scaleToastTimer = setTimeout(()=> scaleToast.classList.remove('show'), 5000);
+    }
+    function zoomTo(s){
+      const clamped = Math.max(MIN_SCALE, Math.min(MAX_SCALE, s));
+      viewer.currentScale = clamped;
+      showScaleToast(numericScale());
+    }
+    function zoomIn(){ zoomTo(numericScale() * STEP); }
+    function zoomOut(){ zoomTo(numericScale() / STEP); }
+    function fitWidth(){
+      viewer.currentScaleValue = "page-width";
+      requestAnimationFrame(()=> showScaleToast(numericScale()));
+    }
+    function fitPage(){
+      viewer.currentScaleValue = "page-fit";
+      requestAnimationFrame(()=> showScaleToast(numericScale()));
+    }
+    function reset100(){ viewer.currentScale = 1; showScaleToast(1); }
+
+    document.getElementById('zoomIn').onclick = zoomIn;
+    document.getElementById('zoomOut').onclick = zoomOut;
+    document.getElementById('fitWidth').onclick = fitWidth;
+    document.getElementById('fitPage').onclick = fitPage;
+    document.getElementById('reset100').onclick = reset100;
+
+    // 监听 pdf.js 的缩放事件（快捷键、触摸手势等也会触发）
+    eventBus.on("scalechanging", ({ scale }) => {
+      const s = typeof scale === 'number' ? scale : numericScale();
+      showScaleToast(s);
+    });
+  </script>
+
+  <noscript>需要启用 JavaScript 才能预览 PDF。</noscript>
+</body>
+</html>
