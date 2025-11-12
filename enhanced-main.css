@@ -416,3 +416,71 @@ body {
 .anchor-target {
   scroll-margin-top: 84px;  /* 你的 navbar 高度 64px，加一点安全空隙 */
 }
+
+
+
+/* ---- Publication card with right-side thumbnail ---- */
+.publication-card{
+  display:flex;
+  align-items:flex-start;
+  gap:20px;
+}
+
+/* 左边文本区撑满 */
+.publication-content{
+  flex:1 1 auto;
+  min-width:0;               /* 让省略号工作 */
+}
+
+/* 右侧封面/图片区 */
+.pub-media{
+  flex:0 0 220px;            /* 右侧固定宽度（可改 180–260） */
+  aspect-ratio: 16 / 10;     /* 统一比例，避免抖动 */
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg,#eef3ff,#f6f8fb);
+  border: 1px solid rgba(13,71,161,0.08);
+  box-shadow: 0 6px 16px rgba(13,71,161,0.06);
+}
+
+/* 图片本体 */
+.pub-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition: transform .35s ease, filter .35s ease;
+}
+
+/* 悬停微动效 */
+.publication-card:hover .pub-media img{
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+/* 点击区域（可整块可只图片） */
+.pub-media a{
+  position:absolute; inset:0;
+  display:block;
+  text-decoration:none;
+}
+
+/* 当没有图片时的占位符（可放字母/图标） */
+.pub-media .placeholder{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  color:#0A336D; font-weight:600; letter-spacing:.5px;
+  opacity:.5; user-select:none;
+}
+
+/* 小屏隐藏缩略图，避免拥挤 */
+@media (max-width: 860px){
+  .pub-media{ display:none; }
+}
+
+/* 链接样式与之前保持一致（不斜体、不下划线、蓝色悬停） */
+.publication-links .pub-link{
+  font-style: normal;
+  text-decoration: none;
+}
