@@ -3,110 +3,458 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>基于异窗宽GTWR模型的商品住宅价格影响因素研究</title>
+  <title>基于异窗宽GTWR模型的商品住宅价格影响因素研究 - PDF</title>
 
-  <!-- PDF.js 的 viewer 组件样式（不是整页 demo） -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
+  <!-- PDF.js viewer 样式 -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
 
   <style>
-    :root{ --bar-h:56px; --accent:#0d47a1; }
+    :root{
+      --bar-h:56px;
+      --sidebar-w:320px;       /* 侧边栏更宽一点 */
+    }
 
-    html,body{height:100%;margin:0}
+    html,body{
+      height:100%;
+      margin:0;
+    }
+
     body{
       background:#f3f6f4;
       color:#1a1d21;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", sans-serif;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial;
+      overflow:hidden;
     }
 
-    /* 顶部工具栏：三列布局（左/中/右） */
+    /* 顶部工具条 --------------------------------------------------- */
     .topbar{
-      position:fixed; inset:0 0 auto 0; height:56px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:8px; padding:0 12px;
-      background:rgba(255,255,255,.92); backdrop-filter: blur(10px);
-      border-bottom:1px solid #e6e8eb; z-index:10;
+      position:fixed;
+      inset:0 0 auto 0;
+      height:var(--bar-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 16px;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid #e6e8eb;
+      z-index:20;
     }
-    .left, .right{ display:flex; align-items:center; gap:10px; }
-    .center{
+
+    .topbar-left,
+    .topbar-right{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+
+    .topbar-title-wrap{
       position:absolute;
-      left:50%; top:0; height:56px;
-      transform:translateX(-50%);
-      display:flex; align-items:center; justify-content:center;
-      /* 让标题不会挡住左右按钮的点击 */
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
       pointer-events:none;
-      /* 给一个合理宽度，避免与左右控件重叠过多；可按需调整 */
-      width:min(70vw, 960px);
+      max-width:60%;
       text-align:center;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .title{
-      margin:0;
-      font-size:16px; font-weight:600; color:#1f2937;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+
+    .topbar-title{
+      font-size:14px;
+      font-weight:600;
+      color:#1a1d21;
     }
 
     .btn{
-      appearance:none; border:1px solid #d0d7de; background:#fff; color:var(--accent);
-      padding:8px 14px; border-radius:12px; text-decoration:none;
-      display:inline-flex; align-items:center; gap:8px; font-weight:600;
-      box-shadow:0 1px 0 rgba(0,0,0,.02);
-      transition:background .15s ease, transform .06s ease;
+      appearance:none;
+      border:1px solid #d0d7de;
+      background:#fff;
+      color:#0d47a1;
+      padding:6px 12px;
+      border-radius:999px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:13px;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:background .15s ease,border-color .15s ease,box-shadow .15s ease,transform .1s ease;
+    }
+    .btn:hover{
+      background:#eef5ff;
+      border-color:#b6c6e3;
+      box-shadow:0 1px 4px rgba(15,23,42,.12);
+      transform:translateY(-1px);
+    }
+    .btn-icon{
+      font-size:14px;
+    }
+
+    .btn-ghost{
+      background:transparent;
+      border-color:#dde1ea;
+    }
+    .btn-ghost:hover{
+      background:#eef2ff;
+    }
+
+    /* 左侧信息 / 目录侧栏 ------------------------------------------- */
+    .side-panel{
+      position:absolute;
+      top:var(--bar-h);
+      left:0;
+      bottom:0;
+      width:var(--sidebar-w);
+      background:#ffffff;
+      border-right:1px solid #dde1ea;
+      transform:translateX(-100%);
+      transition:transform .25s ease,box-shadow .25s ease;
+      z-index:18;
+      overflow:auto;
+    }
+
+    .side-panel-inner{
+      padding:16px 18px 24px;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .side-panel-header{
+      border-bottom:1px solid #e5e7eb;
+      padding-bottom:8px;
+      margin-bottom:10px;
+    }
+    .side-panel-title{
+      font-size:14px;
+      font-weight:600;
+      color:#0d47a1;
+    }
+    .side-panel-subtitle{
+      margin-top:4px;
+      font-size:11px;
+      color:#9ca3af;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .side-panel-section{
+      margin-top:14px;
+      margin-bottom:10px;
+    }
+    .side-panel-section h3{
+      margin:0 0 6px;
+      font-size:12px;
+      font-weight:600;
+      color:#374151;
+      text-transform:none;
+    }
+
+    .meta-item{
+      margin-bottom:4px;
+      color:#4b5563;
+    }
+    .meta-label{
+      color:#6b7280;
+    }
+
+    .toc-list{
+      list-style:none;
+      padding:0;
+      margin:4px 0 0;
+    }
+    .toc-list li{
+      margin-bottom:3px;
+    }
+    .toc-link{
+      border:none;
+      background:transparent;
+      padding:4px 0;
+      font-size:13px;
+      color:#0d47a1;
+      cursor:pointer;
+      text-align:left;
+      width:100%;
+    }
+    .toc-link:hover{
+      text-decoration:underline;
+    }
+
+    body.sidebar-open .side-panel{
+      transform:translateX(0);
+      box-shadow:4px 0 18px rgba(15,23,42,.16);
+    }
+
+    /* 开合手柄（箭头） --------------------------------------------- */
+    .side-toggle-handle{
+      position:fixed;
+      top:calc(var(--bar-h) + 12px);
+      left:0;
+      z-index:21;
+      width:26px;
+      height:44px;
+      padding:0;
+      border:none;
+      border-radius:0 999px 999px 0;
+      background:#0d47a1;
+      color:#fff;
+      font-size:18px;
       line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:2px 2px 10px rgba(15,23,42,.3);
+      transition:left .25s ease,border-radius .25s ease,box-shadow .25s ease;
     }
-    .btn:hover{ background:#eef5ff }
-    .btn:active{ transform:translateY(1px) }
-    .btn-icon{ font-weight:900; font-size:18px; line-height:1; }
 
-    /* PDF 容器 */
+    body.sidebar-open .side-toggle-handle{
+      left:var(--sidebar-w);
+      border-radius:999px 0 0 999px;
+      box-shadow:0 2px 12px rgba(15,23,42,.35);
+    }
+
+    /* PDF 容器 ----------------------------------------------------- */
     #viewerContainer{
-      position:absolute; inset:var(--bar-h) 0 0 0;
-      overflow:auto; background:#fff;
+      position:absolute;
+      top:var(--bar-h);
+      left:0;
+      right:0;
+      bottom:0;
+      overflow:auto;
+      background:#ffffff;
+      transition:left .25s ease;
+      scroll-behavior: smooth; 
     }
-    #viewer{ padding:16px; }
+    body.sidebar-open #viewerContainer{
+      left:var(--sidebar-w);
+    }
 
-    /* 缩放百分比浮层（仅缩放时显示） */
-    .scale-toast{
-      position: fixed;
-      top: calc(var(--bar-h) + 12px);
-      right: 16px;
-      padding: 8px 12px;
-      background: rgba(30, 41, 59, 0.88);
-      color: #fff;
-      font-weight: 700;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.15);
-      opacity: 0;
-      transform: translateY(-6px);
-      transition: opacity .25s ease, transform .25s ease;
-      pointer-events: none;
-      z-index: 20;
+    #viewer{
+      padding:16px;
     }
-    .scale-toast.show{ opacity:1; transform: translateY(0); }
+
+    /* 缩放百分比浮标 ---------------------------------------------- */
+    .zoom-indicator{
+      position:fixed;
+      right:16px;
+      top:calc(var(--bar-h) + 16px);
+      padding:6px 10px;
+      font-size:12px;
+      background:rgba(15,23,42,.9);
+      color:#fff;
+      border-radius:999px;
+      box-shadow:0 4px 12px rgba(15,23,42,.35);
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:opacity .25s ease,transform .25s ease;
+      z-index:30;
+    }
+    .zoom-indicator.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* 加载遮罩 + 进度条 ------------------------------------------- */
+    .loading-overlay{
+      position:absolute;
+      inset:var(--bar-h) 0 0 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(243,246,244,.9);
+      z-index:15;
+      transition:opacity .3s ease;
+    }
+    .loading-overlay.hidden{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .loading-box{
+      padding:16px 20px;
+      border-radius:12px;
+      background:#fff;
+      box-shadow:0 12px 30px rgba(15,23,42,.18);
+      min-width:220px;
+    }
+    .loading-text{
+      font-size:13px;
+      margin-bottom:10px;
+      color:#1f2933;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+    }
+
+    .spinner{
+      width:16px;
+      height:16px;
+      border-radius:999px;
+      border:2px solid #d0e2ff;
+      border-top-color:#0d47a1;
+      animation:spin .7s linear infinite;
+    }
+    @keyframes spin{
+      to{ transform:rotate(360deg); }
+    }
+
+    .loading-bar{
+      position:relative;
+      width:100%;
+      height:4px;
+      border-radius:999px;
+      background:#e5edf7;
+      overflow:hidden;
+    }
+    .loading-bar-fill{
+      position:absolute;
+      inset:0;
+      width:0%;
+      background:linear-gradient(90deg,#0d47a1,#42a5f5);
+      transition:width .15s linear;
+    }
+
+    /* 自适应 ------------------------------------------------------- */
+    @media (max-width:900px){
+      .topbar{ padding:0 8px; }
+      .topbar-title-wrap{ max-width:70%; }
+      #viewer{ padding:8px; }
+
+      .side-panel{
+        width:80%;
+        max-width:340px;
+      }
+
+      body.sidebar-open #viewerContainer{
+        left:0;          /* 抽屉式覆盖, 不推开 PDF */
+      }
+
+      body.sidebar-open .side-toggle-handle{
+        left:min(80vw, 340px);
+      }
+    }
+
+    @media (max-width:600px){
+      .topbar-right{ gap:4px; }
+      .btn{ padding:5px 8px;font-size:12px; }
+      .btn-icon{ font-size:13px; }
+    }
+
   </style>
 </head>
-<body>
-  <!-- 顶部栏：左（返回/下载） 中（标题居中） 右（缩放/适配） -->
+
+<!-- 默认开启侧边栏 -->
+<body class="sidebar-open">
   <div class="topbar">
-    <div class="left">
-      <a href="index.html#gtwr"
+    <div class="topbar-left">
+      <a href="/index.html#poisson-rr"
          class="btn"
-         onclick="event.preventDefault(); if(history.length>1){history.back();} else {location.href='index.html#publications';}">
+         onclick="event.preventDefault(); if(history.length>1){history.back();} else {location.href='/index.html#publications';}">
         <span class="btn-icon">←</span> 返回主页
       </a>
-      <a id="downloadLink" class="btn" href="#" download>
+      <a class="btn btn-ghost" id="downloadLink" href="#" download>
         <span class="btn-icon">↓</span> 下载
       </a>
     </div>
 
-    <div class="center">
-      <h1 class="title">基于异窗宽GTWR模型的商品住宅价格影响因素研究</h1>
+    <div class="topbar-title-wrap">
+      <div class="topbar-title" style="font-size: large;"">
+        基于异窗宽GTWR模型的商品住宅价格影响因素研究
+      </div>
     </div>
 
-    <div class="right">
-      <button class="btn" id="zoomOut"><span class="btn-icon">➖</span> 缩小</button>
-      <button class="btn" id="zoomIn"><span class="btn-icon">＋</span> 放大</button>
-      <button class="btn" id="fitWidth">适宽</button>
-      <button class="btn" id="fitPage">适页</button>
-      <button class="btn" id="reset100">100%</button>
+    <div class="topbar-right">
+      <button class="btn btn-ghost" id="zoomOutBtn"><span class="btn-icon">－</span> 缩小</button>
+      <button class="btn btn-ghost" id="zoomInBtn"><span class="btn-icon">＋</span> 放大</button>
+      <button class="btn btn-ghost" id="fitWidthBtn">适宽</button>
+      <button class="btn btn-ghost" id="fitPageBtn">适页</button>
+      <button class="btn btn-ghost" id="resetZoomBtn">100%</button>
+    </div>
+  </div>
+
+  <!-- 左侧信息 / 目录面板 -->
+  <aside class="side-panel" id="sidePanel">
+    <div class="side-panel-inner">
+      <div class="side-panel-header">
+      <div class="side-panel-title" style="font-size: 18px;">论文信息</div>
+      <div class="side-panel-subtitle">ARTICLE DETAILS</div>
+      </div>
+
+      <div class="side-panel-section">
+      <style>
+        .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
+        .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
+        .meta-list .meta-label { flex: 0 0 40px; width: 90px; color: #6b7280; font-weight: 600; }
+        .meta-list .meta-value { flex: 1 1 auto; color: #374151; }
+      </style>
+
+      <ul class="meta-list">
+        <li class="meta-item">
+        <span class="meta-label" style="font-style: italic;">标题：</span>
+        <span class="meta-value">基于异窗宽GTWR模型的商品住宅价格影响因素研究</span>
+        </li>
+        <li class="meta-item">
+        <span class="meta-label" style="font-style: italic;">作者：</span>
+        <span class="meta-value">侯健, 王芝皓, 田茂再, 窦燕</span>
+        </li>
+        <li class="meta-item">
+        <span class="meta-label" style="font-style: italic;">期刊：</span>
+        <span class="meta-value">数理统计与管理, 2022, 41(06): 1003-1014</span>
+        </li>
+        <li class="meta-item">
+        <span class="meta-label" style="font-style: italic;">DOI:</span>
+        <span class="meta-value">10.13860/j.cnki.sltj.20210722-025</span>
+        </li>
+      </ul>
+
+      <h3 style="font-style: italic; font-size: 20px">摘要</h3>
+      <div style="font-size: 13px; line-height: 1.5; color: #374151;">
+        随着数据可获得性的增强,时空数据被广泛地应用在各个领域.以中国西部干旱区代表城市乌鲁木齐为研究对象,本文根据标准差椭圆加权算法与时空地理加权回归模型(GTWR)提出异常宽 GTWR 模型对房屋价格变动影响因素的时空变化进行研究.结果表明乌鲁木齐市住房价格的变动存在着明显的空间异质性,异常宽 GTWR模型对其的解释能力较好,标准差椭圆加权算法有效的减少了计算量,房价变动在空间上受交通便利性和绿化率等因素的影响较大,时间上受建筑年龄因素影响较大.
+      </div>
+      <div class="side-panel-section">
+      <h3 style="font-style: italic; font-size: 20px">目录</h3>
+      <ol class="toc-list">
+        <li><button class="toc-link" data-page="1", style="font-size: 16px;">0、引言</button></li>
+        <li><button class="toc-link" data-page="2", style="font-size: 16px;">1、研究方法</button></li>
+        <li><button class="toc-link" data-page="4", style="font-size: 16px;">2、标准差椭圆分类算法</button></li>
+        <li><button class="toc-link" data-page="7", style="font-size: 16px;">3、模拟实验</button></li>
+        <li><button class="toc-link" data-page="9", style="font-size: 16px;">4、实证分析</button></li>
+        <li><button class="toc-link" data-page="10", style="font-size: 16px;">5、结论</button></li>
+      </ol>
+      </div>
+      <!-- 
+      不要在这里加平滑滚动脚本, 主脚本已处理目录跳转. 
+      如果要全局平滑滚动, 可在CSS加 scroll-behavior: smooth;
+      -->
+    </div>
+  </aside>
+
+  <!-- 开合手柄（箭头） -->
+  <button id="sideToggleHandle" class="side-toggle-handle" aria-label="打开/关闭侧边信息">‹</button>
+
+  <!-- 缩放百分比浮标 -->
+  <div id="zoomIndicator" class="zoom-indicator">100%</div>
+
+  <!-- 加载遮罩 -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-box">
+      <div class="loading-text">
+        <span style="display:flex;align-items:center;gap:8px;">
+          <span class="spinner"></span>
+          PDF 加载中…
+        </span>
+        <span id="loadingPercent">0%</span>
+      </div>
+      <div class="loading-bar">
+        <div id="loadingBarFill" class="loading-bar-fill"></div>
+      </div>
     </div>
   </div>
 
@@ -115,103 +463,161 @@
     <div id="viewer" class="pdfViewer"></div>
   </div>
 
-  <!-- 缩放百分比浮层 -->
-  <div id="scaleToast" class="scale-toast" aria-live="polite" aria-atomic="true"></div>
-
-  <!-- 初始化 PDF.js（模块方式） -->
+  <!-- PDF.js 初始化 & 交互逻辑 -->
   <script type="module">
-    // 与本 HTML 同目录的 PDF（更稳）
-    const PDF_URL = new URL('./gtwr.pdf', location.href).href;
+    const PDF_URL = "gtwr.pdf";
     document.getElementById('downloadLink').href = PDF_URL;
 
-    // 1) 引入核心与 viewer 组件
     import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs";
     import { EventBus, PDFLinkService, PDFFindController, PDFViewer }
       from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.mjs";
 
-    // 2) 设置 worker
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.mjs";
 
-    // 3) 创建 EventBus、LinkService、FindController、Viewer
-    const eventBus = new EventBus();
-    const linkService = new PDFLinkService({ eventBus });
-    const findController = new PDFFindController({ eventBus, linkService });
+    const eventBus      = new EventBus();
+    const linkService   = new PDFLinkService({ eventBus });
+    const findController= new PDFFindController({ eventBus, linkService });
 
     const container = document.getElementById("viewerContainer");
-    const viewer = new PDFViewer({
+    const viewer    = new PDFViewer({
       container,
       eventBus,
       linkService,
       findController,
-      textLayerMode: 1,     // 启用文本层（便于选中文本）
-      annotationMode: 2,    // 启用注释层
+      textLayerMode: 1,
+      annotationMode: 2,
     });
     linkService.setViewer(viewer);
+    window.viewer = viewer; // 让全局 window.viewer 可用
 
-    // 4) 加载 PDF（包含 CJK 所需资源，避免中文缺字/空白）
+    /* 加载进度条 -------------------------------------------------- */
+    const overlay   = document.getElementById("loadingOverlay");
+    const percentEl = document.getElementById("loadingPercent");
+    const barFillEl = document.getElementById("loadingBarFill");
+
+    function showOverlay(){ overlay.classList.remove("hidden"); }
+    function hideOverlay(){ overlay.classList.add("hidden"); }
+
+    showOverlay();
+
+    const CMAP_URL          = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/";
+    const STANDARD_FONT_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/";
+
     const loadingTask = pdfjsLib.getDocument({
       url: PDF_URL,
-      cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/",
+      cMapUrl: CMAP_URL,
       cMapPacked: true,
-      standardFontDataUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/"
+      standardFontDataUrl: STANDARD_FONT_URL,
     });
+
+    loadingTask.onProgress = ({ loaded, total }) => {
+      if (!total) return;
+
+      // 计算并截断到 [0, 100]
+      let p = Math.round((loaded / total) * 100);
+      p = Math.max(0, Math.min(p, 100));
+
+      percentEl.textContent = p + "%";
+      barFillEl.style.width = p + "%";
+    };
+
     const pdfDocument = await loadingTask.promise;
     viewer.setDocument(pdfDocument);
     linkService.setDocument(pdfDocument, null);
 
-    // 5) 初始适配与按钮行为
     eventBus.on("pagesinit", () => {
-      viewer.currentScaleValue = "page-width"; // 也可改成 "page-fit"
+      viewer.currentScaleValue = "page-fit";
+      setTimeout(hideOverlay, 300);
+      updateZoomIndicator();
     });
 
-    // —— 缩放工具 —— //
-    const MIN_SCALE = 0.2, MAX_SCALE = 5, STEP = 1.1;
+    /* 缩放控制 & 浮标 --------------------------------------------- */
+    const zoomIndicator = document.getElementById("zoomIndicator");
+    let zoomTimer = null;
 
-    const scaleToast = document.getElementById('scaleToast');
-    let scaleToastTimer = null;
+    function showZoomIndicator(){
+      zoomIndicator.classList.add("show");
+      if(zoomTimer) clearTimeout(zoomTimer);
+      zoomTimer = setTimeout(() => {
+        zoomIndicator.classList.remove("show");
+      }, 800);
+    }
 
-    function numericScale(){
-      // _currentScale 永远是数值；currentScaleValue 可能是字符串（page-width等）
-      return viewer._currentScale || viewer.currentScale || 1;
+    function updateZoomIndicator(){
+      const value = Math.round(viewer.currentScale * 100);
+      zoomIndicator.textContent = value + "%";
     }
-    function showScaleToast(scaleNumber){
-      const pct = Math.round(scaleNumber * 100) + '%';
-      scaleToast.textContent = pct;
-      scaleToast.classList.add('show');
-      if (scaleToastTimer) clearTimeout(scaleToastTimer);
-      scaleToastTimer = setTimeout(()=> scaleToast.classList.remove('show'), 5000);
-    }
-    function zoomTo(s){
-      const clamped = Math.max(MIN_SCALE, Math.min(MAX_SCALE, s));
-      viewer.currentScale = clamped;
-      showScaleToast(numericScale());
-    }
-    function zoomIn(){ zoomTo(numericScale() * STEP); }
-    function zoomOut(){ zoomTo(numericScale() / STEP); }
-    function fitWidth(){
-      viewer.currentScaleValue = "page-width";
-      requestAnimationFrame(()=> showScaleToast(numericScale()));
-    }
-    function fitPage(){
-      viewer.currentScaleValue = "page-fit";
-      requestAnimationFrame(()=> showScaleToast(numericScale()));
-    }
-    function reset100(){ viewer.currentScale = 1; showScaleToast(1); }
 
-    document.getElementById('zoomIn').onclick = zoomIn;
-    document.getElementById('zoomOut').onclick = zoomOut;
-    document.getElementById('fitWidth').onclick = fitWidth;
-    document.getElementById('fitPage').onclick = fitPage;
-    document.getElementById('reset100').onclick = reset100;
+    function setScale(scaleValue){
+      viewer.currentScaleValue = scaleValue;
+      updateZoomIndicator();
+      showZoomIndicator();
+    }
 
-    // 监听 pdf.js 的缩放事件（快捷键、触摸手势等也会触发）
-    eventBus.on("scalechanging", ({ scale }) => {
-      const s = typeof scale === 'number' ? scale : numericScale();
-      showScaleToast(s);
+    document.getElementById("zoomInBtn").addEventListener("click", () => {
+      const newScale = Math.min(viewer.currentScale * 1.1, 4.0);
+      setScale(newScale);
+    });
+
+    document.getElementById("zoomOutBtn").addEventListener("click", () => {
+      const newScale = Math.max(viewer.currentScale / 1.1, 0.25);
+      setScale(newScale);
+    });
+
+    document.getElementById("fitWidthBtn").addEventListener("click", () => {
+      setScale("page-width");
+    });
+
+    document.getElementById("fitPageBtn").addEventListener("click", () => {
+      setScale("page-fit");
+    });
+
+    document.getElementById("resetZoomBtn").addEventListener("click", () => {
+      setScale(1.0);
+    });
+
+    eventBus.on("scalechanging", (evt) => {
+      if (typeof evt.scale === "number") {
+        updateZoomIndicator();
+        showZoomIndicator();
+      }
+    });
+
+    /* 侧边栏开合（箭头手柄） ------------------------------------- */
+    const body           = document.body;
+    const sideHandle     = document.getElementById("sideToggleHandle");
+
+    function syncHandle(){
+      sideHandle.textContent = body.classList.contains("sidebar-open") ? "‹" : "›";
+    }
+
+    sideHandle.addEventListener("click", () => {
+      body.classList.toggle("sidebar-open");
+      syncHandle();
+    });
+
+    // ESC 关闭侧栏
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape"){
+        body.classList.remove("sidebar-open");
+        syncHandle();
+      }
+    });
+
+    syncHandle(); // 初始化箭头方向
+
+    /* 目录点击跳转到指定页 ---------------------------------------- */
+    document.querySelectorAll(".toc-link").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const p = parseInt(btn.dataset.page,10);
+        if(Number.isFinite(p)){
+          viewer.scrollPageIntoView({ pageNumber: p });
+        }
+      });
     });
   </script>
 
-  <noscript>需要启用 JavaScript 才能预览 PDF。</noscript>
+  <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>
 </html>
