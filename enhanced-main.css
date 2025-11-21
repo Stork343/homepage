@@ -511,3 +511,80 @@ body {
   color: #8A8F98;     /* 更淡一点，不抢视觉 */
   user-select: none;
 }
+
+
+/* 顶部导航整体高度 + 垂直居中 */
+.navbar {
+  position: sticky;   /* 如果你是 fixed 就写 fixed */
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* 内部内容水平排列并上下居中 */
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;   /* 控制整个 topbar 的高度 */
+}
+
+/* 左侧 LOGO 垂直居中 */
+.nav-logo {
+  font-family: "Lora", serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* 右侧菜单：每个 li 里的 a 都是 flex，文字自然居中 */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: inline-flex;       /* 关键：变成 flex 元素 */
+  align-items: center;        /* 文字上下居中 */
+  justify-content: center;
+  padding: 0.4rem 0;          /* 适当的上下 padding，避免太厚 */
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.1;           /* 不要用很大的 line-height */
+  color: #4b5563;
+  text-decoration: none;
+  position: relative;
+}
+
+/* active / hover 状态下的底部下划线示例，可以按你原来的来 */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  border-radius: 999px;
+  transform-origin: center;
+  transform: scaleX(0);
+  transition: transform 0.18s ease-out;
+  background: #2563eb;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #111827;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
