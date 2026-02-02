@@ -91,6 +91,17 @@
       box-shadow:0 1px 4px rgba(15,23,42,.12);
       transform:translateY(-1px);
     }
+    .btn:disabled{
+      opacity:0.4;
+      cursor:not-allowed;
+      background:#f5f5f5;
+    }
+    .btn:disabled:hover{
+      transform:none;
+      box-shadow:none;
+      background:#f5f5f5;
+      border-color:#d0d7de;
+    }
     .btn-icon{
       font-size:14px;
     }
@@ -101,6 +112,18 @@
     }
     .btn-ghost:hover{
       background:#eef2ff;
+    }
+
+    .page-indicator{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 12px;
+      font-size:13px;
+      font-weight:600;
+      color:#0d47a1;
+      background:#f0f4f8;
+      border-radius:999px;
+      white-space:nowrap;
     }
 
     /* 左侧信息 / 目录侧栏 ------------------------------------------- */
@@ -371,6 +394,11 @@
     </div>
 
     <div class="topbar-right">
+      <button class="btn btn-ghost" id="prevPageBtn" title="上一页"><span class="btn-icon">←</span></button>
+      <div class="page-indicator" id="pageIndicator">
+        <span id="currentPage">1</span> / <span id="totalPages">-</span>
+      </div>
+      <button class="btn btn-ghost" id="nextPageBtn" title="下一页"><span class="btn-icon">→</span></button>
       <button class="btn btn-ghost" id="zoomOutBtn"><span class="btn-icon">－</span> 缩小</button>
       <button class="btn btn-ghost" id="zoomInBtn"><span class="btn-icon">＋</span> 放大</button>
       <button class="btn btn-ghost" id="fitWidthBtn">适宽</button>
@@ -526,10 +554,48 @@
     viewer.setDocument(pdfDocument);
     linkService.setDocument(pdfDocument, null);
 
+    /* 页码显示和导航 ------------------------------------------- */
+    const currentPageEl = document.getElementById("currentPage");
+    const totalPagesEl = document.getElementById("totalPages");
+    const prevPageBtn = document.getElementById("prevPageBtn");
+    const nextPageBtn = document.getElementById("nextPageBtn");
+
+    // 更新页码显示
+    function updatePageIndicator() {
+      const currentPage = viewer.currentPageNumber;
+      const totalPages = pdfDocument.numPages;
+      currentPageEl.textContent = currentPage;
+      totalPagesEl.textContent = totalPages;
+      
+      // 更新按钮状态
+      prevPageBtn.disabled = currentPage <= 1;
+      nextPageBtn.disabled = currentPage >= totalPages;
+    }
+
+    // 监听页面变化
+    eventBus.on("pagechanging", () => {
+      updatePageIndicator();
+    });
+
+    // 上一页
+    prevPageBtn.addEventListener("click", () => {
+      if (viewer.currentPageNumber > 1) {
+        viewer.currentPageNumber--;
+      }
+    });
+
+    // 下一页
+    nextPageBtn.addEventListener("click", () => {
+      if (viewer.currentPageNumber < pdfDocument.numPages) {
+        viewer.currentPageNumber++;
+      }
+    });
+
     eventBus.on("pagesinit", () => {
       viewer.currentScaleValue = "page-fit";
       setTimeout(hideOverlay, 300);
       updateZoomIndicator();
+      updatePageIndicator(); // 初始化页码显示
     });
 
     /* 缩放控制 & 浮标 --------------------------------------------- */
