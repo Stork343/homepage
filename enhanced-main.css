@@ -147,7 +147,30 @@ body {
 .keyword-tag:hover{ background:linear-gradient(135deg,#0D47A1 0%,#0A336D 100%); color:#fff; transform:translateY(-1px); }
 
 /* 学术成果 */
-.publications-list{ display:flex; flex-direction:column; gap:24px; }
+.publications-list{ display:flex; flex-direction:column; gap:36px; }
+
+.publication-year-group{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.publication-year{
+  margin:0;
+  font-family:'Lora',serif;
+  font-size:30px;
+  font-weight:600;
+  line-height:1.2;
+  color:#0A336D;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(13,71,161,.2);
+}
+
+.publication-year-items{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
 
 .publication-card{
   background:rgba(255,255,255,.9); backdrop-filter:blur(20px);
@@ -280,7 +303,9 @@ body {
   .section-title{ font-size:28px; margin-bottom:32px; }
   .section{ padding:48px 0; }
   .research-grid, .projects-grid{ grid-template-columns:1fr; gap:24px; }
-  .publications-list{ gap:16px; }
+  .publications-list{ gap:24px; }
+  .publication-year{ font-size:24px; }
+  .publication-year-items{ gap:16px; }
   .publication-card, .research-item, .project-card, .contact-item{ padding:20px; }
   .social-links{ justify-content:center; }
 }
@@ -288,6 +313,7 @@ body {
   .container{ padding:0 12px; }
   .profile-name{ font-size:32px; }
   .section-title{ font-size:24px; }
+  .publication-year{ font-size:21px; }
   .publication-title, .research-title, .project-title{ font-size:20px; }
 }
 
