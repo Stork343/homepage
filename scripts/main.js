@@ -1,7 +1,23 @@
 // scripts/main.js
 (function () {
+  function getStorageItem(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function setStorageItem(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (_) {
+      // Ignore storage errors (private mode, disabled storage, etc.)
+    }
+  }
+
   function getInitialTheme() {
-    const savedTheme = localStorage.getItem("homepage-theme");
+    const savedTheme = getStorageItem("homepage-theme");
     if (savedTheme === "dark" || savedTheme === "light") {
       return savedTheme;
     }
@@ -12,7 +28,7 @@
   }
 
   const state = {
-    lang: localStorage.getItem("homepage-lang") || "zh",
+    lang: getStorageItem("homepage-lang") || "zh",
     theme: getInitialTheme(),
     publications: []
   };
@@ -155,7 +171,7 @@
 
   function setLanguage(lang) {
     state.lang = lang === "en" ? "en" : "zh";
-    localStorage.setItem("homepage-lang", state.lang);
+    setStorageItem("homepage-lang", state.lang);
     applyI18nText();
     renderPublications();
   }
@@ -198,7 +214,12 @@
     const notify = Boolean(options.notify);
     state.theme = theme === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", state.theme);
-    localStorage.setItem("homepage-theme", state.theme);
+    document.documentElement.style.colorScheme = state.theme;
+    document.documentElement.classList.toggle("theme-dark", state.theme === "dark");
+    if (document.body) {
+      document.body.classList.toggle("theme-dark", state.theme === "dark");
+    }
+    setStorageItem("homepage-theme", state.theme);
     updateThemeToggle();
 
     if (notify) {
