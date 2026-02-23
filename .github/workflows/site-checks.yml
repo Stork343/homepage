@@ -1,0 +1,53 @@
+name: Site Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check JavaScript syntax
+        run: node --check scripts/main.js
+
+      - name: Check HTML syntax (home page)
+        run: npx --yes htmlhint index.html
+
+      - name: Validate publications data JSON
+        run: python3 -m json.tool data/publications.json > /dev/null
+
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --verbose
+            --accept 429
+            --exclude-mail
+            --exclude-loopback
+            --timeout 20
+            --max-concurrency 6
+            --exclude "https://scholar.google.com/.*"
+            --exclude "https://www.researchgate.net/.*"
+            --exclude "https://kns.cnki.net/.*"
+            --exclude "https://link.cnki.net/.*"
+            index.html papers
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

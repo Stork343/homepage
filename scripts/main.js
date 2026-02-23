@@ -1,98 +1,449 @@
 // scripts/main.js
-document.addEventListener("DOMContentLoaded", function () {
-  const navbar   = document.querySelector(".navbar");
-  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-  const sections = Array.from(document.querySelectorAll("main section[id]"));
+(function () {
+  const state = {
+    lang: localStorage.getItem("homepage-lang") || "zh",
+    publications: []
+  };
 
-  // -------- 1. 点击导航平滑滚动 + 高亮 ----------
-  navLinks.forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const id = this.getAttribute("href").slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
+  const I18N = {
+    zh: {
+      nav_about: "关于我",
+      nav_research: "研究领域",
+      nav_publications: "学术成果",
+      nav_cv: "简历",
+      nav_contact: "联系方式",
+      profile_title: "统计学在读博士 | 初级统计师",
+      profile_desc: "主要关注分位回归、鞍点逼近、混合效应建模等领域。",
+      research_title: "研究领域",
+      research_qr_title: "分位回归",
+      research_qr_desc: "高维分位回归建模以及混合效应数据分析，特别关注非光滑估计与渐近推断。",
+      research_spa_title: "鞍点逼近",
+      research_spa_desc: "数值计算优化、半参数鞍点逼近方法与区间估计问题。",
+      research_mixed_title: "混合效应",
+      research_mixed_desc: "大规模全基因组关联分析，以及高维空间中可扩展贝叶斯/变分方法。",
+      tag_longitudinal: "纵向数据",
+      tag_repeated: "重复测量",
+      tag_optimization: "优化算法",
+      publications_title: "学术成果",
+      publications_note: "按年份分组展示，支持 BibTeX 查看与引用复制。",
+      cv_title: "简历",
+      cv_zh_title: "中文简历",
+      cv_zh_desc: "下载最新中文 CV（PDF）",
+      cv_en_title: "English CV",
+      cv_en_desc: "Download the latest English CV (PDF)",
+      cv_updated: "最近更新：2026-02-24",
+      contact_title: "联系方式",
+      contact_email_label: "邮箱",
+      contact_affiliation_label: "机构",
+      contact_affiliation_value: "中国人民大学统计学院",
+      contact_address_label: "地址",
+      contact_address_value: "中国北京市海淀区中关村大街59号，100872",
+      contact_collab_label: "研究合作",
+      contact_collab_value: "欢迎学术合作与交流",
+      contact_collab_people: "主要合作者：TIAN Maozai, MENG Tan, WANG Zhihao",
+      footer_text: "© 2026 HOU Jian. 最后更新：2026年2月",
+      label_pdf: "PDF",
+      label_code: "Code",
+      label_doi: "DOI",
+      label_html: "HTML",
+      label_copy_citation: "复制引用",
+      label_bibtex: "BibTeX",
+      label_copy_bibtex: "复制 BibTeX",
+      label_not_available: "暂不可用",
+      label_loading: "正在加载成果列表...",
+      label_load_failed: "成果列表加载失败，请稍后重试。",
+      toast_citation_copied: "已复制引用",
+      toast_bibtex_copied: "已复制 BibTeX",
+      toast_copy_failed: "复制失败，请手动复制"
+    },
+    en: {
+      nav_about: "About",
+      nav_research: "Research",
+      nav_publications: "Publications",
+      nav_cv: "CV",
+      nav_contact: "Contact",
+      profile_title: "PhD Candidate in Statistics | Junior Statistician",
+      profile_desc: "Research interests include quantile regression, saddlepoint approximation, and mixed-effects modeling.",
+      research_title: "Research Areas",
+      research_qr_title: "Quantile Regression",
+      research_qr_desc: "High-dimensional quantile regression and mixed-effects data analysis with a focus on non-smooth estimation and asymptotic inference.",
+      research_spa_title: "Saddlepoint Approximation",
+      research_spa_desc: "Numerical optimization, semiparametric saddlepoint methods, and interval estimation.",
+      research_mixed_title: "Mixed Effects",
+      research_mixed_desc: "Large-scale GWAS and scalable Bayesian/variational methods in high-dimensional spaces.",
+      tag_longitudinal: "Longitudinal Data",
+      tag_repeated: "Repeated Measures",
+      tag_optimization: "Optimization",
+      publications_title: "Publications",
+      publications_note: "Grouped by year, with BibTeX view and quick citation copy.",
+      cv_title: "Curriculum Vitae",
+      cv_zh_title: "Chinese CV",
+      cv_zh_desc: "Download latest Chinese CV (PDF)",
+      cv_en_title: "English CV",
+      cv_en_desc: "Download latest English CV (PDF)",
+      cv_updated: "Last updated: 2026-02-24",
+      contact_title: "Contact",
+      contact_email_label: "Email",
+      contact_affiliation_label: "Affiliation",
+      contact_affiliation_value: "School of Statistics, Renmin University of China",
+      contact_address_label: "Address",
+      contact_address_value: "No. 59 Zhongguancun Street, Haidian District, Beijing 100872, China",
+      contact_collab_label: "Collaboration",
+      contact_collab_value: "Open to academic collaboration and discussion",
+      contact_collab_people: "Main collaborators: TIAN Maozai, MENG Tan, WANG Zhihao",
+      footer_text: "© 2026 HOU Jian. Last updated: February 2026",
+      label_pdf: "PDF",
+      label_code: "Code",
+      label_doi: "DOI",
+      label_html: "HTML",
+      label_copy_citation: "Copy Citation",
+      label_bibtex: "BibTeX",
+      label_copy_bibtex: "Copy BibTeX",
+      label_not_available: "Not available",
+      label_loading: "Loading publications...",
+      label_load_failed: "Failed to load publications. Please retry later.",
+      toast_citation_copied: "Citation copied",
+      toast_bibtex_copied: "BibTeX copied",
+      toast_copy_failed: "Copy failed, please copy manually"
+    }
+  };
 
-      const navHeight = navbar ? navbar.offsetHeight : 0;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight + 1;
+  const SORTED_LINK_KEYS = ["pdf", "code", "doi", "html"];
 
-      window.scrollTo({
-        top,
-        behavior: "smooth"
-      });
+  function t(key) {
+    return I18N[state.lang][key] || I18N.zh[key] || key;
+  }
 
-      // 手动切换 active，避免滚动动画过程中短暂不高亮
-      setActiveLink(id);
-      // 同步地址栏 hash（不刷新页面）
-      history.replaceState(null, "", "#" + id);
-    });
-  });
-
-  function setActiveLink(id) {
-    navLinks.forEach(link => {
-      const hrefId = link.getAttribute("href").slice(1);
-      if (hrefId === id) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
+  function applyI18nText() {
+    document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
+    document.querySelectorAll("[data-i18n]").forEach((node) => {
+      const key = node.getAttribute("data-i18n");
+      if (key && t(key)) {
+        node.textContent = t(key);
       }
+    });
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.lang === state.lang);
     });
   }
 
-  // -------- 2. 监听滚动，自动更新 active ----------
-  if ("IntersectionObserver" in window) {
-    const navHeight = navbar ? navbar.offsetHeight : 0;
+  function setLanguage(lang) {
+    state.lang = lang === "en" ? "en" : "zh";
+    localStorage.setItem("homepage-lang", state.lang);
+    applyI18nText();
+    renderPublications();
+  }
 
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("id");
-            setActiveLink(id);
-            history.replaceState(null, "", "#" + id);
-          }
-        });
-      },
-      {
-        // 让“视口中间附近”的 section 作为当前 section
-        root: null,
-        threshold: 0.3,
-        rootMargin: `-${navHeight + 40}px 0px -50% 0px`
+  function showToast(message) {
+    const toast = document.getElementById("copy-toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("visible");
+    window.clearTimeout(showToast._timer);
+    showToast._timer = window.setTimeout(() => {
+      toast.classList.remove("visible");
+    }, 1700);
+  }
+
+  async function copyText(text, successMessage) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(successMessage);
+    } catch (_) {
+      showToast(t("toast_copy_failed"));
+    }
+  }
+
+  function createLinkOrPlaceholder(key, url) {
+    const labelKey = `label_${key}`;
+    if (url) {
+      const link = document.createElement("a");
+      link.className = "pub-link";
+      link.href = url;
+      link.textContent = t(labelKey);
+      if (url.startsWith("http")) {
+        link.target = "_blank";
+        link.rel = "noopener";
       }
-    );
+      return link;
+    }
 
-    sections.forEach(sec => observer.observe(sec));
-  } else {
-    // 兼容旧浏览器的简易方案
-    window.addEventListener("scroll", () => {
-      const navHeight = navbar ? navbar.offsetHeight : 0;
-      const scrollPos = window.pageYOffset + navHeight + 60;
+    const span = document.createElement("span");
+    span.className = "pub-link is-disabled";
+    span.textContent = t(labelKey);
+    span.title = t("label_not_available");
+    span.setAttribute("aria-disabled", "true");
+    return span;
+  }
 
-      let currentId = sections[0].id;
-      sections.forEach(sec => {
-        if (scrollPos >= sec.offsetTop) {
-          currentId = sec.id;
+  function createSeparator() {
+    const separator = document.createElement("span");
+    separator.className = "separator";
+    separator.textContent = "·";
+    return separator;
+  }
+
+  function createPublicationCard(pub) {
+    const card = document.createElement("article");
+    card.className = "publication-card has-thumb";
+
+    const title = document.createElement("h3");
+    title.className = "publication-title";
+
+    const articleLink = pub.links && pub.links.article ? pub.links.article : null;
+    if (articleLink) {
+      const a = document.createElement("a");
+      a.href = articleLink;
+      a.textContent = (pub.title && pub.title[state.lang]) || "";
+      if (articleLink.startsWith("http")) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+      title.appendChild(a);
+    } else {
+      const span = document.createElement("span");
+      span.className = "publication-title-text";
+      span.textContent = (pub.title && pub.title[state.lang]) || "";
+      title.appendChild(span);
+    }
+
+    const authors = document.createElement("p");
+    authors.className = "publication-authors";
+    authors.textContent = pub.authors || "";
+
+    const venue = document.createElement("p");
+    venue.className = "publication-venue";
+    venue.textContent = (pub.venue && pub.venue[state.lang]) || "";
+
+    if (pub.status && pub.status[state.lang]) {
+      venue.appendChild(document.createTextNode(". "));
+      const status = document.createElement("span");
+      status.className = "publication-status";
+      status.textContent = pub.status[state.lang];
+      venue.appendChild(status);
+    }
+
+    const links = document.createElement("div");
+    links.className = "publication-links";
+
+    const linkNodes = [];
+    SORTED_LINK_KEYS.forEach((key) => {
+      const url = pub.links ? pub.links[key] : null;
+      linkNodes.push(createLinkOrPlaceholder(key, url));
+    });
+
+    const copyCitationBtn = document.createElement("button");
+    copyCitationBtn.type = "button";
+    copyCitationBtn.className = "pub-link";
+    copyCitationBtn.textContent = t("label_copy_citation");
+    copyCitationBtn.addEventListener("click", () => {
+      copyText((pub.citation && pub.citation[state.lang]) || "", t("toast_citation_copied"));
+    });
+
+    const copyBibBtn = document.createElement("button");
+    copyBibBtn.type = "button";
+    copyBibBtn.className = "pub-link";
+    copyBibBtn.textContent = t("label_copy_bibtex");
+    copyBibBtn.addEventListener("click", () => {
+      copyText(pub.bibtex || "", t("toast_bibtex_copied"));
+    });
+
+    linkNodes.forEach((node, index) => {
+      links.appendChild(node);
+      if (index < linkNodes.length - 1) {
+        links.appendChild(createSeparator());
+      }
+    });
+
+    links.appendChild(createSeparator());
+    links.appendChild(copyCitationBtn);
+    links.appendChild(createSeparator());
+    links.appendChild(copyBibBtn);
+
+    const bibDetails = document.createElement("details");
+    bibDetails.className = "bibtex-details";
+
+    const bibSummary = document.createElement("summary");
+    bibSummary.textContent = t("label_bibtex");
+
+    const bibPre = document.createElement("pre");
+    bibPre.className = "bibtex-pre";
+    bibPre.textContent = pub.bibtex || "";
+
+    bibDetails.appendChild(bibSummary);
+    bibDetails.appendChild(bibPre);
+
+    const media = document.createElement("div");
+    media.className = "pub-media";
+
+    const picture = document.createElement("picture");
+    if (pub.image && pub.image.webp) {
+      const source = document.createElement("source");
+      source.srcset = pub.image.webp;
+      source.type = "image/webp";
+      picture.appendChild(source);
+    }
+
+    const img = document.createElement("img");
+    img.src = (pub.image && pub.image.src) || "";
+    img.alt = (pub.image && pub.image.alt && pub.image.alt[state.lang]) || "";
+    img.loading = "lazy";
+    if (pub.image && pub.image.width) {
+      img.width = pub.image.width;
+    }
+    if (pub.image && pub.image.height) {
+      img.height = pub.image.height;
+    }
+
+    picture.appendChild(img);
+    media.appendChild(picture);
+
+    card.appendChild(title);
+    card.appendChild(authors);
+    card.appendChild(venue);
+    card.appendChild(links);
+    card.appendChild(bibDetails);
+    card.appendChild(media);
+
+    return card;
+  }
+
+  function renderPublications() {
+    const list = document.getElementById("publications-list");
+    if (!list) return;
+
+    if (!state.publications.length) {
+      list.innerHTML = `<p class="publication-empty">${t("label_loading")}</p>`;
+      return;
+    }
+
+    list.innerHTML = "";
+
+    const grouped = state.publications.reduce((acc, pub) => {
+      const year = String(pub.year || "Unknown");
+      if (!acc[year]) acc[year] = [];
+      acc[year].push(pub);
+      return acc;
+    }, {});
+
+    Object.keys(grouped)
+      .sort((a, b) => Number(b) - Number(a))
+      .forEach((year) => {
+        const group = document.createElement("div");
+        group.className = "publication-year-group";
+
+        const yearTitle = document.createElement("h3");
+        yearTitle.className = "publication-year";
+        yearTitle.textContent = year;
+
+        const items = document.createElement("div");
+        items.className = "publication-year-items";
+
+        grouped[year].forEach((pub) => {
+          items.appendChild(createPublicationCard(pub));
+        });
+
+        group.appendChild(yearTitle);
+        group.appendChild(items);
+        list.appendChild(group);
+      });
+  }
+
+  async function loadPublications() {
+    const list = document.getElementById("publications-list");
+    if (list) {
+      list.innerHTML = `<p class="publication-empty">${t("label_loading")}</p>`;
+    }
+
+    try {
+      const response = await fetch("data/publications.json", { cache: "no-cache" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      state.publications = await response.json();
+      renderPublications();
+    } catch (_) {
+      if (list) {
+        list.innerHTML = `<p class="publication-empty">${t("label_load_failed")}</p>`;
+      }
+    }
+  }
+
+  function initNavigation() {
+    const navbar = document.querySelector(".navbar");
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
+    function setActiveLink(id) {
+      navLinks.forEach((link) => {
+        const hrefId = link.getAttribute("href").slice(1);
+        link.classList.toggle("active", hrefId === id);
+      });
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const id = this.getAttribute("href").slice(1);
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        const navHeight = navbar ? navbar.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight + 1;
+        window.scrollTo({ top, behavior: "smooth" });
+
+        setActiveLink(id);
+        history.replaceState(null, "", "#" + id);
+
+        if (navMenu && navToggle) {
+          navMenu.classList.remove("active");
+          navToggle.classList.remove("active");
         }
       });
-      setActiveLink(currentId);
     });
+
+    if ("IntersectionObserver" in window) {
+      const navHeight = navbar ? navbar.offsetHeight : 0;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute("id");
+              setActiveLink(id);
+              history.replaceState(null, "", "#" + id);
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.3,
+          rootMargin: `-${navHeight + 40}px 0px -50% 0px`
+        }
+      );
+      sections.forEach((sec) => observer.observe(sec));
+    }
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        navToggle.classList.toggle("active");
+      });
+    }
   }
 
-  // -------- 3. 移动端菜单（如果你需要） ----------
-  const navToggle = document.getElementById("nav-toggle");
-  const navMenu   = document.getElementById("nav-menu");
-
-  if (navToggle && navMenu) {
-    navToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-      navToggle.classList.toggle("active");
-    });
-
-    // 点击菜单后自动收起
-    navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("active");
-        navToggle.classList.remove("active");
+  function initLanguageSwitch() {
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setLanguage(btn.dataset.lang || "zh");
       });
     });
   }
-});
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    initNavigation();
+    initLanguageSwitch();
+    applyI18nText();
+    await loadPublications();
+  });
+})();

@@ -12,54 +12,80 @@
     <meta property="og:title" content="侯健 - 个人主页">
     <meta property="og:description" content="侯健（Hou Jian）个人主页，研究方向包括分位回归、鞍点逼近与混合效应建模。">
     <meta property="og:url" content="https://stork343.github.io/homepage/">
-    <meta property="og:image" content="https://stork343.github.io/homepage/hj.jpg">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://stork343.github.io/homepage/hj.webp">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="侯健 - 个人主页">
     <meta name="twitter:description" content="侯健（Hou Jian）个人主页，研究方向包括分位回归、鞍点逼近与混合效应建模。">
-    <meta name="twitter:image" content="https://stork343.github.io/homepage/hj.jpg">
+    <meta name="twitter:image" content="https://stork343.github.io/homepage/hj.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="enhanced-main.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8E%93</text></svg>">
+    <script defer data-domain="stork343.github.io" src="https://plausible.io/js/script.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Hou Jian",
+      "alternateName": "侯健",
+      "url": "https://stork343.github.io/homepage/",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "School of Statistics, Renmin University of China"
+      },
+      "sameAs": [
+        "https://github.com/Stork343",
+        "https://orcid.org/0000-0002-9248-6874",
+        "https://www.researchgate.net/profile/Hou-Jian-3"
+      ]
+    }
+    </script>
 </head>
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
                 <div class="nav-logo">HOU Jian</div>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#about" class="nav-link active">关于我</a></li>
-                    <li><a href="#research" class="nav-link">研究领域</a></li>
-                    <li><a href="#publications" class="nav-link">学术成果</a></li>
-                    <li><a href="#contact" class="nav-link">联系方式</a></li>
+                    <li><a href="#about" class="nav-link active" data-i18n="nav_about">关于我</a></li>
+                    <li><a href="#research" class="nav-link" data-i18n="nav_research">研究领域</a></li>
+                    <li><a href="#publications" class="nav-link" data-i18n="nav_publications">学术成果</a></li>
+                    <li><a href="#cv" class="nav-link" data-i18n="nav_cv">简历</a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="nav_contact">联系方式</a></li>
                 </ul>
-                <div class="nav-toggle" id="nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="nav-tools">
+                    <div class="lang-switch" aria-label="Language switch">
+                        <button type="button" class="lang-btn active" data-lang="zh">中</button>
+                        <button type="button" class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- 个人信息区 -->
         <section id="about" class="hero-section">
             <div class="container">
                 <div class="hero-content">
                     <div class="profile-section">
-                        <img src="hj.jpg" alt="个人头像" class="profile-avatar">
+                        <picture>
+                            <source srcset="hj.webp" type="image/webp">
+                            <img src="hj.jpg" alt="个人头像" class="profile-avatar" width="1920" height="1280">
+                        </picture>
                         <div class="profile-info">
                             <h1 class="profile-name">侯健</h1>
-                            <p class="profile-title">统计学在读博士 | 初级统计师</p>
-                            <p class="profile-description">
+                            <p class="profile-title" data-i18n="profile_title">统计学在读博士 | 初级统计师</p>
+                            <p class="profile-description" data-i18n="profile_desc">
                                 主要关注分位回归, 鞍点逼近, 混合效应建模等领域.
                             </p>
                             <div class="social-links">
-                                <!-- Google Scholar -->
-                                <a href="https://scholar.google.com/citations?view_op=search_authors&amp;mauthors=Hou+Jian" class="social-link" title="Google Scholar" target="_blank" rel="noopener noreferrer">
+                                <a href="https://scholar.google.com/citations?view_op=search_authors&amp;mauthors=Hou+Jian" class="social-link" title="Google Scholar" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
                                 <svg class="google-icon" viewBox="0 0 256 262" aria-hidden="true" width="30" height="30">
                                     <path fill="#4285F4" d="M255.5 133.5c0-10.7-.9-18.5-2.9-26.6H130v48.2h71.9c-1.5 12-9.6 30.2-27.6 42.4l-.25 1.7 40.1 31 .28.03c26.8-24.7 41.2-61 41.2-96.7z"/>
                                     <path fill="#34A853" d="M130 261c36.9 0 67.9-12.2 90.4-33.1l-43.1-33.3c-11.5 8-27 13.5-47.3 13.5-36.2 0-66.9-24.1-77.8-57.5l-1.6.13-42.2 32.7-.55.13C29.6 231.3 76.6 261 130 261z"/>
@@ -68,32 +94,29 @@
                                 </svg>
                                 </a>
 
-                                <!-- GitHub -->
                                 <a class="social-link"
                                     href="https://github.com/Stork343"
                                     target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                    <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github v-align-middle">
+                                    <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32" class="octicon octicon-mark-github v-align-middle">
                                         <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"></path>
                                     </svg>
                                 </a>
-                                
-                                <!-- ResearchGate -->
+
                                 <a class="social-link"
                                     href="https://www.researchgate.net/profile/Hou-Jian-3"
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     aria-label="ResearchGate"
                                     title="ResearchGate">
                                     <img src="icon/researchgate.png" width="20" height="20" alt="ResearchGate" class="researchgate-icon" loading="lazy">
                                 </a>
 
-                                <!-- ORCID -->
-                                <a class="social-link" href="https://orcid.org/0000-0002-9248-6874" 
-                                    target="_blank" 
-                                    rel="me noopener noreferrer" 
+                                <a class="social-link" href="https://orcid.org/0000-0002-9248-6874"
+                                    target="_blank"
+                                    rel="me noopener noreferrer"
                                     aria-label="ORCID"
                                     title="ORCID">
-                                    <img src="icon/orcid.png" alt="ORCID iD" class="orcid-icon" >
+                                    <img src="icon/orcid.png" width="20" height="20" alt="ORCID iD" class="orcid-icon" loading="lazy">
                                 </a>
                             </div>
                         </div>
@@ -102,15 +125,14 @@
             </div>
         </section>
 
-        <!-- 研究领域 -->
         <section id="research" class="section">
             <div class="container">
-                <h2 class="section-title">研究领域</h2>
+                <h2 class="section-title" data-i18n="research_title">研究领域</h2>
                 <div class="research-grid">
                     <div class="research-item">
-                        <h3 class="research-title">分位回归</h3>
-                        <p class="research-description">
-                            高维分位回归建模以及混合效应数据的分析, 
+                        <h3 class="research-title" data-i18n="research_qr_title">分位回归</h3>
+                        <p class="research-description" data-i18n="research_qr_desc">
+                            高维分位回归建模以及混合效应数据的分析,
                             特别关注非光滑估计与渐近推断问题.
                         </p>
                         <div class="keyword-tags">
@@ -120,305 +142,79 @@
                         </div>
                     </div>
                     <div class="research-item">
-                        <h3 class="research-title">鞍点逼近</h3>
-                        <p class="research-description">
+                        <h3 class="research-title" data-i18n="research_spa_title">鞍点逼近</h3>
+                        <p class="research-description" data-i18n="research_spa_desc">
                             数值计算的优化与改进, 半参数鞍点逼近方法, 区间估计问题等.
                         </p>
                         <div class="keyword-tags">
                             <span class="keyword-tag">SPA</span>
                             <span class="keyword-tag">LR</span>
-                            <span class="keyword-tag">Jenson</span>
+                            <span class="keyword-tag">Jensen</span>
                         </div>
                     </div>
                     <div class="research-item">
-                        <h3 class="research-title">混合效应</h3>
-                        <p class="research-description">
-                             大规模全基因组关联分析, 高维空间中的可扩展贝叶斯/变分方法等.
+                        <h3 class="research-title" data-i18n="research_mixed_title">混合效应</h3>
+                        <p class="research-description" data-i18n="research_mixed_desc">
+                            大规模全基因组关联分析, 高维空间中的可扩展贝叶斯/变分方法等.
                         </p>
                         <div class="keyword-tags">
-                            <span class="keyword-tag">纵向数据</span>
-                            <span class="keyword-tag">重复测量</span>
-                            <span class="keyword-tag">优化算法</span>
+                            <span class="keyword-tag" data-i18n="tag_longitudinal">纵向数据</span>
+                            <span class="keyword-tag" data-i18n="tag_repeated">重复测量</span>
+                            <span class="keyword-tag" data-i18n="tag_optimization">优化算法</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 学术成果 -->
         <section id="publications" class="section">
             <div class="container">
-                <h2 class="section-title">学术成果</h2>
-                <div class="publications-list">
-                    <div class="publication-year-group">
-                        <h3 class="publication-year">2025</h3>
-                        <div class="publication-year-items">
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <span class="publication-title-text">基于 Mallows 模型的大语言模型特征排序校准方法</span>
-                        </h3>
-                        <p class="publication-authors">侯健, 田茂再</p>
-                        <p class="publication-venue">统计研究</p>
-                        <div class="publication-links">
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">PDF</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">DOI</span>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/fig_estimation_convergence.png" alt="Mallows 模型估计收敛示意图" loading="lazy">
-                        </div>
-                    </article>
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <span class="publication-title-text">Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression</span>
-                        </h3>
-                        <p class="publication-authors">Hou Jian, Meng Tan, Tian Maozai</p>
-                        <p class="publication-venue">Statistica Sinica</p>
-                        <div class="publication-links">
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">PDF</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">DOI</span>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/dblqmm.png" alt="高维混合效应分位回归方法示意图" loading="lazy">
-                        </div>
-                    </article>
-
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="https://arxiv.org/abs/2511.18106"
-                                target="_blank" rel="noopener">Sparse-Smooth Spatially Varying Coefficient Quantile Regression</a>
-                        </h3>
-                        <p class="publication-authors">Hou Jian, Meng Tan, Tian Maozai</p>
-                        <p class="publication-venue">arXiv preprint; Spatial Statistics. <span class="publication-status">Status: First Revision</span></p>
-                        <div class="publication-links">
-                            <a href="./papers/svcqr.html" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="https://github.com/Stork343/SS-SVCQR"
-                                class="pub-link" target="_blank" rel="noopener">Code</a>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">DOI</span>
-                            <span class="separator">·</span>
-                            <a href="https://arxiv.org/html/2511.18106v2" target="_blank" rel="noopener" class="pub-link">HTML</a>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/log_price.png" alt="SVCQR 模型对数房价空间效应图" loading="lazy">
-                        </div>
-                    </article>                    
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="./papers/hcqr.html">Hierarchical Composite Quantile Regression with Adaptive Lasso</a>
-                        </h3>
-                        <p class="publication-authors">Hou Jian, Meng Tan, Tian Maozai</p>
-                        <p class="publication-venue">Journal of Statistical Planning and Inference. <span class="publication-status">Status: Accepted</span></p>
-                        <div class="publication-links">
-                            <a href="./papers/hcqr.html" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">DOI</span>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/data line.png" alt="HCQR 方法性能对比图" loading="lazy">
-                        </div>
-                    </article>
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="https://arxiv.org/abs/2510.24352" target="_blank" rel="noopener">Self-Normalized Quantile Empirical Saddlepoint Approximation</a>
-                        </h3>
-                        <p class="publication-authors">Hou Jian, Meng Tan, Tian Maozai</p>
-                        <p class="publication-venue">arXiv preprint; Statistical Papers. <span class="publication-status">Status: Under Review</span></p>
-                        <div class="publication-links">
-                            <a href="https://arxiv.org/pdf/2510.24352" target="_blank" rel="noopener" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="https://github.com/Stork343/self-normalized-quantile-saddlepoint" target="_blank" rel="noopener" class="pub-link">Code</a>
-                            <span class="separator">·</span>
-                            <a href="https://doi.org/10.48550/arXiv.2510.24352" target="_blank" rel="noopener" class="pub-link">DOI</a>
-                            <span class="separator">·</span>
-                            <a href="https://arxiv.org/html/2510.24352v1" target="_blank" rel="noopener" class="pub-link">HTML</a>
-                        </div>
-                        
-                        <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/spx_plots.png" alt="自标准化分位经验鞍点逼近结果图" loading="lazy">
-                        </div>
-                    </article>
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <span class="publication-title-text">部分线性地理加权分位回归模型</span>
-                        </h3>
-                        <p class="publication-authors">侯健, 刘硕, 田茂再</p>
-                        <p class="publication-venue">应用数学学报. <span class="publication-status">Status: External Review</span></p>
-                        <div class="publication-links">
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">PDF</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">DOI</span>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/plgwqr.png" alt="部分线性地理加权分位回归效果图" loading="lazy">
-                        </div>
-                    </article>
-
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS" 
-                                target="_blank" rel="noopener">泊松分布下基于鞍点逼近的相对风险置信区间构造</a>
-                        </h3>
-                        <p class="publication-authors">侯健, 刘硕, 田茂再</p>
-                        <p class="publication-venue">统计与信息论坛. 2025, 40(08): 3-13</p>
-                        <div class="publication-links">
-                            <a href="./papers/poisson-rr.html" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <a href="https://github.com/Stork343/saddlepoint-Poisson-RR"
-                                class="pub-link" target="_blank" rel="noopener">Code</a>
-                            <span class="separator">·</span>
-                            <a href="https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001"
-                                class="pub-link" target="_blank" rel="noopener">DOI</a>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/poisson-rr.jpeg" alt="泊松相对风险鞍点逼近论文图" loading="lazy">
-                        </div>
-                    </article>
-
-
-                        </div>
-                    </div>
-
-                    <div class="publication-year-group">
-                        <h3 class="publication-year">2022</h3>
-                        <div class="publication-year-items">
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS" 
-                                target="_blank" rel="noopener">基于异窗宽GTWR模型的商品住宅价格影响因素研究</a>
-                        </h3>
-                        <p class="publication-authors">侯健, 王芝皓, 田茂再, 窦燕</p>
-                        <p class="publication-venue">数理统计与管理. 2022, 41(06): 1003-1014</p>
-                        <div class="publication-links">
-                            <a href="./papers/gtwr.html" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <a href="https://doi.org/10.13860/j.cnki.sltj.20210722-025" target="_blank" rel="noopener" class="pub-link">DOI</a>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/mgtwr.png" alt="异窗宽 GTWR 模型结果图" loading="lazy">
-                        </div>
-                    </article>
-
-
-                     <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS"
-                                target="_blank" rel="noopener">基于多尺度时空地理加权回归模型的房价影响因素分析</a>
-                        </h3>
-                        <p class="publication-authors">景昊坤, 王合玲, 侯健</p>
-                        <p class="publication-venue">统计与管理. 2022, 37(10): 101-107</p>
-                        <div class="publication-links">
-                            <a href="./papers/bgtwr.html" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <a href="https://doi.org/10.16722/j.issn.1674-537x.2022.10.001" target="_blank" rel="noopener" class="pub-link">DOI</a>
-                        </div>
-
-                        <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/bgtwr.png" alt="多尺度时空地理加权回归结果图" loading="lazy">
-                        </div>
-                    </article>
-
-
-                        </div>
-                    </div>
-
-                    <div class="publication-year-group">
-                        <h3 class="publication-year">2021</h3>
-                        <div class="publication-year-items">
-
-                    <article class="publication-card has-thumb">
-                        <h3 class="publication-title">
-                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS" 
-                                target="_blank" rel="noopener">基于变量选择的混合时空地理加权回归参数估计</a>
-                        </h3>
-                        <p class="publication-authors">侯健, 田茂再</p>
-                        <p class="publication-venue">数学的实践与认识. 2021, 51(07): 110-118</p>
-                        <div class="publication-links">
-                            <a href="./papers/mgtwr.html" class="pub-link">PDF</a>
-                            <span class="separator">·</span>
-                            <span class="pub-link is-disabled" aria-disabled="true" title="Not available yet">Code</span>
-                            <span class="separator">·</span>
-                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT" 
-                                target="_blank" rel="noopener" class="pub-link">DOI</a>
-                        </div>
-
-                         <!-- 右侧：缩略图 -->
-                        <div class="pub-media">
-                            <img src="./papers/gtwr.png" alt="混合时空地理加权回归结果图" loading="lazy">
-                        </div>
-                    </article>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="section-title" data-i18n="publications_title">学术成果</h2>
+                <p class="section-subtitle" data-i18n="publications_note">按年份分组展示，支持 BibTeX 查看与引用复制。</p>
+                <div id="publications-list" class="publications-list"></div>
             </div>
         </section>
 
+        <section id="cv" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="cv_title">简历</h2>
+                <div class="cv-grid">
+                    <a class="cv-card" href="./cv/hou-jian-cv-zh.pdf" download>
+                        <h3 class="cv-card-title" data-i18n="cv_zh_title">中文简历</h3>
+                        <p class="cv-card-desc" data-i18n="cv_zh_desc">下载最新中文 CV（PDF）</p>
+                    </a>
+                    <a class="cv-card" href="./cv/hou-jian-cv-en.pdf" download>
+                        <h3 class="cv-card-title" data-i18n="cv_en_title">English CV</h3>
+                        <p class="cv-card-desc" data-i18n="cv_en_desc">Download the latest English CV (PDF)</p>
+                    </a>
+                </div>
+                <p class="cv-updated" data-i18n="cv_updated">最近更新：2026-02-24</p>
+            </div>
+        </section>
 
-
-        <!-- 联系方式 -->
         <section id="contact" class="section">
             <div class="container">
-                <h2 class="section-title">联系方式</h2>
+                <h2 class="section-title" data-i18n="contact_title">联系方式</h2>
                 <div class="contact-content">
                     <div class="contact-info">
                         <div class="contact-item">
-                            <h3 class="contact-label">邮箱</h3>
+                            <h3 class="contact-label" data-i18n="contact_email_label">邮箱</h3>
                             <p class="contact-value">
                                 <a href="mailto:houjian1997@ruc.edu.cn">houjian1997@ruc.edu.cn</a>
                             </p>
                         </div>
                         <div class="contact-item">
-                            <h3 class="contact-label">机构</h3>
-                            <p class="contact-value">中国人民大学统计学院</p>
-                            <p class="contact-value">School of Statistics, Renmin University of China</p>
+                            <h3 class="contact-label" data-i18n="contact_affiliation_label">机构</h3>
+                            <p class="contact-value" data-i18n="contact_affiliation_value">中国人民大学统计学院</p>
                         </div>
                         <div class="contact-item">
-                            <h3 class="contact-label">地址</h3>
-                            <p class="contact-value">中国北京市海淀区中关村大街59号</p>
-                            <p class="contact-value">No. 59 Zhongguancun Street, Haidian District Beijing, 100872, P.R. China </p>
+                            <h3 class="contact-label" data-i18n="contact_address_label">地址</h3>
+                            <p class="contact-value" data-i18n="contact_address_value">中国北京市海淀区中关村大街59号，100872</p>
                         </div>
                         <div class="contact-item">
-                            <h3 class="contact-label">研究合作</h3>
-                            <p class="contact-value">欢迎学术合作与交流</p>
-                            <p class="contact-value">主要合作者:TIAN Maozai; MENG Tan; WANG Zhihao</p>
+                            <h3 class="contact-label" data-i18n="contact_collab_label">研究合作</h3>
+                            <p class="contact-value" data-i18n="contact_collab_value">欢迎学术合作与交流</p>
+                            <p class="contact-value" data-i18n="contact_collab_people">主要合作者：TIAN Maozai, MENG Tan, WANG Zhihao</p>
                         </div>
                     </div>
                 </div>
@@ -428,9 +224,11 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="footer-text">© 2025 HOU Jian. 最后更新: 2026年2月</p>
+            <p class="footer-text" data-i18n="footer_text">© 2026 HOU Jian. 最后更新：2026年2月</p>
         </div>
     </footer>
+
+    <div id="copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
 
     <script src="scripts/main.js"></script>
 </body>
