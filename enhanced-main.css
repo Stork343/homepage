@@ -188,29 +188,42 @@ body {
 .publication-title{
   font-family:'Lora',serif; font-size:22px; font-weight:600; line-height:1.4; color:#1A1D21; margin-bottom:8px;
 }
-/* —— 取消标题链接斜体与下划线 —— */
+/* 论文标题与链接 */
 .publication-title a,
 .publication-title a:visited{
-  color:#1A1D21; text-decoration:none; font-style:normal; position:relative; transition:color .25s ease-in-out;
+  color:#1A1D21; text-decoration:none; font-style:normal; transition:color .25s ease-in-out;
 }
-/* 取消伪元素下划线动画 */
-.publication-title a::after{ content:none !important; }
 .publication-title a:hover{ color:#0D47A1; }
+.publication-title-text{ color:#1A1D21; font-style:normal; }
 
 .publication-authors,
 .publication-venue{
   font-size:14px; color:#6C757D; margin-bottom:8px; line-height:1.5;
 }
-/* —— 期刊信息不使用斜体 —— */
 .publication-venue{ font-style: normal; }
+.publication-status{ color:#0A336D; font-weight:600; }
 
-.publication-links{ margin-top:12px; }
+.publication-links{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  column-gap:10px;
+  row-gap:6px;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+}
 .pub-link{
   font-size:14px; font-weight:500; color:#0D47A1; text-decoration:none;
-  padding:4px 8px; border-radius:4px; transition:all .2s ease; position:relative; display:inline-block;
+  padding:0 2px; margin:0; border-radius:4px; transition:all .2s ease; position:relative; display:inline-block;
 }
 .pub-link:hover{ background:rgba(13,71,161,.1); transform:translateY(-1px); }
-.separator{ font-size:14px; color:#6C757D; margin:0 8px; }
+.pub-link.is-disabled{
+  color:#8A8F98; cursor:not-allowed; pointer-events:none;
+}
+.separator{
+  margin:0 6px; font-size:14px; line-height:1;
+  color:#8A8F98; user-select:none;
+}
 
 /* 项目 */
 .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:32px; }
@@ -336,108 +349,6 @@ body {
 
 /* ORCID PNG 快速圆角裁切 */
 .orcid-icon{ width:20px; height:20px; border-radius:50%; display:inline-block; }
-
-
-
-
-/* ===== 强力覆盖：出版物区去斜体、去下划线、统一颜色 ===== */
-
-/* 标题链接：去斜体/下划线/棕色，悬停只变色不加线 */
-.publications-list .publication-card .publication-title a,
-.publications-list .publication-card .publication-title a:visited,
-.publications-list .publication-card .publication-title a:hover {
-  font-style: normal !important;
-  text-decoration: none !important;
-  color: #1A1D21 !important;   /* 标题正常深色 */
-}
-
-/* 删掉任何可能加的装饰线伪元素 */
-.publications-list .publication-card .publication-title a::after {
-  content: none !important;
-}
-
-/* 期刊信息不要斜体 */
-.publications-list .publication-card .publication-venue {
-  font-style: normal !important;
-}
-
-/* 子链接（CNKI / Code / DOI）常态不带下划线，悬停不加线，只变底色/位置 */
-.publications-list .publication-card .publication-links .pub-link,
-.publications-list .publication-card .publication-links .pub-link:visited,
-.publications-list .publication-card .publication-links .pub-link:hover {
-  text-decoration: none !important;
-}
-
-/* 有些全局 a 颜色可能把你标题染成棕色——这里限定出版物区统一管理 */
-.publications-list .publication-card a {
-  color: #0D47A1;            /* 子链接蓝 */
-}
-.publications-list .publication-card .publication-title a {
-  color: #1A1D21 !important; /* 标题仍用深色 */
-}
-
-/* 防止左侧竖色条盖住点击（有的话） */
-.publications-list .publication-card::before {
-  pointer-events: none !important;
-}
-
-/* 你的头像区 HTML 用的是 .hero，不是 .hero-section，补一份别名防踩坑 */
-.hero { /* 和 .hero-section 一样的区块外观（若你仍用 .hero） */
-  padding: 96px 0 64px;
-  margin-top: 64px;
-  background:
-    linear-gradient(135deg, rgba(13,71,161,.02) 0%, rgba(13,71,161,.01) 50%, transparent 100%),
-    radial-gradient(circle at top right, rgba(13,71,161,.05) 0%, transparent 70%);
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content:'';
-  position:absolute; top:0; right:-10%; width:30%; height:100%;
-  background: radial-gradient(ellipse at center, rgba(13,71,161,.03) 0%, transparent 70%);
-  transform: rotate(15deg); pointer-events:none;
-}
-
-
-
-/* ===== 出版物底部小标签：去斜体/去红色/去下划线 ===== */
-
-/* 彻底禁用出版物区任何 <em>/<i> 的斜体 */
-.publications-list .publication-card em,
-.publications-list .publication-card i {
-  font-style: normal !important;
-}
-
-/* 小标签链接（PDF / CNKI / Code / DOI）统一样式 */
-.publications-list .publication-card .publication-links a,
-.publications-list .publication-card .publication-links .pub-link {
-  text-decoration: none !important;       /* 去下划线 */
-  font-style: normal !important;          /* 去斜体 */
-  color: #0D47A1 !important;              /* 常态蓝色（非红） */
-  font-weight: 600;                        /* 略加粗，像“标签” */
-}
-
-/* 如果标签里套了 <em>/<i>，也一并去斜体和红色 */
-.publications-list .publication-card .publication-links a em,
-.publications-list .publication-card .publication-links a i {
-  font-style: normal !important;
-  color: inherit !important;
-}
-
-/* 悬停仅变深一点点，不出现下划线或变红 */
-.publications-list .publication-card .publication-links a:hover,
-.publications-list .publication-card .publication-links .pub-link:hover {
-  color: #083a86 !important;              /* 稍深的蓝 */
-  text-decoration: none !important;
-}
-
-/* 避免被全局 a:active / a:visited 等规则污染 */
-.publications-list .publication-card .publication-links a:visited,
-.publications-list .publication-card .publication-links a:active {
-  color: #0D47A1 !important;
-}
-
-
 /* 固定导航下的锚点定位偏移，避免被顶栏遮住 */
 .anchor-target {
   scroll-margin-top: 84px;  /* 你的 navbar 高度 64px，加一点安全空隙 */
@@ -484,14 +395,6 @@ body {
   max-width: 100%;
 }
 
-/* 链接一行排布（你的原样式若已有可忽略） */
-.publication-links{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
 /* 响应式：屏宽较窄时把缩略图降到标题下方，避免压缩正文 */
 @media (max-width: 1024px){
   .publication-card.has-thumb{
@@ -511,106 +414,4 @@ body {
     height: auto;
     object-fit: contain;
   }
-}
-
-
-/* 让链接排成一行并收紧间距 */
-.publication-links{
-  display: flex;
-  align-items: center;
-  column-gap: 10px;  /* 控制链接之间的基础间距 */
-  row-gap: 6px;      /* 换行时行距 */
-  justify-content: flex-start;
-}
-
-/* 收紧每个链接自身的内边距（否则看起来像“间距过大”） */
-.publication-links .pub-link{
-  padding: 0 2px;     /* 原来若有 4~8px，会显得更散 */
-  margin: 0;
-}
-
-/* 调小分隔点的左右外边距与字号 */
-.publication-links .separator{
-  margin: 0 6px;      /* 原来一般 8~12px，压小一点 */
-  font-size: 14px;
-  line-height: 1;
-  color: #8A8F98;     /* 更淡一点，不抢视觉 */
-  user-select: none;
-}
-
-
-/* 顶部导航整体高度 + 垂直居中 */
-.navbar {
-  position: sticky;   /* 如果你是 fixed 就写 fixed */
-  top: 0;
-  z-index: 100;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-}
-
-/* 内部内容水平排列并上下居中 */
-.nav-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 64px;   /* 控制整个 topbar 的高度 */
-}
-
-/* 左侧 LOGO 垂直居中 */
-.nav-logo {
-  font-family: "Lora", serif;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-}
-
-/* 右侧菜单：每个 li 里的 a 都是 flex，文字自然居中 */
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  display: inline-flex;       /* 关键：变成 flex 元素 */
-  align-items: center;        /* 文字上下居中 */
-  justify-content: center;
-  padding: 0.4rem 0;          /* 适当的上下 padding，避免太厚 */
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  font-size: 15px;
-  line-height: 1.1;           /* 不要用很大的 line-height */
-  color: #4b5563;
-  text-decoration: none;
-  position: relative;
-}
-
-/* active / hover 状态下的底部下划线示例，可以按你原来的来 */
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
-  height: 2px;
-  border-radius: 999px;
-  transform-origin: center;
-  transform: scaleX(0);
-  transition: transform 0.18s ease-out;
-  background: #2563eb;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: #111827;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  transform: scaleX(1);
 }

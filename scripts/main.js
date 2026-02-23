@@ -83,15 +83,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-      navToggle.classList.toggle("open");
+      navMenu.classList.toggle("active");
+      navToggle.classList.toggle("active");
     });
 
     // 点击菜单后自动收起
     navLinks.forEach(link => {
       link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-        navToggle.classList.remove("open");
+        navMenu.classList.remove("active");
+        navToggle.classList.remove("active");
       });
     });
   }
