@@ -1,7 +1,19 @@
 // scripts/main.js
 (function () {
+  function getInitialTheme() {
+    const savedTheme = localStorage.getItem("homepage-theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
+    }
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  }
+
   const state = {
     lang: localStorage.getItem("homepage-lang") || "zh",
+    theme: getInitialTheme(),
     publications: []
   };
 
@@ -50,11 +62,17 @@
       label_bibtex: "BibTeX",
       label_copy_bibtex: "复制 BibTeX",
       label_not_available: "暂不可用",
+      theme_toggle_dark: "夜间",
+      theme_toggle_light: "日间",
+      theme_switch_to_dark: "切换到夜间",
+      theme_switch_to_light: "切换到日间",
       label_loading: "正在加载成果列表...",
       label_load_failed: "成果列表加载失败，请稍后重试。",
       toast_citation_copied: "已复制引用",
       toast_bibtex_copied: "已复制 BibTeX",
-      toast_copy_failed: "复制失败，请手动复制"
+      toast_copy_failed: "复制失败，请手动复制",
+      toast_theme_dark: "已启用夜间模式",
+      toast_theme_light: "已启用日间模式"
     },
     en: {
       nav_about: "About",
@@ -100,11 +118,17 @@
       label_bibtex: "BibTeX",
       label_copy_bibtex: "Copy BibTeX",
       label_not_available: "Not available",
+      theme_toggle_dark: "Dark",
+      theme_toggle_light: "Light",
+      theme_switch_to_dark: "Switch to dark mode",
+      theme_switch_to_light: "Switch to light mode",
       label_loading: "Loading publications...",
       label_load_failed: "Failed to load publications. Please retry later.",
       toast_citation_copied: "Citation copied",
       toast_bibtex_copied: "BibTeX copied",
-      toast_copy_failed: "Copy failed, please copy manually"
+      toast_copy_failed: "Copy failed, please copy manually",
+      toast_theme_dark: "Dark mode enabled",
+      toast_theme_light: "Light mode enabled"
     }
   };
 
@@ -126,6 +150,7 @@
     document.querySelectorAll(".lang-btn").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.lang === state.lang);
     });
+    updateThemeToggle();
   }
 
   function setLanguage(lang) {
@@ -152,6 +177,32 @@
       showToast(successMessage);
     } catch (_) {
       showToast(t("toast_copy_failed"));
+    }
+  }
+
+  function updateThemeToggle() {
+    const themeToggle = document.getElementById("theme-toggle");
+    if (!themeToggle) return;
+
+    const isDark = state.theme === "dark";
+    const buttonLabel = isDark ? t("theme_toggle_light") : t("theme_toggle_dark");
+    const switchLabel = isDark ? t("theme_switch_to_light") : t("theme_switch_to_dark");
+
+    themeToggle.textContent = `${isDark ? "☀" : "☾"} ${buttonLabel}`;
+    themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+    themeToggle.setAttribute("aria-label", switchLabel);
+    themeToggle.title = switchLabel;
+  }
+
+  function setTheme(theme, options = {}) {
+    const notify = Boolean(options.notify);
+    state.theme = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", state.theme);
+    localStorage.setItem("homepage-theme", state.theme);
+    updateThemeToggle();
+
+    if (notify) {
+      showToast(state.theme === "dark" ? t("toast_theme_dark") : t("toast_theme_light"));
     }
   }
 
@@ -440,9 +491,21 @@
     });
   }
 
+  function initThemeSwitch() {
+    const themeToggle = document.getElementById("theme-toggle");
+    if (!themeToggle) return;
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = state.theme === "dark" ? "light" : "dark";
+      setTheme(nextTheme, { notify: true });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
     initNavigation();
     initLanguageSwitch();
+    initThemeSwitch();
+    setTheme(state.theme);
     applyI18nText();
     await loadPublications();
   });
