@@ -1,60 +1,62 @@
-const PDF_URL = window.__PAPER_PDF_URL__;
-
-if (!PDF_URL) {
-  throw new Error("Missing __PAPER_PDF_URL__ for paper reader.");
-}
-
-const rootEl = document.documentElement;
-const bodyEl = document.body;
-const topbarEl = document.querySelector(".topbar");
-const topbarRightEl = document.querySelector(".topbar-right");
-const sideHandle = document.getElementById("sideToggleHandle");
-const downloadLink = document.getElementById("downloadLink");
-const themeToggleBtn = document.getElementById("themeToggleBtn");
-const themeLabel = document.getElementById("themeLabel");
-
-if (downloadLink) {
-  downloadLink.href = PDF_URL;
-}
-
-function readStoredTheme() {
+;(async () => {
   try {
-    const saved = localStorage.getItem("homepage-theme");
-    if (saved === "dark" || saved === "light") {
-      return saved;
+    const PDF_URL = window.__PAPER_PDF_URL__;
+
+    if (!PDF_URL) {
+      throw new Error("Missing __PAPER_PDF_URL__ for paper reader.");
     }
-  } catch (error) {
-    /* ignore */
-  }
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
 
-function applyTheme(theme) {
-  const normalized = theme === "dark" ? "dark" : "light";
-  rootEl.setAttribute("data-theme", normalized);
-  if (themeToggleBtn && themeLabel) {
-    themeToggleBtn.setAttribute("aria-pressed", String(normalized === "dark"));
-    themeToggleBtn.title = normalized === "dark" ? "切换到浅色模式" : "切换到深色模式";
-    themeLabel.textContent = normalized === "dark" ? "日间" : "夜间";
-  }
-  try {
-    localStorage.setItem("homepage-theme", normalized);
-  } catch (error) {
-    /* ignore */
-  }
-}
+    const rootEl = document.documentElement;
+    const bodyEl = document.body;
+    const topbarEl = document.querySelector(".topbar");
+    const topbarRightEl = document.querySelector(".topbar-right");
+    const sideHandle = document.getElementById("sideToggleHandle");
+    const downloadLink = document.getElementById("downloadLink");
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const themeLabel = document.getElementById("themeLabel");
 
-applyTheme(readStoredTheme());
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener("click", () => {
-    applyTheme(rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark");
-  });
-}
+    if (downloadLink) {
+      downloadLink.href = PDF_URL;
+    }
 
-if (topbarRightEl) {
-  topbarRightEl.innerHTML = `
+    function readStoredTheme() {
+      try {
+        const saved = localStorage.getItem("homepage-theme");
+        if (saved === "dark" || saved === "light") {
+          return saved;
+        }
+      } catch (error) {
+        /* ignore */
+      }
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+
+    function applyTheme(theme) {
+      const normalized = theme === "dark" ? "dark" : "light";
+      rootEl.setAttribute("data-theme", normalized);
+      if (themeToggleBtn && themeLabel) {
+        themeToggleBtn.setAttribute("aria-pressed", String(normalized === "dark"));
+        themeToggleBtn.title = normalized === "dark" ? "切换到浅色模式" : "切换到深色模式";
+        themeLabel.textContent = normalized === "dark" ? "日间" : "夜间";
+      }
+      try {
+        localStorage.setItem("homepage-theme", normalized);
+      } catch (error) {
+        /* ignore */
+      }
+    }
+
+    applyTheme(readStoredTheme());
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener("click", () => {
+        applyTheme(rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark");
+      });
+    }
+
+    if (topbarRightEl) {
+      topbarRightEl.innerHTML = `
     <div class="reader-group">
       <button class="btn btn-ghost" id="prevPageBtn" title="上一页 (←)" type="button"><span class="btn-icon">←</span></button>
       <label class="reader-page-jump" title="输入页码后回车跳转">
@@ -77,14 +79,14 @@ if (topbarRightEl) {
       <button class="btn btn-ghost" id="fullscreenBtn" title="全屏" type="button">全屏</button>
     </div>
   `;
-}
+    }
 
-let findBarEl = document.getElementById("findBar");
-if (!findBarEl && topbarEl) {
-  findBarEl = document.createElement("div");
-  findBarEl.id = "findBar";
-  findBarEl.className = "find-bar";
-  findBarEl.innerHTML = `
+    let findBarEl = document.getElementById("findBar");
+    if (!findBarEl && topbarEl) {
+      findBarEl = document.createElement("div");
+      findBarEl.id = "findBar";
+      findBarEl.className = "find-bar";
+      findBarEl.innerHTML = `
     <input class="find-input" id="findInput" type="search" placeholder="检索文档内容..." aria-label="检索文档内容"/>
     <button class="btn btn-ghost" id="findPrevBtn" type="button" title="上一个匹配 (Shift+Enter)">上一个</button>
     <button class="btn btn-ghost" id="findNextBtn" type="button" title="下一个匹配 (Enter)">下一个</button>
@@ -93,148 +95,148 @@ if (!findBarEl && topbarEl) {
     <span class="find-status" id="findStatus">0 / 0</span>
     <button class="btn btn-ghost" id="findCloseBtn" type="button">关闭</button>
   `;
-  topbarEl.insertAdjacentElement("afterend", findBarEl);
-}
+      topbarEl.insertAdjacentElement("afterend", findBarEl);
+    }
 
-const overlay = document.getElementById("loadingOverlay");
-const percentEl = document.getElementById("loadingPercent");
-const barFillEl = document.getElementById("loadingBarFill");
-const zoomIndicator = document.getElementById("zoomIndicator");
-const viewerContainer = document.getElementById("viewerContainer");
+    const overlay = document.getElementById("loadingOverlay");
+    const percentEl = document.getElementById("loadingPercent");
+    const barFillEl = document.getElementById("loadingBarFill");
+    const zoomIndicator = document.getElementById("zoomIndicator");
+    const viewerContainer = document.getElementById("viewerContainer");
 
-const prevPageBtn = document.getElementById("prevPageBtn");
-const nextPageBtn = document.getElementById("nextPageBtn");
-const pageNumberInput = document.getElementById("pageNumberInput");
-const totalPagesEl = document.getElementById("totalPages");
-const zoomOutBtn = document.getElementById("zoomOutBtn");
-const zoomInBtn = document.getElementById("zoomInBtn");
-const fitWidthBtn = document.getElementById("fitWidthBtn");
-const fitPageBtn = document.getElementById("fitPageBtn");
-const resetZoomBtn = document.getElementById("resetZoomBtn");
-const findToggleBtn = document.getElementById("findToggleBtn");
-const printBtn = document.getElementById("printBtn");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
+    const prevPageBtn = document.getElementById("prevPageBtn");
+    const nextPageBtn = document.getElementById("nextPageBtn");
+    const pageNumberInput = document.getElementById("pageNumberInput");
+    const totalPagesEl = document.getElementById("totalPages");
+    const zoomOutBtn = document.getElementById("zoomOutBtn");
+    const zoomInBtn = document.getElementById("zoomInBtn");
+    const fitWidthBtn = document.getElementById("fitWidthBtn");
+    const fitPageBtn = document.getElementById("fitPageBtn");
+    const resetZoomBtn = document.getElementById("resetZoomBtn");
+    const findToggleBtn = document.getElementById("findToggleBtn");
+    const printBtn = document.getElementById("printBtn");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
 
-const findInput = document.getElementById("findInput");
-const findPrevBtn = document.getElementById("findPrevBtn");
-const findNextBtn = document.getElementById("findNextBtn");
-const findCase = document.getElementById("findCase");
-const findHighlightAll = document.getElementById("findHighlightAll");
-const findCloseBtn = document.getElementById("findCloseBtn");
-const findStatus = document.getElementById("findStatus");
+    const findInput = document.getElementById("findInput");
+    const findPrevBtn = document.getElementById("findPrevBtn");
+    const findNextBtn = document.getElementById("findNextBtn");
+    const findCase = document.getElementById("findCase");
+    const findHighlightAll = document.getElementById("findHighlightAll");
+    const findCloseBtn = document.getElementById("findCloseBtn");
+    const findStatus = document.getElementById("findStatus");
 
-function showOverlay() {
-  if (overlay) {
-    overlay.classList.remove("hidden");
-  }
-}
+    function showOverlay() {
+      if (overlay) {
+        overlay.classList.remove("hidden");
+      }
+    }
 
-function hideOverlay() {
-  if (overlay) {
-    overlay.classList.add("hidden");
-  }
-}
+    function hideOverlay() {
+      if (overlay) {
+        overlay.classList.add("hidden");
+      }
+    }
 
-function showZoomIndicator(text) {
-  if (!zoomIndicator) {
-    return;
-  }
-  if (text) {
-    zoomIndicator.textContent = text;
-  }
-  zoomIndicator.classList.add("show");
-  window.clearTimeout(showZoomIndicator.timerId);
-  showZoomIndicator.timerId = window.setTimeout(() => {
-    zoomIndicator.classList.remove("show");
-  }, 850);
-}
-showZoomIndicator.timerId = 0;
+    function showZoomIndicator(text) {
+      if (!zoomIndicator) {
+        return;
+      }
+      if (text) {
+        zoomIndicator.textContent = text;
+      }
+      zoomIndicator.classList.add("show");
+      window.clearTimeout(showZoomIndicator.timerId);
+      showZoomIndicator.timerId = window.setTimeout(() => {
+        zoomIndicator.classList.remove("show");
+      }, 850);
+    }
+    showZoomIndicator.timerId = 0;
 
-function setFindStatus(current, total) {
-  if (!findStatus) {
-    return;
-  }
-  const safeCurrent = Number.isFinite(current) ? current : 0;
-  const safeTotal = Number.isFinite(total) ? total : 0;
-  findStatus.textContent = `${safeCurrent} / ${safeTotal}`;
-}
+    function setFindStatus(current, total) {
+      if (!findStatus) {
+        return;
+      }
+      const safeCurrent = Number.isFinite(current) ? current : 0;
+      const safeTotal = Number.isFinite(total) ? total : 0;
+      findStatus.textContent = `${safeCurrent} / ${safeTotal}`;
+    }
 
-function setFindOpen(opened) {
-  bodyEl.classList.toggle("find-open", opened);
-  if (opened && findInput) {
-    findInput.focus();
-    findInput.select();
-  }
-}
+    function setFindOpen(opened) {
+      bodyEl.classList.toggle("find-open", opened);
+      if (opened && findInput) {
+        findInput.focus();
+        findInput.select();
+      }
+    }
 
-if (findToggleBtn) {
-  findToggleBtn.addEventListener("click", () => {
-    const shouldOpen = !bodyEl.classList.contains("find-open");
-    setFindOpen(shouldOpen);
-  });
-}
+    if (findToggleBtn) {
+      findToggleBtn.addEventListener("click", () => {
+        const shouldOpen = !bodyEl.classList.contains("find-open");
+        setFindOpen(shouldOpen);
+      });
+    }
 
-if (findCloseBtn) {
-  findCloseBtn.addEventListener("click", () => setFindOpen(false));
-}
+    if (findCloseBtn) {
+      findCloseBtn.addEventListener("click", () => setFindOpen(false));
+    }
 
-if (sideHandle) {
-  const syncHandle = () => {
-    const opened = bodyEl.classList.contains("sidebar-open");
-    sideHandle.textContent = opened ? "‹" : "›";
-    sideHandle.setAttribute("aria-label", opened ? "收起侧边信息" : "展开侧边信息");
-  };
-  sideHandle.addEventListener("click", () => {
-    bodyEl.classList.toggle("sidebar-open");
-    syncHandle();
-  });
-  syncHandle();
-}
+    if (sideHandle) {
+      const syncHandle = () => {
+        const opened = bodyEl.classList.contains("sidebar-open");
+        sideHandle.textContent = opened ? "‹" : "›";
+        sideHandle.setAttribute("aria-label", opened ? "收起侧边信息" : "展开侧边信息");
+      };
+      sideHandle.addEventListener("click", () => {
+        bodyEl.classList.toggle("sidebar-open");
+        syncHandle();
+      });
+      syncHandle();
+    }
 
-const pdfjsLib = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs");
-const viewerModule = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.mjs");
-const { EventBus, PDFLinkService, PDFFindController, PDFViewer } = viewerModule;
+    const pdfjsLib = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs");
+    const viewerModule = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.mjs");
+    const { EventBus, PDFLinkService, PDFFindController, PDFViewer } = viewerModule;
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.mjs";
 
-const eventBus = new EventBus();
-const linkService = new PDFLinkService({ eventBus });
-const findController = new PDFFindController({ eventBus, linkService });
-const viewer = new PDFViewer({
-  container: viewerContainer,
-  eventBus,
-  linkService,
-  findController,
-  textLayerMode: 1,
-  annotationMode: 2
-});
-linkService.setViewer(viewer);
+    const eventBus = new EventBus();
+    const linkService = new PDFLinkService({ eventBus });
+    const findController = new PDFFindController({ eventBus, linkService });
+    const viewer = new PDFViewer({
+      container: viewerContainer,
+      eventBus,
+      linkService,
+      findController,
+      textLayerMode: 1,
+      annotationMode: 2
+    });
+    linkService.setViewer(viewer);
 
-window.viewer = viewer;
+    window.viewer = viewer;
 
-showOverlay();
+    showOverlay();
 
-const loadingTask = pdfjsLib.getDocument({
+    const loadingTask = pdfjsLib.getDocument({
   url: PDF_URL,
   cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/",
   cMapPacked: true,
   standardFontDataUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/"
-});
+    });
 
-loadingTask.onProgress = ({ loaded, total }) => {
+    loadingTask.onProgress = ({ loaded, total }) => {
   if (!total || !percentEl || !barFillEl) {
     return;
   }
   const percent = Math.max(0, Math.min(100, Math.round((loaded / total) * 100)));
   percentEl.textContent = `${percent}%`;
   barFillEl.style.width = `${percent}%`;
-};
+    };
 
-let pdfDocument;
-try {
-  pdfDocument = await loadingTask.promise;
-} catch (error) {
+    let pdfDocument;
+    try {
+      pdfDocument = await loadingTask.promise;
+    } catch (error) {
   if (percentEl) {
     percentEl.textContent = "失败";
   }
@@ -253,12 +255,12 @@ try {
   }
   console.error("Failed to load PDF:", error);
   throw error;
-}
+    }
 
-viewer.setDocument(pdfDocument);
-linkService.setDocument(pdfDocument, null);
+    viewer.setDocument(pdfDocument);
+    linkService.setDocument(pdfDocument, null);
 
-const updatePageControls = () => {
+    const updatePageControls = () => {
   if (!pdfDocument) {
     return;
   }
@@ -277,36 +279,36 @@ const updatePageControls = () => {
   if (nextPageBtn) {
     nextPageBtn.disabled = current >= total;
   }
-};
+    };
 
-const setScale = (scaleValue) => {
-  viewer.currentScaleValue = scaleValue;
-  const percent = Math.round(viewer.currentScale * 100);
-  showZoomIndicator(`${percent}%`);
-};
+    const setScale = (scaleValue) => {
+      viewer.currentScaleValue = scaleValue;
+      const percent = Math.round(viewer.currentScale * 100);
+      showZoomIndicator(`${percent}%`);
+    };
 
-eventBus.on("pagesinit", () => {
+    eventBus.on("pagesinit", () => {
   viewer.currentScaleValue = "page-fit";
   updatePageControls();
   setTimeout(hideOverlay, 300);
-});
+    });
 
-eventBus.on("pagechanging", updatePageControls);
-eventBus.on("scalechanging", ({ scale }) => {
+    eventBus.on("pagechanging", updatePageControls);
+    eventBus.on("scalechanging", ({ scale }) => {
   if (typeof scale === "number") {
     showZoomIndicator(`${Math.round(scale * 100)}%`);
   }
-});
+    });
 
-eventBus.on("updatefindmatchescount", ({ matchesCount }) => {
+    eventBus.on("updatefindmatchescount", ({ matchesCount }) => {
   if (!matchesCount) {
     setFindStatus(0, 0);
     return;
   }
   setFindStatus(matchesCount.current || 0, matchesCount.total || 0);
-});
+    });
 
-const runFind = (findPrevious = false, forceNewSearch = false) => {
+    const runFind = (findPrevious = false, forceNewSearch = false) => {
   if (!findInput) {
     return;
   }
@@ -323,9 +325,9 @@ const runFind = (findPrevious = false, forceNewSearch = false) => {
     findPrevious,
     matchDiacritics: false
   });
-};
+    };
 
-if (findInput) {
+    if (findInput) {
   findInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -337,38 +339,38 @@ if (findInput) {
       setFindStatus(0, 0);
     }
   });
-}
+    }
 
-if (findNextBtn) {
+    if (findNextBtn) {
   findNextBtn.addEventListener("click", () => runFind(false, true));
-}
-if (findPrevBtn) {
+    }
+    if (findPrevBtn) {
   findPrevBtn.addEventListener("click", () => runFind(true, true));
-}
-if (findCase) {
+    }
+    if (findCase) {
   findCase.addEventListener("change", () => runFind(false, true));
-}
-if (findHighlightAll) {
+    }
+    if (findHighlightAll) {
   findHighlightAll.addEventListener("change", () => runFind(false, true));
-}
+    }
 
-if (prevPageBtn) {
+    if (prevPageBtn) {
   prevPageBtn.addEventListener("click", () => {
     if (viewer.currentPageNumber > 1) {
       viewer.currentPageNumber -= 1;
     }
   });
-}
+    }
 
-if (nextPageBtn) {
+    if (nextPageBtn) {
   nextPageBtn.addEventListener("click", () => {
     if (pdfDocument && viewer.currentPageNumber < pdfDocument.numPages) {
       viewer.currentPageNumber += 1;
     }
   });
-}
+    }
 
-if (pageNumberInput) {
+    if (pageNumberInput) {
   const jumpToPage = () => {
     if (!pdfDocument) {
       return;
@@ -389,29 +391,29 @@ if (pageNumberInput) {
       jumpToPage();
     }
   });
-}
+    }
 
-if (zoomInBtn) {
+    if (zoomInBtn) {
   zoomInBtn.addEventListener("click", () => {
     setScale(Math.min(viewer.currentScale * 1.1, 4.0));
   });
-}
-if (zoomOutBtn) {
+    }
+    if (zoomOutBtn) {
   zoomOutBtn.addEventListener("click", () => {
     setScale(Math.max(viewer.currentScale / 1.1, 0.25));
   });
-}
-if (fitWidthBtn) {
+    }
+    if (fitWidthBtn) {
   fitWidthBtn.addEventListener("click", () => setScale("page-width"));
-}
-if (fitPageBtn) {
+    }
+    if (fitPageBtn) {
   fitPageBtn.addEventListener("click", () => setScale("page-fit"));
-}
-if (resetZoomBtn) {
+    }
+    if (resetZoomBtn) {
   resetZoomBtn.addEventListener("click", () => setScale(1.0));
-}
+    }
 
-if (printBtn) {
+    if (printBtn) {
   printBtn.addEventListener("click", () => {
     const printWindow = window.open(PDF_URL, "_blank", "noopener");
     if (!printWindow) {
@@ -427,18 +429,18 @@ if (printBtn) {
     };
     printWindow.addEventListener("load", () => setTimeout(triggerPrint, 300), { once: true });
   });
-}
+    }
 
-const updateFullscreenState = () => {
-  if (!fullscreenBtn) {
-    return;
-  }
-  const isFullscreen = Boolean(document.fullscreenElement);
-  fullscreenBtn.textContent = isFullscreen ? "退出全屏" : "全屏";
-  fullscreenBtn.title = isFullscreen ? "退出全屏" : "全屏";
-};
+    const updateFullscreenState = () => {
+      if (!fullscreenBtn) {
+        return;
+      }
+      const isFullscreen = Boolean(document.fullscreenElement);
+      fullscreenBtn.textContent = isFullscreen ? "退出全屏" : "全屏";
+      fullscreenBtn.title = isFullscreen ? "退出全屏" : "全屏";
+    };
 
-if (fullscreenBtn) {
+    if (fullscreenBtn) {
   fullscreenBtn.addEventListener("click", async () => {
     try {
       if (!document.fullscreenElement) {
@@ -450,21 +452,21 @@ if (fullscreenBtn) {
       console.error("Fullscreen failed:", error);
     }
   });
-}
-document.addEventListener("fullscreenchange", updateFullscreenState);
-updateFullscreenState();
+    }
+    document.addEventListener("fullscreenchange", updateFullscreenState);
+    updateFullscreenState();
 
-const tocButtons = Array.from(document.querySelectorAll(".toc-link"));
-tocButtons.forEach((button) => {
+    const tocButtons = Array.from(document.querySelectorAll(".toc-link"));
+    tocButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const pageNumber = Number.parseInt(button.dataset.page || "", 10);
     if (Number.isFinite(pageNumber)) {
       viewer.scrollPageIntoView({ pageNumber });
     }
   });
-});
+    });
 
-async function resolveDestinationToPage(dest) {
+    async function resolveDestinationToPage(dest) {
   if (!dest) {
     return null;
   }
@@ -481,36 +483,36 @@ async function resolveDestinationToPage(dest) {
   } catch (error) {
     return null;
   }
-}
+    }
 
-async function attachOutline() {
-  const outline = await pdfDocument.getOutline();
-  if (!outline || outline.length === 0) {
-    return;
-  }
-  const panelInner = document.querySelector(".side-panel-inner");
-  if (!panelInner) {
-    return;
-  }
+    async function attachOutline() {
+      const outline = await pdfDocument.getOutline();
+      if (!outline || outline.length === 0) {
+        return;
+      }
+      const panelInner = document.querySelector(".side-panel-inner");
+      if (!panelInner) {
+        return;
+      }
 
-  const section = document.createElement("div");
-  section.className = "side-panel-section";
-  section.id = "autoOutlineSection";
-  section.innerHTML = `
+      const section = document.createElement("div");
+      section.className = "side-panel-section";
+      section.id = "autoOutlineSection";
+      section.innerHTML = `
     <h3 style="font-style: italic; font-size: 18px;">PDF 书签目录</h3>
     <ol class="outline-list" id="outlineList"></ol>
   `;
-  panelInner.appendChild(section);
+      panelInner.appendChild(section);
 
-  const outlineList = section.querySelector("#outlineList");
-  if (!outlineList) {
-    return;
-  }
+      const outlineList = section.querySelector("#outlineList");
+      if (!outlineList) {
+        return;
+      }
 
-  let count = 0;
-  const maxItems = 80;
+      let count = 0;
+      const maxItems = 80;
 
-  const walk = async (items, depth = 0) => {
+      const walk = async (items, depth = 0) => {
     for (const item of items) {
       if (count >= maxItems) {
         return;
@@ -534,16 +536,16 @@ async function attachOutline() {
         await walk(item.items, depth + 1);
       }
     }
-  };
+      };
 
-  await walk(outline, 0);
-}
+      await walk(outline, 0);
+    }
 
-attachOutline().catch((error) => {
-  console.warn("Failed to build PDF outline:", error);
-});
+    attachOutline().catch((error) => {
+      console.warn("Failed to build PDF outline:", error);
+    });
 
-document.addEventListener("keydown", (event) => {
+    document.addEventListener("keydown", (event) => {
   const target = event.target;
   const tagName = target && target.tagName ? target.tagName.toLowerCase() : "";
   if (tagName === "input" || tagName === "textarea" || (target && target.isContentEditable)) {
@@ -598,4 +600,8 @@ document.addEventListener("keydown", (event) => {
     event.preventDefault();
     resetZoomBtn && resetZoomBtn.click();
   }
-});
+    });
+  } catch (error) {
+    console.error("Paper reader initialization failed:", error);
+  }
+})();
