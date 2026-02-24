@@ -1,0 +1,5 @@
+# macOS Finder metadata
+.DS_Store
+
+# Local downloaded reference CSS assets
+*~product.css
