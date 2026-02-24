@@ -40,6 +40,7 @@
       nav_publications: "学术成果",
       nav_cv: "简历",
       nav_contact: "联系方式",
+      profile_name: "侯健",
       profile_title: "统计学在读博士 | 初级统计师",
       profile_desc: "主要关注分位回归、鞍点逼近、混合效应建模等领域。",
       research_title: "研究领域",
@@ -96,6 +97,7 @@
       nav_publications: "Publications",
       nav_cv: "CV",
       nav_contact: "Contact",
+      profile_name: "Hou Jian",
       profile_title: "PhD Candidate in Statistics | Junior Statistician",
       profile_desc: "Research interests include quantile regression, saddlepoint approximation, and mixed-effects modeling.",
       research_title: "Research Areas",
@@ -256,7 +258,19 @@
     return separator;
   }
 
+  function getPublicationLanguage(pub) {
+    return pub && pub.force_english_display ? "en" : state.lang;
+  }
+
+  function localizedText(value, lang) {
+    if (value && typeof value === "object") {
+      return value[lang] || value.en || value.zh || "";
+    }
+    return value || "";
+  }
+
   function createPublicationCard(pub) {
+    const pubLang = getPublicationLanguage(pub);
     const card = document.createElement("article");
     card.className = "publication-card has-thumb";
 
@@ -267,7 +281,7 @@
     if (articleLink) {
       const a = document.createElement("a");
       a.href = articleLink;
-      a.textContent = (pub.title && pub.title[state.lang]) || "";
+      a.textContent = localizedText(pub.title, pubLang);
       if (articleLink.startsWith("http")) {
         a.target = "_blank";
         a.rel = "noopener";
@@ -276,23 +290,24 @@
     } else {
       const span = document.createElement("span");
       span.className = "publication-title-text";
-      span.textContent = (pub.title && pub.title[state.lang]) || "";
+      span.textContent = localizedText(pub.title, pubLang);
       title.appendChild(span);
     }
 
     const authors = document.createElement("p");
     authors.className = "publication-authors";
-    authors.textContent = pub.authors || "";
+    authors.textContent = localizedText(pub.authors, pubLang);
 
     const venue = document.createElement("p");
     venue.className = "publication-venue";
-    venue.textContent = (pub.venue && pub.venue[state.lang]) || "";
+    venue.textContent = localizedText(pub.venue, pubLang);
 
-    if (pub.status && pub.status[state.lang]) {
+    const statusText = localizedText(pub.status, pubLang);
+    if (statusText) {
       venue.appendChild(document.createTextNode(". "));
       const status = document.createElement("span");
       status.className = "publication-status";
-      status.textContent = pub.status[state.lang];
+      status.textContent = statusText;
       venue.appendChild(status);
     }
 
@@ -310,7 +325,7 @@
     copyCitationBtn.className = "pub-link";
     copyCitationBtn.textContent = t("label_copy_citation");
     copyCitationBtn.addEventListener("click", () => {
-      copyText((pub.citation && pub.citation[state.lang]) || "", t("toast_citation_copied"));
+      copyText(localizedText(pub.citation, pubLang), t("toast_citation_copied"));
     });
 
     const copyBibBtn = document.createElement("button");
@@ -359,7 +374,7 @@
 
     const img = document.createElement("img");
     img.src = (pub.image && pub.image.src) || "";
-    img.alt = (pub.image && pub.image.alt && pub.image.alt[state.lang]) || "";
+    img.alt = localizedText(pub.image && pub.image.alt, pubLang);
     img.loading = "lazy";
     if (pub.image && pub.image.width) {
       img.width = pub.image.width;
