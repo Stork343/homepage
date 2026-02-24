@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap");
+
+:root {
+  --tf-blue: #204c8b;
+  --tf-brand-blue: #1d2088;
+  --tf-link: #204c8b;
+  --tf-link-hover: #3f7cba;
+  --tf-ink: #1b2430;
+  --tf-slate: #3f4d60;
+  --tf-muted: #667487;
+  --tf-bg: #f4f6f9;
+  --tf-paper: #ffffff;
+  --tf-border: #d4dce7;
+  --paper-bar-h: 64px;
+  --paper-sidebar-w: 340px;
+}
+
+:root[data-theme="dark"] {
+  --tf-blue: #8db7ff;
+  --tf-link: #8db7ff;
+  --tf-link-hover: #bfd7ff;
+  --tf-ink: #e6edf8;
+  --tf-slate: #bfcbdd;
+  --tf-muted: #95a4b8;
+  --tf-bg: #0f141c;
+  --tf-paper: #18212c;
+  --tf-border: #2d3a4c;
+}
+
+:root {
+  --bar-h: var(--paper-bar-h);
+  --sidebar-w: var(--paper-sidebar-w);
+}
+
+body {
+  background: var(--tf-bg) !important;
+  color: var(--tf-ink) !important;
+  font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.topbar {
+  background: var(--tf-paper) !important;
+  border-bottom: 1px solid var(--tf-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.topbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--tf-brand-blue);
+}
+
+.topbar-title {
+  font-family: "Source Serif 4", serif !important;
+  font-size: 15px !important;
+  color: var(--tf-ink) !important;
+  letter-spacing: 0.01em;
+}
+
+.btn {
+  border-radius: 3px !important;
+  border: 1px solid var(--tf-border) !important;
+  background: var(--tf-paper) !important;
+  color: var(--tf-link) !important;
+  box-shadow: none !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  padding: 6px 10px !important;
+}
+
+.btn:hover {
+  background: #eef3fa !important;
+  border-color: #b7c7db !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-ghost {
+  background: transparent !important;
+}
+
+.btn:focus-visible,
+.toc-link:focus-visible,
+.side-toggle-handle:focus-visible {
+  outline: 2px solid var(--tf-link) !important;
+  outline-offset: 2px !important;
+}
+
+.page-indicator {
+  border: 1px solid #d7e2f1;
+  border-radius: 3px !important;
+  background: #eef4fb !important;
+  color: var(--tf-link) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.side-panel {
+  background: var(--tf-paper) !important;
+  border-right: 1px solid var(--tf-border) !important;
+}
+
+.side-panel-header {
+  border-bottom: 1px solid var(--tf-border) !important;
+}
+
+.side-panel-title {
+  font-family: "Source Serif 4", serif !important;
+  color: var(--tf-link) !important;
+}
+
+.side-panel-subtitle,
+.meta-label {
+  color: var(--tf-muted) !important;
+}
+
+.side-panel-section h3,
+.meta-item,
+.meta-list .meta-value,
+.toc-link {
+  color: var(--tf-ink) !important;
+}
+
+.toc-link {
+  color: var(--tf-link) !important;
+  font-size: 15px !important;
+}
+
+.toc-link:hover {
+  color: var(--tf-link-hover) !important;
+  text-decoration: underline;
+}
+
+.side-panel-section div {
+  color: var(--tf-ink) !important;
+}
+
+#viewerContainer {
+  background: var(--tf-paper) !important;
+}
+
+.zoom-indicator {
+  background: rgba(20, 34, 52, 0.9) !important;
+  color: #ffffff !important;
+  border-radius: 3px !important;
+}
+
+.loading-overlay {
+  background: rgba(244, 246, 249, 0.92) !important;
+}
+
+.loading-box {
+  background: var(--tf-paper) !important;
+  border: 1px solid var(--tf-border);
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+
+.loading-text {
+  color: var(--tf-ink) !important;
+}
+
+.loading-bar {
+  background: #e0e8f4 !important;
+}
+
+.loading-bar-fill {
+  background: linear-gradient(90deg, var(--tf-link), #6ea1d9) !important;
+}
+
+.side-toggle-handle {
+  background: var(--tf-link) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 900px) {
+  .topbar-title-wrap {
+    display: none !important;
+  }
+
+  .topbar-left {
+    min-width: 0;
+  }
+
+  .topbar-right {
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --paper-bar-h: 62px;
+  }
+
+  .topbar {
+    padding: 0 6px !important;
+  }
+
+  .btn {
+    font-size: 11px !important;
+    padding: 5px 8px !important;
+  }
+
+  .page-indicator {
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+  }
+}
