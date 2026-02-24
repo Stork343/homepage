@@ -126,6 +126,11 @@
 
     const primaryTocList = document.querySelector(".side-panel .toc-list");
     const staticTocButtons = primaryTocList ? Array.from(primaryTocList.querySelectorAll(".toc-link")) : [];
+    const tocSectionTitleEl = primaryTocList
+      ? primaryTocList.closest(".side-panel-section")?.querySelector("h3")
+      : null;
+    const tocSectionTitle = (tocSectionTitleEl ? tocSectionTitleEl.textContent : "").trim();
+    const prefersAutoToc = Boolean(window.__PAPER_AUTO_TOC__) || /^content$/i.test(tocSectionTitle);
 
     let pdfDocument = null;
     let pageTextCache = null;
@@ -390,10 +395,13 @@
 
     function isNumberedHeading(text) {
       const value = String(text || "").trim();
+      if (!value || value.length > 90) {
+        return false;
+      }
       return (
         /^[一二三四五六七八九十百零]{1,3}[、.．:：)]/u.test(value) ||
         /^第[一二三四五六七八九十百零0-9]+[章节部分篇][、.．:：)]?/u.test(value) ||
-        /^\d+(\.\d+){0,2}[.．、:：)]?\s*[A-Za-z\u4e00-\u9fff]/u.test(value)
+        /^\d+(\.\d+){0,2}[.)]?\s+[A-Z][A-Za-z\s\-&/]{1,80}$/u.test(value)
       );
     }
 
@@ -411,12 +419,22 @@
         return false;
       }
       return (
-        /^(introduction|model|method|methods|methodology|estimationandalgorithms|asymptotictheory|simulationstudy|realdata|realdataanalysis|discussion|conclusion|conclusions|proofsoftheorems|references)$/i.test(
+        /^(introduction|model|method|methods|methodology|estimationmethod|estimationandalgorithms|asymptotictheory|simulationstudy|simulation|realworlddata|realdata|realdataanalysis|discussion|conclusion|conclusions|proofsoftheorems|appendix|appendices|references)$/i.test(
           compact
         ) ||
         /^(引言|研究方法|方法|模型|理论基础|理论方法|模拟研究|实证分析|结论|结论与展望|参考文献)$/u.test(
           value
         )
+      );
+    }
+
+    function isPrimaryHeading(title) {
+      const value = String(title || "").trim();
+      return (
+        /^[一二三四五六七八九十百零]{1,3}[、.．:：)]/u.test(value) ||
+        /^第[一二三四五六七八九十百零0-9]+[章节部分篇]/u.test(value) ||
+        /^\d+[.)]?\s+[A-Z]/u.test(value) ||
+        isKeywordHeading(value)
       );
     }
 
@@ -646,7 +664,9 @@
         }
       }
 
-      return items.slice(0, 48);
+      const primaryItems = items.filter((item) => isPrimaryHeading(item.title));
+      const filtered = primaryItems.length >= 4 ? primaryItems : items;
+      return filtered.slice(0, 32);
     }
 
     const pdfjsLib = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs");
@@ -908,9 +928,8 @@
       updatePageControls();
       setTimeout(hideOverlay, 300);
 
-      // Prefer curated HTML TOC to avoid encoding noise in some PDFs.
-      // Only auto-build TOC when page has no predefined TOC entries.
-      if (staticTocButtons.length === 0) {
+      // SCI/English pages marked with "Content" prefer PDF-driven TOC.
+      if (prefersAutoToc) {
         try {
           const outlineItems = await extractOutlineItems();
           if (outlineItems.length >= 3 && renderPrimaryTocItems(outlineItems)) {
@@ -930,6 +949,7 @@
         }
       }
 
+      // Non-auto pages keep curated TOC titles and only realign page targets.
       try {
         await mapStaticTocToRealPages();
       } catch (error) {
