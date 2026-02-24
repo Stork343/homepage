@@ -13,7 +13,6 @@
     const downloadLink = document.getElementById("downloadLink");
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     const themeLabel = document.getElementById("themeLabel");
-    const panelInner = document.querySelector(".side-panel-inner");
 
     if (downloadLink) {
       downloadLink.href = PDF_URL;
@@ -327,27 +326,165 @@
       bindTocButton(btn);
     });
 
+    function normalizeHeadingDisplay(text) {
+      let value = String(text || "").replace(/\s+/g, " ").trim();
+      if (/[\u4e00-\u9fff]/u.test(value)) {
+        value = value.replace(/\s+/g, "");
+      }
+      value = value.replace(/^[\-–—·•●\s]+/u, "").replace(/\s*[.:：。；;]+$/u, "").trim();
+      return value;
+    }
+
+    function extractPageLines(items) {
+      const rows = [];
+      const threshold = 2.2;
+      for (const item of items || []) {
+        const text = String(item && item.str ? item.str : "").trim();
+        if (!text) {
+          continue;
+        }
+        const transform = Array.isArray(item.transform) ? item.transform : [];
+        const x = Number(transform[4]) || 0;
+        const y = Number(transform[5]) || 0;
+        const width = Number(item.width) || 0;
+
+        let targetRow = null;
+        for (let i = rows.length - 1; i >= 0; i -= 1) {
+          if (Math.abs(rows[i].y - y) <= threshold) {
+            targetRow = rows[i];
+            break;
+          }
+        }
+        if (!targetRow) {
+          targetRow = { y, parts: [] };
+          rows.push(targetRow);
+        }
+        targetRow.parts.push({ x, width, text });
+      }
+
+      rows.sort((a, b) => b.y - a.y);
+      return rows
+        .map((row) => {
+          row.parts.sort((a, b) => a.x - b.x);
+          let merged = "";
+          let prev = null;
+          for (const part of row.parts) {
+            if (prev) {
+              const prevEnd = prev.x + prev.width;
+              const gap = part.x - prevEnd;
+              const needSpace =
+                gap > 3 &&
+                /[A-Za-z0-9]$/.test(prev.text) &&
+                /^[A-Za-z0-9(]/.test(part.text);
+              if (needSpace) {
+                merged += " ";
+              }
+            }
+            merged += part.text;
+            prev = part;
+          }
+          return normalizeHeadingDisplay(merged);
+        })
+        .filter(Boolean);
+    }
+
+    function isNumberedHeading(text) {
+      const value = String(text || "").trim();
+      return (
+        /^[一二三四五六七八九十百零]{1,3}[、.．:：)]/u.test(value) ||
+        /^第[一二三四五六七八九十百零0-9]+[章节部分篇][、.．:：)]?/u.test(value) ||
+        /^\d+(\.\d+){0,2}[.．、:：)]?\s*[A-Za-z\u4e00-\u9fff]/u.test(value)
+      );
+    }
+
+    function isKeywordHeading(text) {
+      const value = String(text || "").trim();
+      if (!value || value.length > 90) {
+        return false;
+      }
+      const compact = normalizeForMatch(value);
+      if (
+        /^(doi|www|http|journal|vol|收稿|基金|作者简介|关键词|key\s*words|copyright)/iu.test(
+          compact
+        )
+      ) {
+        return false;
+      }
+      return (
+        /^(introduction|model|method|methods|methodology|estimationandalgorithms|asymptotictheory|simulationstudy|realdata|realdataanalysis|discussion|conclusion|conclusions|proofsoftheorems|references)$/i.test(
+          compact
+        ) ||
+        /^(引言|研究方法|方法|模型|理论基础|理论方法|模拟研究|实证分析|结论|结论与展望|参考文献)$/u.test(
+          value
+        )
+      );
+    }
+
+    function inferHeadingDepth(title) {
+      const value = String(title || "").trim();
+      const match = value.match(/^(\d+(\.\d+){0,2})/);
+      if (!match) {
+        return 0;
+      }
+      const dotCount = (match[1].match(/\./g) || []).length;
+      return Math.min(dotCount, 3);
+    }
+
+    function renderPrimaryTocItems(items) {
+      if (!primaryTocList || !Array.isArray(items) || items.length === 0) {
+        return false;
+      }
+      primaryTocList.innerHTML = "";
+      for (const item of items) {
+        const title = stripPageSuffix(item.title || "未命名");
+        const pageNumber = Number.parseInt(item.pageNumber || "", 10);
+        if (!title || !Number.isFinite(pageNumber) || pageNumber <= 0) {
+          continue;
+        }
+        const li = document.createElement("li");
+        if (Number.isFinite(item.depth) && item.depth > 0) {
+          li.className = `outline-depth-${Math.min(item.depth, 3)}`;
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "toc-link";
+        btn.dataset.page = String(pageNumber);
+        btn.dataset.titleRaw = title;
+        btn.textContent = title;
+        const isChinese = /[\u4e00-\u9fff]/u.test(title);
+        btn.title = isChinese ? `跳转到第${pageNumber}页` : `Go to page ${pageNumber}`;
+        bindTocButton(btn);
+        li.appendChild(btn);
+        primaryTocList.appendChild(li);
+      }
+      return primaryTocList.children.length > 0;
+    }
+
     async function buildPageTextCache() {
       if (pageTextCache || !pdfDocument) {
-        return pageTextCache || { fullTexts: [], headTexts: [] };
+        return pageTextCache || { fullTexts: [], headTexts: [], pageLines: [] };
       }
       const fullTexts = [];
       const headTexts = [];
+      const pageLines = [];
 
       for (let p = 1; p <= pdfDocument.numPages; p += 1) {
         try {
           const page = await pdfDocument.getPage(p);
           const textContent = await page.getTextContent();
-          const text = textContent.items.map((item) => item.str || "").join(" ");
+          const items = Array.isArray(textContent.items) ? textContent.items : [];
+          const text = items.map((item) => item.str || "").join(" ");
           const normalized = normalizeForMatch(text);
           fullTexts.push(normalized);
           headTexts.push(normalized.slice(0, 2200));
+          pageLines.push(extractPageLines(items));
         } catch (error) {
           fullTexts.push("");
           headTexts.push("");
+          pageLines.push([]);
         }
       }
-      pageTextCache = { fullTexts, headTexts };
+      pageTextCache = { fullTexts, headTexts, pageLines };
       return pageTextCache;
     }
 
@@ -419,13 +556,9 @@
       }
     }
 
-    async function attachPdfOutline() {
-      if (!panelInner || !pdfDocument) {
-        return;
-      }
-      const old = document.getElementById("autoOutlineSection");
-      if (old) {
-        old.remove();
+    async function extractOutlineItems() {
+      if (!pdfDocument) {
+        return [];
       }
 
       let outline = null;
@@ -435,23 +568,10 @@
         outline = null;
       }
       if (!outline || outline.length === 0) {
-        return;
+        return [];
       }
 
-      const section = document.createElement("div");
-      section.className = "side-panel-section";
-      section.id = "autoOutlineSection";
-      section.innerHTML = `
-        <h3 style="font-style: italic; font-size: 18px;">PDF 书签目录</h3>
-        <ol class="outline-list" id="outlineList"></ol>
-      `;
-      panelInner.appendChild(section);
-
-      const outlineList = section.querySelector("#outlineList");
-      if (!outlineList) {
-        return;
-      }
-
+      const collected = [];
       let count = 0;
       const maxItems = 120;
 
@@ -462,19 +582,15 @@
           }
           const pageNumber = await resolveDestinationToPage(item.dest);
           if (pageNumber) {
-            const li = document.createElement("li");
-            li.className = `outline-depth-${Math.min(depth, 3)}`;
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "toc-link";
-            btn.dataset.page = String(pageNumber);
-            const title = stripPageSuffix(item.title || "未命名");
-            btn.textContent = title;
-            btn.title = `跳转到第${pageNumber}页`;
-            bindTocButton(btn);
-            li.appendChild(btn);
-            outlineList.appendChild(li);
-            count += 1;
+            const title = normalizeHeadingDisplay(stripPageSuffix(item.title || "未命名"));
+            if (title) {
+              collected.push({
+                title,
+                pageNumber,
+                depth: Math.min(depth, 3)
+              });
+              count += 1;
+            }
           }
           if (Array.isArray(item.items) && item.items.length > 0) {
             await walk(item.items, depth + 1);
@@ -483,6 +599,54 @@
       }
 
       await walk(outline, 0);
+
+      const unique = [];
+      const seen = new Set();
+      for (const item of collected) {
+        const key = `${normalizeForMatch(item.title)}@${item.pageNumber}`;
+        if (seen.has(key)) {
+          continue;
+        }
+        seen.add(key);
+        unique.push(item);
+      }
+      return unique;
+    }
+
+    async function extractHeuristicTocItems() {
+      if (!pdfDocument) {
+        return [];
+      }
+      const { pageLines } = await buildPageTextCache();
+      if (!Array.isArray(pageLines) || pageLines.length === 0) {
+        return [];
+      }
+
+      const items = [];
+      const seen = new Set();
+      for (let pageIndex = 0; pageIndex < pageLines.length; pageIndex += 1) {
+        for (const rawLine of pageLines[pageIndex]) {
+          const title = normalizeHeadingDisplay(rawLine);
+          if (!title || title.length < 2 || title.length > 90) {
+            continue;
+          }
+          if (!isNumberedHeading(title) && !isKeywordHeading(title)) {
+            continue;
+          }
+          const key = normalizeForMatch(stripHeadingPrefix(title) || title);
+          if (!key || key.length < 2 || seen.has(key)) {
+            continue;
+          }
+          seen.add(key);
+          items.push({
+            title,
+            pageNumber: pageIndex + 1,
+            depth: inferHeadingDepth(title)
+          });
+        }
+      }
+
+      return items.slice(0, 48);
     }
 
     const pdfjsLib = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs");
@@ -744,18 +908,40 @@
       updatePageControls();
       setTimeout(hideOverlay, 300);
 
-      try {
-        await mapStaticTocToRealPages();
-      } catch (error) {
-        console.warn("Failed to map static toc:", error);
-      }
+      let tocBuilt = false;
 
       try {
-        await attachPdfOutline();
+        const outlineItems = await extractOutlineItems();
+        if (outlineItems.length >= 3) {
+          tocBuilt = renderPrimaryTocItems(outlineItems);
+        }
       } catch (error) {
-        console.warn("Failed to attach PDF outline:", error);
+        console.warn("Failed to build TOC from PDF outline:", error);
       }
 
+      if (!tocBuilt) {
+        try {
+          const headingItems = await extractHeuristicTocItems();
+          if (headingItems.length >= 3) {
+            tocBuilt = renderPrimaryTocItems(headingItems);
+          }
+        } catch (error) {
+          console.warn("Failed to build TOC from PDF headings:", error);
+        }
+      }
+
+      if (!tocBuilt) {
+        try {
+          await mapStaticTocToRealPages();
+        } catch (error) {
+          console.warn("Failed to map static toc:", error);
+        }
+      }
+    });
+
+    // Keep page controls in sync if TOC buttons are clicked before pagesinit finishes.
+    eventBus.on("pagerendered", () => {
+      updatePageControls();
     });
 
     document.addEventListener("keydown", (event) => {
