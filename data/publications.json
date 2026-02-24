@@ -26,8 +26,8 @@
       "article": null
     },
     "image": {
-      "src": "./papers/fig_estimation_convergence.png",
-      "webp": "./papers/fig_estimation_convergence.webp",
+      "src": "./papers/2025/mallows-llm-ranking/fig_estimation_convergence.png",
+      "webp": "./papers/2025/mallows-llm-ranking/fig_estimation_convergence.webp",
       "width": 1980,
       "height": 1580,
       "alt": {
@@ -65,8 +65,8 @@
       "article": null
     },
     "image": {
-      "src": "./papers/dblqmm.png",
-      "webp": "./papers/dblqmm.webp",
+      "src": "./papers/2025/jpdi-mixed-qr/dblqmm.png",
+      "webp": "./papers/2025/jpdi-mixed-qr/dblqmm.webp",
       "width": 1024,
       "height": 1024,
       "alt": {
@@ -98,15 +98,15 @@
       "en": "Status: First Revision"
     },
     "links": {
-      "pdf": "./papers/svcqr.html",
+      "pdf": "./papers/2025/svcqr/svcqr.html",
       "code": "https://github.com/Stork343/SS-SVCQR",
       "doi": null,
       "html": "https://arxiv.org/html/2511.18106v2",
       "article": "https://arxiv.org/abs/2511.18106"
     },
     "image": {
-      "src": "./papers/log_price.png",
-      "webp": "./papers/log_price.webp",
+      "src": "./papers/2025/svcqr/log_price.png",
+      "webp": "./papers/2025/svcqr/log_price.webp",
       "width": 1777,
       "height": 867,
       "alt": {
@@ -138,15 +138,15 @@
       "en": "Status: Accepted"
     },
     "links": {
-      "pdf": "./papers/hcqr.html",
+      "pdf": "./papers/2025/hcqr/hcqr.html",
       "code": null,
       "doi": null,
       "html": null,
-      "article": "./papers/hcqr.html"
+      "article": "./papers/2025/hcqr/hcqr.html"
     },
     "image": {
-      "src": "./papers/data line.png",
-      "webp": "./papers/data-line.webp",
+      "src": "./papers/2025/hcqr/data-line.png",
+      "webp": "./papers/2025/hcqr/data-line.webp",
       "width": 3179,
       "height": 3180,
       "alt": {
@@ -185,8 +185,8 @@
       "article": "https://arxiv.org/abs/2510.24352"
     },
     "image": {
-      "src": "./papers/spx_plots.png",
-      "webp": "./papers/spx_plots.webp",
+      "src": "./papers/2025/snqesa/spx_plots.png",
+      "webp": "./papers/2025/snqesa/spx_plots.webp",
       "width": 2414,
       "height": 1928,
       "alt": {
@@ -228,8 +228,8 @@
       "article": null
     },
     "image": {
-      "src": "./papers/plgwqr.png",
-      "webp": "./papers/plgwqr.webp",
+      "src": "./papers/2025/plgwqr/plgwqr.png",
+      "webp": "./papers/2025/plgwqr/plgwqr.webp",
       "width": 1942,
       "height": 1812,
       "alt": {
@@ -260,15 +260,15 @@
     },
     "status": null,
     "links": {
-      "pdf": "./papers/poisson-rr.html",
+      "pdf": "./papers/2025/poisson-rr/poisson-rr.html",
       "code": "https://github.com/Stork343/saddlepoint-Poisson-RR",
       "doi": "https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001",
       "html": null,
       "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS"
     },
     "image": {
-      "src": "./papers/poisson-rr.jpeg",
-      "webp": "./papers/poisson-rr.webp",
+      "src": "./papers/2025/poisson-rr/poisson-rr.jpeg",
+      "webp": "./papers/2025/poisson-rr/poisson-rr.webp",
       "width": 254,
       "height": 198,
       "alt": {
@@ -299,15 +299,15 @@
     },
     "status": null,
     "links": {
-      "pdf": "./papers/gtwr.html",
+      "pdf": "./papers/2022/gtwr-housing/gtwr.html",
       "code": null,
       "doi": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
       "html": null,
       "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS"
     },
     "image": {
-      "src": "./papers/mgtwr.png",
-      "webp": "./papers/mgtwr.webp",
+      "src": "./papers/2022/gtwr-housing/mgtwr.png",
+      "webp": "./papers/2022/gtwr-housing/mgtwr.webp",
       "width": 2630,
       "height": 1972,
       "alt": {
@@ -338,15 +338,15 @@
     },
     "status": null,
     "links": {
-      "pdf": "./papers/bgtwr.html",
+      "pdf": "./papers/2022/bgtwr-housing/bgtwr.html",
       "code": null,
       "doi": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
       "html": null,
       "article": "https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS"
     },
     "image": {
-      "src": "./papers/bgtwr.png",
-      "webp": "./papers/bgtwr.webp",
+      "src": "./papers/2022/bgtwr-housing/bgtwr.png",
+      "webp": "./papers/2022/bgtwr-housing/bgtwr.webp",
       "width": 1332,
       "height": 940,
       "alt": {
@@ -377,15 +377,15 @@
     },
     "status": null,
     "links": {
-      "pdf": "./papers/mgtwr.html",
+      "pdf": "./papers/2021/mgtwr-variable-selection/mgtwr.html",
       "code": null,
       "doi": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT",
       "html": null,
       "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS"
     },
     "image": {
-      "src": "./papers/gtwr.png",
-      "webp": "./papers/gtwr.webp",
+      "src": "./papers/2021/mgtwr-variable-selection/gtwr.png",
+      "webp": "./papers/2021/mgtwr-variable-selection/gtwr.webp",
       "width": 1024,
       "height": 1024,
       "alt": {
