@@ -1,0 +1,18 @@
+{
+  "name": "houjian-homepage",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Personal academic homepage with paper subpages and PDF reader",
+  "scripts": {
+    "check:syntax": "node --check scripts/main.js && node --check papers/shared/paper-reader.js && node --check scripts/validate-site.js && node --check scripts/acceptance-check.js && node --check scripts/generate-paper-toc.js && node --check scripts/run-lighthouse-check.js",
+    "check:data": "node scripts/validate-site.js && node scripts/generate-paper-toc.js --check",
+    "check:acceptance": "node scripts/acceptance-check.js",
+    "toc:build": "node scripts/generate-paper-toc.js --write",
+    "test:ui": "playwright test",
+    "lighthouse": "node scripts/run-lighthouse-check.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "lighthouse": "^12.8.2"
+  }
+}

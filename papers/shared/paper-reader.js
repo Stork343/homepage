@@ -217,6 +217,35 @@
       }
     }
 
+    async function loadGeneratedTocEntry() {
+      const paperId = derivePaperId();
+      if (!paperId) {
+        return null;
+      }
+      const tocUrl = window.__PAPER_TOC_URL__ || "../../../data/paper-toc.generated.json";
+      try {
+        const response = await fetch(new URL(tocUrl, window.location.href).toString(), {
+          cache: "no-cache"
+        });
+        if (!response.ok) {
+          return null;
+        }
+        const payload = await response.json();
+        const entries = Array.isArray(payload) ? payload : Array.isArray(payload.papers) ? payload.papers : [];
+        if (entries.length === 0) {
+          return null;
+        }
+        const currentPath = normalizePath(window.location.pathname);
+        return (
+          entries.find((entry) => String(entry.id || "").trim() === paperId) ||
+          entries.find((entry) => currentPath.endsWith(normalizePath(entry.path || ""))) ||
+          null
+        );
+      } catch (error) {
+        return null;
+      }
+    }
+
     function buildPdfCandidates(config) {
       const configCandidates = [];
       if (config && typeof config === "object") {
@@ -231,9 +260,11 @@
     }
 
     const paperConfigPromise = loadPaperConfig();
+    const generatedTocPromise = loadGeneratedTocEntry();
 
     let pdfDocument = null;
     let pageTextCache = null;
+    let prebuiltTocApplied = false;
 
     function showOverlay() {
       if (overlay) {
@@ -679,6 +710,29 @@
           renderPrimaryTocItems(checked.items);
         }
       }
+    }
+
+    function applyGeneratedTocToSidebar(entry) {
+      if (!entry || typeof entry !== "object") {
+        return false;
+      }
+      if (tocSectionTitleEl && entry.toc_heading) {
+        tocSectionTitleEl.textContent = String(entry.toc_heading);
+      }
+      const rawItems = Array.isArray(entry.items) ? entry.items : Array.isArray(entry.toc) ? entry.toc : [];
+      if (rawItems.length === 0) {
+        return false;
+      }
+      const normalized = rawItems.map((item) => ({
+        title: item && item.title ? String(item.title) : "",
+        pageNumber: item && item.page ? Number(item.page) : Number(item && item.pageNumber),
+        depth: Number.isFinite(item && item.depth) ? item.depth : 0
+      }));
+      const checked = validateTocItems(normalized, 1);
+      if (checked.items.length === 0) {
+        return false;
+      }
+      return renderPrimaryTocItems(checked.items);
     }
 
     function readDeepLinkState() {
@@ -1146,8 +1200,9 @@
 
     showOverlay();
 
-    const paperConfig = await paperConfigPromise;
+    const [paperConfig, generatedTocEntry] = await Promise.all([paperConfigPromise, generatedTocPromise]);
     applyPaperConfigToSidebar(paperConfig);
+    prebuiltTocApplied = applyGeneratedTocToSidebar(generatedTocEntry) || prebuiltTocApplied;
     pdfCandidates = buildPdfCandidates(paperConfig);
     activePdfUrl = pdfCandidates[0];
     if (downloadLink) {
@@ -1215,7 +1270,7 @@
       updatePageControls();
       setTimeout(hideOverlay, 300);
 
-      let tocBuiltFromPdf = false;
+      let tocBuiltFromPdf = prebuiltTocApplied;
       if (prefersAutoToc) {
         try {
           const outlineValidation = validateTocItems(await extractOutlineItems(), 3);

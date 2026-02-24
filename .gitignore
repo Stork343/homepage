@@ -3,3 +3,8 @@
 
 # Local downloaded reference CSS assets
 *~product.css
+
+# Node / test artifacts
+node_modules/
+playwright-report/
+test-results/
