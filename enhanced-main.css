@@ -452,7 +452,7 @@ body {
 .orcid-icon{ width:20px; height:20px; border-radius:50%; display:inline-block; }
 /* 固定导航下的锚点定位偏移，避免被顶栏遮住 */
 .anchor-target {
-  scroll-margin-top: 84px;  /* 你的 navbar 高度 64px，加一点安全空隙 */
+  scroll-margin-top: 96px;  /* navbar 加高后，保留更稳定的锚点可见区 */
 }
 
 
@@ -565,7 +565,7 @@ body{
 
 .navbar{
   position:fixed;
-  height:68px;
+  height:76px;
   background:#fff;
   border-bottom:1px solid var(--tf-border);
   box-shadow:none;
@@ -582,20 +582,22 @@ body{
 }
 .nav-content{
   height:100%;
-  padding-top:4px;
+  padding-top:8px;
 }
 .nav-logo{
   font-family:'Source Serif 4', serif;
-  font-size:20px;
+  font-size:21px;
   letter-spacing:.07em;
   color:var(--tf-blue);
 }
 .nav-logo::before{ display:none; }
 .nav-menu{
-  gap:26px;
+  gap:28px;
 }
 .nav-link{
-  font-size:13px;
+  font-size:14px;
+  line-height:1.25;
+  padding:10px 0;
   text-transform:uppercase;
   letter-spacing:.05em;
   color:var(--tf-slate);
@@ -640,7 +642,7 @@ body{
 }
 
 .hero-section{
-  margin-top:68px;
+  margin-top:76px;
   padding:56px 0 44px;
   background:transparent;
 }
@@ -1033,11 +1035,11 @@ body{
 }
 
 @media (max-width:768px){
-  .navbar{ height:64px; }
-  .nav-content{ padding-top:4px; }
+  .navbar{ height:70px; }
+  .nav-content{ padding-top:7px; }
   .nav-menu{
-    top:64px;
-    height:calc(100vh - 64px);
+    top:70px;
+    height:calc(100vh - 70px);
     background:#fff;
     backdrop-filter:none;
   }
@@ -1046,7 +1048,7 @@ body{
     font-size:11px;
   }
   .hero-section{
-    margin-top:64px;
+    margin-top:70px;
     padding:38px 0 24px;
   }
   .hero-content{
