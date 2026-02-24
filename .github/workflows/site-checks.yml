@@ -39,11 +39,29 @@ jobs:
       - name: Validate generated TOC cache JSON
         run: python3 -m json.tool data/paper-toc.generated.json > /dev/null
 
+      - name: Validate search index JSON
+        run: python3 -m json.tool data/search-index.generated.json > /dev/null
+
+      - name: Validate generated publications JSON-LD
+        run: python3 -m json.tool data/publications-jsonld.generated.json > /dev/null
+
+      - name: Validate generated paper SEO JSON
+        run: python3 -m json.tool data/paper-seo.generated.json > /dev/null
+
+      - name: Ensure generated site data is up to date
+        run: node scripts/build-site-data.js --check
+
       - name: Ensure generated TOC cache is up to date
         run: node scripts/generate-paper-toc.js --check
 
+      - name: Ensure paper SEO blocks are up to date
+        run: node scripts/sync-paper-seo.js --check
+
       - name: Validate site data consistency
         run: node scripts/validate-site.js
+
+      - name: Run WCAG contrast checks
+        run: npm --silent run check:contrast
 
       - name: Run acceptance smoke checks
         run: node scripts/acceptance-check.js
@@ -92,6 +110,46 @@ jobs:
 
       - name: Run Playwright regression tests
         run: npm run test:ui
+
+  a11y-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run accessibility tests
+        run: npm run test:a11y
+
+  visual-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run visual baseline tests
+        run: npm run test:visual
 
   lighthouse-check:
     runs-on: ubuntu-latest

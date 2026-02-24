@@ -36,7 +36,7 @@
       }
     }());
     </script>
-    <link rel="stylesheet" href="enhanced-main.css?v=20260225a">
+    <link rel="stylesheet" href="enhanced-main.css?v=20260225b">
     <link rel="sitemap" type="application/xml" href="sitemap.xml">
     <link rel="robots" href="robots.txt">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8E%93</text></svg>">
@@ -190,14 +190,25 @@
         <section id="publications" class="section">
             <div class="container">
                 <h2 class="section-title" data-i18n="publications_title">学术成果</h2>
-                <p class="section-subtitle" data-i18n="publications_note">按年份分组展示，支持 BibTeX 查看与引用复制。</p>
+                <p class="section-subtitle" data-i18n="publications_note">全站学术检索（标题/作者/关键词/年份/期刊），并支持引用批量导出。</p>
                 <form class="pub-search" id="pub-search-form" role="search" aria-label="Search publications">
                     <label class="sr-only" for="pub-search-input" data-i18n="publications_search_label">检索成果</label>
                     <input id="pub-search-input" type="search" data-i18n-placeholder="publications_search_placeholder" data-i18n-aria-label="publications_search_label" placeholder="按标题、作者、期刊或关键词检索…">
                     <select id="pub-year-filter" aria-label="Year filter"></select>
+                    <select id="pub-venue-filter" aria-label="Venue filter"></select>
+                    <select id="pub-keyword-filter" aria-label="Keyword filter"></select>
                     <select id="pub-status-filter" aria-label="Status filter"></select>
                     <button id="pub-clear-btn" type="button" class="pub-clear-btn" data-i18n="publications_clear">清空</button>
                 </form>
+                <div class="citation-export" id="citation-export" aria-label="Citation export center">
+                    <button type="button" class="pub-export-btn" id="export-bibtex-btn" data-i18n="export_bibtex">导出 BibTeX</button>
+                    <button type="button" class="pub-export-btn" id="export-ris-btn" data-i18n="export_ris">导出 RIS</button>
+                    <button type="button" class="pub-export-btn" id="export-endnote-btn" data-i18n="export_endnote">导出 EndNote</button>
+                    <label class="export-scope">
+                        <input type="checkbox" id="export-filtered-only">
+                        <span data-i18n="export_filtered_only">仅导出当前筛选结果</span>
+                    </label>
+                </div>
                 <p id="pub-result-count" class="pub-result-count" aria-live="polite"></p>
                 <div id="publications-list" class="publications-list"></div>
             </div>
@@ -286,6 +297,6 @@
 
     <div id="copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
 
-    <script src="scripts/main.js?v=20260225a"></script>
+    <script src="scripts/main.js?v=20260225b"></script>
 </body>
 </html>

@@ -4,14 +4,21 @@
   "version": "1.0.0",
   "description": "Personal academic homepage with paper subpages and PDF reader",
   "scripts": {
-    "check:syntax": "node --check scripts/main.js && node --check papers/shared/paper-reader.js && node --check scripts/validate-site.js && node --check scripts/acceptance-check.js && node --check scripts/generate-paper-toc.js && node --check scripts/run-lighthouse-check.js",
-    "check:data": "node scripts/validate-site.js && node scripts/generate-paper-toc.js --check",
+    "check:syntax": "node --check scripts/main.js && node --check papers/shared/paper-reader.js && node --check scripts/validate-site.js && node --check scripts/acceptance-check.js && node --check scripts/generate-paper-toc.js && node --check scripts/build-site-data.js && node --check scripts/run-lighthouse-check.js",
+    "check:data": "node scripts/build-site-data.js --check && node scripts/validate-site.js && node scripts/generate-paper-toc.js --check",
     "check:acceptance": "node scripts/acceptance-check.js",
+    "check:contrast": "node scripts/check-contrast.js",
+    "data:build": "node scripts/build-site-data.js --write",
     "toc:build": "node scripts/generate-paper-toc.js --write",
+    "seo:sync": "node scripts/sync-paper-seo.js --write",
+    "metadata:enrich": "node scripts/enrich-metadata.js --write-cache",
     "test:ui": "playwright test",
+    "test:a11y": "playwright test tests/ui/accessibility.spec.js",
+    "test:visual": "playwright test tests/ui/visual.spec.js",
     "lighthouse": "node scripts/run-lighthouse-check.js"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.52.0",
     "lighthouse": "^12.8.2"
   }

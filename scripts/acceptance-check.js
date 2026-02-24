@@ -115,8 +115,14 @@ function run() {
   assertContains(indexHtml, "Home theme toggle", /id=["']theme-toggle["']/i, "index.html");
   assertContains(indexHtml, "Home publication search input", /id=["']pub-search-input["']/i, "index.html");
   assertContains(indexHtml, "Home publication year filter", /id=["']pub-year-filter["']/i, "index.html");
+  assertContains(indexHtml, "Home publication venue filter", /id=["']pub-venue-filter["']/i, "index.html");
+  assertContains(indexHtml, "Home publication keyword filter", /id=["']pub-keyword-filter["']/i, "index.html");
   assertContains(indexHtml, "Home publication status filter", /id=["']pub-status-filter["']/i, "index.html");
   assertContains(indexHtml, "Home publication clear button", /id=["']pub-clear-btn["']/i, "index.html");
+  assertContains(indexHtml, "Home citation export BibTeX button", /id=["']export-bibtex-btn["']/i, "index.html");
+  assertContains(indexHtml, "Home citation export RIS button", /id=["']export-ris-btn["']/i, "index.html");
+  assertContains(indexHtml, "Home citation export EndNote button", /id=["']export-endnote-btn["']/i, "index.html");
+  assertContains(indexHtml, "Home citation export filtered scope", /id=["']export-filtered-only["']/i, "index.html");
   assertContains(indexHtml, "Home CSS version tag", /enhanced-main\.css\?v=\d+/i, "index.html");
   assertContains(indexHtml, "Home JS version tag", /scripts\/main\.js\?v=\d+/i, "index.html");
 
@@ -175,6 +181,7 @@ function run() {
       /paper-reader\.js\?v=\d+/i,
       relPath
     );
+    assertContains(html, `${label} has SEO block`, /SEO:BEGIN[\s\S]*SEO:END/i, relPath);
     assertContains(html, `${label} has TOC list`, /class=["']toc-list["']/i, relPath);
     assertContains(html, `${label} has paper theme toggle`, /id=["']themeToggleBtn["']/i, relPath);
 
@@ -289,6 +296,10 @@ function run() {
   manual(
     "Manual check: bilingual display",
     "Switch language on home page and verify SCI cards remain English titles while name rendering follows English mode rules."
+  );
+  manual(
+    "Manual check: citation export center",
+    "On home page, export BibTeX/RIS/EndNote in both full and filtered scope and verify downloaded files open correctly."
   );
 
   printAndExit();
