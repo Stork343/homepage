@@ -6,6 +6,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const INDEX_HTML = path.join(ROOT, "index.html");
 const PAPER_CONFIG_JSON = path.join(ROOT, "data", "paper-pages.json");
+const GENERATED_TOC_JSON = path.join(ROOT, "data", "paper-toc.generated.json");
 const PUBLICATIONS_JSON = path.join(ROOT, "data", "publications.json");
 
 const results = [];
@@ -88,6 +89,11 @@ function run() {
     printAndExit();
     return;
   }
+  if (!fs.existsSync(GENERATED_TOC_JSON)) {
+    fail("Generated TOC cache exists", GENERATED_TOC_JSON);
+    printAndExit();
+    return;
+  }
   if (!fs.existsSync(PUBLICATIONS_JSON)) {
     fail("Publications data exists", PUBLICATIONS_JSON);
     printAndExit();
@@ -96,8 +102,11 @@ function run() {
 
   const indexHtml = readText(INDEX_HTML);
   const paperConfig = readJson(PAPER_CONFIG_JSON);
+  const generatedToc = readJson(GENERATED_TOC_JSON);
   const publications = readJson(PUBLICATIONS_JSON);
   const papers = Array.isArray(paperConfig.papers) ? paperConfig.papers : [];
+  const generatedPapers = Array.isArray(generatedToc.papers) ? generatedToc.papers : [];
+  const generatedById = new Map(generatedPapers.map((entry) => [String(entry.id || ""), entry]));
   const publicationById = new Map(
     (Array.isArray(publications) ? publications : []).map((entry) => [String(entry.id || ""), entry])
   );
@@ -115,6 +124,14 @@ function run() {
     pass("Paper pages count", "paper-pages.json has 6 configured paper pages");
   } else {
     fail("Paper pages count", `Expected 6, got ${papers.length}`);
+  }
+  if (generatedPapers.length === papers.length) {
+    pass("Generated TOC paper count", `paper-toc.generated.json has ${generatedPapers.length} paper entries`);
+  } else {
+    fail(
+      "Generated TOC paper count",
+      `paper-toc.generated.json has ${generatedPapers.length}, expected ${papers.length}`
+    );
   }
 
   for (const entry of papers) {
@@ -148,6 +165,12 @@ function run() {
     );
     assertContains(
       html,
+      `${label} exposes __PAPER_TOC_URL__`,
+      /window\.__PAPER_TOC_URL__\s*=\s*["']\.\.\/\.\.\/\.\.\/data\/paper-toc\.generated\.json["']/m,
+      relPath
+    );
+    assertContains(
+      html,
       `${label} has paper reader script version`,
       /paper-reader\.js\?v=\d+/i,
       relPath
@@ -159,6 +182,25 @@ function run() {
       assertContains(html, `${label} TOC heading (Content)`, />\s*Content\s*<\/h3>/i, relPath);
     } else {
       assertContains(html, `${label} TOC heading (目录)`, />\s*目录\s*<\/h3>/i, relPath);
+    }
+
+    const generatedEntry = generatedById.get(id);
+    if (!generatedEntry) {
+      fail(`${label} generated TOC mapping`, `${id} not found in paper-toc.generated.json`);
+    } else {
+      pass(`${label} generated TOC mapping`, `${id} found in paper-toc.generated.json`);
+      const generatedPath = normalizeRelPath(generatedEntry.path);
+      if (generatedPath !== relPath) {
+        fail(`${label} generated TOC path`, `cache=${generatedPath}, page=${relPath}`);
+      } else {
+        pass(`${label} generated TOC path`, generatedPath);
+      }
+      const generatedItems = Array.isArray(generatedEntry.items) ? generatedEntry.items : [];
+      if (generatedItems.length > 0) {
+        pass(`${label} generated TOC items`, `${generatedItems.length} entries`);
+      } else {
+        fail(`${label} generated TOC items`, "no prebuilt TOC items");
+      }
     }
 
     const pub = publicationById.get(id);

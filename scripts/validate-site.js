@@ -6,6 +6,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const PUBLICATIONS_JSON = path.join(ROOT, "data", "publications.json");
 const PAPER_CONFIG_JSON = path.join(ROOT, "data", "paper-pages.json");
+const GENERATED_TOC_JSON = path.join(ROOT, "data", "paper-toc.generated.json");
 
 function readJson(filePath) {
   const content = fs.readFileSync(filePath, "utf8");
@@ -44,10 +45,16 @@ function run() {
     fail(`Missing file: ${PAPER_CONFIG_JSON}`);
     return;
   }
+  if (!fs.existsSync(GENERATED_TOC_JSON)) {
+    fail(`Missing file: ${GENERATED_TOC_JSON}`);
+    return;
+  }
 
   const publications = readJson(PUBLICATIONS_JSON);
   const paperConfig = readJson(PAPER_CONFIG_JSON);
+  const generatedToc = readJson(GENERATED_TOC_JSON);
   const papers = Array.isArray(paperConfig.papers) ? paperConfig.papers : [];
+  const generatedPapers = Array.isArray(generatedToc.papers) ? generatedToc.papers : [];
 
   if (!Array.isArray(publications)) {
     fail("data/publications.json must be an array.");
@@ -57,6 +64,18 @@ function run() {
     fail("data/paper-pages.json must contain a non-empty papers array.");
     return;
   }
+  if (generatedPapers.length === 0) {
+    fail("data/paper-toc.generated.json must contain a non-empty papers array.");
+    return;
+  }
+
+  const generatedTocById = new Map();
+  generatedPapers.forEach((entry) => {
+    const id = String(entry && entry.id ? entry.id : "").trim();
+    if (id) {
+      generatedTocById.set(id, entry);
+    }
+  });
 
   const publicationById = new Map();
   publications.forEach((pub) => {
@@ -95,6 +114,9 @@ function run() {
     }
     if (!html.includes('window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json"')) {
       fail(`${relPath} must expose window.__PAPER_CONFIG_URL__`);
+    }
+    if (!html.includes('window.__PAPER_TOC_URL__ = "../../../data/paper-toc.generated.json"')) {
+      fail(`${relPath} must expose window.__PAPER_TOC_URL__`);
     }
 
     if (!Array.isArray(entry.toc) || entry.toc.length === 0) {
@@ -136,7 +158,27 @@ function run() {
     if (pdfLink && pdfLink !== relPath) {
       fail(`Mismatch for ${id}: publications.json pdf link (${pdfLink}) != paper-pages path (${relPath})`);
     }
+
+    const generatedEntry = generatedTocById.get(id);
+    if (!generatedEntry) {
+      fail(`paper-toc.generated.json missing entry for ${id}.`);
+    } else {
+      const generatedPath = normalizeRelPath(generatedEntry.path);
+      if (generatedPath !== relPath) {
+        fail(`paper-toc.generated mismatch for ${id}: path ${generatedPath} != ${relPath}`);
+      }
+      const generatedItems = Array.isArray(generatedEntry.items) ? generatedEntry.items : [];
+      if (generatedItems.length === 0) {
+        fail(`paper-toc.generated entry ${id} has empty items.`);
+      }
+    }
   });
+
+  if (generatedTocById.size !== papers.length) {
+    fail(
+      `paper-toc.generated paper count mismatch: generated ${generatedTocById.size}, expected ${papers.length}`
+    );
+  }
 
   const readerPath = path.join(ROOT, "papers", "shared", "paper-reader.js");
   if (fs.existsSync(readerPath)) {
@@ -145,6 +187,8 @@ function run() {
       "validateTocItems",
       "applyInitialDeepLink",
       "paperConfigPromise",
+      "generatedTocPromise",
+      "applyGeneratedTocToSidebar",
       "mapStaticTocToRealPages"
     ];
     requiredSnippets.forEach((snippet) => {

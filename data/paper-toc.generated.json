@@ -1,0 +1,244 @@
+{
+  "updated": "2026-02-24",
+  "generated_at": "2026-02-24T00:00:00.000Z",
+  "papers": [
+    {
+      "id": "mgtwr-variable-selection",
+      "path": "papers/2021/mgtwr-variable-selection/mgtwr.html",
+      "auto_toc": false,
+      "toc_heading": "目录",
+      "items": [
+        {
+          "title": "一、引言",
+          "page": 1,
+          "depth": 0
+        },
+        {
+          "title": "二、理论方法",
+          "page": 2,
+          "depth": 0
+        },
+        {
+          "title": "三、实证分析",
+          "page": 4,
+          "depth": 0
+        },
+        {
+          "title": "四、结论",
+          "page": 7,
+          "depth": 0
+        }
+      ],
+      "source": "prebuilt-static"
+    },
+    {
+      "id": "bgtwr-housing",
+      "path": "papers/2022/bgtwr-housing/bgtwr.html",
+      "auto_toc": false,
+      "toc_heading": "目录",
+      "items": [
+        {
+          "title": "一、引言",
+          "page": 1,
+          "depth": 0
+        },
+        {
+          "title": "二、理论基础",
+          "page": 2,
+          "depth": 0
+        },
+        {
+          "title": "三、实证分析",
+          "page": 4,
+          "depth": 0
+        },
+        {
+          "title": "四、结论",
+          "page": 7,
+          "depth": 0
+        }
+      ],
+      "source": "prebuilt-static"
+    },
+    {
+      "id": "gtwr-housing",
+      "path": "papers/2022/gtwr-housing/gtwr.html",
+      "auto_toc": false,
+      "toc_heading": "目录",
+      "items": [
+        {
+          "title": "一、引言",
+          "page": 1,
+          "depth": 0
+        },
+        {
+          "title": "二、研究方法",
+          "page": 2,
+          "depth": 0
+        },
+        {
+          "title": "三、标准差椭圆分类算法",
+          "page": 4,
+          "depth": 0
+        },
+        {
+          "title": "四、模拟实验",
+          "page": 7,
+          "depth": 0
+        },
+        {
+          "title": "五、实证分析",
+          "page": 9,
+          "depth": 0
+        },
+        {
+          "title": "六、结论",
+          "page": 10,
+          "depth": 0
+        }
+      ],
+      "source": "prebuilt-static"
+    },
+    {
+      "id": "poisson-rr",
+      "path": "papers/2025/poisson-rr/poisson-rr.html",
+      "auto_toc": false,
+      "toc_heading": "目录",
+      "items": [
+        {
+          "title": "一、引言",
+          "page": 1,
+          "depth": 0
+        },
+        {
+          "title": "二、相对风险置信区间的传统构造",
+          "page": 2,
+          "depth": 0
+        },
+        {
+          "title": "三、基于鞍点逼近的置信区间方法",
+          "page": 4,
+          "depth": 0
+        },
+        {
+          "title": "四、模拟研究",
+          "page": 7,
+          "depth": 0
+        },
+        {
+          "title": "五、真实数据分析",
+          "page": 9,
+          "depth": 0
+        },
+        {
+          "title": "六、结论与展望",
+          "page": 10,
+          "depth": 0
+        }
+      ],
+      "source": "prebuilt-static"
+    },
+    {
+      "id": "hcqr",
+      "path": "papers/2025/hcqr/hcqr.html",
+      "auto_toc": true,
+      "toc_heading": "Content",
+      "items": [
+        {
+          "title": "1. Introduction",
+          "page": 3,
+          "depth": 0
+        },
+        {
+          "title": "2. Model and Methodology",
+          "page": 5,
+          "depth": 0
+        },
+        {
+          "title": "3. Estimation Method",
+          "page": 12,
+          "depth": 0
+        },
+        {
+          "title": "4. Simulation",
+          "page": 18,
+          "depth": 0
+        },
+        {
+          "title": "5. Real World Data",
+          "page": 23,
+          "depth": 0
+        },
+        {
+          "title": "6. Conclusion",
+          "page": 31,
+          "depth": 0
+        },
+        {
+          "title": "References",
+          "page": 41,
+          "depth": 0
+        }
+      ],
+      "source": "prebuilt+runtime-fallback"
+    },
+    {
+      "id": "svcqr",
+      "path": "papers/2025/svcqr/svcqr.html",
+      "auto_toc": true,
+      "toc_heading": "Content",
+      "items": [
+        {
+          "title": "1. Introduction",
+          "page": 4,
+          "depth": 0
+        },
+        {
+          "title": "2. Model",
+          "page": 6,
+          "depth": 0
+        },
+        {
+          "title": "3. Estimation and Algorithms",
+          "page": 8,
+          "depth": 0
+        },
+        {
+          "title": "4. Asymptotic Theory",
+          "page": 13,
+          "depth": 0
+        },
+        {
+          "title": "5. Simulation Study",
+          "page": 16,
+          "depth": 0
+        },
+        {
+          "title": "6. Real Data",
+          "page": 30,
+          "depth": 0
+        },
+        {
+          "title": "7. Discussion",
+          "page": 38,
+          "depth": 0
+        },
+        {
+          "title": "Appendix A. Proofs of Theorems",
+          "page": 40,
+          "depth": 0
+        },
+        {
+          "title": "References",
+          "page": 49,
+          "depth": 0
+        }
+      ],
+      "source": "prebuilt+runtime-fallback",
+      "pdf_candidates": [
+        "svcqr.pdf",
+        "https://arxiv.org/pdf/2511.18106v2.pdf"
+      ]
+    }
+  ]
+}
