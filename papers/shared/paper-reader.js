@@ -170,6 +170,72 @@
         }
         bindTocButton(btn);
       });
+      syncTocState();
+    }
+
+    function getTocEntries() {
+      return staticTocButtons
+        .map((button) => ({
+          button,
+          pageNumber: Number.parseInt(button.dataset.page || "", 10)
+        }))
+        .filter((entry) => Number.isFinite(entry.pageNumber) && entry.pageNumber > 0)
+        .sort((a, b) => a.pageNumber - b.pageNumber);
+    }
+
+    function setTocProgress(currentPage, totalPages) {
+      if (!primaryTocList) {
+        return;
+      }
+      const safeCurrent = Number.isFinite(currentPage) && currentPage > 0 ? currentPage : 1;
+      const safeTotal =
+        Number.isFinite(totalPages) && totalPages > 0 ? totalPages : Number.isFinite(safeCurrent) ? safeCurrent : 1;
+      const progress = safeTotal > 1 ? (safeCurrent - 1) / (safeTotal - 1) : 0;
+      const bounded = Math.max(0, Math.min(1, progress));
+      primaryTocList.style.setProperty("--toc-progress", String(bounded));
+    }
+
+    function setActiveTocByPage(currentPage) {
+      const entries = getTocEntries();
+      staticTocButtons.forEach((button) => {
+        button.classList.remove("is-active", "is-past");
+      });
+      if (entries.length === 0) {
+        return;
+      }
+
+      const safeCurrent = Number.isFinite(currentPage) && currentPage > 0 ? currentPage : entries[0].pageNumber;
+      let activeEntry = entries[0];
+      for (const entry of entries) {
+        if (entry.pageNumber <= safeCurrent) {
+          activeEntry = entry;
+        } else {
+          break;
+        }
+      }
+
+      entries.forEach((entry) => {
+        if (entry.pageNumber < activeEntry.pageNumber) {
+          entry.button.classList.add("is-past");
+        }
+      });
+      activeEntry.button.classList.add("is-active");
+    }
+
+    function syncTocState(pageNumber, totalPages) {
+      const fallbackPage =
+        window.viewer && Number.isFinite(window.viewer.currentPageNumber)
+          ? Number(window.viewer.currentPageNumber)
+          : 1;
+      const current = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : fallbackPage;
+      const total =
+        Number.isFinite(totalPages) && totalPages > 0
+          ? totalPages
+          : pdfDocument && Number.isFinite(pdfDocument.numPages)
+            ? pdfDocument.numPages
+            : 1;
+      setTocProgress(current, total);
+      setActiveTocByPage(current);
     }
 
     function derivePaperId() {
@@ -450,7 +516,10 @@
       button.addEventListener("click", () => {
         const pageNumber = Number.parseInt(button.dataset.page || "", 10);
         if (Number.isFinite(pageNumber) && pageNumber > 0) {
-          window.viewer.scrollPageIntoView({ pageNumber });
+          syncTocState(pageNumber);
+          if (window.viewer && typeof window.viewer.scrollPageIntoView === "function") {
+            window.viewer.scrollPageIntoView({ pageNumber });
+          }
         }
       });
     }
@@ -1024,6 +1093,7 @@
       if (nextPageBtn) {
         nextPageBtn.disabled = current >= total;
       }
+      syncTocState(current, total);
     }
 
     function setScale(scaleValue) {
@@ -1183,6 +1253,7 @@
       updatePageControls();
       if (Number.isFinite(pageNumber) && pageNumber > 0) {
         syncPageQuery(pageNumber);
+        syncTocState(pageNumber, pdfDocument ? pdfDocument.numPages : null);
       }
     });
     eventBus.on("scalechanging", ({ scale }) => {
@@ -1316,6 +1387,7 @@
       }
 
       await applyInitialDeepLink();
+      syncTocState(viewer.currentPageNumber, pdfDocument ? pdfDocument.numPages : null);
     });
 
     // Keep page controls in sync if TOC buttons are clicked before pagesinit finishes.
