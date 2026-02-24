@@ -3,6 +3,21 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("homepage-theme");
+        var theme = (saved === "dark" || saved === "light")
+          ? saved
+          : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    }());
+  </script>
+
   <title>泊松分布下基于鞍点逼近的相对风险置信区间构造 - PDF</title>
 
   <!-- PDF.js viewer 样式 -->
@@ -370,6 +385,113 @@
       .btn-icon{ font-size:13px; }
     }
 
+    .topbar-right{
+      overflow-x:auto;
+      scrollbar-width:thin;
+      scrollbar-color:#c5cfdd transparent;
+    }
+    .topbar-right::-webkit-scrollbar{
+      height:6px;
+    }
+    .topbar-right::-webkit-scrollbar-thumb{
+      background:#c5cfdd;
+      border-radius:999px;
+    }
+
+    .btn:focus-visible,
+    .toc-link:focus-visible,
+    .side-toggle-handle:focus-visible{
+      outline:2px solid #0d47a1;
+      outline-offset:2px;
+    }
+
+    @media (max-width:900px){
+      .topbar-title-wrap{ display:none; }
+      .topbar-right{ margin-left:6px; }
+    }
+
+    @media (max-width:600px){
+      :root{ --bar-h:60px; }
+      .topbar{ padding:0 6px; }
+      #fitWidthBtn,
+      #fitPageBtn{
+        display:none;
+      }
+      .page-indicator{
+        padding:5px 8px;
+        font-size:12px;
+      }
+    }
+
+    :root[data-theme="dark"] body{
+      background:#0f1722;
+      color:#e5e7eb;
+    }
+    :root[data-theme="dark"] .topbar{
+      background:rgba(15,23,34,.92);
+      border-bottom-color:#2c394a;
+    }
+    :root[data-theme="dark"] .topbar-title{
+      color:#e5e7eb;
+    }
+    :root[data-theme="dark"] .btn{
+      background:#152131;
+      color:#cfe0ff;
+      border-color:#3b4d63;
+    }
+    :root[data-theme="dark"] .btn:hover{
+      background:#203147;
+      border-color:#5a7393;
+      box-shadow:0 1px 6px rgba(0,0,0,.35);
+    }
+    :root[data-theme="dark"] .btn-ghost{
+      background:transparent;
+      border-color:#3b4d63;
+    }
+    :root[data-theme="dark"] .page-indicator{
+      background:#1b2b3d;
+      color:#aecdff;
+    }
+    :root[data-theme="dark"] .side-panel{
+      background:#121d2b;
+      border-right-color:#2c394a;
+    }
+    :root[data-theme="dark"] .side-panel-header{
+      border-bottom-color:#2c394a;
+    }
+    :root[data-theme="dark"] .side-panel-title,
+    :root[data-theme="dark"] .toc-link{
+      color:#7fb2ff;
+    }
+    :root[data-theme="dark"] .meta-item,
+    :root[data-theme="dark"] .meta-list .meta-value{
+      color:#d1d9e6;
+    }
+    :root[data-theme="dark"] .meta-label,
+    :root[data-theme="dark"] .side-panel-subtitle{
+      color:#97a5b8;
+    }
+    :root[data-theme="dark"] .side-toggle-handle{
+      background:#224a8f;
+      box-shadow:2px 2px 10px rgba(0,0,0,.45);
+    }
+    :root[data-theme="dark"] #viewerContainer{
+      background:#0f1722;
+    }
+    :root[data-theme="dark"] .loading-overlay{
+      background:rgba(15,23,34,.92);
+    }
+    :root[data-theme="dark"] .loading-box{
+      background:#152131;
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+    :root[data-theme="dark"] .loading-text{
+      color:#d9e3f0;
+    }
+    :root[data-theme="dark"] .loading-bar{
+      background:#223145;
+    }
+
   </style>
 </head>
 
@@ -377,7 +499,7 @@
 <body class="sidebar-open">
   <div class="topbar">
     <div class="topbar-left">
-      <a href="/index.html#poisson-rr"
+      <a href="/index.html#publications"
          class="btn"
          onclick="event.preventDefault(); if(history.length>1){history.back();} else {location.href='/index.html#publications';}">
         <span class="btn-icon">←</span> 返回主页
@@ -385,6 +507,9 @@
       <a class="btn btn-ghost" id="downloadLink" href="#" download>
         <span class="btn-icon">↓</span> 下载
       </a>
+      <button class="btn btn-ghost" id="themeToggleBtn" type="button" title="切换到深色模式" aria-pressed="false">
+        <span class="btn-icon">◐</span> <span id="themeLabel">夜间</span>
+      </button>
     </div>
 
     <div class="topbar-title-wrap">
@@ -497,6 +622,42 @@
     const PDF_URL = "poisson-rr.pdf";
     document.getElementById('downloadLink').href = PDF_URL;
 
+    const rootEl = document.documentElement;
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const themeLabel = document.getElementById("themeLabel");
+
+    function readStoredTheme() {
+      try {
+        const saved = localStorage.getItem("homepage-theme");
+        if (saved === "dark" || saved === "light") {
+          return saved;
+        }
+      } catch (e) {}
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+
+    function applyTheme(theme) {
+      const normalized = theme === "dark" ? "dark" : "light";
+      rootEl.setAttribute("data-theme", normalized);
+      if (themeToggleBtn && themeLabel) {
+        themeToggleBtn.setAttribute("aria-pressed", String(normalized === "dark"));
+        themeToggleBtn.title = normalized === "dark" ? "切换到浅色模式" : "切换到深色模式";
+        themeLabel.textContent = normalized === "dark" ? "日间" : "夜间";
+      }
+      try {
+        localStorage.setItem("homepage-theme", normalized);
+      } catch (e) {}
+    }
+
+    applyTheme(readStoredTheme());
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener("click", () => {
+        applyTheme(rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark");
+      });
+    }
+
     import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs";
     import { EventBus, PDFLinkService, PDFFindController, PDFViewer }
       from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.mjs";
@@ -551,7 +712,24 @@
       barFillEl.style.width = p + "%";
     };
 
-    const pdfDocument = await loadingTask.promise;
+    let pdfDocument = null;
+    try {
+      pdfDocument = await loadingTask.promise;
+    } catch (error) {
+      percentEl.textContent = "失败";
+      barFillEl.style.width = "100%";
+      const box = overlay.querySelector(".loading-box");
+      if (box) {
+        box.innerHTML = `
+          <div class="loading-text"><span>PDF 加载失败</span></div>
+          <div style="font-size:12px;color:#6b7280;line-height:1.6;margin-bottom:10px;">请检查网络连接，或直接下载原文查看。</div>
+          <a class="btn" href="${PDF_URL}" download><span class="btn-icon">↓</span> 下载 PDF</a>
+        `;
+      }
+      console.error("Failed to load PDF:", error);
+      throw error;
+    }
+
     viewer.setDocument(pdfDocument);
     linkService.setDocument(pdfDocument, null);
 
@@ -560,6 +738,14 @@
     const totalPagesEl = document.getElementById("totalPages");
     const prevPageBtn = document.getElementById("prevPageBtn");
     const nextPageBtn = document.getElementById("nextPageBtn");
+
+    prevPageBtn.title = "上一页 (←)";
+    nextPageBtn.title = "下一页 (→)";
+    document.getElementById("zoomOutBtn").title = "缩小 (-)";
+    document.getElementById("zoomInBtn").title = "放大 (+)";
+    document.getElementById("fitWidthBtn").title = "适宽 (W)";
+    document.getElementById("fitPageBtn").title = "适页 (F)";
+    document.getElementById("resetZoomBtn").title = "100% (R)";
 
     // 更新页码显示
     function updatePageIndicator() {
@@ -656,7 +842,9 @@
     const sideHandle     = document.getElementById("sideToggleHandle");
 
     function syncHandle(){
-      sideHandle.textContent = body.classList.contains("sidebar-open") ? "‹" : "›";
+      const opened = body.classList.contains("sidebar-open");
+      sideHandle.textContent = opened ? "‹" : "›";
+      sideHandle.setAttribute("aria-label", opened ? "收起侧边信息" : "展开侧边信息");
     }
 
     sideHandle.addEventListener("click", () => {
@@ -673,6 +861,38 @@
     });
 
     syncHandle(); // 初始化箭头方向
+
+    /* 键盘快捷键 ------------------------------------------------ */
+    document.addEventListener("keydown", (e) => {
+      const target = e.target;
+      const tagName = target && target.tagName ? target.tagName.toLowerCase() : "";
+      if (tagName === "input" || tagName === "textarea" || (target && target.isContentEditable)) {
+        return;
+      }
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevPageBtn.click();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        nextPageBtn.click();
+      } else if (e.key === "+" || e.key === "=") {
+        e.preventDefault();
+        document.getElementById("zoomInBtn").click();
+      } else if (e.key === "-" || e.key === "_") {
+        e.preventDefault();
+        document.getElementById("zoomOutBtn").click();
+      } else if (e.key.toLowerCase() === "w") {
+        e.preventDefault();
+        setScale("page-width");
+      } else if (e.key.toLowerCase() === "f") {
+        e.preventDefault();
+        setScale("page-fit");
+      } else if (e.key.toLowerCase() === "r") {
+        e.preventDefault();
+        setScale(1.0);
+      }
+    });
 
     /* 目录点击跳转到指定页 ---------------------------------------- */
     document.querySelectorAll(".toc-link").forEach(btn=>{
