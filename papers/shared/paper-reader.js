@@ -908,34 +908,32 @@
       updatePageControls();
       setTimeout(hideOverlay, 300);
 
-      let tocBuilt = false;
-
-      try {
-        const outlineItems = await extractOutlineItems();
-        if (outlineItems.length >= 3) {
-          tocBuilt = renderPrimaryTocItems(outlineItems);
+      // Prefer curated HTML TOC to avoid encoding noise in some PDFs.
+      // Only auto-build TOC when page has no predefined TOC entries.
+      if (staticTocButtons.length === 0) {
+        try {
+          const outlineItems = await extractOutlineItems();
+          if (outlineItems.length >= 3 && renderPrimaryTocItems(outlineItems)) {
+            return;
+          }
+        } catch (error) {
+          console.warn("Failed to build TOC from PDF outline:", error);
         }
-      } catch (error) {
-        console.warn("Failed to build TOC from PDF outline:", error);
-      }
 
-      if (!tocBuilt) {
         try {
           const headingItems = await extractHeuristicTocItems();
-          if (headingItems.length >= 3) {
-            tocBuilt = renderPrimaryTocItems(headingItems);
+          if (headingItems.length >= 3 && renderPrimaryTocItems(headingItems)) {
+            return;
           }
         } catch (error) {
           console.warn("Failed to build TOC from PDF headings:", error);
         }
       }
 
-      if (!tocBuilt) {
-        try {
-          await mapStaticTocToRealPages();
-        } catch (error) {
-          console.warn("Failed to map static toc:", error);
-        }
+      try {
+        await mapStaticTocToRealPages();
+      } catch (error) {
+        console.warn("Failed to map static toc:", error);
       }
     });
 
