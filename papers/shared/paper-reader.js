@@ -395,52 +395,9 @@
         cursorPage = Math.max(cursorPage, foundPage);
 
         const isChinese = /[\u4e00-\u9fff]/u.test(rawTitle);
-        btn.textContent = isChinese
-          ? `${rawTitle}（第${foundPage}页）`
-          : `${rawTitle} (p.${foundPage})`;
+        btn.textContent = rawTitle;
+        btn.title = isChinese ? `跳转到第${foundPage}页` : `Go to page ${foundPage}`;
       });
-    }
-
-    function attachPageNavigator() {
-      if (!panelInner || !pdfDocument) {
-        return;
-      }
-      const old = document.getElementById("pageNavSection");
-      if (old) {
-        old.remove();
-      }
-
-      const section = document.createElement("div");
-      section.className = "side-panel-section";
-      section.id = "pageNavSection";
-      section.innerHTML = `
-        <h3 style="font-style: italic; font-size: 18px;">完整目录（按页）</h3>
-        <ol class="outline-list" id="pageNavList"></ol>
-      `;
-
-      const tocSection = primaryTocList ? primaryTocList.closest(".side-panel-section") : null;
-      if (tocSection && tocSection.parentNode) {
-        tocSection.insertAdjacentElement("afterend", section);
-      } else {
-        panelInner.appendChild(section);
-      }
-
-      const list = section.querySelector("#pageNavList");
-      if (!list) {
-        return;
-      }
-
-      for (let p = 1; p <= pdfDocument.numPages; p += 1) {
-        const li = document.createElement("li");
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "toc-link";
-        btn.dataset.page = String(p);
-        btn.textContent = `第 ${p} 页`;
-        bindTocButton(btn);
-        li.appendChild(btn);
-        list.appendChild(li);
-      }
     }
 
     async function resolveDestinationToPage(dest) {
@@ -512,7 +469,8 @@
             btn.className = "toc-link";
             btn.dataset.page = String(pageNumber);
             const title = stripPageSuffix(item.title || "未命名");
-            btn.textContent = `${title}（第${pageNumber}页）`;
+            btn.textContent = title;
+            btn.title = `跳转到第${pageNumber}页`;
             bindTocButton(btn);
             li.appendChild(btn);
             outlineList.appendChild(li);
@@ -798,11 +756,6 @@
         console.warn("Failed to attach PDF outline:", error);
       }
 
-      try {
-        attachPageNavigator();
-      } catch (error) {
-        console.warn("Failed to attach page navigator:", error);
-      }
     });
 
     document.addEventListener("keydown", (event) => {
