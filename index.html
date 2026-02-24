@@ -17,7 +17,9 @@
     <meta name="twitter:title" content="侯健 - 个人主页">
     <meta name="twitter:description" content="侯健（Hou Jian）个人主页，研究方向包括分位回归、鞍点逼近与混合效应建模。">
     <meta name="twitter:image" content="https://stork343.github.io/homepage/hj.webp">
+    <meta name="theme-color" content="#1d2088">
     <meta name="color-scheme" content="light dark">
+    <meta property="og:locale:alternate" content="en_US">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,7 +36,9 @@
       }
     }());
     </script>
-    <link rel="stylesheet" href="enhanced-main.css?v=20260224d">
+    <link rel="stylesheet" href="enhanced-main.css?v=20260224e">
+    <link rel="sitemap" type="application/xml" href="sitemap.xml">
+    <link rel="robots" href="robots.txt">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8E%93</text></svg>">
     <script defer data-domain="stork343.github.io" src="https://plausible.io/js/script.js"></script>
     <script type="application/ld+json">
@@ -57,6 +61,7 @@
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
@@ -84,14 +89,14 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
         <section id="about" class="hero-section">
             <div class="container">
                 <div class="hero-content">
                     <div class="profile-section">
                         <picture>
                             <source srcset="hj.webp" type="image/webp">
-                            <img src="hj.jpg" alt="个人头像" class="profile-avatar" width="1920" height="1280">
+                            <img src="hj.jpg" alt="个人头像" class="profile-avatar" width="1920" height="1280" decoding="async" fetchpriority="high">
                         </picture>
                         <div class="profile-info">
                             <h1 class="profile-name" data-i18n="profile_name">侯健</h1>
@@ -186,6 +191,14 @@
             <div class="container">
                 <h2 class="section-title" data-i18n="publications_title">学术成果</h2>
                 <p class="section-subtitle" data-i18n="publications_note">按年份分组展示，支持 BibTeX 查看与引用复制。</p>
+                <form class="pub-search" id="pub-search-form" role="search" aria-label="Search publications">
+                    <label class="sr-only" for="pub-search-input" data-i18n="publications_search_label">检索成果</label>
+                    <input id="pub-search-input" type="search" data-i18n-placeholder="publications_search_placeholder" data-i18n-aria-label="publications_search_label" placeholder="按标题、作者、期刊或关键词检索…">
+                    <select id="pub-year-filter" aria-label="Year filter"></select>
+                    <select id="pub-status-filter" aria-label="Status filter"></select>
+                    <button id="pub-clear-btn" type="button" class="pub-clear-btn" data-i18n="publications_clear">清空</button>
+                </form>
+                <p id="pub-result-count" class="pub-result-count" aria-live="polite"></p>
                 <div id="publications-list" class="publications-list"></div>
             </div>
         </section>
@@ -273,6 +286,6 @@
 
     <div id="copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
 
-    <script src="scripts/main.js?v=20260224c"></script>
+    <script src="scripts/main.js?v=20260224e"></script>
 </body>
 </html>

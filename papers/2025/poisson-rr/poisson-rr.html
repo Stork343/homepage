@@ -23,7 +23,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224j"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224k"/>
 
   <style>
     :root{
@@ -541,7 +541,7 @@
       <div class="side-panel-subtitle">ARTICLE DETAILS</div>
       </div>
 
-      <div class="side-panel-section">
+            <div class="side-panel-section">
       <style>
         .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
@@ -573,6 +573,7 @@
         相对风险是流行学随机对照试验中的一种常用指标, 用于比较两个群体的发病率或死亡率. 对其进行区间估计是一种有效的统计推断方法, 可以反映疾病诊断的不确定性和可信度. 然而, 传统的区间估计方法, 如 Wald 区间、Wilson 区间、Fisher 区间等, 都存在一定的局限性：误差大、覆盖率低、区间长度长、区间不合理等. 为了克服这些缺点, 提出了基于鞍点逼近的区间估计方法：在泊松分布的假设下, 利用泰勒展开和拉普拉斯积分等推导了相对风险的逼近公式, 并给出了相应置信区间的构造方法. 通过蒙特卡洛模拟和实证分析, 将鞍点逼近方法与部分常用的区间估计方法进行了比较, 结果表明, 鞍点逼近方法在小样本或大样本情况下都能获得最短的置信区间, 同时区间覆盖率更加接近名义水平, 为相关风险提供了一种优越的区间估计方法. 最后对鞍点逼近方法的优点和局限性, 以及在流行病学研究中的应用价值和前景进行了讨论. 
       </div>
 
+      </div>
       <div class="side-panel-section">
       <h3 style="font-style: italic; font-size: 20px">目录</h3>
       <ol class="toc-list">
@@ -622,9 +623,11 @@
 
   <!-- PDF.js 初始化 & 交互逻辑 -->
   <script>
+    window.__PAPER_ID__ = "poisson-rr";
+    window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
     window.__PAPER_PDF_URL__ = "poisson-rr.pdf";
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=20260224j"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=20260224l"></script>
 
   <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>

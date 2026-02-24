@@ -23,7 +23,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224j"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224k"/>
 
   <style>
     :root{
@@ -541,7 +541,7 @@
       <div class="side-panel-subtitle">ARTICLE DETAILS</div>
       </div>
 
-      <div class="side-panel-section">
+            <div class="side-panel-section">
       <style>
         .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
@@ -571,6 +571,7 @@
       <h3 style="font-style: italic; font-size: 20px">Abstract</h3>
       <div style="font-size: 13px; line-height: 1.5; color: #374151;">
         Hierarchical (multi-level) data commonly exhibit heavy-tailed noise and high-dimensional fixed-effect structures. To address these challenges, we propose a Hierarchical Composite Quantile Regression (HCQR) framework regularized with an adaptive Lasso penalty. Our approach integrates the statistical efficiency of composite quantile loss for robustness and the adaptive Lasso for sparse variable selection. We develop an efficient estimation procedure based on an Expectation-Maximization (EM) algorithm, with an embedded ADMM routine to solve the penalized M-step. This allows for simultaneous estimation of fixed effects, variance components, and prediction of random effects, while the quantile-based loss function ensures robustness against non-Gaussian error distributions. Simulation studies under various error distributions, including normal, t, Cauchy, and mixture-normal, confirm that HCQR achieves near-oracle performance in variable selection and prediction, even when the number of covariates exceeds the sample size. An application to a Parkinson’s disease tele-monitoring dataset further illustrates how HCQR effectively uncovers clinically meaningful voice biomarkers while accounting for patient-specific disease progression.
+      </div>
       </div>
       <div class="side-panel-section">
       <h3 style="font-style: italic; font-size: 20px">Content</h3>
@@ -622,10 +623,11 @@
 
   <!-- PDF.js 初始化 & 交互逻辑 -->
   <script>
-    window.__PAPER_AUTO_TOC__ = true;
+    window.__PAPER_ID__ = "hcqr";
+    window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
     window.__PAPER_PDF_URL__ = "hcqr.pdf";
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=20260224j"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=20260224l"></script>
 
   <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>

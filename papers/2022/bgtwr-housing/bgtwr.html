@@ -23,7 +23,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224j"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224k"/>
 
   <style>
     :root{
@@ -541,7 +541,7 @@
       <div class="side-panel-subtitle">ARTICLE DETAILS</div>
       </div>
 
-      <div class="side-panel-section">
+            <div class="side-panel-section">
       <style>
         .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
@@ -571,6 +571,7 @@
       <h3 style="font-style: italic; font-size: 20px">摘要</h3>
       <div style="font-size: 13px; line-height: 1.5; color: #374151;">
         以乌鲁木齐市2020年房价数据为研究对象, 建立多尺度时空地理加权回归模型(MGCTWR), 对房价的空间异质性进行分析. 研究结果表明: 相比GTWR模型, MGCTWR模型的回归结果更为真实可靠, 更适用于房价相关研究; 在所选指标中, 区位是最重要的影响因素且存在较强的空间异质性, 次重要的因素依次是绿化率, 卧室数, 最近公交站距离, 最近重点小学距离, 一般影响因素有楼层, 容积率, 最近银行距离, 面积, 而最近重点中学的影响最小, 最近三甲医院距离和最近商场距离的回归系数变化范围较大, 影响不显著.
+      </div>
       </div>
       <div class="side-panel-section">
       <h3 style="font-style: italic; font-size: 20px">目录</h3>
@@ -619,9 +620,11 @@
 
   <!-- PDF.js 初始化 & 交互逻辑 -->
   <script>
+    window.__PAPER_ID__ = "bgtwr-housing";
+    window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
     window.__PAPER_PDF_URL__ = "bgtwr.pdf";
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=20260224j"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=20260224l"></script>
 
   <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>

@@ -23,7 +23,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224j"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224k"/>
 
   <style>
     :root{
@@ -541,7 +541,7 @@
       <div class="side-panel-subtitle">ARTICLE DETAILS</div>
       </div>
 
-      <div class="side-panel-section">
+            <div class="side-panel-section">
       <style>
         .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
@@ -571,6 +571,7 @@
       <h3 style="font-style: italic; font-size: 20px">Abstract</h3>
       <div style="font-size: 13px; line-height: 1.5; color: #374151;">
         Modeling spatially varying relationships in the presence of heavy-tailed responses and irregular sampling designs presents a significant challenge in geospatial analysis. In this paper, we propose a Sparse--Smooth Spatially Varying Coefficient Quantile Regression (SS--SVCQR) framework that simultaneously achieves robust estimation, structural interpretability, and computational scalability. Our approach decomposes each coefficient function into a global baseline and a spatial deviation component. By applying a group $L_2$ penalty, the model automatically selects between globally constant and spatially varying specifications, offering a parsimonious alternative to standard Geographically Weighted Regression (GWR). Conditional on local variation, spatial smoothness is enforced via a normalized graph Laplacian regularization, which adapts to varying sampling densities and admits a Bayesian interpretation as an intrinsic Gaussian Markov Random Field (GMRF) prior. We develop efficient convex optimization algorithms based on ADMM and smoothed proximal-gradient methods to handle the non-differentiable check loss. Theoretically, we establish the root-$n$ consistency and asymptotic normality of the global estimators, as well as the selection consistency of the global-vs-local structure under mild conditions. Extensive simulations and a real-world housing application show that SS--SVCQR provides more accurate quantile predictions and more interpretable global–local structures than existing kernel- and spline-based alternatives, especially in the presence of heavy-tailed noise.      </div>
+      </div>
       <div class="side-panel-section">
       <h3 style="font-style: italic; font-size: 20px">Content</h3>
       <ol class="toc-list">
@@ -622,10 +623,12 @@
 
   <!-- PDF.js 初始化 & 交互逻辑 -->
   <script>
-    window.__PAPER_AUTO_TOC__ = true;
+    window.__PAPER_ID__ = "svcqr";
+    window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
+    window.__PAPER_PDF_CANDIDATES__ = ["svcqr.pdf", "https://arxiv.org/pdf/2511.18106v2.pdf"];
     window.__PAPER_PDF_URL__ = "svcqr.pdf";
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=20260224j"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=20260224l"></script>
 
   <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>
