@@ -23,7 +23,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224j"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224k"/>
 
   <style>
     :root{
@@ -541,7 +541,7 @@
       <div class="side-panel-subtitle">ARTICLE DETAILS</div>
       </div>
 
-      <div class="side-panel-section">
+            <div class="side-panel-section">
       <style>
         .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
@@ -573,6 +573,7 @@
         混合时空地理加权回归模型作为一种有效处理空间数据全局平稳和局部非平稳的分析方法得到了广泛的应用.但其参数估计方法中假定固定系数变量已知且不存在时空效应,这一较强的前提使回归系数的估计值变得极不稳定.为探究当固定系数变量存在时空效应时的参数估计方法,本文提出一种变量选择(Variable Selection)方法来剔除指标间的交互效应,并给出相应的算法过程.通过乌鲁木齐市商品住宅真实价格数据对不同估计方法进行对比验证,结果表明,利用变量选择方法后得到的MGTWR模型性能和拟合效果得到提升,固定回归系数的估计更加稳定,原有参数估计方法得到改善.
       </div>
 
+      </div>
       <div class="side-panel-section">
       <h3 style="font-style: italic; font-size: 20px">目录</h3>
       <ol class="toc-list">
@@ -620,9 +621,11 @@
 
   <!-- PDF.js 初始化 & 交互逻辑 -->
   <script>
+    window.__PAPER_ID__ = "mgtwr-variable-selection";
+    window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
     window.__PAPER_PDF_URL__ = "mgtwr.pdf";
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=20260224j"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=20260224l"></script>
 
   <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>

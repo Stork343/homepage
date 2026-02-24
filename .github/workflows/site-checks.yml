@@ -21,11 +21,23 @@ jobs:
       - name: Check JavaScript syntax
         run: node --check scripts/main.js
 
+      - name: Check paper reader syntax
+        run: node --check papers/shared/paper-reader.js
+
       - name: Check HTML syntax (home page)
         run: npx --yes htmlhint index.html
 
+      - name: Check HTML syntax (paper pages)
+        run: find papers -name '*.html' -print0 | xargs -0 npx --yes htmlhint
+
       - name: Validate publications data JSON
         run: python3 -m json.tool data/publications.json > /dev/null
+
+      - name: Validate paper page config JSON
+        run: python3 -m json.tool data/paper-pages.json > /dev/null
+
+      - name: Validate site data consistency
+        run: node scripts/validate-site.js
 
   link-check:
     runs-on: ubuntu-latest

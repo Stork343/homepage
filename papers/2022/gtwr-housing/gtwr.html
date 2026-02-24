@@ -23,7 +23,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224j"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=20260224k"/>
 
   <style>
     :root{
@@ -514,7 +514,7 @@
     </div>
 
     <div class="topbar-title-wrap">
-      <div class="topbar-title" style="font-size: large;"">
+      <div class="topbar-title" style="font-size: large;">
         基于异窗宽GTWR模型的商品住宅价格影响因素研究
       </div>
     </div>
@@ -541,7 +541,7 @@
       <div class="side-panel-subtitle">ARTICLE DETAILS</div>
       </div>
 
-      <div class="side-panel-section">
+            <div class="side-panel-section">
       <style>
         .meta-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .meta-list .meta-item { display: flex; gap: 0px; align-items: flex-start; padding: 6px 0; }
@@ -571,6 +571,7 @@
       <h3 style="font-style: italic; font-size: 20px">摘要</h3>
       <div style="font-size: 13px; line-height: 1.5; color: #374151;">
         随着数据可获得性的增强,时空数据被广泛地应用在各个领域.以中国西部干旱区代表城市乌鲁木齐为研究对象,本文根据标准差椭圆加权算法与时空地理加权回归模型(GTWR)提出异窗宽 GTWR 模型对房屋价格变动影响因素的时空变化进行研究.结果表明乌鲁木齐市住房价格的变动存在着明显的空间异质性,异窗宽 GTWR模型对其的解释能力较好,标准差椭圆加权算法有效的减少了计算量,房价变动在空间上受交通便利性和绿化率等因素的影响较大,时间上受建筑年龄因素影响较大.
+      </div>
       </div>
       <div class="side-panel-section">
       <h3 style="font-style: italic; font-size: 20px">目录</h3>
@@ -621,9 +622,11 @@
 
   <!-- PDF.js 初始化 & 交互逻辑 -->
   <script>
+    window.__PAPER_ID__ = "gtwr-housing";
+    window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
     window.__PAPER_PDF_URL__ = "gtwr.pdf";
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=20260224j"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=20260224l"></script>
 
   <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
 </body>

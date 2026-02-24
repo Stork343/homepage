@@ -1,10 +1,5 @@
 ;(async () => {
   try {
-    const PDF_URL = window.__PAPER_PDF_URL__;
-    if (!PDF_URL) {
-      throw new Error("Missing __PAPER_PDF_URL__ for paper reader.");
-    }
-
     const rootEl = document.documentElement;
     const bodyEl = document.body;
     const topbarEl = document.querySelector(".topbar");
@@ -14,8 +9,43 @@
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     const themeLabel = document.getElementById("themeLabel");
 
+    function toAbsoluteUrl(value) {
+      const raw = String(value || "").trim();
+      if (!raw) {
+        return "";
+      }
+      try {
+        return new URL(raw, window.location.href).toString();
+      } catch (error) {
+        return "";
+      }
+    }
+
+    function dedupeUrlList(values) {
+      const output = [];
+      const seen = new Set();
+      values.forEach((value) => {
+        const absolute = toAbsoluteUrl(value);
+        if (!absolute || seen.has(absolute)) {
+          return;
+        }
+        seen.add(absolute);
+        output.push(absolute);
+      });
+      return output;
+    }
+
+    const seedPdfCandidates = dedupeUrlList([
+      window.__PAPER_PDF_URL__,
+      ...(Array.isArray(window.__PAPER_PDF_CANDIDATES__) ? window.__PAPER_PDF_CANDIDATES__ : [])
+    ]);
+    if (seedPdfCandidates.length === 0) {
+      throw new Error("Missing __PAPER_PDF_URL__ (or __PAPER_PDF_CANDIDATES__) for paper reader.");
+    }
+    let pdfCandidates = seedPdfCandidates.slice();
+    let activePdfUrl = pdfCandidates[0];
     if (downloadLink) {
-      downloadLink.href = PDF_URL;
+      downloadLink.href = activePdfUrl;
     }
 
     function readStoredTheme() {
@@ -125,12 +155,82 @@
     const findStatus = document.getElementById("findStatus");
 
     const primaryTocList = document.querySelector(".side-panel .toc-list");
-    const staticTocButtons = primaryTocList ? Array.from(primaryTocList.querySelectorAll(".toc-link")) : [];
+    let staticTocButtons = primaryTocList ? Array.from(primaryTocList.querySelectorAll(".toc-link")) : [];
     const tocSectionTitleEl = primaryTocList
       ? primaryTocList.closest(".side-panel-section")?.querySelector("h3")
       : null;
     const tocSectionTitle = (tocSectionTitleEl ? tocSectionTitleEl.textContent : "").trim();
-    const prefersAutoToc = Boolean(window.__PAPER_AUTO_TOC__) || /^content$/i.test(tocSectionTitle);
+    let prefersAutoToc = Boolean(window.__PAPER_AUTO_TOC__) || /^content$/i.test(tocSectionTitle);
+
+    function refreshStaticTocButtons() {
+      staticTocButtons = primaryTocList ? Array.from(primaryTocList.querySelectorAll(".toc-link")) : [];
+      staticTocButtons.forEach((btn) => {
+        if (!btn.dataset.titleRaw) {
+          btn.dataset.titleRaw = stripPageSuffix(btn.textContent || "");
+        }
+        bindTocButton(btn);
+      });
+    }
+
+    function derivePaperId() {
+      if (window.__PAPER_ID__) {
+        return String(window.__PAPER_ID__).trim();
+      }
+      const parts = window.location.pathname.split("/").filter(Boolean);
+      if (parts.length >= 2) {
+        return parts[parts.length - 2];
+      }
+      return "";
+    }
+
+    function normalizePath(path) {
+      const value = String(path || "").replace(/\\/g, "/").replace(/^\/+/, "");
+      return value.startsWith("homepage/") ? value.slice("homepage/".length) : value;
+    }
+
+    async function loadPaperConfig() {
+      const paperId = derivePaperId();
+      if (!paperId) {
+        return null;
+      }
+      const configUrl = window.__PAPER_CONFIG_URL__ || "../../../data/paper-pages.json";
+      try {
+        const response = await fetch(new URL(configUrl, window.location.href).toString(), {
+          cache: "no-cache"
+        });
+        if (!response.ok) {
+          return null;
+        }
+        const payload = await response.json();
+        const entries = Array.isArray(payload) ? payload : Array.isArray(payload.papers) ? payload.papers : [];
+        if (entries.length === 0) {
+          return null;
+        }
+        const currentPath = normalizePath(window.location.pathname);
+        return (
+          entries.find((entry) => String(entry.id || "").trim() === paperId) ||
+          entries.find((entry) => currentPath.endsWith(normalizePath(entry.path || ""))) ||
+          null
+        );
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function buildPdfCandidates(config) {
+      const configCandidates = [];
+      if (config && typeof config === "object") {
+        if (Array.isArray(config.pdf_candidates)) {
+          configCandidates.push(...config.pdf_candidates);
+        }
+        if (config.pdf_url) {
+          configCandidates.push(config.pdf_url);
+        }
+      }
+      return dedupeUrlList([...seedPdfCandidates, ...configCandidates]);
+    }
+
+    const paperConfigPromise = loadPaperConfig();
 
     let pdfDocument = null;
     let pageTextCache = null;
@@ -324,12 +424,7 @@
       });
     }
 
-    staticTocButtons.forEach((btn) => {
-      if (!btn.dataset.titleRaw) {
-        btn.dataset.titleRaw = stripPageSuffix(btn.textContent || "");
-      }
-      bindTocButton(btn);
-    });
+    refreshStaticTocButtons();
 
     function normalizeHeadingDisplay(text) {
       let value = String(text || "").replace(/\s+/g, " ").trim();
@@ -448,6 +543,90 @@
       return Math.min(dotCount, 3);
     }
 
+    function isLikelyGarbledTitle(title) {
+      const value = String(title || "").trim();
+      if (!value) {
+        return true;
+      }
+      if (/[�￾￿□■▢�]/u.test(value)) {
+        return true;
+      }
+      if (/[\u0000-\u001f]/u.test(value)) {
+        return true;
+      }
+      if (!/[A-Za-z\u4e00-\u9fff0-9]/u.test(value)) {
+        return true;
+      }
+      return value.length > 110;
+    }
+
+    function validateTocItems(items, minCount = 3) {
+      if (!Array.isArray(items)) {
+        return { ok: false, items: [] };
+      }
+      const deduped = [];
+      const seen = new Set();
+      let lastPage = 1;
+
+      for (const item of items) {
+        const title = normalizeHeadingDisplay(stripPageSuffix(item && item.title ? item.title : ""));
+        const pageNumber = Number.parseInt(item && item.pageNumber ? item.pageNumber : "", 10);
+        if (!title || isLikelyGarbledTitle(title)) {
+          continue;
+        }
+        if (!Number.isFinite(pageNumber) || pageNumber <= 0) {
+          continue;
+        }
+        const key = `${normalizeForMatch(stripHeadingPrefix(title) || title)}@${pageNumber}`;
+        if (!key || seen.has(key)) {
+          continue;
+        }
+        seen.add(key);
+        deduped.push({
+          title,
+          pageNumber,
+          depth: Number.isFinite(item && item.depth) ? item.depth : inferHeadingDepth(title)
+        });
+      }
+
+      if (deduped.length < minCount) {
+        return { ok: false, items: deduped };
+      }
+
+      // Ensure TOC pages do not jump backwards too aggressively.
+      let monotonicPenalty = 0;
+      for (const item of deduped) {
+        if (item.pageNumber + 1 < lastPage) {
+          monotonicPenalty += 1;
+        }
+        lastPage = Math.max(lastPage, item.pageNumber);
+      }
+      if (monotonicPenalty > Math.floor(deduped.length / 3)) {
+        return { ok: false, items: deduped };
+      }
+
+      return { ok: true, items: deduped };
+    }
+
+    function isSuspiciousTocMapping(buttons) {
+      if (!Array.isArray(buttons) || buttons.length < 4) {
+        return false;
+      }
+      const pages = buttons
+        .map((btn) => Number.parseInt(btn.dataset.page || "", 10))
+        .filter((page) => Number.isFinite(page) && page > 0);
+      if (pages.length < 4) {
+        return false;
+      }
+      const uniquePages = new Set(pages);
+      if (uniquePages.size <= 2) {
+        return true;
+      }
+      const min = Math.min(...pages);
+      const max = Math.max(...pages);
+      return max - min <= 1;
+    }
+
     function renderPrimaryTocItems(items) {
       if (!primaryTocList || !Array.isArray(items) || items.length === 0) {
         return false;
@@ -475,7 +654,88 @@
         li.appendChild(btn);
         primaryTocList.appendChild(li);
       }
+      refreshStaticTocButtons();
       return primaryTocList.children.length > 0;
+    }
+
+    function applyPaperConfigToSidebar(config) {
+      if (!config || typeof config !== "object") {
+        return;
+      }
+      if (typeof config.auto_toc === "boolean") {
+        prefersAutoToc = config.auto_toc;
+      }
+      if (tocSectionTitleEl && config.toc_heading) {
+        tocSectionTitleEl.textContent = String(config.toc_heading);
+      }
+      if (Array.isArray(config.toc) && config.toc.length > 0) {
+        const normalized = config.toc.map((item) => ({
+          title: item && item.title ? String(item.title) : "",
+          pageNumber: item && item.page ? Number(item.page) : Number(item && item.pageNumber),
+          depth: Number.isFinite(item && item.depth) ? item.depth : 0
+        }));
+        const checked = validateTocItems(normalized, 1);
+        if (checked.items.length > 0) {
+          renderPrimaryTocItems(checked.items);
+        }
+      }
+    }
+
+    function readDeepLinkState() {
+      const url = new URL(window.location.href);
+      const rawPage = Number.parseInt(url.searchParams.get("page") || "", 10);
+      const rawSec = url.searchParams.get("sec") || "";
+      const hashSec = url.hash && url.hash.startsWith("#sec-") ? decodeURIComponent(url.hash.slice(5)) : "";
+      return {
+        page: Number.isFinite(rawPage) && rawPage > 0 ? rawPage : null,
+        sec: (rawSec || hashSec || "").trim()
+      };
+    }
+
+    function findSectionTargetPage(sectionText) {
+      if (!sectionText || staticTocButtons.length === 0) {
+        return null;
+      }
+      const sectionKey = normalizeForMatch(stripHeadingPrefix(sectionText) || sectionText);
+      if (!sectionKey) {
+        return null;
+      }
+      for (const btn of staticTocButtons) {
+        const rawTitle = stripPageSuffix(btn.dataset.titleRaw || btn.textContent || "");
+        const titleKey = normalizeForMatch(stripHeadingPrefix(rawTitle) || rawTitle);
+        if (!titleKey) {
+          continue;
+        }
+        if (titleKey === sectionKey || titleKey.includes(sectionKey) || sectionKey.includes(titleKey)) {
+          const pageNumber = Number.parseInt(btn.dataset.page || "", 10);
+          if (Number.isFinite(pageNumber) && pageNumber > 0) {
+            return pageNumber;
+          }
+        }
+      }
+      return null;
+    }
+
+    function syncPageQuery(pageNumber) {
+      if (!Number.isFinite(pageNumber) || pageNumber <= 0) {
+        return;
+      }
+      const url = new URL(window.location.href);
+      url.searchParams.set("page", String(pageNumber));
+      history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    }
+
+    async function applyInitialDeepLink() {
+      const state = readDeepLinkState();
+      const sectionPage = findSectionTargetPage(state.sec);
+      const targetPage = sectionPage || state.page;
+      if (!Number.isFinite(targetPage) || targetPage <= 0) {
+        return;
+      }
+      const total = pdfDocument ? pdfDocument.numPages : 0;
+      const safeTarget = total > 0 ? Math.max(1, Math.min(total, targetPage)) : targetPage;
+      window.viewer.scrollPageIntoView({ pageNumber: safeTarget });
+      syncPageQuery(safeTarget);
     }
 
     async function buildPageTextCache() {
@@ -824,7 +1084,7 @@
 
     if (printBtn) {
       printBtn.addEventListener("click", () => {
-        const printWindow = window.open(PDF_URL, "_blank", "noopener");
+        const printWindow = window.open(activePdfUrl, "_blank", "noopener");
         if (!printWindow) {
           return;
         }
@@ -865,7 +1125,12 @@
     document.addEventListener("fullscreenchange", updateFullscreenState);
     updateFullscreenState();
 
-    eventBus.on("pagechanging", updatePageControls);
+    eventBus.on("pagechanging", ({ pageNumber }) => {
+      updatePageControls();
+      if (Number.isFinite(pageNumber) && pageNumber > 0) {
+        syncPageQuery(pageNumber);
+      }
+    });
     eventBus.on("scalechanging", ({ scale }) => {
       if (typeof scale === "number") {
         showZoomIndicator(`${Math.round(scale * 100)}%`);
@@ -881,25 +1146,47 @@
 
     showOverlay();
 
-    const loadingTask = pdfjsLib.getDocument({
-      url: PDF_URL,
-      cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/",
-      cMapPacked: true,
-      standardFontDataUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/"
-    });
+    const paperConfig = await paperConfigPromise;
+    applyPaperConfigToSidebar(paperConfig);
+    pdfCandidates = buildPdfCandidates(paperConfig);
+    activePdfUrl = pdfCandidates[0];
+    if (downloadLink) {
+      downloadLink.href = activePdfUrl;
+    }
 
-    loadingTask.onProgress = ({ loaded, total }) => {
-      if (!total || !percentEl || !barFillEl) {
-        return;
+    let lastLoadError = null;
+    for (const candidateUrl of pdfCandidates) {
+      activePdfUrl = candidateUrl;
+      if (downloadLink) {
+        downloadLink.href = activePdfUrl;
       }
-      const percent = Math.max(0, Math.min(100, Math.round((loaded / total) * 100)));
-      percentEl.textContent = `${percent}%`;
-      barFillEl.style.width = `${percent}%`;
-    };
+      const loadingTask = pdfjsLib.getDocument({
+        url: candidateUrl,
+        cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/",
+        cMapPacked: true,
+        standardFontDataUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/"
+      });
 
-    try {
-      pdfDocument = await loadingTask.promise;
-    } catch (error) {
+      loadingTask.onProgress = ({ loaded, total }) => {
+        if (!total || !percentEl || !barFillEl) {
+          return;
+        }
+        const percent = Math.max(0, Math.min(100, Math.round((loaded / total) * 100)));
+        percentEl.textContent = `${percent}%`;
+        barFillEl.style.width = `${percent}%`;
+      };
+
+      try {
+        pdfDocument = await loadingTask.promise;
+        lastLoadError = null;
+        break;
+      } catch (error) {
+        lastLoadError = error;
+        console.warn("Failed to load PDF candidate:", candidateUrl, error);
+      }
+    }
+
+    if (!pdfDocument) {
       if (percentEl) {
         percentEl.textContent = "失败";
       }
@@ -912,12 +1199,12 @@
           box.innerHTML = `
             <div class="loading-text"><span>PDF 加载失败</span></div>
             <div style="font-size:12px;color:#6b7280;line-height:1.6;margin-bottom:10px;">请检查网络连接，或直接下载原文查看。</div>
-            <a class="btn" href="${PDF_URL}" download><span class="btn-icon">↓</span> 下载 PDF</a>
+            <a class="btn" href="${activePdfUrl}" download><span class="btn-icon">↓</span> 下载 PDF</a>
           `;
         }
       }
-      console.error("Failed to load PDF:", error);
-      throw error;
+      console.error("Failed to load all PDF candidates:", lastLoadError);
+      throw lastLoadError || new Error("Failed to load PDF.");
     }
 
     viewer.setDocument(pdfDocument);
@@ -928,33 +1215,52 @@
       updatePageControls();
       setTimeout(hideOverlay, 300);
 
-      // SCI/English pages marked with "Content" prefer PDF-driven TOC.
+      let tocBuiltFromPdf = false;
       if (prefersAutoToc) {
         try {
-          const outlineItems = await extractOutlineItems();
-          if (outlineItems.length >= 3 && renderPrimaryTocItems(outlineItems)) {
-            return;
+          const outlineValidation = validateTocItems(await extractOutlineItems(), 3);
+          if (outlineValidation.ok && renderPrimaryTocItems(outlineValidation.items)) {
+            tocBuiltFromPdf = true;
           }
         } catch (error) {
           console.warn("Failed to build TOC from PDF outline:", error);
         }
+      }
 
+      if (prefersAutoToc && !tocBuiltFromPdf) {
         try {
-          const headingItems = await extractHeuristicTocItems();
-          if (headingItems.length >= 3 && renderPrimaryTocItems(headingItems)) {
-            return;
+          const headingValidation = validateTocItems(await extractHeuristicTocItems(), 3);
+          if (headingValidation.ok && renderPrimaryTocItems(headingValidation.items)) {
+            tocBuiltFromPdf = true;
           }
         } catch (error) {
           console.warn("Failed to build TOC from PDF headings:", error);
         }
       }
 
-      // Non-auto pages keep curated TOC titles and only realign page targets.
-      try {
-        await mapStaticTocToRealPages();
-      } catch (error) {
-        console.warn("Failed to map static toc:", error);
+      if (!tocBuiltFromPdf) {
+        try {
+          await mapStaticTocToRealPages();
+        } catch (error) {
+          console.warn("Failed to map static toc:", error);
+        }
       }
+
+      if (isSuspiciousTocMapping(staticTocButtons) && paperConfig && Array.isArray(paperConfig.toc)) {
+        const fallbackValidation = validateTocItems(
+          paperConfig.toc.map((item) => ({
+            title: item && item.title ? item.title : "",
+            pageNumber: Number(item && item.page ? item.page : item && item.pageNumber),
+            depth: Number.isFinite(item && item.depth) ? item.depth : 0
+          })),
+          1
+        );
+        if (fallbackValidation.items.length > 0) {
+          renderPrimaryTocItems(fallbackValidation.items);
+        }
+      }
+
+      await applyInitialDeepLink();
     });
 
     // Keep page controls in sync if TOC buttons are clicked before pagesinit finishes.

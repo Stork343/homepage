@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stork343.github.io/homepage/sitemap.xml
