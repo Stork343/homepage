@@ -410,3 +410,340 @@ body.find-open .side-toggle-handle {
     font-size: 11px;
   }
 }
+
+/* 2026-02 reader visual polish */
+:root {
+  --paper-bar-h: 68px;
+  --paper-sidebar-w: 352px;
+  --toc-progress: 0;
+}
+
+.topbar {
+  height: var(--bar-h) !important;
+  padding: 0 10px !important;
+}
+
+.topbar-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.008em !important;
+}
+
+.topbar-right {
+  gap: 8px !important;
+  padding-bottom: 2px;
+}
+
+.reader-group {
+  gap: 4px;
+  padding: 2px;
+  border: 1px solid var(--tf-border);
+  border-radius: 3px;
+  background: #f6f9fd;
+}
+
+.reader-group .btn {
+  border: 0 !important;
+  background: transparent !important;
+  min-height: 30px;
+  padding: 5px 8px !important;
+  border-radius: 2px !important;
+}
+
+.reader-group .btn:hover {
+  background: #e8f0fa !important;
+  border-color: transparent !important;
+}
+
+.reader-page-jump {
+  height: 30px;
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.side-panel-title,
+.side-panel-title[style] {
+  font-size: 23px !important;
+  line-height: 1.18 !important;
+}
+
+.side-panel-subtitle {
+  margin-top: 6px;
+  letter-spacing: 0.08em;
+}
+
+.side-panel-inner {
+  padding: 20px 18px 30px !important;
+}
+
+.side-panel-section {
+  margin-top: 18px !important;
+  margin-bottom: 14px !important;
+}
+
+.side-panel-section h3,
+.side-panel-section h3[style] {
+  margin-bottom: 8px !important;
+  font-family: "Source Serif 4", serif !important;
+  font-style: normal !important;
+  font-size: 26px !important;
+  line-height: 1.16 !important;
+  color: var(--tf-ink) !important;
+}
+
+.side-panel .meta-list {
+  font-size: 13px !important;
+}
+
+.side-panel .meta-list .meta-item {
+  display: grid !important;
+  grid-template-columns: 72px minmax(0, 1fr) !important;
+  gap: 8px !important;
+  align-items: start !important;
+  padding: 7px 0 !important;
+}
+
+.side-panel .meta-list .meta-label {
+  width: auto !important;
+  flex: 0 0 auto !important;
+  color: var(--tf-muted) !important;
+}
+
+.side-panel .meta-list .meta-value {
+  color: var(--tf-ink) !important;
+}
+
+.toc-list {
+  position: relative;
+  margin-top: 8px;
+  padding-left: 14px;
+}
+
+.toc-list::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 2px;
+  background: #d9e4f3;
+}
+
+.toc-list::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 2px;
+  height: calc((100% - 4px) * var(--toc-progress));
+  background: linear-gradient(180deg, var(--tf-link), #6ea1d9);
+  transition: height 0.2s ease;
+}
+
+.toc-link {
+  display: block !important;
+  width: 100% !important;
+  border-radius: 2px !important;
+  padding: 5px 8px 5px 10px !important;
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.outline-depth-1 .toc-link {
+  padding-left: 20px !important;
+}
+
+.outline-depth-2 .toc-link {
+  padding-left: 30px !important;
+}
+
+.outline-depth-3 .toc-link {
+  padding-left: 40px !important;
+}
+
+.toc-link.is-past {
+  color: #56779f !important;
+}
+
+.toc-link.is-active {
+  color: #153f7f !important;
+  background: #e7f0ff !important;
+  font-weight: 700 !important;
+  box-shadow: inset 3px 0 0 #1f5aa6;
+}
+
+#viewerContainer {
+  background: #ffffff !important;
+}
+
+.side-panel,
+#viewerContainer {
+  animation: reader-enter 0.35s ease both;
+}
+
+@keyframes reader-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:root[data-theme="dark"] {
+  --tf-blue: #90bdff;
+  --tf-link: #90bdff;
+  --tf-link-hover: #bed9ff;
+  --tf-ink: #eef4ff;
+  --tf-slate: #c4d1e6;
+  --tf-muted: #9ab0cc;
+  --tf-bg: #0b1220;
+  --tf-paper: #132033;
+  --tf-border: #2d415d;
+}
+
+:root[data-theme="dark"] .reader-group {
+  border-color: #3a5475;
+  background: #1a2b40;
+}
+
+:root[data-theme="dark"] .reader-group .btn {
+  color: #d6e6ff !important;
+}
+
+:root[data-theme="dark"] .reader-group .btn:hover {
+  background: #243a54 !important;
+}
+
+:root[data-theme="dark"] .reader-page-jump {
+  background: #152334;
+  border-color: #3a5475;
+  color: #cfe0ff;
+}
+
+:root[data-theme="dark"] .toc-list::before {
+  background: #31455f;
+}
+
+:root[data-theme="dark"] .toc-list::after {
+  background: linear-gradient(180deg, #8fbaff, #6f9cdc);
+}
+
+:root[data-theme="dark"] .toc-link.is-past {
+  color: #8fa8c7 !important;
+}
+
+:root[data-theme="dark"] .toc-link.is-active {
+  color: #dceaff !important;
+  background: #1f3551 !important;
+  box-shadow: inset 3px 0 0 #8fbaff;
+}
+
+:root[data-theme="dark"] .side-panel .meta-list .meta-label {
+  color: #9bb0cc !important;
+}
+
+:root[data-theme="dark"] .side-panel .meta-list .meta-value,
+:root[data-theme="dark"] .side-panel-section div {
+  color: #d9e7fb !important;
+}
+
+:root[data-theme="dark"] .find-bar {
+  background: #132033;
+}
+
+:root[data-theme="dark"] .find-input {
+  background: #17273a;
+  border-color: #3a5475;
+  color: #d9e7fb;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --paper-sidebar-w: min(84vw, 352px);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --paper-bar-h: 64px;
+  }
+
+  .topbar {
+    padding: 0 6px !important;
+  }
+
+  .reader-group {
+    padding: 1px;
+  }
+
+  .reader-group .btn {
+    min-height: 28px;
+    padding: 4px 6px !important;
+  }
+
+  .side-panel-section h3,
+  .side-panel-section h3[style] {
+    font-size: 22px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-panel,
+  #viewerContainer,
+  .toc-link {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+  }
+
+  .topbar,
+  .side-toggle-handle,
+  .loading-overlay,
+  .zoom-indicator,
+  .find-bar {
+    display: none !important;
+  }
+
+  .side-panel {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    margin: 0 0 12pt !important;
+    page-break-after: always;
+  }
+
+  #viewerContainer {
+    position: static !important;
+    inset: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  #viewer {
+    padding: 0 !important;
+  }
+
+  .pdfViewer .page {
+    margin: 0 auto 8pt !important;
+    box-shadow: none !important;
+    border: 1px solid #cdd6e3 !important;
+    break-inside: avoid;
+  }
+}

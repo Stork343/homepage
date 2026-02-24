@@ -180,6 +180,14 @@
   };
 
   const SORTED_LINK_KEYS = ["pdf", "code", "doi", "html"];
+  const REVEAL_SELECTOR = [
+    ".research-item",
+    ".publication-card",
+    ".project-card",
+    ".cv-card",
+    ".contact-item"
+  ].join(", ");
+  let revealObserver = null;
 
   function t(key) {
     return I18N[state.lang][key] || I18N.zh[key] || key;
@@ -278,6 +286,77 @@
     if (notify) {
       showToast(state.theme === "dark" ? t("toast_theme_dark") : t("toast_theme_light"));
     }
+  }
+
+  function updateScrollProgress() {
+    const root = document.documentElement;
+    const totalScrollable = Math.max(0, root.scrollHeight - window.innerHeight);
+    const progress = totalScrollable > 0 ? Math.min(100, (window.scrollY / totalScrollable) * 100) : 0;
+    root.style.setProperty("--scroll-progress", `${progress.toFixed(2)}%`);
+  }
+
+  function initScrollProgress() {
+    let rafId = 0;
+    const requestUpdate = () => {
+      if (rafId) {
+        return;
+      }
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        updateScrollProgress();
+      });
+    };
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    requestUpdate();
+  }
+
+  function initRevealObserver() {
+    if (!("IntersectionObserver" in window)) {
+      revealObserver = null;
+      return;
+    }
+    const reduceMotion =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      revealObserver = null;
+      return;
+    }
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+    );
+  }
+
+  function applyRevealAnimation(root) {
+    const scope = root && typeof root.querySelectorAll === "function" ? root : document;
+    const targets = Array.from(scope.querySelectorAll(REVEAL_SELECTOR));
+    if (!targets.length) {
+      return;
+    }
+    const reduceMotion =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    targets.forEach((node, index) => {
+      node.classList.add("reveal-item");
+      node.style.setProperty("--reveal-delay", `${Math.min((index % 7) * 50, 300)}ms`);
+      if (reduceMotion || !revealObserver) {
+        node.classList.add("in-view");
+        return;
+      }
+      if (node.dataset.revealBound === "1") {
+        return;
+      }
+      node.dataset.revealBound = "1";
+      revealObserver.observe(node);
+    });
   }
 
   function createLinkOrPlaceholder(key, url) {
@@ -686,6 +765,8 @@
         group.appendChild(items);
         list.appendChild(group);
       });
+    applyRevealAnimation(list);
+    window.requestAnimationFrame(updateScrollProgress);
   }
 
   async function loadPublications() {
@@ -855,10 +936,13 @@
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
+    initScrollProgress();
+    initRevealObserver();
     initNavigation();
     initLanguageSwitch();
     initThemeSwitch();
     initPublicationSearch();
+    applyRevealAnimation(document);
     setTheme(state.theme);
     applyI18nText();
     await loadPublications();
