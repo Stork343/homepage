@@ -1,0 +1,116 @@
+{
+  "updated": "2026-02-24T19:40:49.674Z",
+  "source": "site-master.json",
+  "entries": [
+    {
+      "id": "mallows-llm-ranking",
+      "checked_at": "2026-02-24T19:40:41.235Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "jpdi-mixed-qr",
+      "checked_at": "2026-02-24T19:40:42.588Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "svcqr",
+      "checked_at": "2026-02-24T19:40:43.409Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "2511.18106",
+      "arxiv_abs": "https://arxiv.org/abs/2511.18106",
+      "arxiv_pdf": "https://arxiv.org/pdf/2511.18106.pdf",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "hcqr",
+      "checked_at": "2026-02-24T19:40:44.381Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "snqesa",
+      "checked_at": "2026-02-24T19:40:44.381Z",
+      "doi": "10.48550/arXiv.2510.24352",
+      "doi_url": "https://doi.org/10.48550/arXiv.2510.24352",
+      "arxiv_id": "2510.24352",
+      "arxiv_abs": "https://arxiv.org/abs/2510.24352",
+      "arxiv_pdf": "https://arxiv.org/pdf/2510.24352.pdf",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "plgwqr",
+      "checked_at": "2026-02-24T19:40:45.430Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "poisson-rr",
+      "checked_at": "2026-02-24T19:40:46.040Z",
+      "doi": "10.20207/j.cnki.1007-3116.20250703.001",
+      "doi_url": "https://doi.org/10.20207/j.cnki.1007-3116.20250703.001",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "gtwr-housing",
+      "checked_at": "2026-02-24T19:40:46.476Z",
+      "doi": "10.13860/j.cnki.sltj.20210722-025",
+      "doi_url": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "bgtwr-housing",
+      "checked_at": "2026-02-24T19:40:47.001Z",
+      "doi": "10.16722/j.issn.1674-537x.2022.10.001",
+      "doi_url": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "mgtwr-variable-selection",
+      "checked_at": "2026-02-24T19:40:49.674Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    }
+  ]
+}

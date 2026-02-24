@@ -1,0 +1,354 @@
+{
+  "updated": "2026-02-24",
+  "papers": [
+    {
+      "id": "svcqr",
+      "path": "papers/2025/svcqr/svcqr.html",
+      "title": {
+        "zh": "Sparse-Smooth 空间变系数分位回归",
+        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
+      },
+      "description": {
+        "zh": "Sparse-Smooth 空间变系数分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai. arXiv 预印本；Spatial Statistics, 2025.",
+        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression. Authors: Hou Jian, Meng Tan, Tian Maozai. arXiv preprint; Spatial Statistics, 2025."
+      },
+      "keywords": [
+        "空间统计",
+        "变系数模型",
+        "分位回归",
+        "稀疏平滑",
+        "房价建模",
+        "spatial statistics",
+        "varying coefficient model",
+        "quantile regression",
+        "sparse smooth",
+        "housing price"
+      ],
+      "canonical": "https://stork343.github.io/homepage/papers/2025/svcqr/svcqr.html",
+      "og_image": "https://stork343.github.io/homepage/papers/2025/svcqr/log_price.webp",
+      "scholarly_article": {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression",
+        "headline": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression",
+        "inLanguage": "en",
+        "datePublished": "2025",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Meng Tan"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "isPartOf": {
+          "@type": "Periodical",
+          "name": "arXiv preprint; Spatial Statistics"
+        },
+        "url": "https://stork343.github.io/homepage/papers/2025/svcqr/svcqr.html",
+        "image": "https://stork343.github.io/homepage/papers/2025/svcqr/log_price.webp",
+        "sameAs": [
+          "https://arxiv.org/abs/2511.18106"
+        ]
+      }
+    },
+    {
+      "id": "hcqr",
+      "path": "papers/2025/hcqr/hcqr.html",
+      "title": {
+        "zh": "带自适应 Lasso 的分层复合分位回归",
+        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
+      },
+      "description": {
+        "zh": "带自适应 Lasso 的分层复合分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, 2025.",
+        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso. Authors: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, 2025."
+      },
+      "keywords": [
+        "分层模型",
+        "复合分位回归",
+        "自适应 Lasso",
+        "鲁棒估计",
+        "变量选择",
+        "hierarchical model",
+        "composite quantile regression",
+        "adaptive lasso",
+        "robust estimation",
+        "variable selection"
+      ],
+      "canonical": "https://stork343.github.io/homepage/papers/2025/hcqr/hcqr.html",
+      "og_image": "https://stork343.github.io/homepage/papers/2025/hcqr/data-line.webp",
+      "scholarly_article": {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Hierarchical Composite Quantile Regression with Adaptive Lasso",
+        "headline": "Hierarchical Composite Quantile Regression with Adaptive Lasso",
+        "inLanguage": "en",
+        "datePublished": "2025",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Meng Tan"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "isPartOf": {
+          "@type": "Periodical",
+          "name": "Journal of Statistical Planning and Inference"
+        },
+        "url": "https://stork343.github.io/homepage/papers/2025/hcqr/hcqr.html",
+        "image": "https://stork343.github.io/homepage/papers/2025/hcqr/data-line.webp",
+        "sameAs": [
+          "https://stork343.github.io/homepage/papers/2025/hcqr/hcqr.html"
+        ]
+      }
+    },
+    {
+      "id": "poisson-rr",
+      "path": "papers/2025/poisson-rr/poisson-rr.html",
+      "title": {
+        "zh": "泊松分布下基于鞍点逼近的相对风险置信区间构造",
+        "en": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation"
+      },
+      "description": {
+        "zh": "泊松分布下基于鞍点逼近的相对风险置信区间构造. 作者: 侯健, 刘硕, 田茂再. 统计与信息论坛. 2025, 40(08): 3-13, 2025.",
+        "en": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation. Authors: Hou Jian, Liu Shuo, Tian Maozai. Statistics and Information Foru…"
+      },
+      "keywords": [
+        "泊松分布",
+        "相对风险",
+        "置信区间",
+        "鞍点逼近",
+        "生物统计",
+        "poisson distribution",
+        "relative risk",
+        "confidence interval",
+        "saddlepoint approximation",
+        "biostatistics"
+      ],
+      "canonical": "https://stork343.github.io/homepage/papers/2025/poisson-rr/poisson-rr.html",
+      "og_image": "https://stork343.github.io/homepage/papers/2025/poisson-rr/poisson-rr.webp",
+      "scholarly_article": {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation",
+        "headline": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation",
+        "inLanguage": "en",
+        "datePublished": "2025",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Liu Shuo"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "isPartOf": {
+          "@type": "Periodical",
+          "name": "Statistics and Information Forum, 2025, 40(08): 3-13"
+        },
+        "url": "https://stork343.github.io/homepage/papers/2025/poisson-rr/poisson-rr.html",
+        "image": "https://stork343.github.io/homepage/papers/2025/poisson-rr/poisson-rr.webp",
+        "identifier": "https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001",
+        "sameAs": [
+          "https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001",
+          "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS"
+        ]
+      }
+    },
+    {
+      "id": "gtwr-housing",
+      "path": "papers/2022/gtwr-housing/gtwr.html",
+      "title": {
+        "zh": "基于异窗宽GTWR模型的商品住宅价格影响因素研究",
+        "en": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths"
+      },
+      "description": {
+        "zh": "基于异窗宽GTWR模型的商品住宅价格影响因素研究. 作者: 侯健, 王芝皓, 田茂再, 窦燕. 数理统计与管理. 2022, 41(06): 1003-1014, 2022.",
+        "en": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths. Authors: Hou Jian, Wang Zhihao, Tian Maozai, Dou Yan. Journal of Applied Statistics a…"
+      },
+      "keywords": [
+        "GTWR",
+        "时空回归",
+        "商品住宅",
+        "房价影响因素",
+        "空间分析",
+        "spatiotemporal regression",
+        "commercial housing",
+        "housing price factors",
+        "spatial analysis"
+      ],
+      "canonical": "https://stork343.github.io/homepage/papers/2022/gtwr-housing/gtwr.html",
+      "og_image": "https://stork343.github.io/homepage/papers/2022/gtwr-housing/mgtwr.webp",
+      "scholarly_article": {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths",
+        "headline": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths",
+        "inLanguage": "en",
+        "datePublished": "2022",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Wang Zhihao"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          },
+          {
+            "@type": "Person",
+            "name": "Dou Yan"
+          }
+        ],
+        "isPartOf": {
+          "@type": "Periodical",
+          "name": "Journal of Applied Statistics and Management, 2022, 41(06): 1003-1014"
+        },
+        "url": "https://stork343.github.io/homepage/papers/2022/gtwr-housing/gtwr.html",
+        "image": "https://stork343.github.io/homepage/papers/2022/gtwr-housing/mgtwr.webp",
+        "identifier": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
+        "sameAs": [
+          "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
+          "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS"
+        ]
+      }
+    },
+    {
+      "id": "bgtwr-housing",
+      "path": "papers/2022/bgtwr-housing/bgtwr.html",
+      "title": {
+        "zh": "基于多尺度时空地理加权回归模型的房价影响因素分析",
+        "en": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression"
+      },
+      "description": {
+        "zh": "基于多尺度时空地理加权回归模型的房价影响因素分析. 作者: 景昊坤, 王合玲, 侯健. 统计与管理. 2022, 37(10): 101-107, 2022.",
+        "en": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression. Authors: Jing Haokun, Wang Heling, Hou Jian. Statistics and Ma…"
+      },
+      "keywords": [
+        "多尺度回归",
+        "时空地理加权回归",
+        "房价分析",
+        "空间模型",
+        "房地产统计",
+        "multiscale regression",
+        "spatiotemporal geographically weighted regression",
+        "housing price analysis",
+        "spatial model",
+        "real estate statistics"
+      ],
+      "canonical": "https://stork343.github.io/homepage/papers/2022/bgtwr-housing/bgtwr.html",
+      "og_image": "https://stork343.github.io/homepage/papers/2022/bgtwr-housing/bgtwr.webp",
+      "scholarly_article": {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression",
+        "headline": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression",
+        "inLanguage": "en",
+        "datePublished": "2022",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Jing Haokun"
+          },
+          {
+            "@type": "Person",
+            "name": "Wang Heling"
+          },
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          }
+        ],
+        "isPartOf": {
+          "@type": "Periodical",
+          "name": "Statistics and Management, 2022, 37(10): 101-107"
+        },
+        "url": "https://stork343.github.io/homepage/papers/2022/bgtwr-housing/bgtwr.html",
+        "image": "https://stork343.github.io/homepage/papers/2022/bgtwr-housing/bgtwr.webp",
+        "identifier": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
+        "sameAs": [
+          "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
+          "https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS"
+        ]
+      }
+    },
+    {
+      "id": "mgtwr-variable-selection",
+      "path": "papers/2021/mgtwr-variable-selection/mgtwr.html",
+      "title": {
+        "zh": "基于变量选择的混合时空地理加权回归参数估计",
+        "en": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection"
+      },
+      "description": {
+        "zh": "基于变量选择的混合时空地理加权回归参数估计. 作者: 侯健, 田茂再. 数学的实践与认识. 2021, 51(07): 110-118, 2021.",
+        "en": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection. Authors: Hou Jian, Tian Maozai. Mathematics in Practice and Theory, 2021,…"
+      },
+      "keywords": [
+        "混合 GTWR",
+        "变量选择",
+        "参数估计",
+        "时空建模",
+        "统计推断",
+        "mixed GTWR",
+        "variable selection",
+        "parameter estimation",
+        "spatiotemporal modeling",
+        "statistical inference"
+      ],
+      "canonical": "https://stork343.github.io/homepage/papers/2021/mgtwr-variable-selection/mgtwr.html",
+      "og_image": "https://stork343.github.io/homepage/papers/2021/mgtwr-variable-selection/gtwr.webp",
+      "scholarly_article": {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "name": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection",
+        "headline": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection",
+        "inLanguage": "en",
+        "datePublished": "2021",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "isPartOf": {
+          "@type": "Periodical",
+          "name": "Mathematics in Practice and Theory, 2021, 51(07): 110-118"
+        },
+        "url": "https://stork343.github.io/homepage/papers/2021/mgtwr-variable-selection/mgtwr.html",
+        "image": "https://stork343.github.io/homepage/papers/2021/mgtwr-variable-selection/gtwr.webp",
+        "identifier": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT",
+        "sameAs": [
+          "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT",
+          "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS"
+        ]
+      }
+    }
+  ]
+}

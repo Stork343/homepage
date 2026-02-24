@@ -106,3 +106,31 @@ test('SVCQR TOC links jump to the expected query page', async ({ page }) => {
   await clickTocAndAssertPageQuery(page, '4. Asymptotic Theory');
   await clickTocAndAssertPageQuery(page, '7. Discussion');
 });
+
+test('Site-wide filters and citation export center work together', async ({ page }) => {
+  await waitForPublications(page);
+
+  await page.locator('.lang-btn[data-lang="en"]').click();
+  await expect(page.locator('.lang-btn[data-lang="en"]')).toHaveClass(/active/);
+
+  await expect(page.locator('#pub-keyword-filter')).toBeVisible();
+  const keywordValue = await page.evaluate(() => {
+    const select = document.getElementById('pub-keyword-filter');
+    if (!select) return '';
+    const options = Array.from(select.options || []);
+    const matched = options.find((option) => /quantile regression/i.test(option.textContent || ''));
+    return matched ? matched.value : '';
+  });
+  expect(keywordValue).not.toBe('');
+  await page.selectOption('#pub-keyword-filter', keywordValue);
+
+  const filteredCount = await page.locator('#publications-list .publication-card').count();
+  expect(filteredCount).toBeGreaterThan(0);
+
+  await page.locator('#export-filtered-only').check();
+  const downloadPromise = page.waitForEvent('download');
+  await page.locator('#export-bibtex-btn').click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toContain('filtered');
+  expect(download.suggestedFilename()).toContain('.bib');
+});

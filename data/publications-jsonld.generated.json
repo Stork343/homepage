@@ -1,0 +1,258 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Publications by Hou Jian",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Feature Ranking Calibration for Large Language Models Based on the Mallows Model",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "Statistical Research",
+        "url": "https://stork343.github.io/homepage/#publication-mallows-llm-ranking"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Meng Tan"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "Statistica Sinica",
+        "url": "https://stork343.github.io/homepage/#publication-jpdi-mixed-qr"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Meng Tan"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "arXiv preprint; Spatial Statistics",
+        "url": "https://arxiv.org/abs/2511.18106"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Hierarchical Composite Quantile Regression with Adaptive Lasso",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Meng Tan"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "Journal of Statistical Planning and Inference",
+        "url": "https://stork343.github.io/homepage/#publication-hcqr"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Self-Normalized Quantile Empirical Saddlepoint Approximation",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Meng Tan"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "arXiv preprint; Statistical Papers",
+        "url": "https://arxiv.org/abs/2510.24352",
+        "identifier": "https://doi.org/10.48550/arXiv.2510.24352"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Partially Linear Geographically Weighted Quantile Regression",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Liu Shuo"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "Acta Mathematicae Applicatae Sinica",
+        "url": "https://stork343.github.io/homepage/#publication-plgwqr"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Liu Shuo"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2025",
+        "isPartOf": "Statistics and Information Forum, 2025, 40(08): 3-13",
+        "url": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS",
+        "identifier": "https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Wang Zhihao"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          },
+          {
+            "@type": "Person",
+            "name": "Dou Yan"
+          }
+        ],
+        "datePublished": "2022",
+        "isPartOf": "Journal of Applied Statistics and Management, 2022, 41(06): 1003-1014",
+        "url": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS",
+        "identifier": "https://doi.org/10.13860/j.cnki.sltj.20210722-025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Jing Haokun"
+          },
+          {
+            "@type": "Person",
+            "name": "Wang Heling"
+          },
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          }
+        ],
+        "datePublished": "2022",
+        "isPartOf": "Statistics and Management, 2022, 37(10): 101-107",
+        "url": "https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS",
+        "identifier": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Hou Jian"
+          },
+          {
+            "@type": "Person",
+            "name": "Tian Maozai"
+          }
+        ],
+        "datePublished": "2021",
+        "isPartOf": "Mathematics in Practice and Theory, 2021, 51(07): 110-118",
+        "url": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS",
+        "identifier": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT"
+      }
+    }
+  ]
+}

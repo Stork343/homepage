@@ -31,8 +31,10 @@
     const url = new URL(window.location.href);
     const q = (url.searchParams.get("q") || "").trim();
     const year = (url.searchParams.get("year") || "all").trim();
+    const venue = (url.searchParams.get("venue") || "all").trim();
+    const keyword = (url.searchParams.get("keyword") || "all").trim();
     const status = (url.searchParams.get("status") || "all").trim();
-    return { q, year, status };
+    return { q, year, venue, keyword, status };
   }
 
   const initialFilters = readPublicationFilterStateFromUrl();
@@ -44,6 +46,8 @@
     filters: {
       q: initialFilters.q,
       year: initialFilters.year,
+      venue: normalizeSearchText(initialFilters.venue || "all"),
+      keyword: normalizeSearchText(initialFilters.keyword || "all"),
       status: initialFilters.status
     }
   };
@@ -69,14 +73,24 @@
       tag_repeated: "重复测量",
       tag_optimization: "优化算法",
       publications_title: "学术成果",
-      publications_note: "按年份分组展示，支持 BibTeX 查看与引用复制。",
-      publications_search_label: "检索成果",
-      publications_search_placeholder: "按标题、作者、期刊或关键词检索…",
+      publications_note: "全站学术检索（标题/作者/关键词/年份/期刊），并支持引用批量导出。",
+      publications_search_label: "全站检索（按标题、作者、关键词）",
+      publications_search_placeholder: "全站检索：标题、作者、关键词…",
       publications_year_all: "全部年份",
+      publications_venue_all: "全部期刊/来源",
+      publications_keyword_all: "全部关键词",
       publications_status_all: "全部状态",
       publications_clear: "清空",
       publications_result_count: "显示 {shown} / {total} 篇",
       publications_empty: "没有匹配的成果，请调整筛选条件。",
+      export_bibtex: "导出 BibTeX",
+      export_ris: "导出 RIS",
+      export_endnote: "导出 EndNote",
+      export_filtered_only: "仅导出当前筛选结果",
+      export_done: "已导出 {format}（{count} 条）",
+      export_empty: "当前筛选结果为空，无法导出",
+      export_file_all: "hou-jian-publications-all",
+      export_file_filtered: "hou-jian-publications-filtered",
       cv_title: "简历",
       cv_zh_title: "中文简历",
       cv_zh_desc: "下载最新中文 CV（PDF）",
@@ -133,14 +147,24 @@
       tag_repeated: "Repeated Measures",
       tag_optimization: "Optimization",
       publications_title: "Publications",
-      publications_note: "Grouped by year, with BibTeX view and quick citation copy.",
-      publications_search_label: "Search Publications",
-      publications_search_placeholder: "Search by title, author, venue, or keyword...",
+      publications_note: "Site-wide academic search by title, author, keywords, year, and venue; with bulk citation exports.",
+      publications_search_label: "Site-wide search (title, author, keywords)",
+      publications_search_placeholder: "Site-wide search: title, author, keywords...",
       publications_year_all: "All Years",
+      publications_venue_all: "All Venues",
+      publications_keyword_all: "All Keywords",
       publications_status_all: "All Status",
       publications_clear: "Clear",
       publications_result_count: "Showing {shown} / {total} items",
       publications_empty: "No matching publications. Try a different filter.",
+      export_bibtex: "Export BibTeX",
+      export_ris: "Export RIS",
+      export_endnote: "Export EndNote",
+      export_filtered_only: "Export filtered results only",
+      export_done: "Exported {format} ({count} records)",
+      export_empty: "No records to export for current filters",
+      export_file_all: "hou-jian-publications-all",
+      export_file_filtered: "hou-jian-publications-filtered",
       cv_title: "Curriculum Vitae",
       cv_zh_title: "Chinese CV",
       cv_zh_desc: "Download latest Chinese CV (PDF)",
@@ -419,6 +443,24 @@
     return "published";
   }
 
+  function getKeywords(pub, lang) {
+    const raw = pub && pub.keywords;
+    if (Array.isArray(raw)) {
+      return raw.map((item) => String(item || "").trim()).filter(Boolean);
+    }
+    if (raw && typeof raw === "object") {
+      const candidate = Array.isArray(raw[lang]) ? raw[lang] : Array.isArray(raw.en) ? raw.en : raw.zh;
+      return (Array.isArray(candidate) ? candidate : [])
+        .map((item) => String(item || "").trim())
+        .filter(Boolean);
+    }
+    return [];
+  }
+
+  function getVenueKey(pub) {
+    return normalizeSearchText(localizedText(pub && pub.venue, "en") || localizedText(pub && pub.venue, "zh"));
+  }
+
   function normalizeSearchText(value) {
     return String(value || "")
       .toLowerCase()
@@ -427,6 +469,8 @@
   }
 
   function buildSearchHaystack(pub) {
+    const keywordZh = getKeywords(pub, "zh").join(" ");
+    const keywordEn = getKeywords(pub, "en").join(" ");
     const pieces = [
       localizedText(pub.title, "zh"),
       localizedText(pub.title, "en"),
@@ -434,9 +478,12 @@
       localizedText(pub.authors, "en"),
       localizedText(pub.venue, "zh"),
       localizedText(pub.venue, "en"),
+      keywordZh,
+      keywordEn,
       getStatusText(pub, "zh"),
       getStatusText(pub, "en"),
-      String(pub.year || "")
+      String(pub.year || ""),
+      String(pub.id || "")
     ];
     return normalizeSearchText(pieces.join(" "));
   }
@@ -453,6 +500,16 @@
     } else {
       url.searchParams.delete("year");
     }
+    if (state.filters.venue && state.filters.venue !== "all") {
+      url.searchParams.set("venue", state.filters.venue);
+    } else {
+      url.searchParams.delete("venue");
+    }
+    if (state.filters.keyword && state.filters.keyword !== "all") {
+      url.searchParams.set("keyword", state.filters.keyword);
+    } else {
+      url.searchParams.delete("keyword");
+    }
     if (state.filters.status && state.filters.status !== "all") {
       url.searchParams.set("status", state.filters.status);
     } else {
@@ -466,6 +523,17 @@
     return state.publications.filter((pub) => {
       if (state.filters.year !== "all" && String(pub.year || "") !== String(state.filters.year)) {
         return false;
+      }
+      if (state.filters.venue !== "all" && getVenueKey(pub) !== state.filters.venue) {
+        return false;
+      }
+      if (state.filters.keyword !== "all") {
+        const allKeywords = Array.from(new Set([...getKeywords(pub, "zh"), ...getKeywords(pub, "en")])).map((item) =>
+          normalizeSearchText(item)
+        );
+        if (!allKeywords.includes(state.filters.keyword)) {
+          return false;
+        }
       }
       if (state.filters.status !== "all" && getStatusKey(pub) !== state.filters.status) {
         return false;
@@ -490,8 +558,10 @@
 
   function renderPublicationFilterOptions() {
     const yearSelect = document.getElementById("pub-year-filter");
+    const venueSelect = document.getElementById("pub-venue-filter");
+    const keywordSelect = document.getElementById("pub-keyword-filter");
     const statusSelect = document.getElementById("pub-status-filter");
-    if (!yearSelect || !statusSelect) {
+    if (!yearSelect || !venueSelect || !keywordSelect || !statusSelect) {
       return;
     }
 
@@ -511,6 +581,66 @@
       yearSelect.appendChild(option);
     });
     yearSelect.value = years.includes(String(state.filters.year)) ? String(state.filters.year) : "all";
+
+    const venuePairs = Array.from(
+      state.publications.reduce((acc, pub) => {
+        const value = getVenueKey(pub);
+        if (!value) {
+          return acc;
+        }
+        if (!acc.has(value)) {
+          acc.set(value, localizedText(pub.venue, state.lang) || localizedText(pub.venue, "en"));
+        }
+        return acc;
+      }, new Map())
+    ).sort((a, b) => a[1].localeCompare(b[1]));
+
+    venueSelect.innerHTML = "";
+    const venueAll = document.createElement("option");
+    venueAll.value = "all";
+    venueAll.textContent = t("publications_venue_all");
+    venueSelect.appendChild(venueAll);
+    venuePairs.forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      venueSelect.appendChild(option);
+    });
+    venueSelect.value = venuePairs.some(([value]) => value === state.filters.venue) ? state.filters.venue : "all";
+
+    const keywordPairs = Array.from(
+      state.publications.reduce((acc, pub) => {
+        const preferred = getKeywords(pub, state.lang);
+        const fallback = getKeywords(pub, state.lang === "zh" ? "en" : "zh");
+        const all = Array.from(new Set([...preferred, ...fallback]));
+        all.forEach((keyword) => {
+          const value = normalizeSearchText(keyword);
+          if (!value) {
+            return;
+          }
+          if (!acc.has(value)) {
+            const display = preferred.find((item) => normalizeSearchText(item) === value) || keyword;
+            acc.set(value, display);
+          }
+        });
+        return acc;
+      }, new Map())
+    ).sort((a, b) => a[1].localeCompare(b[1]));
+
+    keywordSelect.innerHTML = "";
+    const keywordAll = document.createElement("option");
+    keywordAll.value = "all";
+    keywordAll.textContent = t("publications_keyword_all");
+    keywordSelect.appendChild(keywordAll);
+    keywordPairs.forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      keywordSelect.appendChild(option);
+    });
+    keywordSelect.value = keywordPairs.some(([value]) => value === state.filters.keyword)
+      ? state.filters.keyword
+      : "all";
 
     const statusPairs = Array.from(
       state.publications.reduce((acc, pub) => {
@@ -589,10 +719,36 @@
     document.head.appendChild(script);
   }
 
+  async function applyGeneratedJsonLd() {
+    const targetId = "publications-jsonld";
+    const existing = document.getElementById(targetId);
+    if (existing) {
+      existing.remove();
+    }
+    try {
+      const response = await fetch("data/publications-jsonld.generated.json", { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const payload = await response.json();
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = targetId;
+      script.textContent = JSON.stringify(payload, null, 2);
+      document.head.appendChild(script);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   function createPublicationCard(pub) {
     const pubLang = getPublicationLanguage(pub);
     const card = document.createElement("article");
     card.className = "publication-card has-thumb";
+    if (pub && pub.id) {
+      card.id = `publication-${pub.id}`;
+    }
 
     const title = document.createElement("h3");
     title.className = "publication-title";
@@ -629,6 +785,19 @@
       status.className = "publication-status";
       status.textContent = statusText;
       venue.appendChild(status);
+    }
+
+    const keywords = getKeywords(pub, pubLang);
+    let keywordRow = null;
+    if (keywords.length > 0) {
+      keywordRow = document.createElement("div");
+      keywordRow.className = "publication-keywords";
+      keywords.slice(0, 6).forEach((keyword) => {
+        const tag = document.createElement("span");
+        tag.className = "publication-keyword";
+        tag.textContent = keyword;
+        keywordRow.appendChild(tag);
+      });
     }
 
     const links = document.createElement("div");
@@ -711,6 +880,9 @@
     card.appendChild(title);
     card.appendChild(authors);
     card.appendChild(venue);
+    if (keywordRow) {
+      card.appendChild(keywordRow);
+    }
     card.appendChild(links);
     card.appendChild(bibDetails);
     card.appendChild(media);
@@ -769,6 +941,134 @@
     window.requestAnimationFrame(updateScrollProgress);
   }
 
+  function splitAuthorNames(value) {
+    return String(value || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  function getExportRecords(filteredOnly) {
+    const list = filteredOnly ? getFilteredPublications() : state.publications.slice();
+    return list.map((pub) => {
+      const title = localizedText(pub.title, "en") || localizedText(pub.title, "zh");
+      const authors = splitAuthorNames(localizedText(pub.authors, "en") || localizedText(pub.authors, "zh"));
+      const venue = localizedText(pub.venue, "en") || localizedText(pub.venue, "zh");
+      const year = String(pub.year || "");
+      const doiRaw = pub && pub.links ? String(pub.links.doi || "") : "";
+      const doiMatch = doiRaw.match(/\b10\.\d{4,9}\/[-._;()/:A-Z0-9]+\b/i);
+      const doi = doiMatch ? doiMatch[0] : "";
+      const urlRaw = pub && pub.links ? String(pub.links.article || pub.links.html || pub.links.pdf || "") : "";
+      const url = urlRaw && urlRaw.startsWith("http") ? urlRaw : "";
+      return {
+        id: String(pub.id || ""),
+        title,
+        authors,
+        venue,
+        year,
+        doi,
+        url,
+        bibtex: String(pub.bibtex || "").trim()
+      };
+    });
+  }
+
+  function buildBibtexExport(records) {
+    return `${records
+      .map((record) => record.bibtex)
+      .filter(Boolean)
+      .join("\n\n")}\n`;
+  }
+
+  function buildRisExport(records) {
+    return `${records
+      .map((record) => {
+        const lines = ["TY  - JOUR", `TI  - ${record.title}`];
+        record.authors.forEach((author) => lines.push(`AU  - ${author}`));
+        if (record.venue) {
+          lines.push(`JO  - ${record.venue}`);
+        }
+        if (record.year) {
+          lines.push(`PY  - ${record.year}`);
+        }
+        if (record.doi) {
+          lines.push(`DO  - ${record.doi}`);
+        }
+        if (record.url) {
+          lines.push(`UR  - ${record.url}`);
+        }
+        lines.push("ER  - ");
+        return lines.join("\n");
+      })
+      .join("\n\n")}\n`;
+  }
+
+  function buildEndnoteExport(records) {
+    return `${records
+      .map((record) => {
+        const lines = ["%0 Journal Article", `%T ${record.title}`];
+        record.authors.forEach((author) => lines.push(`%A ${author}`));
+        if (record.venue) {
+          lines.push(`%J ${record.venue}`);
+        }
+        if (record.year) {
+          lines.push(`%D ${record.year}`);
+        }
+        if (record.doi) {
+          lines.push(`%R ${record.doi}`);
+        }
+        if (record.url) {
+          lines.push(`%U ${record.url}`);
+        }
+        return lines.join("\n");
+      })
+      .join("\n\n")}\n`;
+  }
+
+  function triggerDownload(filename, content, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const href = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = href;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(href);
+  }
+
+  function initCitationExport() {
+    const exportBibtexBtn = document.getElementById("export-bibtex-btn");
+    const exportRisBtn = document.getElementById("export-ris-btn");
+    const exportEndnoteBtn = document.getElementById("export-endnote-btn");
+    const filteredOnlyInput = document.getElementById("export-filtered-only");
+    if (!exportBibtexBtn || !exportRisBtn || !exportEndnoteBtn || !filteredOnlyInput) {
+      return;
+    }
+
+    const exportWith = (format, extension, builder, mimeType) => {
+      const records = getExportRecords(Boolean(filteredOnlyInput.checked));
+      if (!records.length) {
+        showToast(t("export_empty"));
+        return;
+      }
+      const prefix = filteredOnlyInput.checked ? t("export_file_filtered") : t("export_file_all");
+      const filename = `${prefix}.${extension}`;
+      triggerDownload(filename, builder(records), mimeType);
+      showToast(formatI18n("export_done", { format, count: String(records.length) }));
+    };
+
+    exportBibtexBtn.addEventListener("click", () => {
+      exportWith("BibTeX", "bib", buildBibtexExport, "application/x-bibtex;charset=utf-8");
+    });
+    exportRisBtn.addEventListener("click", () => {
+      exportWith("RIS", "ris", buildRisExport, "application/x-research-info-systems;charset=utf-8");
+    });
+    exportEndnoteBtn.addEventListener("click", () => {
+      exportWith("EndNote", "enw", buildEndnoteExport, "text/plain;charset=utf-8");
+    });
+  }
+
   async function loadPublications() {
     const list = document.getElementById("publications-list");
     if (list) {
@@ -799,7 +1099,10 @@
       setStorageItem(cacheKey, JSON.stringify(state.publications));
       renderPublicationFilterOptions();
       renderPublications();
-      updateScholarlyJsonLd();
+      const loadedGenerated = await applyGeneratedJsonLd();
+      if (!loadedGenerated) {
+        updateScholarlyJsonLd();
+      }
     } catch (_) {
       if (!hadCachedData && list) {
         list.innerHTML = `<p class="publication-empty">${t("label_load_failed")}</p>`;
@@ -899,20 +1202,26 @@
   function initPublicationSearch() {
     const input = document.getElementById("pub-search-input");
     const yearSelect = document.getElementById("pub-year-filter");
+    const venueSelect = document.getElementById("pub-venue-filter");
+    const keywordSelect = document.getElementById("pub-keyword-filter");
     const statusSelect = document.getElementById("pub-status-filter");
     const clearBtn = document.getElementById("pub-clear-btn");
-    if (!input || !yearSelect || !statusSelect || !clearBtn) {
+    if (!input || !yearSelect || !venueSelect || !keywordSelect || !statusSelect || !clearBtn) {
       return;
     }
 
     input.value = state.filters.q || "";
     yearSelect.value = state.filters.year || "all";
+    venueSelect.value = state.filters.venue || "all";
+    keywordSelect.value = state.filters.keyword || "all";
     statusSelect.value = state.filters.status || "all";
 
     let searchDebounceTimer = 0;
     const applyFilters = () => {
       state.filters.q = (input.value || "").trim();
       state.filters.year = yearSelect.value || "all";
+      state.filters.venue = venueSelect.value || "all";
+      state.filters.keyword = keywordSelect.value || "all";
       state.filters.status = statusSelect.value || "all";
       writePublicationFiltersToUrl();
       renderPublications();
@@ -924,14 +1233,34 @@
     });
 
     yearSelect.addEventListener("change", applyFilters);
+    venueSelect.addEventListener("change", applyFilters);
+    keywordSelect.addEventListener("change", applyFilters);
     statusSelect.addEventListener("change", applyFilters);
 
     clearBtn.addEventListener("click", () => {
       input.value = "";
       yearSelect.value = "all";
+      venueSelect.value = "all";
+      keywordSelect.value = "all";
       statusSelect.value = "all";
       applyFilters();
       input.focus();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const target = event.target;
+      const tag = target && target.tagName ? target.tagName.toLowerCase() : "";
+      if (tag === "input" || tag === "textarea" || tag === "select" || (target && target.isContentEditable)) {
+        if (event.key === "Escape" && tag === "input" && target === input) {
+          input.blur();
+        }
+        return;
+      }
+      if (event.key === "/" && !event.metaKey && !event.ctrlKey && !event.altKey) {
+        event.preventDefault();
+        input.focus();
+        input.select();
+      }
     });
   }
 
@@ -942,6 +1271,7 @@
     initLanguageSwitch();
     initThemeSwitch();
     initPublicationSearch();
+    initCitationExport();
     applyRevealAnimation(document);
     setTheme(state.theme);
     applyI18nText();

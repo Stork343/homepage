@@ -637,7 +637,7 @@ summary:focus-visible {
   --tf-btn-hover:#ffffff;
   --tf-ink:#1b2430;
   --tf-slate:#3f4d60;
-  --tf-muted:#667487;
+  --tf-muted:#5f7086;
   --tf-bg:#f4f6f9;
   --tf-paper:#ffffff;
   --tf-border:#d4dce7;
@@ -1530,6 +1530,71 @@ body{
   font-size:26px;
 }
 
+.publication-keywords{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:8px 0 4px;
+}
+
+.publication-keyword{
+  font-size:11px;
+  line-height:1.2;
+  padding:3px 7px;
+  border-radius:2px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  background:#eef3fa;
+  border:1px solid #d3deec;
+  color:#395a84;
+}
+
+.pub-search{
+  grid-template-columns:minmax(240px,1.15fr) repeat(4,minmax(120px,.62fr)) auto;
+  gap:10px;
+}
+
+.citation-export{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin:0 0 14px;
+}
+
+.pub-export-btn{
+  min-height:34px;
+  border:1px solid var(--tf-blue);
+  background:var(--tf-blue);
+  color:#fff;
+  border-radius:3px;
+  padding:6px 11px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.pub-export-btn:hover{
+  background:#fff;
+  color:var(--tf-blue);
+}
+
+.export-scope{
+  margin-left:4px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#4b5e77;
+  font-size:13px;
+}
+
+.export-scope input{
+  accent-color:var(--tf-blue);
+}
+
 .theme-btn,
 .pub-clear-btn,
 .project-link,
@@ -1574,15 +1639,13 @@ body{
 }
 
 .reveal-item{
-  opacity:0;
+  opacity:1;
   transform:translateY(18px);
   transition:
-    opacity .45s ease,
     transform .45s ease;
   transition-delay:var(--reveal-delay, 0ms);
 }
 .reveal-item.in-view{
-  opacity:1;
   transform:translateY(0);
 }
 
@@ -1640,10 +1703,32 @@ body{
   background:#223248;
 }
 
+:root[data-theme="dark"] .pub-export-btn{
+  background:#2c5f9d;
+  border-color:#2c5f9d;
+  color:#edf5ff;
+}
+
+:root[data-theme="dark"] .pub-export-btn:hover{
+  background:#142236;
+  color:#9bc1ff;
+  border-color:#47688f;
+}
+
+:root[data-theme="dark"] .export-scope{
+  color:#b4c3d8;
+}
+
 :root[data-theme="dark"] .keyword-tag{
   background:#1c2a3c;
   border-color:#30455f;
   color:#d2e4ff;
+}
+
+:root[data-theme="dark"] .publication-keyword{
+  background:#1d2c40;
+  border-color:#35516f;
+  color:#c8dcff;
 }
 
 :root[data-theme="dark"] .footer-link{
@@ -1675,6 +1760,7 @@ body{
   }
   .theme-btn,
   .pub-clear-btn,
+  .pub-export-btn,
   .project-link,
   .pub-link,
   .footer-signup{

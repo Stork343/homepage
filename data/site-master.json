@@ -1,0 +1,765 @@
+{
+  "updated": "2026-02-24",
+  "site": {
+    "base_url": "https://stork343.github.io/homepage/",
+    "owner": {
+      "name_zh": "侯健",
+      "name_en": "Hou Jian"
+    },
+    "affiliation": "School of Statistics, Renmin University of China",
+    "locale_primary": "zh_CN",
+    "locale_alternate": "en_US"
+  },
+  "publications": [
+    {
+      "id": "mallows-llm-ranking",
+      "year": 2025,
+      "title": {
+        "zh": "基于 Mallows 模型的大语言模型特征排序校准方法",
+        "en": "Feature Ranking Calibration for Large Language Models Based on the Mallows Model"
+      },
+      "authors": {
+        "zh": "侯健, 田茂再",
+        "en": "Hou Jian, Tian Maozai"
+      },
+      "venue": {
+        "zh": "统计研究",
+        "en": "Statistical Research"
+      },
+      "status": {
+        "zh": "状态：在投",
+        "en": "Status: Submitted"
+      },
+      "links": {
+        "pdf": null,
+        "code": null,
+        "doi": null,
+        "html": null,
+        "article": null
+      },
+      "image": {
+        "src": "./papers/2025/mallows-llm-ranking/fig_estimation_convergence.png",
+        "webp": "./papers/2025/mallows-llm-ranking/fig_estimation_convergence.webp",
+        "width": 1980,
+        "height": 1580,
+        "alt": {
+          "zh": "Mallows 模型估计收敛示意图",
+          "en": "Convergence plot for Mallows model estimation"
+        }
+      },
+      "citation": {
+        "zh": "侯健, 田茂再. 基于 Mallows 模型的大语言模型特征排序校准方法. 统计研究, 2025.",
+        "en": "Hou, J., & Tian, M. Feature Ranking Calibration for Large Language Models Based on the Mallows Model. Statistical Research, 2025."
+      },
+      "bibtex": "@article{hou2025mallows,\n  title={Feature Ranking Calibration for Large Language Models Based on the Mallows Model},\n  author={Hou, Jian and Tian, Maozai},\n  journal={Statistical Research},\n  year={2025},\n  note={Submitted}\n}",
+      "keywords": {
+        "zh": [
+          "Mallows 模型",
+          "大语言模型",
+          "特征排序",
+          "排序校准",
+          "统计学习"
+        ],
+        "en": [
+          "Mallows model",
+          "large language model",
+          "feature ranking",
+          "rank calibration",
+          "statistical learning"
+        ]
+      }
+    },
+    {
+      "id": "jpdi-mixed-qr",
+      "year": 2025,
+      "title": {
+        "zh": "高维混合效应分位回归的联合惩罚与去偏推断",
+        "en": "Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression"
+      },
+      "authors": "Hou Jian, Meng Tan, Tian Maozai",
+      "venue": {
+        "zh": "Statistica Sinica",
+        "en": "Statistica Sinica"
+      },
+      "status": {
+        "zh": "状态：准备投稿",
+        "en": "Status: In Preparation"
+      },
+      "links": {
+        "pdf": null,
+        "code": null,
+        "doi": null,
+        "html": null,
+        "article": null
+      },
+      "image": {
+        "src": "./papers/2025/jpdi-mixed-qr/dblqmm.png",
+        "webp": "./papers/2025/jpdi-mixed-qr/dblqmm.webp",
+        "width": 1024,
+        "height": 1024,
+        "alt": {
+          "zh": "高维混合效应分位回归方法示意图",
+          "en": "Method overview for high-dimensional mixed effects quantile regression"
+        }
+      },
+      "citation": {
+        "zh": "Hou Jian, Meng Tan, Tian Maozai. 高维混合效应分位回归的联合惩罚与去偏推断. Statistica Sinica, 2025.",
+        "en": "Hou, J., Tan, M., & Tian, M. Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression. Statistica Sinica, 2025."
+      },
+      "bibtex": "@article{hou2025jpdi,\n  title={Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Statistica Sinica},\n  year={2025},\n  note={In preparation}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "分位回归",
+          "混合效应",
+          "高维统计",
+          "去偏推断",
+          "惩罚估计"
+        ],
+        "en": [
+          "quantile regression",
+          "mixed effects",
+          "high-dimensional statistics",
+          "debiased inference",
+          "penalized estimation"
+        ]
+      }
+    },
+    {
+      "id": "svcqr",
+      "year": 2025,
+      "title": {
+        "zh": "Sparse-Smooth 空间变系数分位回归",
+        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
+      },
+      "authors": "Hou Jian, Meng Tan, Tian Maozai",
+      "venue": {
+        "zh": "arXiv 预印本；Spatial Statistics",
+        "en": "arXiv preprint; Spatial Statistics"
+      },
+      "status": {
+        "zh": "状态：一审修改",
+        "en": "Status: First Revision"
+      },
+      "links": {
+        "pdf": "./papers/2025/svcqr/svcqr.html",
+        "code": "https://github.com/Stork343/SS-SVCQR",
+        "doi": null,
+        "html": "https://arxiv.org/html/2511.18106v2",
+        "article": "https://arxiv.org/abs/2511.18106"
+      },
+      "image": {
+        "src": "./papers/2025/svcqr/log_price.png",
+        "webp": "./papers/2025/svcqr/log_price.webp",
+        "width": 1777,
+        "height": 867,
+        "alt": {
+          "zh": "SVCQR 模型对数房价空间效应图",
+          "en": "Spatial effect plot of log house prices under SVCQR"
+        }
+      },
+      "citation": {
+        "zh": "Hou Jian, Meng Tan, Tian Maozai. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025.",
+        "en": "Hou, J., Tan, M., & Tian, M. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025."
+      },
+      "bibtex": "@article{hou2025svcqr,\n  title={Sparse-Smooth Spatially Varying Coefficient Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2511.18106},\n  year={2025}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "空间统计",
+          "变系数模型",
+          "分位回归",
+          "稀疏平滑",
+          "房价建模"
+        ],
+        "en": [
+          "spatial statistics",
+          "varying coefficient model",
+          "quantile regression",
+          "sparse smooth",
+          "housing price"
+        ]
+      },
+      "paper_page": {
+        "path": "papers/2025/svcqr/svcqr.html",
+        "auto_toc": true,
+        "toc_heading": "Content",
+        "toc": [
+          {
+            "title": "1. Introduction",
+            "page": 4
+          },
+          {
+            "title": "2. Model",
+            "page": 6
+          },
+          {
+            "title": "3. Estimation and Algorithms",
+            "page": 8
+          },
+          {
+            "title": "4. Asymptotic Theory",
+            "page": 13
+          },
+          {
+            "title": "5. Simulation Study",
+            "page": 16
+          },
+          {
+            "title": "6. Real Data",
+            "page": 30
+          },
+          {
+            "title": "7. Discussion",
+            "page": 38
+          },
+          {
+            "title": "Appendix A. Proofs of Theorems",
+            "page": 40
+          },
+          {
+            "title": "References",
+            "page": 49
+          }
+        ],
+        "pdf_candidates": [
+          "svcqr.pdf",
+          "https://arxiv.org/pdf/2511.18106v2.pdf"
+        ]
+      }
+    },
+    {
+      "id": "hcqr",
+      "year": 2025,
+      "title": {
+        "zh": "带自适应 Lasso 的分层复合分位回归",
+        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
+      },
+      "authors": "Hou Jian, Meng Tan, Tian Maozai",
+      "venue": {
+        "zh": "Journal of Statistical Planning and Inference",
+        "en": "Journal of Statistical Planning and Inference"
+      },
+      "status": {
+        "zh": "状态：已接收",
+        "en": "Status: Accepted"
+      },
+      "links": {
+        "pdf": "./papers/2025/hcqr/hcqr.html",
+        "code": null,
+        "doi": null,
+        "html": null,
+        "article": "./papers/2025/hcqr/hcqr.html"
+      },
+      "image": {
+        "src": "./papers/2025/hcqr/data-line.png",
+        "webp": "./papers/2025/hcqr/data-line.webp",
+        "width": 3179,
+        "height": 3180,
+        "alt": {
+          "zh": "HCQR 方法性能对比图",
+          "en": "Performance comparison for HCQR"
+        }
+      },
+      "citation": {
+        "zh": "Hou Jian, Meng Tan, Tian Maozai. Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 2025.",
+        "en": "Hou, J., Tan, M., & Tian, M. Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 2025."
+      },
+      "bibtex": "@article{hou2025hcqr,\n  title={Hierarchical Composite Quantile Regression with Adaptive Lasso},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Journal of Statistical Planning and Inference},\n  year={2025},\n  note={Accepted}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "分层模型",
+          "复合分位回归",
+          "自适应 Lasso",
+          "鲁棒估计",
+          "变量选择"
+        ],
+        "en": [
+          "hierarchical model",
+          "composite quantile regression",
+          "adaptive lasso",
+          "robust estimation",
+          "variable selection"
+        ]
+      },
+      "paper_page": {
+        "path": "papers/2025/hcqr/hcqr.html",
+        "auto_toc": true,
+        "toc_heading": "Content",
+        "toc": [
+          {
+            "title": "1. Introduction",
+            "page": 3
+          },
+          {
+            "title": "2. Model and Methodology",
+            "page": 5
+          },
+          {
+            "title": "3. Estimation Method",
+            "page": 12
+          },
+          {
+            "title": "4. Simulation",
+            "page": 18
+          },
+          {
+            "title": "5. Real World Data",
+            "page": 23
+          },
+          {
+            "title": "6. Conclusion",
+            "page": 31
+          },
+          {
+            "title": "References",
+            "page": 41
+          }
+        ]
+      }
+    },
+    {
+      "id": "snqesa",
+      "year": 2025,
+      "title": {
+        "zh": "自标准化分位经验鞍点逼近",
+        "en": "Self-Normalized Quantile Empirical Saddlepoint Approximation"
+      },
+      "authors": "Hou Jian, Meng Tan, Tian Maozai",
+      "venue": {
+        "zh": "arXiv 预印本；Statistical Papers",
+        "en": "arXiv preprint; Statistical Papers"
+      },
+      "status": {
+        "zh": "状态：外审中",
+        "en": "Status: Under Review"
+      },
+      "links": {
+        "pdf": "https://arxiv.org/pdf/2510.24352",
+        "code": "https://github.com/Stork343/self-normalized-quantile-saddlepoint",
+        "doi": "https://doi.org/10.48550/arXiv.2510.24352",
+        "html": "https://arxiv.org/html/2510.24352v1",
+        "article": "https://arxiv.org/abs/2510.24352"
+      },
+      "image": {
+        "src": "./papers/2025/snqesa/spx_plots.png",
+        "webp": "./papers/2025/snqesa/spx_plots.webp",
+        "width": 2414,
+        "height": 1928,
+        "alt": {
+          "zh": "自标准化分位经验鞍点逼近结果图",
+          "en": "Result plots for self-normalized quantile empirical saddlepoint approximation"
+        }
+      },
+      "citation": {
+        "zh": "Hou Jian, Meng Tan, Tian Maozai. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025.",
+        "en": "Hou, J., Tan, M., & Tian, M. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025."
+      },
+      "bibtex": "@article{hou2025snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2510.24352},\n  year={2025}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "鞍点逼近",
+          "经验似然",
+          "分位统计",
+          "自标准化",
+          "渐近推断"
+        ],
+        "en": [
+          "saddlepoint approximation",
+          "empirical likelihood",
+          "quantile statistics",
+          "self-normalization",
+          "asymptotic inference"
+        ]
+      }
+    },
+    {
+      "id": "plgwqr",
+      "year": 2025,
+      "title": {
+        "zh": "部分线性地理加权分位回归模型",
+        "en": "Partially Linear Geographically Weighted Quantile Regression"
+      },
+      "authors": {
+        "zh": "侯健, 刘硕, 田茂再",
+        "en": "Hou Jian, Liu Shuo, Tian Maozai"
+      },
+      "venue": {
+        "zh": "应用数学学报",
+        "en": "Acta Mathematicae Applicatae Sinica"
+      },
+      "status": {
+        "zh": "状态：外审",
+        "en": "Status: External Review"
+      },
+      "links": {
+        "pdf": null,
+        "code": null,
+        "doi": null,
+        "html": null,
+        "article": null
+      },
+      "image": {
+        "src": "./papers/2025/plgwqr/plgwqr.png",
+        "webp": "./papers/2025/plgwqr/plgwqr.webp",
+        "width": 1942,
+        "height": 1812,
+        "alt": {
+          "zh": "部分线性地理加权分位回归效果图",
+          "en": "Effect plot for partially linear geographically weighted quantile regression"
+        }
+      },
+      "citation": {
+        "zh": "侯健, 刘硕, 田茂再. 部分线性地理加权分位回归模型. 应用数学学报, 2025.",
+        "en": "Hou, J., Liu, S., & Tian, M. Partially Linear Geographically Weighted Quantile Regression. Acta Mathematicae Applicatae Sinica, 2025."
+      },
+      "bibtex": "@article{hou2025plgwqr,\n  title={Partially Linear Geographically Weighted Quantile Regression},\n  author={Hou, Jian and Liu, Shuo and Tian, Maozai},\n  journal={Acta Mathematicae Applicatae Sinica},\n  year={2025},\n  note={Under external review}\n}",
+      "keywords": {
+        "zh": [
+          "地理加权回归",
+          "分位回归",
+          "部分线性模型",
+          "空间异质性",
+          "变量选择"
+        ],
+        "en": [
+          "geographically weighted regression",
+          "quantile regression",
+          "partially linear model",
+          "spatial heterogeneity",
+          "variable selection"
+        ]
+      }
+    },
+    {
+      "id": "poisson-rr",
+      "year": 2025,
+      "title": {
+        "zh": "泊松分布下基于鞍点逼近的相对风险置信区间构造",
+        "en": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation"
+      },
+      "authors": {
+        "zh": "侯健, 刘硕, 田茂再",
+        "en": "Hou Jian, Liu Shuo, Tian Maozai"
+      },
+      "venue": {
+        "zh": "统计与信息论坛. 2025, 40(08): 3-13",
+        "en": "Statistics and Information Forum, 2025, 40(08): 3-13"
+      },
+      "status": null,
+      "links": {
+        "pdf": "./papers/2025/poisson-rr/poisson-rr.html",
+        "code": "https://github.com/Stork343/saddlepoint-Poisson-RR",
+        "doi": "https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001",
+        "html": null,
+        "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS"
+      },
+      "image": {
+        "src": "./papers/2025/poisson-rr/poisson-rr.jpeg",
+        "webp": "./papers/2025/poisson-rr/poisson-rr.webp",
+        "width": 254,
+        "height": 198,
+        "alt": {
+          "zh": "泊松相对风险鞍点逼近论文图",
+          "en": "Illustration for Poisson relative risk saddlepoint paper"
+        }
+      },
+      "citation": {
+        "zh": "侯健, 刘硕, 田茂再. 泊松分布下基于鞍点逼近的相对风险置信区间构造. 统计与信息论坛, 2025, 40(08): 3-13.",
+        "en": "Hou, J., Liu, S., & Tian, M. Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation. Statistics and Information Forum, 2025, 40(08): 3-13."
+      },
+      "bibtex": "@article{hou2025poissonrr,\n  title={Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation},\n  author={Hou, Jian and Liu, Shuo and Tian, Maozai},\n  journal={Statistics and Information Forum},\n  volume={40},\n  number={8},\n  pages={3--13},\n  year={2025}\n}",
+      "keywords": {
+        "zh": [
+          "泊松分布",
+          "相对风险",
+          "置信区间",
+          "鞍点逼近",
+          "生物统计"
+        ],
+        "en": [
+          "poisson distribution",
+          "relative risk",
+          "confidence interval",
+          "saddlepoint approximation",
+          "biostatistics"
+        ]
+      },
+      "paper_page": {
+        "path": "papers/2025/poisson-rr/poisson-rr.html",
+        "auto_toc": false,
+        "toc_heading": "目录",
+        "toc": [
+          {
+            "title": "一、引言",
+            "page": 1
+          },
+          {
+            "title": "二、相对风险置信区间的传统构造",
+            "page": 2
+          },
+          {
+            "title": "三、基于鞍点逼近的置信区间方法",
+            "page": 4
+          },
+          {
+            "title": "四、模拟研究",
+            "page": 7
+          },
+          {
+            "title": "五、真实数据分析",
+            "page": 9
+          },
+          {
+            "title": "六、结论与展望",
+            "page": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "gtwr-housing",
+      "year": 2022,
+      "title": {
+        "zh": "基于异窗宽GTWR模型的商品住宅价格影响因素研究",
+        "en": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths"
+      },
+      "authors": {
+        "zh": "侯健, 王芝皓, 田茂再, 窦燕",
+        "en": "Hou Jian, Wang Zhihao, Tian Maozai, Dou Yan"
+      },
+      "venue": {
+        "zh": "数理统计与管理. 2022, 41(06): 1003-1014",
+        "en": "Journal of Applied Statistics and Management, 2022, 41(06): 1003-1014"
+      },
+      "status": null,
+      "links": {
+        "pdf": "./papers/2022/gtwr-housing/gtwr.html",
+        "code": null,
+        "doi": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
+        "html": null,
+        "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS"
+      },
+      "image": {
+        "src": "./papers/2022/gtwr-housing/mgtwr.png",
+        "webp": "./papers/2022/gtwr-housing/mgtwr.webp",
+        "width": 2630,
+        "height": 1972,
+        "alt": {
+          "zh": "异窗宽 GTWR 模型结果图",
+          "en": "Result plot for GTWR with heterogeneous bandwidths"
+        }
+      },
+      "citation": {
+        "zh": "侯健, 王芝皓, 田茂再, 窦燕. 基于异窗宽GTWR模型的商品住宅价格影响因素研究. 数理统计与管理, 2022, 41(06): 1003-1014.",
+        "en": "Hou, J., Wang, Z., Tian, M., & Dou, Y. Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths. Journal of Applied Statistics and Management, 2022, 41(06): 1003-1014."
+      },
+      "bibtex": "@article{hou2022gtwr,\n  title={Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths},\n  author={Hou, Jian and Wang, Zhihao and Tian, Maozai and Dou, Yan},\n  journal={Journal of Applied Statistics and Management},\n  volume={41},\n  number={6},\n  pages={1003--1014},\n  year={2022},\n  doi={10.13860/j.cnki.sltj.20210722-025}\n}",
+      "keywords": {
+        "zh": [
+          "GTWR",
+          "时空回归",
+          "商品住宅",
+          "房价影响因素",
+          "空间分析"
+        ],
+        "en": [
+          "GTWR",
+          "spatiotemporal regression",
+          "commercial housing",
+          "housing price factors",
+          "spatial analysis"
+        ]
+      },
+      "paper_page": {
+        "path": "papers/2022/gtwr-housing/gtwr.html",
+        "auto_toc": false,
+        "toc_heading": "目录",
+        "toc": [
+          {
+            "title": "一、引言",
+            "page": 1
+          },
+          {
+            "title": "二、研究方法",
+            "page": 2
+          },
+          {
+            "title": "三、标准差椭圆分类算法",
+            "page": 4
+          },
+          {
+            "title": "四、模拟实验",
+            "page": 7
+          },
+          {
+            "title": "五、实证分析",
+            "page": 9
+          },
+          {
+            "title": "六、结论",
+            "page": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "bgtwr-housing",
+      "year": 2022,
+      "title": {
+        "zh": "基于多尺度时空地理加权回归模型的房价影响因素分析",
+        "en": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression"
+      },
+      "authors": {
+        "zh": "景昊坤, 王合玲, 侯健",
+        "en": "Jing Haokun, Wang Heling, Hou Jian"
+      },
+      "venue": {
+        "zh": "统计与管理. 2022, 37(10): 101-107",
+        "en": "Statistics and Management, 2022, 37(10): 101-107"
+      },
+      "status": null,
+      "links": {
+        "pdf": "./papers/2022/bgtwr-housing/bgtwr.html",
+        "code": null,
+        "doi": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
+        "html": null,
+        "article": "https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS"
+      },
+      "image": {
+        "src": "./papers/2022/bgtwr-housing/bgtwr.png",
+        "webp": "./papers/2022/bgtwr-housing/bgtwr.webp",
+        "width": 1332,
+        "height": 940,
+        "alt": {
+          "zh": "多尺度时空地理加权回归结果图",
+          "en": "Result plot for multiscale spatiotemporal geographically weighted regression"
+        }
+      },
+      "citation": {
+        "zh": "景昊坤, 王合玲, 侯健. 基于多尺度时空地理加权回归模型的房价影响因素分析. 统计与管理, 2022, 37(10): 101-107.",
+        "en": "Jing, H., Wang, H., & Hou, J. Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression. Statistics and Management, 2022, 37(10): 101-107."
+      },
+      "bibtex": "@article{jing2022bgtwr,\n  title={Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression},\n  author={Jing, Haokun and Wang, Heling and Hou, Jian},\n  journal={Statistics and Management},\n  volume={37},\n  number={10},\n  pages={101--107},\n  year={2022},\n  doi={10.16722/j.issn.1674-537x.2022.10.001}\n}",
+      "keywords": {
+        "zh": [
+          "多尺度回归",
+          "时空地理加权回归",
+          "房价分析",
+          "空间模型",
+          "房地产统计"
+        ],
+        "en": [
+          "multiscale regression",
+          "spatiotemporal geographically weighted regression",
+          "housing price analysis",
+          "spatial model",
+          "real estate statistics"
+        ]
+      },
+      "paper_page": {
+        "path": "papers/2022/bgtwr-housing/bgtwr.html",
+        "auto_toc": false,
+        "toc_heading": "目录",
+        "toc": [
+          {
+            "title": "一、引言",
+            "page": 1
+          },
+          {
+            "title": "二、理论基础",
+            "page": 2
+          },
+          {
+            "title": "三、实证分析",
+            "page": 4
+          },
+          {
+            "title": "四、结论",
+            "page": 7
+          }
+        ]
+      }
+    },
+    {
+      "id": "mgtwr-variable-selection",
+      "year": 2021,
+      "title": {
+        "zh": "基于变量选择的混合时空地理加权回归参数估计",
+        "en": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection"
+      },
+      "authors": {
+        "zh": "侯健, 田茂再",
+        "en": "Hou Jian, Tian Maozai"
+      },
+      "venue": {
+        "zh": "数学的实践与认识. 2021, 51(07): 110-118",
+        "en": "Mathematics in Practice and Theory, 2021, 51(07): 110-118"
+      },
+      "status": null,
+      "links": {
+        "pdf": "./papers/2021/mgtwr-variable-selection/mgtwr.html",
+        "code": null,
+        "doi": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT",
+        "html": null,
+        "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS"
+      },
+      "image": {
+        "src": "./papers/2021/mgtwr-variable-selection/gtwr.png",
+        "webp": "./papers/2021/mgtwr-variable-selection/gtwr.webp",
+        "width": 1024,
+        "height": 1024,
+        "alt": {
+          "zh": "混合时空地理加权回归结果图",
+          "en": "Result plot for mixed geographically and temporally weighted regression"
+        }
+      },
+      "citation": {
+        "zh": "侯健, 田茂再. 基于变量选择的混合时空地理加权回归参数估计. 数学的实践与认识, 2021, 51(07): 110-118.",
+        "en": "Hou, J., & Tian, M. Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection. Mathematics in Practice and Theory, 2021, 51(07): 110-118."
+      },
+      "bibtex": "@article{hou2021mgtwr,\n  title={Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection},\n  author={Hou, Jian and Tian, Maozai},\n  journal={Mathematics in Practice and Theory},\n  volume={51},\n  number={7},\n  pages={110--118},\n  year={2021}\n}",
+      "keywords": {
+        "zh": [
+          "混合 GTWR",
+          "变量选择",
+          "参数估计",
+          "时空建模",
+          "统计推断"
+        ],
+        "en": [
+          "mixed GTWR",
+          "variable selection",
+          "parameter estimation",
+          "spatiotemporal modeling",
+          "statistical inference"
+        ]
+      },
+      "paper_page": {
+        "path": "papers/2021/mgtwr-variable-selection/mgtwr.html",
+        "auto_toc": false,
+        "toc_heading": "目录",
+        "toc": [
+          {
+            "title": "一、引言",
+            "page": 1
+          },
+          {
+            "title": "二、理论方法",
+            "page": 2
+          },
+          {
+            "title": "三、实证分析",
+            "page": 4
+          },
+          {
+            "title": "四、结论",
+            "page": 7
+          }
+        ]
+      }
+    }
+  ]
+}
