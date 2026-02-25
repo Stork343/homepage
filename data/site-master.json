@@ -343,13 +343,13 @@
         "article": "https://arxiv.org/abs/2510.24352"
       },
       "image": {
-        "src": "./papers/2025/snqesa/spx_plots.png",
-        "webp": "./papers/2025/snqesa/spx_plots.webp",
-        "width": 2414,
-        "height": 1928,
+        "src": "./papers/2025/snqesa/statistical-papers-cover-2019.jpg",
+        "webp": "./papers/2025/snqesa/statistical-papers-cover-2019.webp",
+        "width": 960,
+        "height": 1468,
         "alt": {
-          "zh": "自标准化分位经验鞍点逼近结果图",
-          "en": "Result plots for self-normalized quantile empirical saddlepoint approximation"
+          "zh": "Statistical Papers 期刊封面（Volume 60, Number 6, October 2019）",
+          "en": "Statistical Papers journal cover (Volume 60, Number 6, October 2019)"
         }
       },
       "citation": {
