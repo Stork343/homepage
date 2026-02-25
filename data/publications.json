@@ -460,13 +460,13 @@
       "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS"
     },
     "image": {
-      "src": "./papers/2022/gtwr-housing/mgtwr.png",
-      "webp": "./papers/2022/gtwr-housing/mgtwr.webp",
-      "width": 2630,
-      "height": 1972,
+      "src": "./papers/2022/gtwr-housing/sltj.jpg",
+      "webp": "./papers/2022/gtwr-housing/sltj.webp",
+      "width": 294,
+      "height": 392,
       "alt": {
-        "zh": "异窗宽 GTWR 模型结果图",
-        "en": "Result plot for GTWR with heterogeneous bandwidths"
+        "zh": "数理统计与管理期刊封面",
+        "en": "Journal of Applied Statistics and Management cover"
       }
     },
     "citation": {
