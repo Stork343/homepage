@@ -399,13 +399,13 @@
       "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS"
     },
     "image": {
-      "src": "./papers/2025/poisson-rr/poisson-rr.jpeg",
-      "webp": "./papers/2025/poisson-rr/poisson-rr.webp",
-      "width": 254,
-      "height": 198,
+      "src": "./papers/2025/poisson-rr/tjlt202602.jpg",
+      "webp": "./papers/2025/poisson-rr/tjlt202602.webp",
+      "width": 277,
+      "height": 392,
       "alt": {
-        "zh": "泊松相对风险鞍点逼近论文图",
-        "en": "Illustration for Poisson relative risk saddlepoint paper"
+        "zh": "统计与信息论坛封面（2026年第2期）",
+        "en": "Statistics and Information Forum cover (Issue 2, 2026)"
       }
     },
     "citation": {
