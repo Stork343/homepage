@@ -25,7 +25,7 @@
         "housing price"
       ],
       "canonical": "https://stork343.github.io/homepage/papers/2025/svcqr/svcqr.html",
-      "og_image": "https://stork343.github.io/homepage/papers/2025/svcqr/log_price.webp",
+      "og_image": "https://stork343.github.io/homepage/papers/2025/svcqr/spatial-statistics-cover.webp",
       "scholarly_article": {
         "@context": "https://schema.org",
         "@type": "ScholarlyArticle",
@@ -52,7 +52,7 @@
           "name": "arXiv preprint; Spatial Statistics"
         },
         "url": "https://stork343.github.io/homepage/papers/2025/svcqr/svcqr.html",
-        "image": "https://stork343.github.io/homepage/papers/2025/svcqr/log_price.webp",
+        "image": "https://stork343.github.io/homepage/papers/2025/svcqr/spatial-statistics-cover.webp",
         "sameAs": [
           "https://arxiv.org/abs/2511.18106"
         ]
