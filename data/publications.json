@@ -87,13 +87,13 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2025/jpdi-mixed-qr/dblqmm.png",
-      "webp": "./papers/2025/jpdi-mixed-qr/dblqmm.webp",
-      "width": 1024,
-      "height": 1024,
+      "src": "./papers/2025/jpdi-mixed-qr/statistica-sinica-cover-v18n4.png",
+      "webp": "./papers/2025/jpdi-mixed-qr/statistica-sinica-cover-v18n4.webp",
+      "width": 1500,
+      "height": 960,
       "alt": {
-        "zh": "高维混合效应分位回归方法示意图",
-        "en": "Method overview for high-dimensional mixed effects quantile regression"
+        "zh": "Statistica Sinica 期刊封面（Volume 18, Number 4）",
+        "en": "Statistica Sinica journal cover (Volume 18, Number 4)"
       }
     },
     "citation": {
