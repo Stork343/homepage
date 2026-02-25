@@ -749,6 +749,18 @@
     if (pub && pub.id) {
       card.id = `publication-${pub.id}`;
     }
+    const imageWidth = Number(pub && pub.image && pub.image.width);
+    const imageHeight = Number(pub && pub.image && pub.image.height);
+    if (Number.isFinite(imageWidth) && Number.isFinite(imageHeight) && imageWidth > 0 && imageHeight > 0) {
+      const aspect = imageWidth / imageHeight;
+      if (Number.isFinite(aspect) && aspect > 0) {
+        const normalizedAspect = Math.round(aspect * 10000) / 10000;
+        card.style.setProperty("--pub-thumb-aspect", String(normalizedAspect));
+        if (aspect < 1) {
+          card.classList.add("has-portrait-thumb");
+        }
+      }
+    }
 
     const title = document.createElement("h3");
     title.className = "publication-title";
