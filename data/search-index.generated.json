@@ -127,7 +127,7 @@
     },
     {
       "id": "hcqr",
-      "year": 2025,
+      "year": 2026,
       "title": {
         "zh": "带自适应 Lasso 的分层复合分位回归",
         "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
@@ -141,8 +141,8 @@
         "en": "Journal of Statistical Planning and Inference"
       },
       "status": {
-        "zh": "状态：已接收",
-        "en": "Status: Accepted"
+        "zh": "状态：已在线发表",
+        "en": "Status: Available online"
       },
       "keywords": {
         "zh": [
@@ -161,7 +161,7 @@
         ]
       },
       "links": {
-        "article": "./papers/2025/hcqr/hcqr.html",
+        "article": "https://www.sciencedirect.com/science/article/abs/pii/S0378375826000182",
         "pdf": "./papers/2025/hcqr/hcqr.html"
       },
       "paper_path": "papers/2025/hcqr/hcqr.html"
