@@ -629,13 +629,13 @@
         "article": "https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS"
       },
       "image": {
-        "src": "./papers/2022/bgtwr-housing/bgtwr.png",
-        "webp": "./papers/2022/bgtwr-housing/bgtwr.webp",
-        "width": 1332,
-        "height": 940,
+        "src": "./papers/2022/bgtwr-housing/tngl202602.jpg",
+        "webp": "./papers/2022/bgtwr-housing/tngl202602.webp",
+        "width": 288,
+        "height": 392,
         "alt": {
-          "zh": "多尺度时空地理加权回归结果图",
-          "en": "Result plot for multiscale spatiotemporal geographically weighted regression"
+          "zh": "统计与管理期刊封面（2026年第2期）",
+          "en": "Statistics and Management cover (Issue 2, 2026)"
         }
       },
       "citation": {
