@@ -338,13 +338,13 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2025/plgwqr/plgwqr.png",
-      "webp": "./papers/2025/plgwqr/plgwqr.webp",
-      "width": 1942,
-      "height": 1812,
+      "src": "./papers/2025/plgwqr/acta-math-app-cover-2026.jpg",
+      "webp": "./papers/2025/plgwqr/acta-math-app-cover-2026.webp",
+      "width": 800,
+      "height": 1134,
       "alt": {
-        "zh": "部分线性地理加权分位回归效果图",
-        "en": "Effect plot for partially linear geographically weighted quantile regression"
+        "zh": "应用数学学报封面（2026年第49卷第1期）",
+        "en": "Acta Mathematicae Applicatae Sinica cover (Vol. 49, No. 1, 2026)"
       }
     },
     "citation": {
