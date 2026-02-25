@@ -189,7 +189,7 @@
   },
   {
     "id": "hcqr",
-    "year": 2025,
+    "year": 2026,
     "title": {
       "zh": "带自适应 Lasso 的分层复合分位回归",
       "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
@@ -200,15 +200,15 @@
       "en": "Journal of Statistical Planning and Inference"
     },
     "status": {
-      "zh": "状态：已接收",
-      "en": "Status: Accepted"
+      "zh": "状态：已在线发表",
+      "en": "Status: Available online"
     },
     "links": {
       "pdf": "./papers/2025/hcqr/hcqr.html",
       "code": null,
-      "doi": null,
+      "doi": "https://doi.org/10.1016/j.jspi.2026.106390",
       "html": null,
-      "article": "./papers/2025/hcqr/hcqr.html"
+      "article": "https://www.sciencedirect.com/science/article/abs/pii/S0378375826000182"
     },
     "image": {
       "src": "./papers/2025/hcqr/data-line.png",
@@ -221,10 +221,10 @@
       }
     },
     "citation": {
-      "zh": "Hou Jian, Meng Tan, Tian Maozai. Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 2025.",
-      "en": "Hou, J., Tan, M., & Tian, M. Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 2025."
+      "zh": "Hou Jian, Meng Tan, Tian Maozai. Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 2026, 106390. https://doi.org/10.1016/j.jspi.2026.106390.",
+      "en": "Hou, J., Tan, M., & Tian, M. (2026). Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 106390. https://doi.org/10.1016/j.jspi.2026.106390."
     },
-    "bibtex": "@article{hou2025hcqr,\n  title={Hierarchical Composite Quantile Regression with Adaptive Lasso},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Journal of Statistical Planning and Inference},\n  year={2025},\n  note={Accepted}\n}",
+    "bibtex": "@article{hou2026hcqr,\n  title={Hierarchical Composite Quantile Regression with Adaptive Lasso},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Journal of Statistical Planning and Inference},\n  year={2026},\n  pages={106390},\n  doi={10.1016/j.jspi.2026.106390},\n  note={Available online}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
