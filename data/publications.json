@@ -149,13 +149,13 @@
       "article": "https://arxiv.org/abs/2511.18106"
     },
     "image": {
-      "src": "./papers/2025/svcqr/log_price.png",
-      "webp": "./papers/2025/svcqr/log_price.webp",
-      "width": 1777,
-      "height": 867,
+      "src": "./papers/2025/svcqr/spatial-statistics-cover.jpg",
+      "webp": "./papers/2025/svcqr/spatial-statistics-cover.webp",
+      "width": 528,
+      "height": 768,
       "alt": {
-        "zh": "SVCQR 模型对数房价空间效应图",
-        "en": "Spatial effect plot of log house prices under SVCQR"
+        "zh": "Spatial Statistics 期刊封面",
+        "en": "Spatial Statistics journal cover"
       }
     },
     "citation": {
