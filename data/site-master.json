@@ -254,11 +254,11 @@
       "image": {
         "src": "./papers/2025/hcqr/data-line.png",
         "webp": "./papers/2025/hcqr/data-line.webp",
-        "width": 3179,
-        "height": 3180,
+        "width": 563,
+        "height": 768,
         "alt": {
-          "zh": "HCQR 方法性能对比图",
-          "en": "Performance comparison for HCQR"
+          "zh": "Journal of Statistical Planning and Inference 期刊封面（Volume 243, July 2026）",
+          "en": "Journal of Statistical Planning and Inference cover (Volume 243, July 2026)"
         }
       },
       "citation": {
