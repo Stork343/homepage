@@ -93,13 +93,13 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2025/jpdi-mixed-qr/statistica-sinica-cover-v18n4.png",
-        "webp": "./papers/2025/jpdi-mixed-qr/statistica-sinica-cover-v18n4.webp",
-        "width": 1500,
-        "height": 960,
+        "src": "./papers/2025/jpdi-mixed-qr/Sinica.jpg",
+        "webp": "./papers/2025/jpdi-mixed-qr/Sinica.webp",
+        "width": 187,
+        "height": 269,
         "alt": {
-          "zh": "Statistica Sinica 期刊封面（Volume 18, Number 4）",
-          "en": "Statistica Sinica journal cover (Volume 18, Number 4)"
+          "zh": "Statistica Sinica 封面缩略图",
+          "en": "Statistica Sinica cover thumbnail"
         }
       },
       "citation": {
