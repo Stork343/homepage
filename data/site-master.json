@@ -707,13 +707,13 @@
         "article": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS"
       },
       "image": {
-        "src": "./papers/2021/mgtwr-variable-selection/gtwr.png",
-        "webp": "./papers/2021/mgtwr-variable-selection/gtwr.webp",
-        "width": 1024,
-        "height": 1024,
+        "src": "./papers/2021/mgtwr-variable-selection/mgtwr.jpg",
+        "webp": "./papers/2021/mgtwr-variable-selection/mgtwr.webp",
+        "width": 701,
+        "height": 981,
         "alt": {
-          "zh": "混合时空地理加权回归结果图",
-          "en": "Result plot for mixed geographically and temporally weighted regression"
+          "zh": "数学的实践与认识封面（2024年第54卷第1期）",
+          "en": "Mathematics in Practice and Theory cover (Vol. 54, No. 1, 2024)"
         }
       },
       "citation": {
