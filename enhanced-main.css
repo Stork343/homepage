@@ -992,14 +992,14 @@ body{
   object-position:center;
 }
 .publication-card.has-thumb.has-portrait-thumb{
-  --pub-thumb-width:248px;
-  padding-right:calc(var(--pub-thumb-width) + 34px);
-  min-height:max(248px, calc((var(--pub-thumb-width) / var(--pub-thumb-aspect)) + 48px));
+  --pub-thumb-width:176px;
+  padding-right:calc(var(--pub-thumb-width) + 30px);
+  min-height:max(172px, calc((var(--pub-thumb-width) / var(--pub-thumb-aspect)) + 22px));
 }
 .publication-card.has-thumb.has-portrait-thumb .pub-media{
-  top:24px;
-  transform:none;
-  height:calc(var(--pub-thumb-width) / var(--pub-thumb-aspect));
+  top:50%;
+  transform:translateY(-50%);
+  height:min(260px, calc(var(--pub-thumb-width) / var(--pub-thumb-aspect)));
 }
 .publication-card.has-thumb.has-portrait-thumb .pub-media img{
   object-fit:contain;
