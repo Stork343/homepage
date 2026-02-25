@@ -38,13 +38,13 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2025/mallows-llm-ranking/fig_estimation_convergence.png",
-        "webp": "./papers/2025/mallows-llm-ranking/fig_estimation_convergence.webp",
-        "width": 1980,
-        "height": 1580,
+        "src": "./papers/2025/mallows-llm-ranking/statistical-research-cover-2026.png",
+        "webp": "./papers/2025/mallows-llm-ranking/statistical-research-cover-2026.webp",
+        "width": 288,
+        "height": 392,
         "alt": {
-          "zh": "Mallows 模型估计收敛示意图",
-          "en": "Convergence plot for Mallows model estimation"
+          "zh": "统计研究 2026 年第 1 期封面",
+          "en": "Statistical Research cover (Issue 1, 2026)"
         }
       },
       "citation": {
