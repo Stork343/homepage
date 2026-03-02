@@ -206,6 +206,11 @@
   const SORTED_LINK_KEYS = ["pdf", "code", "doi", "html"];
   const COAUTHOR_ORCID_URL = "https://orcid.org/0000-0002-6100-7105";
   const SELF_AUTHOR_ALIASES = new Set(["侯健", "hou jian", "houjian", "jian hou"]);
+  const AUTHOR_LINK_OVERRIDES = new Map([
+    ["田茂再", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
+    ["tianmaozai", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
+    ["maozaitian", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"]
+  ]);
   const REVEAL_SELECTOR = [
     ".research-item",
     ".publication-card",
@@ -428,6 +433,14 @@
 
   function isSelfAuthorName(name) {
     return SELF_AUTHOR_ALIASES.has(normalizeAuthorIdentity(name));
+  }
+
+  function getAuthorProfileLink(name) {
+    const normalized = normalizeAuthorIdentity(name);
+    if (!normalized || isSelfAuthorName(name)) {
+      return "";
+    }
+    return AUTHOR_LINK_OVERRIDES.get(normalized) || COAUTHOR_ORCID_URL;
   }
 
   function localizedText(value, lang) {
@@ -933,9 +946,14 @@
         container.appendChild(document.createTextNode(name));
         return;
       }
+      const linkUrl = getAuthorProfileLink(name);
+      if (!linkUrl) {
+        container.appendChild(document.createTextNode(name));
+        return;
+      }
       const link = document.createElement("a");
       link.className = "publication-author-link";
-      link.href = COAUTHOR_ORCID_URL;
+      link.href = linkUrl;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.textContent = name;
