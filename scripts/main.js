@@ -924,7 +924,7 @@
       return;
     }
 
-    const separator = pubLang === "zh" ? "， " : ", ";
+    const separator = ", ";
     names.forEach((name, index) => {
       if (index > 0) {
         container.appendChild(document.createTextNode(separator));
