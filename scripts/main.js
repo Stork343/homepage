@@ -209,7 +209,10 @@
   const AUTHOR_LINK_OVERRIDES = new Map([
     ["田茂再", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
     ["tianmaozai", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
-    ["maozaitian", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"]
+    ["maozaitian", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
+    ["孟坦", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
+    ["mengtan", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
+    ["tanmeng", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"]
   ]);
   const REVEAL_SELECTOR = [
     ".research-item",
