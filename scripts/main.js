@@ -204,15 +204,23 @@
   };
 
   const SORTED_LINK_KEYS = ["pdf", "code", "doi", "html"];
-  const COAUTHOR_ORCID_URL = "https://orcid.org/0000-0002-6100-7105";
   const SELF_AUTHOR_ALIASES = new Set(["侯健", "hou jian", "houjian", "jian hou"]);
   const AUTHOR_LINK_OVERRIDES = new Map([
+    ["张丽平", "https://orcid.org/0000-0002-6100-7105"],
+    ["zhangliping", "https://orcid.org/0000-0002-6100-7105"],
+    ["lipingzhang", "https://orcid.org/0000-0002-6100-7105"],
     ["田茂再", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
     ["tianmaozai", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
     ["maozaitian", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
     ["孟坦", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
     ["mengtan", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
-    ["tanmeng", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"]
+    ["tanmeng", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
+    ["刘硕", "https://orcid.org/0000-0002-1183-2238"],
+    ["liushuo", "https://orcid.org/0000-0002-1183-2238"],
+    ["shuoliu", "https://orcid.org/0000-0002-1183-2238"],
+    ["王芝皓", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+    ["wangzhihao", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+    ["zhihaowang", "https://www.researchgate.net/profile/Zhihao-Wang-14"]
   ]);
   const REVEAL_SELECTOR = [
     ".research-item",
@@ -443,7 +451,7 @@
     if (!normalized || isSelfAuthorName(name)) {
       return "";
     }
-    return AUTHOR_LINK_OVERRIDES.get(normalized) || COAUTHOR_ORCID_URL;
+    return AUTHOR_LINK_OVERRIDES.get(normalized) || "";
   }
 
   function localizedText(value, lang) {
