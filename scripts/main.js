@@ -803,12 +803,14 @@
     const title = document.createElement("h3");
     title.className = "publication-title";
 
-    const articleLink = pub.links && pub.links.article ? pub.links.article : null;
-    if (articleLink) {
+    const titleLink = pub && pub.links
+      ? pub.links.article || pub.links.html || pub.links.pdf || null
+      : null;
+    if (titleLink) {
       const a = document.createElement("a");
-      a.href = articleLink;
+      a.href = titleLink;
       a.textContent = localizedText(pub.title, pubLang);
-      if (articleLink.startsWith("http")) {
+      if (titleLink.startsWith("http")) {
         a.target = "_blank";
         a.rel = "noopener";
       }
