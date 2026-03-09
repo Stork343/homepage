@@ -1473,6 +1473,10 @@
       if (nextPageBtn) {
         nextPageBtn.disabled = current >= total;
       }
+      if (topbarEl) {
+        const safeProgress = total > 0 ? Math.max(0, Math.min(1, current / total)) : 0;
+        topbarEl.style.setProperty("--reader-progress", String(safeProgress));
+      }
       syncTocState(current, total);
     }
 
