@@ -83,7 +83,7 @@
       "position": 4,
       "item": {
         "@type": "ScholarlyArticle",
-        "name": "Hierarchical Composite Quantile Regression with Adaptive Lasso",
+        "name": "Hierarchical composite quantile regression with adaptive Lasso",
         "author": [
           {
             "@type": "Person",
@@ -100,7 +100,7 @@
         ],
         "datePublished": "2026",
         "isPartOf": "Journal of Statistical Planning and Inference",
-        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378375826000182",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0378375826000182",
         "identifier": "https://doi.org/10.1016/j.jspi.2026.106390"
       }
     },

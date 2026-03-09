@@ -1,6 +1,6 @@
 {
-  "updated": "2026-02-24",
-  "generated_at": "2026-02-24T00:00:00.000Z",
+  "updated": "2026-03-09",
+  "generated_at": "2026-03-09T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -130,7 +130,7 @@
       "year": 2026,
       "title": {
         "zh": "带自适应 Lasso 的分层复合分位回归",
-        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
+        "en": "Hierarchical composite quantile regression with adaptive Lasso"
       },
       "authors": {
         "zh": "Hou Jian, Meng Tan, Tian Maozai",
@@ -141,8 +141,8 @@
         "en": "Journal of Statistical Planning and Inference"
       },
       "status": {
-        "zh": "状态：已在线发表",
-        "en": "Status: Available online"
+        "zh": "状态：正式刊出",
+        "en": "Status: Published"
       },
       "keywords": {
         "zh": [
@@ -161,7 +161,7 @@
         ]
       },
       "links": {
-        "article": "https://www.sciencedirect.com/science/article/abs/pii/S0378375826000182",
+        "article": "https://www.sciencedirect.com/science/article/pii/S0378375826000182",
         "pdf": "./papers/2025/hcqr/hcqr.html"
       },
       "paper_path": "papers/2025/hcqr/hcqr.html"

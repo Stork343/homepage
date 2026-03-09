@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-24",
+  "updated": "2026-03-09",
   "site": {
     "base_url": "https://stork343.github.io/homepage/",
     "owner": {
@@ -233,7 +233,7 @@
       "year": 2026,
       "title": {
         "zh": "带自适应 Lasso 的分层复合分位回归",
-        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
+        "en": "Hierarchical composite quantile regression with adaptive Lasso"
       },
       "authors": "Hou Jian, Meng Tan, Tian Maozai",
       "venue": {
@@ -241,15 +241,15 @@
         "en": "Journal of Statistical Planning and Inference"
       },
       "status": {
-        "zh": "状态：已在线发表",
-        "en": "Status: Available online"
+        "zh": "状态：正式刊出",
+        "en": "Status: Published"
       },
       "links": {
         "pdf": "./papers/2025/hcqr/hcqr.html",
         "code": null,
         "doi": "https://doi.org/10.1016/j.jspi.2026.106390",
-        "html": null,
-        "article": "https://www.sciencedirect.com/science/article/abs/pii/S0378375826000182"
+        "html": "https://www.sciencedirect.com/science/article/pii/S0378375826000182",
+        "article": "https://www.sciencedirect.com/science/article/pii/S0378375826000182"
       },
       "image": {
         "src": "./papers/2025/hcqr/hcqr-cover-2026.png",
@@ -257,15 +257,24 @@
         "width": 563,
         "height": 768,
         "alt": {
-          "zh": "Journal of Statistical Planning and Inference 期刊封面（Volume 243, July 2026）",
-          "en": "Journal of Statistical Planning and Inference cover (Volume 243, July 2026)"
+          "zh": "Journal of Statistical Planning and Inference 期刊封面",
+          "en": "Journal of Statistical Planning and Inference cover"
         }
       },
       "citation": {
-        "zh": "Hou Jian, Meng Tan, Tian Maozai. Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 2026, 106390. https://doi.org/10.1016/j.jspi.2026.106390.",
-        "en": "Hou, J., Tan, M., & Tian, M. (2026). Hierarchical Composite Quantile Regression with Adaptive Lasso. Journal of Statistical Planning and Inference, 106390. https://doi.org/10.1016/j.jspi.2026.106390."
+        "zh": "Hou Jian, Meng Tan, Tian Maozai. Hierarchical composite quantile regression with adaptive Lasso. Journal of Statistical Planning and Inference, 245, 106390. https://doi.org/10.1016/j.jspi.2026.106390.",
+        "en": "Hou, J., Tan, M., & Tian, M. (2026). Hierarchical composite quantile regression with adaptive Lasso. Journal of Statistical Planning and Inference, 245, 106390. https://doi.org/10.1016/j.jspi.2026.106390."
       },
-      "bibtex": "@article{hou2026hcqr,\n  title={Hierarchical Composite Quantile Regression with Adaptive Lasso},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Journal of Statistical Planning and Inference},\n  year={2026},\n  pages={106390},\n  doi={10.1016/j.jspi.2026.106390},\n  note={Available online}\n}",
+      "bibtex": "@article{hou2026hcqr,\n  title={Hierarchical composite quantile regression with adaptive {L}asso},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Journal of Statistical Planning and Inference},\n  volume={245},\n  year={2026},\n  pages={106390},\n  doi={10.1016/j.jspi.2026.106390}\n}",
+      "publication_info": {
+        "display": {
+          "zh": "Volume 245, December 2026, 106390",
+          "en": "Volume 245, December 2026, 106390"
+        },
+        "date_published": "2026-12",
+        "volume": "245",
+        "article_number": "106390"
+      },
       "force_english_display": true,
       "keywords": {
         "zh": [

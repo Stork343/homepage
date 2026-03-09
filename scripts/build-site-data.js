@@ -288,13 +288,23 @@ function buildPaperSeo(master, publications) {
     const venueEn = localizedText(pub.venue, "en");
     const venueZh = localizedText(pub.venue, "zh");
     const authorsEn = localizedText(pub.authors, "en");
+    const publicationInfo =
+      pub && pub.publication_info && typeof pub.publication_info === "object"
+        ? pub.publication_info
+        : null;
+    const publicationDisplayZh = localizedText(publicationInfo && publicationInfo.display, "zh");
+    const publicationDisplayEn = localizedText(publicationInfo && publicationInfo.display, "en");
+    const publicationSummaryZh = [venueZh || venueEn, publicationDisplayZh || String(pub.year || "")]
+      .filter(Boolean)
+      .join(", ");
+    const publicationSummaryEn = [venueEn || venueZh, publicationDisplayEn || String(pub.year || "")]
+      .filter(Boolean)
+      .join(", ");
     const descriptionZh = sanitizeForDescription(
-      `${titleZh || titleEn}. 作者: ${localizedText(pub.authors, "zh") || authorsEn}. ${venueZh || venueEn}, ${pub.year}.`
+      `${titleZh || titleEn}. 作者: ${localizedText(pub.authors, "zh") || authorsEn}. ${publicationSummaryZh}.`
     );
     const descriptionEn = sanitizeForDescription(
-      `${titleEn || titleZh}. Authors: ${authorsEn || localizedText(pub.authors, "zh")}. ${venueEn || venueZh}, ${
-        pub.year
-      }.`
+      `${titleEn || titleZh}. Authors: ${authorsEn || localizedText(pub.authors, "zh")}. ${publicationSummaryEn}.`
     );
     const keywordList = uniqueStringList([
       ...uniqueStringList(pub && pub.keywords && pub.keywords.zh),
@@ -312,13 +322,16 @@ function buildPaperSeo(master, publications) {
         ? articleRaw
         : `${baseUrl}${normalizeRelPath(articleRaw)}`
       : "";
+    const datePublished = String((publicationInfo && publicationInfo.date_published) || pub.year || "");
+    const volumeNumber = String((publicationInfo && publicationInfo.volume) || "").trim();
+    const articleNumber = String((publicationInfo && publicationInfo.article_number) || "").trim();
     const scholarlyArticle = {
       "@context": "https://schema.org",
       "@type": "ScholarlyArticle",
       name: titleEn || titleZh,
       headline: titleEn || titleZh,
       inLanguage: "en",
-      datePublished: String(pub.year || ""),
+      datePublished,
       author: String(authorsEn || localizedText(pub.authors, "zh"))
         .split(",")
         .map((name) => String(name || "").trim())
@@ -331,6 +344,12 @@ function buildPaperSeo(master, publications) {
       url: canonical,
       image: ogImage
     };
+    if (volumeNumber) {
+      scholarlyArticle.isPartOf.volumeNumber = volumeNumber;
+    }
+    if (articleNumber) {
+      scholarlyArticle.pagination = articleNumber;
+    }
     if (doiLink) {
       scholarlyArticle.identifier = doiLink;
       scholarlyArticle.sameAs = uniqueStringList([doiLink, articleUrl]).filter(Boolean);
