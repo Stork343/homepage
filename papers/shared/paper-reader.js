@@ -237,9 +237,6 @@
             <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Print PDF" type="button" aria-label="Print PDF">
               <span class="btn-icon">${iconMarkup.print}</span>
             </button>
-            <a class="btn btn-ghost tf-icon-btn tf-download-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
-              <span class="btn-icon">${iconMarkup.download}</span>
-            </a>
           </div>
         `;
       }
