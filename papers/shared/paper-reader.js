@@ -1463,6 +1463,8 @@
       if (pageNumberInput) {
         pageNumberInput.value = String(current);
         pageNumberInput.max = String(total);
+        const pageDigits = Math.max(String(current).length, String(total).length, 2);
+        pageNumberInput.style.width = `${pageDigits + 1.35}ch`;
       }
       if (totalPagesEl) {
         totalPagesEl.textContent = String(total);
