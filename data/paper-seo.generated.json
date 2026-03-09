@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-24",
+  "updated": "2026-03-09",
   "papers": [
     {
       "id": "svcqr",
@@ -63,11 +63,11 @@
       "path": "papers/2025/hcqr/hcqr.html",
       "title": {
         "zh": "带自适应 Lasso 的分层复合分位回归",
-        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso"
+        "en": "Hierarchical composite quantile regression with adaptive Lasso"
       },
       "description": {
-        "zh": "带自适应 Lasso 的分层复合分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, 2026.",
-        "en": "Hierarchical Composite Quantile Regression with Adaptive Lasso. Authors: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, 2026."
+        "zh": "带自适应 Lasso 的分层复合分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, Volume 245, December 2026, 106390.",
+        "en": "Hierarchical composite quantile regression with adaptive Lasso. Authors: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, Volume 245, December 2026,…"
       },
       "keywords": [
         "分层模型",
@@ -86,10 +86,10 @@
       "scholarly_article": {
         "@context": "https://schema.org",
         "@type": "ScholarlyArticle",
-        "name": "Hierarchical Composite Quantile Regression with Adaptive Lasso",
-        "headline": "Hierarchical Composite Quantile Regression with Adaptive Lasso",
+        "name": "Hierarchical composite quantile regression with adaptive Lasso",
+        "headline": "Hierarchical composite quantile regression with adaptive Lasso",
         "inLanguage": "en",
-        "datePublished": "2026",
+        "datePublished": "2026-12",
         "author": [
           {
             "@type": "Person",
@@ -106,14 +106,16 @@
         ],
         "isPartOf": {
           "@type": "Periodical",
-          "name": "Journal of Statistical Planning and Inference"
+          "name": "Journal of Statistical Planning and Inference",
+          "volumeNumber": "245"
         },
         "url": "https://stork343.github.io/homepage/papers/2025/hcqr/hcqr.html",
         "image": "https://stork343.github.io/homepage/papers/2025/hcqr/hcqr-cover-2026.webp",
+        "pagination": "106390",
         "identifier": "https://doi.org/10.1016/j.jspi.2026.106390",
         "sameAs": [
           "https://doi.org/10.1016/j.jspi.2026.106390",
-          "https://www.sciencedirect.com/science/article/abs/pii/S0378375826000182"
+          "https://www.sciencedirect.com/science/article/pii/S0378375826000182"
         ]
       }
     },
