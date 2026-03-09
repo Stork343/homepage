@@ -849,7 +849,7 @@ body {
   justify-content: center !important;
   height: 28px !important;
   padding: 0 10px !important;
-  min-width: 118px;
+  min-width: 0;
   gap: 10px;
   border: 1px solid #4a5060 !important;
   border-radius: 3px !important;
@@ -858,13 +858,15 @@ body {
 }
 
 .reader-page-jump input {
-  width: 24px !important;
+  width: 4ch !important;
+  min-width: 4ch;
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
   color: #ffffff !important;
   font-size: 12px !important;
   font-weight: 600 !important;
+  font-variant-numeric: tabular-nums;
   text-align: center;
 }
 
