@@ -21,6 +21,12 @@ async function clickTocAndAssertPageQuery(page, buttonText) {
     )
     .toBe(true);
 
+  const relationsTab = page.locator('.tf-sidebar-tab[data-panel="relations"]').first();
+  if (await relationsTab.count()) {
+    await relationsTab.click();
+    await expect(page.locator('.reader-relations-panel')).toBeVisible({ timeout: 30000 });
+  }
+
   const tocButton = page.locator('.toc-list .toc-link', { hasText: buttonText }).first();
   await expect(tocButton).toBeVisible({ timeout: 90000 });
   const expectedPage = await tocButton.getAttribute('data-page');
