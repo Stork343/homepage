@@ -705,9 +705,7 @@ body.find-open .side-toggle-handle {
   --tf-paper-shadow: 0 5px 18px rgba(28, 34, 44, 0.16);
   --tf-rail-w: 48px;
   --tf-rail-offset: 6px;
-  --tf-handle-w: 34px;
-  --tf-handle-h: 46px;
-  --bar-h: 52px !important;
+  --bar-h: 44px !important;
   --sidebar-w: 356px !important;
 }
 
@@ -748,9 +746,10 @@ body {
 }
 
 .tf-topbar-center {
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   min-width: 0;
+  padding-left: 14px;
 }
 
 .tf-topbar-actions {
@@ -798,13 +797,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  height: 32px;
+  height: 24px;
   padding: 0 11px;
   border: 1px solid #4a5060;
   border-radius: 3px;
   background: #343947;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.03em;
 }
@@ -824,13 +823,13 @@ body {
 }
 
 .tf-page-label {
-  font-size: 13px;
-  color: #d7dce7;
+  font-size: 12px;
+  color: #c8cdd8;
   white-space: nowrap;
 }
 
 .reader-page-jump {
-  height: 34px !important;
+  height: 28px !important;
   padding: 0 10px !important;
   border: 1px solid #4a5060 !important;
   border-radius: 3px !important;
@@ -839,12 +838,12 @@ body {
 }
 
 .reader-page-jump input {
-  width: 40px !important;
+  width: 34px !important;
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
   color: #ffffff !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: 600 !important;
   text-align: right;
 }
@@ -858,10 +857,10 @@ body {
 .tf-topbar-actions .btn,
 .tf-page-group .btn {
   position: relative !important;
-  min-width: 36px !important;
-  min-height: 36px !important;
-  height: 36px !important;
-  padding: 0 10px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  padding: 0 8px !important;
   border: 0 !important;
   border-radius: 999px !important;
   background: transparent !important;
@@ -906,15 +905,38 @@ body {
 
 .tf-percent-btn {
   min-width: auto !important;
-  padding: 0 12px !important;
-  border-radius: 18px !important;
+  padding: 0 8px !important;
+  border-radius: 14px !important;
   background: #343947 !important;
-  font-size: 13px !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
 }
 
 .tf-percent-btn::before {
   inset: 0 !important;
+}
+
+.tf-download-btn,
+.tf-download-btn.btn {
+  min-width: 30px !important;
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  background: #0d8fb1 !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+.tf-download-btn::before,
+.tf-download-btn.btn::before {
+  display: none !important;
+}
+
+.tf-download-btn:hover,
+.tf-download-btn.btn:hover,
+.tf-download-btn:focus-visible,
+.tf-download-btn.btn:focus-visible {
+  background: #0b7f9d !important;
 }
 
 .topbar .btn-icon {
@@ -923,14 +945,14 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   line-height: 1;
 }
 
 .tf-svg-icon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   display: block;
 }
 
@@ -1223,44 +1245,19 @@ body.sidebar-open .side-panel {
 }
 
 .side-toggle-handle {
-  top: calc(var(--bar-h) + 10px) !important;
-  left: calc(var(--tf-rail-offset) + (var(--tf-rail-w) - var(--tf-handle-w)) / 2) !important;
-  width: var(--tf-handle-w) !important;
-  height: var(--tf-handle-h) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border: 0 !important;
-  border-radius: 999px 999px 999px 999px !important;
-  background: #ffffff !important;
-  color: #364050 !important;
-  overflow: hidden !important;
-  box-shadow: 0 4px 12px rgba(24, 29, 39, 0.15) !important;
-}
-
-body.sidebar-open .side-toggle-handle {
-  left: calc(var(--sidebar-w) + var(--tf-rail-offset) + (var(--tf-rail-w) - var(--tf-handle-w)) / 2) !important;
-}
-
-.side-toggle-handle:hover {
-  background: #f4f6f9 !important;
-}
-
-.side-toggle-handle .tf-svg-icon {
-  width: 18px;
-  height: 18px;
+  display: none !important;
 }
 
 .tf-side-rail {
   position: fixed;
-  top: calc(var(--bar-h) + 58px);
+  top: calc(var(--bar-h) + 6px);
   left: var(--tf-rail-offset);
   z-index: 22;
   display: flex;
   flex-direction: column;
   gap: 0;
   width: var(--tf-rail-w);
-  padding: 8px 0;
+  padding: 0;
   border: 1px solid #d9dee8;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.98);
@@ -1284,7 +1281,7 @@ body.find-open .tf-side-rail {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 46px;
+  height: 44px;
   border: 0;
   background: transparent;
   color: #5d6575;
@@ -1303,6 +1300,24 @@ body.find-open .tf-side-rail {
   opacity: 0;
   transform: scale(0.84);
   transition: opacity 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+}
+
+.tf-rail-toggle {
+  height: 46px;
+  color: #545b6b;
+}
+
+.tf-rail-toggle::before {
+  inset: 0;
+  border-radius: 999px;
+  background: #ececf1;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tf-rail-toggle:hover::before,
+.tf-rail-toggle:focus-visible::before {
+  background: #e3e6ed;
 }
 
 .tf-rail-btn:hover,
@@ -1334,6 +1349,11 @@ body.find-open .tf-side-rail {
 .tf-rail-link .tf-svg-icon {
   position: relative;
   z-index: 1;
+}
+
+.tf-rail-toggle .tf-svg-icon {
+  width: 18px;
+  height: 18px;
 }
 
 #viewerContainer {
@@ -1440,7 +1460,7 @@ body.find-open .side-toggle-handle {
   }
 
   body.sidebar-open .side-toggle-handle {
-    left: calc(min(86vw, 336px) + var(--tf-rail-offset) + (var(--tf-rail-w) - var(--tf-handle-w)) / 2) !important;
+    left: auto !important;
   }
 
   body.sidebar-open .tf-side-rail {
@@ -1476,10 +1496,6 @@ body.find-open .side-toggle-handle {
 
   body.sidebar-open .tf-side-rail {
     left: calc(min(86vw, 336px) + var(--tf-rail-offset));
-  }
-
-  body.sidebar-open .side-toggle-handle {
-    left: calc(min(86vw, 336px) + var(--tf-rail-offset) + (var(--tf-rail-w) - var(--tf-handle-w)) / 2) !important;
   }
 }
 
