@@ -65,6 +65,95 @@
       return new URL("../../../index.html#publications", window.location.href).toString();
     }
 
+    const iconMarkup = {
+      brand: `
+        <svg class="tf-svg-icon tf-svg-icon-brand" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.18"></circle>
+          <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+          <path d="M12 2a10 10 0 0 1 8.66 5H3.34A10 10 0 0 1 12 2Z" fill="currentColor" opacity="0.38"></path>
+        </svg>
+      `,
+      pagePrev: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M14.5 6 8.5 12l6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      pageNext: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      zoomOut: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 12h12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path>
+        </svg>
+      `,
+      zoomIn: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 6v12M6 12h12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path>
+        </svg>
+      `,
+      search: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="10.5" cy="10.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
+          <path d="m15 15 4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+        </svg>
+      `,
+      print: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M7 9V5h10v4M7 17H5V11h14v6h-2M8 14h8v5H8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      fullscreenEnter: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M9 4H4v5M15 4h5v5M9 20H4v-5M20 20h-5v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      fullscreenExit: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M9 9H4V4M15 9h5V4M9 15H4v5M20 20h-5v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      download: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 4v10M8 10l4 4 4-4M5 18h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      handleOpen: `
+        <svg class="tf-svg-icon tf-svg-icon-handle" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M14 7 9 12l5 5M19 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      handleClosed: `
+        <svg class="tf-svg-icon tf-svg-icon-handle" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m10 7 5 5-5 5M5 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      details: `
+        <svg class="tf-svg-icon tf-svg-icon-rail" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
+          <path d="M12 10v6M12 7.4h.01" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      relations: `
+        <svg class="tf-svg-icon tf-svg-icon-rail" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 7h12M6 12h12M6 17h12M4 7h.01M4 12h.01M4 17h.01" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path>
+        </svg>
+      `,
+      figures: `
+        <svg class="tf-svg-icon tf-svg-icon-rail" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x="4" y="5" width="16" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"></rect>
+          <path d="m7 15 3-3 2 2 3-4 2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="9" cy="9" r="1.3" fill="currentColor"></circle>
+        </svg>
+      `,
+      link: `
+        <svg class="tf-svg-icon tf-svg-icon-rail" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M10 14 8 16a3 3 0 1 1-4-4l3-3a3 3 0 0 1 4 0M14 10l2-2a3 3 0 1 1 4 4l-3 3a3 3 0 0 1-4 0M9 15l6-6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `
+    };
+
     function readMetaEntries() {
       return Array.from(document.querySelectorAll(".side-panel .meta-list .meta-item"))
         .map((item) => {
@@ -107,12 +196,10 @@
         topbarEl.innerHTML = `
           <div class="tf-topbar-brand">
             <a class="tf-brand-link" id="homeLink" href="${escapeHtml(homeHref)}" aria-label="Back to publications">
-              <span class="tf-brand-mark" aria-hidden="true">
-                <span class="tf-brand-dot"></span>
-              </span>
+              <span class="tf-brand-mark" aria-hidden="true">${iconMarkup.brand}</span>
               <span class="tf-brand-copy">
-                <strong>Taylor &amp; Francis</strong>
-                <span>Online</span>
+                <strong>Paper Reader</strong>
+                <span>Academic archive</span>
               </span>
             </a>
           </div>
@@ -120,7 +207,7 @@
             <div class="tf-format-pill" aria-hidden="true">PDF <span class="tf-format-caret">▾</span></div>
             <div class="reader-group tf-page-group">
               <button class="btn btn-ghost tf-icon-btn" id="prevPageBtn" title="Previous page" type="button" aria-label="Previous page">
-                <span class="btn-icon">←</span>
+                <span class="btn-icon">${iconMarkup.pagePrev}</span>
               </button>
               <span class="tf-page-label">Page</span>
               <label class="reader-page-jump" title="Jump to page">
@@ -129,29 +216,29 @@
                 <span id="totalPages">-</span>
               </label>
               <button class="btn btn-ghost tf-icon-btn" id="nextPageBtn" title="Next page" type="button" aria-label="Next page">
-                <span class="btn-icon">→</span>
+                <span class="btn-icon">${iconMarkup.pageNext}</span>
               </button>
             </div>
           </div>
           <div class="tf-topbar-actions">
             <button class="btn btn-ghost tf-icon-btn" id="zoomOutBtn" title="Zoom out" type="button" aria-label="Zoom out">
-              <span class="btn-icon">−</span>
+              <span class="btn-icon">${iconMarkup.zoomOut}</span>
             </button>
             <button class="btn btn-ghost tf-icon-btn" id="zoomInBtn" title="Zoom in" type="button" aria-label="Zoom in">
-              <span class="btn-icon">+</span>
+              <span class="btn-icon">${iconMarkup.zoomIn}</span>
             </button>
             <button class="btn btn-ghost tf-icon-btn tf-percent-btn" id="resetZoomBtn" title="Reset zoom" type="button" aria-label="Reset zoom">100%</button>
             <button class="btn btn-ghost tf-icon-btn" id="findToggleBtn" title="Search document" type="button" aria-label="Search document">
-              <span class="btn-icon">⌕</span>
+              <span class="btn-icon">${iconMarkup.search}</span>
             </button>
             <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Print PDF" type="button" aria-label="Print PDF">
-              <span class="btn-icon">⎙</span>
+              <span class="btn-icon">${iconMarkup.print}</span>
             </button>
             <button class="btn btn-ghost tf-icon-btn" id="fullscreenBtn" title="Enter fullscreen" type="button" aria-label="Enter fullscreen">
-              <span class="btn-icon">⤢</span>
+              <span class="btn-icon">${iconMarkup.fullscreenEnter}</span>
             </button>
             <a class="btn btn-ghost tf-icon-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
-              <span class="btn-icon">↓</span>
+              <span class="btn-icon">${iconMarkup.download}</span>
             </a>
           </div>
         `;
@@ -279,12 +366,12 @@
       const rail = document.createElement("div");
       rail.className = "tf-side-rail";
       rail.innerHTML = `
-        <button class="tf-rail-btn is-active" type="button" data-panel="details" title="Show details" aria-label="Show details">i</button>
-        <button class="tf-rail-btn" type="button" data-panel="relations" title="Show relations" aria-label="Show relations">≡</button>
-        <button class="tf-rail-btn" type="button" data-action="cover" title="Go to first page" aria-label="Go to first page">▣</button>
+        <button class="tf-rail-btn is-active" type="button" data-panel="details" title="Show details" aria-label="Show details">${iconMarkup.details}</button>
+        <button class="tf-rail-btn" type="button" data-panel="relations" title="Show relations" aria-label="Show relations">${iconMarkup.relations}</button>
+        <button class="tf-rail-btn" type="button" data-action="cover" title="Go to first page" aria-label="Go to first page">${iconMarkup.figures}</button>
         ${
           articleEntry && articleEntry.href
-            ? `<a class="tf-rail-btn tf-rail-link" href="${escapeHtml(articleEntry.href)}" target="_blank" rel="noopener" title="Open article page" aria-label="Open article page">↗</a>`
+            ? `<a class="tf-rail-btn tf-rail-link" href="${escapeHtml(articleEntry.href)}" target="_blank" rel="noopener" title="Open article page" aria-label="Open article page">${iconMarkup.link}</a>`
             : ""
         }
       `;
@@ -662,7 +749,7 @@
     function setSidebarOpen(opened) {
       bodyEl.classList.toggle("sidebar-open", opened);
       if (sideHandle) {
-        sideHandle.textContent = opened ? "‹" : "›";
+        sideHandle.innerHTML = opened ? iconMarkup.handleOpen : iconMarkup.handleClosed;
         sideHandle.setAttribute("aria-label", opened ? "Collapse sidebar" : "Expand sidebar");
         sideHandle.setAttribute("aria-expanded", String(opened));
       }
@@ -1513,7 +1600,7 @@
         return;
       }
       const isFullscreen = Boolean(document.fullscreenElement);
-      fullscreenBtn.innerHTML = `<span class="btn-icon">${isFullscreen ? "⤡" : "⤢"}</span>`;
+      fullscreenBtn.innerHTML = `<span class="btn-icon">${isFullscreen ? iconMarkup.fullscreenExit : iconMarkup.fullscreenEnter}</span>`;
       fullscreenBtn.title = isFullscreen ? "Exit fullscreen" : "Enter fullscreen";
       fullscreenBtn.setAttribute("aria-label", isFullscreen ? "Exit fullscreen" : "Enter fullscreen");
     }
