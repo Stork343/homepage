@@ -461,15 +461,25 @@
     return value || "";
   }
 
+  function getPublicationInfoText(pub, lang) {
+    return localizedText(pub && pub.publication_info && pub.publication_info.display, lang);
+  }
+
   function getStatusText(pub, lang) {
+    if (getPublicationInfoText(pub, lang)) {
+      return "";
+    }
     const localized = localizedText(pub && pub.status, lang);
     if (localized) {
       return localized;
     }
-    return lang === "zh" ? "已发表" : "Published";
+    return "";
   }
 
   function getStatusKey(pub) {
+    if (getPublicationInfoText(pub, "zh") || getPublicationInfoText(pub, "en")) {
+      return "";
+    }
     const fromEn = localizedText(pub && pub.status, "en");
     if (fromEn) {
       return fromEn.trim().toLowerCase();
@@ -516,6 +526,8 @@
       localizedText(pub.authors, "en"),
       localizedText(pub.venue, "zh"),
       localizedText(pub.venue, "en"),
+      getPublicationInfoText(pub, "zh"),
+      getPublicationInfoText(pub, "en"),
       keywordZh,
       keywordEn,
       getStatusText(pub, "zh"),
@@ -683,6 +695,9 @@
     const statusPairs = Array.from(
       state.publications.reduce((acc, pub) => {
         const key = getStatusKey(pub);
+        if (!key) {
+          return acc;
+        }
         if (!acc.has(key)) {
           acc.set(key, getStatusText(pub, state.lang));
         }
@@ -830,7 +845,13 @@
     venue.className = "publication-venue";
     venue.textContent = localizedText(pub.venue, pubLang);
 
-    const statusText = localizedText(pub.status, pubLang);
+    const publicationInfoText = getPublicationInfoText(pub, pubLang);
+    if (publicationInfoText) {
+      venue.appendChild(document.createTextNode(", "));
+      venue.appendChild(document.createTextNode(publicationInfoText));
+    }
+
+    const statusText = getStatusText(pub, pubLang);
     if (statusText) {
       venue.appendChild(document.createTextNode(". "));
       const status = document.createElement("span");
