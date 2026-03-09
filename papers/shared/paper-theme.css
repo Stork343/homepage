@@ -703,7 +703,7 @@ body.find-open .side-toggle-handle {
   --tf-panel-muted-2: #9ca7bb;
   --tf-viewer-bg: #ceced7;
   --tf-paper-shadow: 0 5px 18px rgba(28, 34, 44, 0.16);
-  --tf-rail-w: 48px;
+  --tf-rail-w: 38px;
   --tf-rail-offset: 6px;
   --bar-h: 44px !important;
   --sidebar-w: 356px !important;
@@ -749,7 +749,7 @@ body {
   justify-content: flex-start;
   gap: 12px;
   min-width: 0;
-  padding-left: 14px;
+  padding-left: 24px;
 }
 
 .tf-topbar-actions {
@@ -829,8 +829,13 @@ body {
 }
 
 .reader-page-jump {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   height: 28px !important;
   padding: 0 10px !important;
+  min-width: 118px;
+  gap: 10px;
   border: 1px solid #4a5060 !important;
   border-radius: 3px !important;
   background: #343947 !important;
@@ -838,14 +843,14 @@ body {
 }
 
 .reader-page-jump input {
-  width: 34px !important;
+  width: 24px !important;
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
   color: #ffffff !important;
   font-size: 12px !important;
   font-weight: 600 !important;
-  text-align: right;
+  text-align: center;
 }
 
 .reader-page-jump input:focus-visible {
@@ -916,29 +921,6 @@ body {
   inset: 0 !important;
 }
 
-.tf-download-btn,
-.tf-download-btn.btn {
-  min-width: 30px !important;
-  width: 30px !important;
-  height: 30px !important;
-  padding: 0 !important;
-  background: #0d8fb1 !important;
-  color: #ffffff !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
-}
-
-.tf-download-btn::before,
-.tf-download-btn.btn::before {
-  display: none !important;
-}
-
-.tf-download-btn:hover,
-.tf-download-btn.btn:hover,
-.tf-download-btn:focus-visible,
-.tf-download-btn.btn:focus-visible {
-  background: #0b7f9d !important;
-}
-
 .topbar .btn-icon {
   position: relative;
   z-index: 1;
@@ -984,9 +966,13 @@ body {
   background: var(--tf-panel-bg) !important;
   border-right: 1px solid var(--tf-panel-border) !important;
   color: var(--tf-panel-text) !important;
+  transform: translateX(calc(-1 * var(--sidebar-w))) !important;
+  pointer-events: none !important;
 }
 
 body.sidebar-open .side-panel {
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
   box-shadow: 10px 0 22px rgba(16, 22, 34, 0.18) !important;
 }
 
@@ -1281,7 +1267,7 @@ body.find-open .tf-side-rail {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 44px;
+  height: 36px;
   border: 0;
   background: transparent;
   color: #5d6575;
@@ -1294,7 +1280,7 @@ body.find-open .tf-side-rail {
 .tf-rail-link::before {
   content: "";
   position: absolute;
-  inset: 6px 8px;
+  inset: 4px 5px;
   border-radius: 999px;
   background: #eef2f6;
   opacity: 0;
@@ -1303,7 +1289,7 @@ body.find-open .tf-side-rail {
 }
 
 .tf-rail-toggle {
-  height: 46px;
+  height: 38px;
   color: #545b6b;
 }
 
@@ -1338,9 +1324,9 @@ body.find-open .tf-side-rail {
 }
 
 .tf-rail-btn.is-active::before {
-  inset: 7px 9px;
+  inset: 5px 6px;
   background: transparent;
-  border: 4px solid #1189ad;
+  border: 3px solid #1189ad;
   opacity: 1;
   transform: scale(1);
 }
