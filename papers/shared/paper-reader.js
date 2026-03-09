@@ -211,7 +211,7 @@
               </button>
               <span class="tf-page-label">Page</span>
               <label class="reader-page-jump" title="Jump to page">
-                <input id="pageNumberInput" type="number" min="1" step="1" value="1" aria-label="Page number"/>
+                <input id="pageNumberInput" type="text" inputmode="numeric" pattern="[0-9]*" value="1" aria-label="Page number" autocomplete="off"/>
                 <span>/</span>
                 <span id="totalPages">-</span>
               </label>
@@ -1462,9 +1462,8 @@
       const total = pdfDocument.numPages;
       if (pageNumberInput) {
         pageNumberInput.value = String(current);
-        pageNumberInput.max = String(total);
         const pageDigits = Math.max(String(current).length, String(total).length, 2);
-        pageNumberInput.style.width = `${pageDigits + 1.35}ch`;
+        pageNumberInput.style.width = `${Math.max(pageDigits + 1.6, 4.5)}ch`;
       }
       if (totalPagesEl) {
         totalPagesEl.textContent = String(total);
@@ -1524,11 +1523,14 @@
     }
 
     if (pageNumberInput) {
+      pageNumberInput.addEventListener("input", () => {
+        pageNumberInput.value = pageNumberInput.value.replace(/[^\d]/g, "");
+      });
       const jumpToPage = () => {
         if (!pdfDocument) {
           return;
         }
-        const raw = Number(pageNumberInput.value);
+        const raw = Number.parseInt(pageNumberInput.value || "", 10);
         if (!Number.isFinite(raw)) {
           updatePageControls();
           return;
