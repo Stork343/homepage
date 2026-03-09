@@ -221,6 +221,9 @@
             </div>
           </div>
           <div class="tf-topbar-actions">
+            <button class="btn btn-ghost tf-icon-btn" id="fullscreenBtn" title="Enter fullscreen" type="button" aria-label="Enter fullscreen">
+              <span class="btn-icon">${iconMarkup.fullscreenEnter}</span>
+            </button>
             <button class="btn btn-ghost tf-icon-btn" id="zoomOutBtn" title="Zoom out" type="button" aria-label="Zoom out">
               <span class="btn-icon">${iconMarkup.zoomOut}</span>
             </button>
@@ -234,10 +237,7 @@
             <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Print PDF" type="button" aria-label="Print PDF">
               <span class="btn-icon">${iconMarkup.print}</span>
             </button>
-            <button class="btn btn-ghost tf-icon-btn" id="fullscreenBtn" title="Enter fullscreen" type="button" aria-label="Enter fullscreen">
-              <span class="btn-icon">${iconMarkup.fullscreenEnter}</span>
-            </button>
-            <a class="btn btn-ghost tf-icon-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
+            <a class="btn btn-ghost tf-icon-btn tf-download-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
               <span class="btn-icon">${iconMarkup.download}</span>
             </a>
           </div>
@@ -366,6 +366,7 @@
       const rail = document.createElement("div");
       rail.className = "tf-side-rail";
       rail.innerHTML = `
+        <button class="tf-rail-btn tf-rail-toggle" type="button" data-action="toggle-sidebar" title="Collapse sidebar" aria-label="Collapse sidebar">${iconMarkup.handleOpen}</button>
         <button class="tf-rail-btn is-active" type="button" data-panel="details" title="Show details" aria-label="Show details">${iconMarkup.details}</button>
         <button class="tf-rail-btn" type="button" data-panel="relations" title="Show relations" aria-label="Show relations">${iconMarkup.relations}</button>
         <button class="tf-rail-btn" type="button" data-action="cover" title="Go to first page" aria-label="Go to first page">${iconMarkup.figures}</button>
@@ -406,6 +407,11 @@
         button.addEventListener("click", () => {
           activateSidebarPanel(button.dataset.panel || "details");
           bodyEl.classList.add("sidebar-open");
+        });
+      });
+      Array.from(document.querySelectorAll(".tf-rail-btn[data-action='toggle-sidebar']")).forEach((button) => {
+        button.addEventListener("click", () => {
+          setSidebarOpen(!bodyEl.classList.contains("sidebar-open"));
         });
       });
       Array.from(document.querySelectorAll(".tf-rail-btn[data-action='cover']")).forEach((button) => {
@@ -753,6 +759,12 @@
         sideHandle.setAttribute("aria-label", opened ? "Collapse sidebar" : "Expand sidebar");
         sideHandle.setAttribute("aria-expanded", String(opened));
       }
+      Array.from(document.querySelectorAll(".tf-rail-toggle")).forEach((button) => {
+        button.innerHTML = opened ? iconMarkup.handleOpen : iconMarkup.handleClosed;
+        button.title = opened ? "Collapse sidebar" : "Expand sidebar";
+        button.setAttribute("aria-label", opened ? "Collapse sidebar" : "Expand sidebar");
+        button.setAttribute("aria-pressed", String(opened));
+      });
     }
 
     setSidebarOpen(bodyEl.classList.contains("sidebar-open"));
