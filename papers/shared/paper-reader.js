@@ -3,11 +3,11 @@
     const rootEl = document.documentElement;
     const bodyEl = document.body;
     const topbarEl = document.querySelector(".topbar");
-    const topbarRightEl = document.querySelector(".topbar-right");
+    const sidePanelEl = document.getElementById("sidePanel");
     const sideHandle = document.getElementById("sideToggleHandle");
-    const downloadLink = document.getElementById("downloadLink");
-    const themeToggleBtn = document.getElementById("themeToggleBtn");
-    const themeLabel = document.getElementById("themeLabel");
+    let downloadLink = null;
+    let themeToggleBtn = null;
+    let themeLabel = null;
 
     function toAbsoluteUrl(value) {
       const raw = String(value || "").trim();
@@ -35,6 +35,302 @@
       return output;
     }
 
+    function escapeHtml(value) {
+      return String(value || "").replace(/[&<>"']/g, (char) => {
+        switch (char) {
+          case "&":
+            return "&amp;";
+          case "<":
+            return "&lt;";
+          case ">":
+            return "&gt;";
+          case '"':
+            return "&quot;";
+          case "'":
+            return "&#39;";
+          default:
+            return char;
+        }
+      });
+    }
+
+    function normalizeMetaKey(value) {
+      return String(value || "")
+        .replace(/[:：]/g, "")
+        .trim()
+        .toLowerCase();
+    }
+
+    function getHomeHref() {
+      return new URL("../../../index.html#publications", window.location.href).toString();
+    }
+
+    function readMetaEntries() {
+      return Array.from(document.querySelectorAll(".side-panel .meta-list .meta-item"))
+        .map((item) => {
+          const labelEl = item.querySelector(".meta-label");
+          const valueEl = item.querySelector(".meta-value");
+          const linkEl = valueEl ? valueEl.querySelector("a[href]") : null;
+          return {
+            key: normalizeMetaKey(labelEl ? labelEl.textContent : ""),
+            label: labelEl ? labelEl.textContent.trim() : "",
+            text: valueEl ? valueEl.textContent.trim() : "",
+            href: linkEl ? linkEl.href : "",
+            item
+          };
+        })
+        .filter((entry) => entry.key && entry.text);
+    }
+
+    function buildReaderChrome() {
+      const homeHref = getHomeHref();
+      const metaEntries = readMetaEntries();
+      const titleEntry = metaEntries.find((entry) => entry.key === "title");
+      const authorsEntry = metaEntries.find((entry) => entry.key === "authors");
+      const journalEntry = metaEntries.find((entry) => entry.key === "journal");
+      const doiEntry = metaEntries.find((entry) => entry.key === "doi");
+      const articleEntry = metaEntries.find((entry) => entry.key === "article");
+
+      const paperTitle =
+        (titleEntry && titleEntry.text) ||
+        String(document.title || "")
+          .replace(/\s*-\s*PDF\s*$/i, "")
+          .trim();
+      const journalText = (journalEntry && journalEntry.text) || "Journal article";
+      const journalName = journalText.split(",")[0].trim() || journalText;
+      const journalMeta = journalText.replace(/^([^,]+),\s*/, "").trim() || "Research Article";
+      const coverUrl =
+        (document.querySelector('meta[property="og:image"]')?.getAttribute("content") || "").trim() ||
+        (document.querySelector('meta[name="twitter:image"]')?.getAttribute("content") || "").trim();
+
+      if (topbarEl) {
+        topbarEl.innerHTML = `
+          <div class="tf-topbar-brand">
+            <a class="tf-brand-link" id="homeLink" href="${escapeHtml(homeHref)}" aria-label="Back to publications">
+              <span class="tf-brand-mark" aria-hidden="true">
+                <span class="tf-brand-dot"></span>
+              </span>
+              <span class="tf-brand-copy">
+                <strong>Taylor &amp; Francis</strong>
+                <span>Online</span>
+              </span>
+            </a>
+          </div>
+          <div class="tf-topbar-center">
+            <div class="tf-format-pill" aria-hidden="true">PDF <span class="tf-format-caret">▾</span></div>
+            <div class="reader-group tf-page-group">
+              <button class="btn btn-ghost tf-icon-btn" id="prevPageBtn" title="Previous page" type="button" aria-label="Previous page">
+                <span class="btn-icon">←</span>
+              </button>
+              <span class="tf-page-label">Page</span>
+              <label class="reader-page-jump" title="Jump to page">
+                <input id="pageNumberInput" type="number" min="1" step="1" value="1" aria-label="Page number"/>
+                <span>/</span>
+                <span id="totalPages">-</span>
+              </label>
+              <button class="btn btn-ghost tf-icon-btn" id="nextPageBtn" title="Next page" type="button" aria-label="Next page">
+                <span class="btn-icon">→</span>
+              </button>
+            </div>
+          </div>
+          <div class="tf-topbar-actions">
+            <button class="btn btn-ghost tf-icon-btn" id="zoomOutBtn" title="Zoom out" type="button" aria-label="Zoom out">
+              <span class="btn-icon">−</span>
+            </button>
+            <button class="btn btn-ghost tf-icon-btn" id="zoomInBtn" title="Zoom in" type="button" aria-label="Zoom in">
+              <span class="btn-icon">+</span>
+            </button>
+            <button class="btn btn-ghost tf-icon-btn tf-percent-btn" id="resetZoomBtn" title="Reset zoom" type="button" aria-label="Reset zoom">100%</button>
+            <button class="btn btn-ghost tf-icon-btn" id="findToggleBtn" title="Search document" type="button" aria-label="Search document">
+              <span class="btn-icon">⌕</span>
+            </button>
+            <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Print PDF" type="button" aria-label="Print PDF">
+              <span class="btn-icon">⎙</span>
+            </button>
+            <button class="btn btn-ghost tf-icon-btn" id="fullscreenBtn" title="Enter fullscreen" type="button" aria-label="Enter fullscreen">
+              <span class="btn-icon">⤢</span>
+            </button>
+            <a class="btn btn-ghost tf-icon-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
+              <span class="btn-icon">↓</span>
+            </a>
+          </div>
+        `;
+      }
+
+      const homeLink = document.getElementById("homeLink");
+      if (homeLink) {
+        homeLink.addEventListener("click", (event) => {
+          if (window.history.length > 1) {
+            event.preventDefault();
+            window.history.back();
+          }
+        });
+      }
+
+      if (!sidePanelEl) {
+        return;
+      }
+      const sideInnerEl = sidePanelEl.querySelector(".side-panel-inner");
+      if (!sideInnerEl) {
+        return;
+      }
+
+      const sections = Array.from(sideInnerEl.querySelectorAll(".side-panel-section"));
+      const abstractSection = sections.find((section) => /abstract/i.test(section.querySelector("h3")?.textContent || ""));
+      const tocSection = sections.find((section) => /content/i.test(section.querySelector("h3")?.textContent || ""));
+      const metaListEl = sideInnerEl.querySelector(".meta-list");
+      const metaListClone = metaListEl ? metaListEl.cloneNode(true) : null;
+      const tocListClone = tocSection && tocSection.querySelector(".toc-list") ? tocSection.querySelector(".toc-list").cloneNode(true) : null;
+      const abstractHtml = abstractSection
+        ? Array.from(abstractSection.children)
+            .filter((child) => {
+              const tag = child.tagName.toLowerCase();
+              return tag !== "h3" && tag !== "style" && !child.classList.contains("meta-list");
+            })
+            .map((child) => child.outerHTML)
+            .join("")
+        : '<p class="tf-empty-copy">Abstract will appear here when available.</p>';
+
+      if (metaListClone) {
+        metaListClone.classList.add("reader-meta-list");
+        Array.from(metaListClone.querySelectorAll(".meta-item")).forEach((item) => {
+          const key = normalizeMetaKey(item.querySelector(".meta-label")?.textContent || "");
+          if (key === "title" || key === "authors" || key === "article") {
+            item.remove();
+            return;
+          }
+          const labelEl = item.querySelector(".meta-label");
+          const valueEl = item.querySelector(".meta-value");
+          if (labelEl) {
+            labelEl.style.setProperty("color", "#b6c1d4", "important");
+            labelEl.style.setProperty("font-style", "normal", "important");
+            labelEl.style.setProperty("font-weight", "500", "important");
+          }
+          if (valueEl) {
+            valueEl.style.setProperty("color", "#ffffff", "important");
+          }
+          Array.from(item.querySelectorAll("a[href]")).forEach((link) => {
+            link.style.setProperty("color", "#ffffff", "important");
+          });
+        });
+      }
+
+      sideInnerEl.innerHTML = `
+        <div class="tf-sidebar-tabs" role="tablist" aria-label="Sidebar panels">
+          <button class="tf-sidebar-tab is-active" type="button" role="tab" aria-selected="true" data-panel="details">DETAILS</button>
+          <button class="tf-sidebar-tab" type="button" role="tab" aria-selected="false" data-panel="relations">RELATIONS</button>
+        </div>
+        <div class="tf-sidebar-panels">
+          <section class="tf-sidebar-panel reader-details-panel is-active" data-panel="details" role="tabpanel">
+            <div class="tf-sidebar-journal-card">
+              <div class="tf-sidebar-cover">
+                ${
+                  coverUrl
+                    ? `<img src="${escapeHtml(coverUrl)}" alt="${escapeHtml(journalName)} cover"/>`
+                    : '<div class="tf-sidebar-cover-fallback">PDF</div>'
+                }
+              </div>
+              <div class="tf-sidebar-journal-copy">
+                <div class="tf-sidebar-journal-name">${escapeHtml(journalName)}</div>
+                <div class="tf-sidebar-journal-meta">${escapeHtml(journalMeta)}</div>
+              </div>
+            </div>
+
+            <div class="tf-sidebar-kicker">ARTICLE</div>
+            <h1 class="tf-sidebar-article-title">${escapeHtml(paperTitle)}</h1>
+            ${
+              articleEntry && articleEntry.href
+                ? `<a class="tf-sidebar-link" href="${escapeHtml(articleEntry.href)}" target="_blank" rel="noopener">View article page</a>`
+                : doiEntry && doiEntry.href
+                  ? `<a class="tf-sidebar-link" href="${escapeHtml(doiEntry.href)}" target="_blank" rel="noopener">Open DOI page</a>`
+                  : ""
+            }
+            ${authorsEntry && authorsEntry.text ? `<div class="tf-sidebar-authors">${escapeHtml(authorsEntry.text)}</div>` : ""}
+
+            ${
+              metaListClone && metaListClone.children.length
+                ? `<div class="side-panel-section reader-meta-section"><h3>Article details</h3>${metaListClone.outerHTML}</div>`
+                : ""
+            }
+
+            <div class="side-panel-section reader-abstract-section">
+              <h3>Abstract</h3>
+              <div class="tf-sidebar-abstract">${abstractHtml}</div>
+            </div>
+          </section>
+
+          <section class="tf-sidebar-panel reader-relations-panel" data-panel="relations" role="tabpanel" hidden>
+            <div class="side-panel-section reader-relations-section">
+              <h3>${escapeHtml((tocSection && tocSection.querySelector("h3")?.textContent) || "Content")}</h3>
+              ${
+                tocListClone && tocListClone.children.length
+                  ? tocListClone.outerHTML
+                  : '<div class="tf-empty-copy">Section links will appear after the PDF loads.</div>'
+              }
+            </div>
+          </section>
+        </div>
+      `;
+
+      const existingRail = document.querySelector(".tf-side-rail");
+      if (existingRail) {
+        existingRail.remove();
+      }
+      const rail = document.createElement("div");
+      rail.className = "tf-side-rail";
+      rail.innerHTML = `
+        <button class="tf-rail-btn is-active" type="button" data-panel="details" title="Show details" aria-label="Show details">i</button>
+        <button class="tf-rail-btn" type="button" data-panel="relations" title="Show relations" aria-label="Show relations">≡</button>
+        <button class="tf-rail-btn" type="button" data-action="cover" title="Go to first page" aria-label="Go to first page">▣</button>
+        ${
+          articleEntry && articleEntry.href
+            ? `<a class="tf-rail-btn tf-rail-link" href="${escapeHtml(articleEntry.href)}" target="_blank" rel="noopener" title="Open article page" aria-label="Open article page">↗</a>`
+            : ""
+        }
+      `;
+      bodyEl.appendChild(rail);
+
+      const panelTabs = Array.from(document.querySelectorAll(".tf-sidebar-tab[data-panel]"));
+      const panelButtons = Array.from(document.querySelectorAll(".tf-rail-btn[data-panel]"));
+      const panels = Array.from(document.querySelectorAll(".tf-sidebar-panel[data-panel]"));
+
+      function activateSidebarPanel(panelName) {
+        const nextPanel = panelName === "relations" ? "relations" : "details";
+        sidePanelEl.setAttribute("data-active-panel", nextPanel);
+        panelTabs.forEach((tab) => {
+          const active = tab.dataset.panel === nextPanel;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-selected", String(active));
+        });
+        panelButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.panel === nextPanel);
+        });
+        panels.forEach((panel) => {
+          const active = panel.dataset.panel === nextPanel;
+          panel.classList.toggle("is-active", active);
+          panel.hidden = !active;
+        });
+      }
+
+      panelTabs.forEach((tab) => {
+        tab.addEventListener("click", () => activateSidebarPanel(tab.dataset.panel || "details"));
+      });
+      panelButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activateSidebarPanel(button.dataset.panel || "details");
+          bodyEl.classList.add("sidebar-open");
+        });
+      });
+      Array.from(document.querySelectorAll(".tf-rail-btn[data-action='cover']")).forEach((button) => {
+        button.addEventListener("click", () => {
+          if (window.viewer && typeof window.viewer.scrollPageIntoView === "function") {
+            window.viewer.scrollPageIntoView({ pageNumber: 1 });
+          }
+        });
+      });
+      activateSidebarPanel("details");
+    }
+
     const seedPdfCandidates = dedupeUrlList([
       window.__PAPER_PDF_URL__,
       ...(Array.isArray(window.__PAPER_PDF_CANDIDATES__) ? window.__PAPER_PDF_CANDIDATES__ : [])
@@ -44,6 +340,11 @@
     }
     let pdfCandidates = seedPdfCandidates.slice();
     let activePdfUrl = pdfCandidates[0];
+
+    buildReaderChrome();
+    downloadLink = document.getElementById("downloadLink");
+    themeToggleBtn = document.getElementById("themeToggleBtn");
+    themeLabel = document.getElementById("themeLabel");
     if (downloadLink) {
       downloadLink.href = activePdfUrl;
     }
@@ -84,45 +385,19 @@
       });
     }
 
-    if (topbarRightEl) {
-      topbarRightEl.innerHTML = `
-        <div class="reader-group">
-          <button class="btn btn-ghost" id="prevPageBtn" title="上一页 (←)" type="button"><span class="btn-icon">←</span></button>
-          <label class="reader-page-jump" title="输入页码后回车跳转">
-            <input id="pageNumberInput" type="number" min="1" step="1" value="1" aria-label="页码"/>
-            <span>/</span>
-            <span id="totalPages">-</span>
-          </label>
-          <button class="btn btn-ghost" id="nextPageBtn" title="下一页 (→)" type="button"><span class="btn-icon">→</span></button>
-        </div>
-        <div class="reader-group">
-          <button class="btn btn-ghost" id="zoomOutBtn" title="缩小 (-)" type="button"><span class="btn-icon">－</span></button>
-          <button class="btn btn-ghost" id="zoomInBtn" title="放大 (+)" type="button"><span class="btn-icon">＋</span></button>
-          <button class="btn btn-ghost" id="fitWidthBtn" title="适宽 (W)" type="button">适宽</button>
-          <button class="btn btn-ghost" id="fitPageBtn" title="适页 (F)" type="button">适页</button>
-          <button class="btn btn-ghost" id="resetZoomBtn" title="100% (R)" type="button">100%</button>
-        </div>
-        <div class="reader-group">
-          <button class="btn btn-ghost" id="findToggleBtn" title="检索 (/ 或 Shift+F)" type="button">检索</button>
-          <button class="btn btn-ghost" id="printBtn" title="打印" type="button">打印</button>
-          <button class="btn btn-ghost" id="fullscreenBtn" title="全屏" type="button">全屏</button>
-        </div>
-      `;
-    }
-
     let findBarEl = document.getElementById("findBar");
     if (!findBarEl && topbarEl) {
       findBarEl = document.createElement("div");
       findBarEl.id = "findBar";
       findBarEl.className = "find-bar";
       findBarEl.innerHTML = `
-        <input class="find-input" id="findInput" type="search" placeholder="检索文档内容..." aria-label="检索文档内容"/>
-        <button class="btn btn-ghost" id="findPrevBtn" type="button" title="上一个匹配 (Shift+Enter)">上一个</button>
-        <button class="btn btn-ghost" id="findNextBtn" type="button" title="下一个匹配 (Enter)">下一个</button>
-        <label class="find-check"><input id="findCase" type="checkbox"/>区分大小写</label>
-        <label class="find-check"><input id="findHighlightAll" type="checkbox" checked/>全部高亮</label>
+        <input class="find-input" id="findInput" type="search" placeholder="Search document text..." aria-label="Search document text"/>
+        <button class="btn btn-ghost" id="findPrevBtn" type="button" title="Previous match (Shift+Enter)">Previous</button>
+        <button class="btn btn-ghost" id="findNextBtn" type="button" title="Next match (Enter)">Next</button>
+        <label class="find-check"><input id="findCase" type="checkbox"/>Match case</label>
+        <label class="find-check"><input id="findHighlightAll" type="checkbox" checked/>Highlight all</label>
         <span class="find-status" id="findStatus">0 / 0</span>
-        <button class="btn btn-ghost" id="findCloseBtn" type="button">关闭</button>
+        <button class="btn btn-ghost" id="findCloseBtn" type="button">Close</button>
       `;
       topbarEl.insertAdjacentElement("afterend", findBarEl);
     }
@@ -132,6 +407,13 @@
     const barFillEl = document.getElementById("loadingBarFill");
     const zoomIndicator = document.getElementById("zoomIndicator");
     const viewerContainer = document.getElementById("viewerContainer");
+
+    if (overlay) {
+      const loadingLabel = overlay.querySelector(".loading-text span");
+      if (loadingLabel) {
+        loadingLabel.innerHTML = '<span class="spinner"></span> Loading PDF';
+      }
+    }
 
     const prevPageBtn = document.getElementById("prevPageBtn");
     const nextPageBtn = document.getElementById("nextPageBtn");
@@ -331,6 +613,7 @@
     let pdfDocument = null;
     let pageTextCache = null;
     let prebuiltTocApplied = false;
+    let suppressScaleIndicator = true;
 
     function showOverlay() {
       if (overlay) {
@@ -380,7 +663,8 @@
       bodyEl.classList.toggle("sidebar-open", opened);
       if (sideHandle) {
         sideHandle.textContent = opened ? "‹" : "›";
-        sideHandle.setAttribute("aria-label", opened ? "收起侧边信息" : "展开侧边信息");
+        sideHandle.setAttribute("aria-label", opened ? "Collapse sidebar" : "Expand sidebar");
+        sideHandle.setAttribute("aria-expanded", String(opened));
       }
     }
 
@@ -1229,8 +1513,9 @@
         return;
       }
       const isFullscreen = Boolean(document.fullscreenElement);
-      fullscreenBtn.textContent = isFullscreen ? "退出全屏" : "全屏";
-      fullscreenBtn.title = isFullscreen ? "退出全屏" : "全屏";
+      fullscreenBtn.innerHTML = `<span class="btn-icon">${isFullscreen ? "⤡" : "⤢"}</span>`;
+      fullscreenBtn.title = isFullscreen ? "Exit fullscreen" : "Enter fullscreen";
+      fullscreenBtn.setAttribute("aria-label", isFullscreen ? "Exit fullscreen" : "Enter fullscreen");
     }
 
     if (fullscreenBtn) {
@@ -1257,7 +1542,7 @@
       }
     });
     eventBus.on("scalechanging", ({ scale }) => {
-      if (typeof scale === "number") {
+      if (!suppressScaleIndicator && typeof scale === "number") {
         showZoomIndicator(`${Math.round(scale * 100)}%`);
       }
     });
@@ -1324,8 +1609,8 @@
         if (box) {
           box.innerHTML = `
             <div class="loading-text"><span>PDF 加载失败</span></div>
-            <div style="font-size:12px;color:#6b7280;line-height:1.6;margin-bottom:10px;">请检查网络连接，或直接下载原文查看。</div>
-            <a class="btn" href="${activePdfUrl}" download><span class="btn-icon">↓</span> 下载 PDF</a>
+            <div style="font-size:12px;color:#6b7280;line-height:1.6;margin-bottom:10px;">Please check your connection, or download the PDF directly.</div>
+            <a class="btn" href="${activePdfUrl}" download><span class="btn-icon">↓</span> Download PDF</a>
           `;
         }
       }
@@ -1340,6 +1625,9 @@
       viewer.currentScaleValue = "page-fit";
       updatePageControls();
       setTimeout(hideOverlay, 300);
+      window.setTimeout(() => {
+        suppressScaleIndicator = false;
+      }, 500);
 
       let tocBuiltFromPdf = prebuiltTocApplied;
       if (prefersAutoToc) {
