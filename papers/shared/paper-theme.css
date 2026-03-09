@@ -971,11 +971,18 @@ body {
   background: var(--tf-panel-bg) !important;
   border-right: 1px solid var(--tf-panel-border) !important;
   color: var(--tf-panel-text) !important;
+  opacity: 0 !important;
   transform: translateX(calc(-1 * var(--sidebar-w))) !important;
   pointer-events: none !important;
+  transition:
+    transform 0.24s ease,
+    opacity 0.2s ease,
+    box-shadow 0.24s ease !important;
+  will-change: transform, opacity;
 }
 
 body.sidebar-open .side-panel {
+  opacity: 1 !important;
   transform: translateX(0) !important;
   pointer-events: auto !important;
   box-shadow: 10px 0 22px rgba(16, 22, 34, 0.18) !important;
@@ -1351,6 +1358,7 @@ body.find-open .tf-side-rail {
   top: var(--bar-h) !important;
   left: 0 !important;
   background: var(--tf-viewer-bg) !important;
+  transition: left 0.24s ease !important;
 }
 
 body.sidebar-open #viewerContainer {
