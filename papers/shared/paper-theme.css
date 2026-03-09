@@ -858,8 +858,8 @@ body {
 }
 
 .reader-page-jump input {
-  width: 4ch !important;
-  min-width: 4ch;
+  width: 4.5ch !important;
+  min-width: 4.5ch;
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
@@ -867,7 +867,10 @@ body {
   font-size: 12px !important;
   font-weight: 600 !important;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .reader-page-jump input:focus-visible {
