@@ -15,8 +15,8 @@
       "en": "Statistical Research"
     },
     "status": {
-      "zh": "状态：在投",
-      "en": "Status: Submitted"
+      "zh": "状态：初审",
+      "en": "Status: Initial Review"
     },
     "links": {
       "pdf": null,
@@ -39,7 +39,7 @@
       "zh": "侯健, 张丽平, 田茂再. 基于 Mallows 模型的大语言模型特征排序校准方法. 统计研究, 2025.",
       "en": "Hou, J., Zhang, L., & Tian, M. Feature Ranking Calibration for Large Language Models Based on the Mallows Model. Statistical Research, 2025."
     },
-    "bibtex": "@article{hou2025mallows,\n  title={Feature Ranking Calibration for Large Language Models Based on the Mallows Model},\n  author={Hou, Jian and Zhang, Liping and Tian, Maozai},\n  journal={Statistical Research},\n  year={2025},\n  note={Submitted}\n}",
+    "bibtex": "@article{hou2025mallows,\n  title={Feature Ranking Calibration for Large Language Models Based on the Mallows Model},\n  author={Hou, Jian and Zhang, Liping and Tian, Maozai},\n  journal={Statistical Research},\n  year={2025},\n  note={Initial review}\n}",
     "keywords": {
       "zh": [
         "Mallows 模型",
