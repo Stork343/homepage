@@ -1,6 +1,6 @@
 {
-  "updated": "2026-03-09",
-  "generated_at": "2026-03-09T00:00:00.000Z",
+  "updated": "2026-04-07",
+  "generated_at": "2026-04-07T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -18,8 +18,8 @@
         "en": "Statistical Research"
       },
       "status": {
-        "zh": "状态：在投",
-        "en": "Status: Submitted"
+        "zh": "状态：初审",
+        "en": "Status: Initial Review"
       },
       "keywords": {
         "zh": [
