@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-07",
+  "updated": "2026-05-04",
   "site": {
     "base_url": "https://stork343.github.io/homepage/",
     "owner": {
@@ -122,6 +122,67 @@
           "high-dimensional statistics",
           "debiased inference",
           "penalized estimation"
+        ]
+      }
+    },
+    {
+      "id": "qapsm-icu-bp",
+      "year": 2026,
+      "title": {
+        "zh": "A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories",
+        "en": "A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories"
+      },
+      "authors": "Hou Jian, Zhang Liping, Tian Maozai",
+      "venue": {
+        "zh": "Statistics in Medicine",
+        "en": "Statistics in Medicine"
+      },
+      "status": {
+        "zh": "Status: Manuscript",
+        "en": "Status: Manuscript"
+      },
+      "links": {
+        "pdf": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp.pdf",
+        "code": null,
+        "doi": null,
+        "html": null,
+        "article": null
+      },
+      "image": {
+        "src": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp-cover.png",
+        "width": 595,
+        "height": 782,
+        "alt": {
+          "zh": "Statistics in Medicine manuscript cover preview",
+          "en": "Statistics in Medicine manuscript cover preview"
+        }
+      },
+      "citation": {
+        "zh": "Hou Jian, Zhang Liping, Tian Maozai. A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories. Statistics in Medicine, 2026.",
+        "en": "Hou, J., Zhang, L., & Tian, M. A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories. Statistics in Medicine, 2026."
+      },
+      "bibtex": "@article{hou2026qapsm,\n  title={A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories},\n  author={Hou, Jian and Zhang, Liping and Tian, Maozai},\n  journal={Statistics in Medicine},\n  year={2026},\n  note={Manuscript}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "quantile regression",
+          "profiled-score mixed-effects representation",
+          "reduced-rank modeling",
+          "trajectory heterogeneity",
+          "intensive care unit",
+          "mean arterial pressure",
+          "irregular longitudinal data",
+          "MIMIC-IV"
+        ],
+        "en": [
+          "quantile regression",
+          "profiled-score mixed-effects representation",
+          "reduced-rank modeling",
+          "trajectory heterogeneity",
+          "intensive care unit",
+          "mean arterial pressure",
+          "irregular longitudinal data",
+          "MIMIC-IV"
         ]
       }
     },
