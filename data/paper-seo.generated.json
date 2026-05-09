@@ -9,8 +9,8 @@
         "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
       },
       "description": {
-        "zh": "Sparse-Smooth 空间变系数分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai. arXiv 预印本；Spatial Statistics, 2025.",
-        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression. Authors: Hou Jian, Meng Tan, Tian Maozai. arXiv preprint; Spatial Statistics, 2025."
+        "zh": "Sparse-Smooth 空间变系数分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle. arXiv 预印本；Spatial Statistics, 2025.",
+        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression. Authors: Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle. arXiv preprint; Spatial Statistics, 2…"
       },
       "keywords": [
         "空间统计",
@@ -45,6 +45,14 @@
           {
             "@type": "Person",
             "name": "Tian Maozai"
+          },
+          {
+            "@type": "Person",
+            "name": "Jianxin Pan"
+          },
+          {
+            "@type": "Person",
+            "name": "Wolfgang Karl Hardle"
           }
         ],
         "isPartOf": {
