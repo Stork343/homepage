@@ -193,7 +193,7 @@
       "zh": "Sparse-Smooth 空间变系数分位回归",
       "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
     },
-    "authors": "Hou Jian, Meng Tan, Tian Maozai",
+    "authors": "Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle",
     "venue": {
       "zh": "arXiv 预印本；Spatial Statistics",
       "en": "arXiv preprint; Spatial Statistics"
@@ -220,10 +220,10 @@
       }
     },
     "citation": {
-      "zh": "Hou Jian, Meng Tan, Tian Maozai. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025.",
-      "en": "Hou, J., Tan, M., & Tian, M. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025."
+      "zh": "Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025.",
+      "en": "Hou, J., Tan, M., Tian, M., Pan, J., & Hardle, W. K. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025."
     },
-    "bibtex": "@article{hou2025svcqr,\n  title={Sparse-Smooth Spatially Varying Coefficient Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2511.18106},\n  year={2025}\n}",
+    "bibtex": "@article{hou2025svcqr,\n  title={Sparse-Smooth Spatially Varying Coefficient Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai and Pan, Jianxin and Hardle, Wolfgang Karl},\n  journal={arXiv preprint arXiv:2511.18106},\n  year={2025}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
