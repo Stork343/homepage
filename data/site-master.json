@@ -187,6 +187,63 @@
       }
     },
     {
+      "id": "jss-sssvcqr",
+      "year": 2026,
+      "title": {
+        "zh": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R",
+        "en": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R"
+      },
+      "authors": "Hou Jian, Tian Maozai",
+      "venue": {
+        "zh": "Journal of Statistical Software",
+        "en": "Journal of Statistical Software"
+      },
+      "status": {
+        "zh": "状态：手稿",
+        "en": "Status: Manuscript"
+      },
+      "links": {
+        "pdf": null,
+        "code": "https://github.com/Stork343/sssvcqr",
+        "doi": null,
+        "html": null,
+        "article": null
+      },
+      "image": {
+        "src": "./papers/2026/jss-sssvcqr/jsslogo.jpg",
+        "width": 538,
+        "height": 392,
+        "alt": {
+          "zh": "Journal of Statistical Software logo preview",
+          "en": "Journal of Statistical Software logo preview"
+        }
+      },
+      "citation": {
+        "zh": "Hou Jian, Tian Maozai. sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R. Journal of Statistical Software, 2026.",
+        "en": "Hou, J., & Tian, M. sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R. Journal of Statistical Software, 2026."
+      },
+      "bibtex": "@article{hou2026jsssssvcqr,\n  title={sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R},\n  author={Hou, Jian and Tian, Maozai},\n  journal={Journal of Statistical Software},\n  year={2026},\n  note={Manuscript}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "quantile regression",
+          "spatial statistics",
+          "varying coefficient model",
+          "graph regularization",
+          "R package",
+          "ADMM"
+        ],
+        "en": [
+          "quantile regression",
+          "spatial statistics",
+          "varying coefficient model",
+          "graph regularization",
+          "R package",
+          "ADMM"
+        ]
+      }
+    },
+    {
       "id": "svcqr",
       "year": 2025,
       "title": {

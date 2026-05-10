@@ -132,6 +132,49 @@
       "paper_path": null
     },
     {
+      "id": "jss-sssvcqr",
+      "year": 2026,
+      "title": {
+        "zh": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R",
+        "en": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R"
+      },
+      "authors": {
+        "zh": "Hou Jian, Tian Maozai",
+        "en": "Hou Jian, Tian Maozai"
+      },
+      "venue": {
+        "zh": "Journal of Statistical Software",
+        "en": "Journal of Statistical Software"
+      },
+      "status": {
+        "zh": "状态：手稿",
+        "en": "Status: Manuscript"
+      },
+      "keywords": {
+        "zh": [
+          "quantile regression",
+          "spatial statistics",
+          "varying coefficient model",
+          "graph regularization",
+          "R package",
+          "ADMM"
+        ],
+        "en": [
+          "quantile regression",
+          "spatial statistics",
+          "varying coefficient model",
+          "graph regularization",
+          "R package",
+          "ADMM"
+        ]
+      },
+      "links": {
+        "article": null,
+        "pdf": null
+      },
+      "paper_path": null
+    },
+    {
       "id": "svcqr",
       "year": 2025,
       "title": {
