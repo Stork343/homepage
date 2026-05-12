@@ -819,7 +819,7 @@
     title.className = "publication-title";
 
     const titleLink = pub && pub.links
-      ? pub.links.article || pub.links.html || pub.links.pdf || null
+      ? pub.links.article || null
       : null;
     if (titleLink) {
       const a = document.createElement("a");
@@ -1064,7 +1064,7 @@
       const doiRaw = pub && pub.links ? String(pub.links.doi || "") : "";
       const doiMatch = doiRaw.match(/\b10\.\d{4,9}\/[-._;()/:A-Z0-9]+\b/i);
       const doi = doiMatch ? doiMatch[0] : "";
-      const urlRaw = pub && pub.links ? String(pub.links.article || pub.links.html || pub.links.pdf || "") : "";
+      const urlRaw = pub && pub.links ? String(pub.links.article || "") : "";
       const url = urlRaw && urlRaw.startsWith("http") ? urlRaw : "";
       return {
         id: String(pub.id || ""),

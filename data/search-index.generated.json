@@ -127,7 +127,7 @@
       },
       "links": {
         "article": null,
-        "pdf": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp.pdf"
+        "pdf": null
       },
       "paper_path": null
     },
@@ -190,8 +190,8 @@
         "en": "arXiv preprint; Spatial Statistics"
       },
       "status": {
-        "zh": "状态：接收",
-        "en": "Status: Accepted"
+        "zh": "状态：online",
+        "en": "Status: Online"
       },
       "keywords": {
         "zh": [
@@ -211,7 +211,7 @@
       },
       "links": {
         "article": "https://arxiv.org/abs/2511.18106",
-        "pdf": "./papers/2025/svcqr/svcqr.html"
+        "pdf": "https://www.sciencedirect.com/science/article/pii/S221167532600031X"
       },
       "paper_path": "papers/2025/svcqr/svcqr.html"
     },
