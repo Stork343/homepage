@@ -99,6 +99,12 @@ function buildPublications(master, metadataById) {
   return publications.map((pub) => {
     const output = { ...pub };
     delete output.paper_page;
+    const statusZh = localizedText(pub.status, "zh");
+    const statusEn = localizedText(pub.status, "en");
+    const isManuscript =
+      /手稿/i.test(statusZh) ||
+      /manuscript/i.test(statusZh) ||
+      /manuscript/i.test(statusEn);
     const metadata = metadataById.get(String(pub.id || ""));
     if (!output.links || typeof output.links !== "object") {
       output.links = {};
@@ -107,15 +113,6 @@ function buildPublications(master, metadataById) {
       if (!output.links.doi && metadata.doi_url) {
         output.links.doi = metadata.doi_url;
       }
-      if (!output.links.article && metadata.arxiv_abs) {
-        output.links.article = metadata.arxiv_abs;
-      }
-      if (!output.links.html && metadata.arxiv_abs) {
-        output.links.html = metadata.arxiv_abs;
-      }
-      if (!output.links.pdf && metadata.arxiv_pdf) {
-        output.links.pdf = metadata.arxiv_pdf;
-      }
       output.metadata = {
         ...(output.metadata && typeof output.metadata === "object" ? output.metadata : {}),
         doi: metadata.doi || "",
@@ -123,6 +120,9 @@ function buildPublications(master, metadataById) {
         source: metadata.source || "",
         checked_at: metadata.checked_at || ""
       };
+    }
+    if (isManuscript) {
+      output.links.pdf = null;
     }
     output.keywords = {
       zh: uniqueStringList(

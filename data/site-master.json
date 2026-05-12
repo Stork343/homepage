@@ -142,7 +142,7 @@
         "en": "Status: Manuscript"
       },
       "links": {
-        "pdf": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp.pdf",
+        "pdf": null,
         "code": null,
         "doi": null,
         "html": null,
@@ -256,11 +256,11 @@
         "en": "arXiv preprint; Spatial Statistics"
       },
       "status": {
-        "zh": "状态：接收",
-        "en": "Status: Accepted"
+        "zh": "状态：online",
+        "en": "Status: Online"
       },
       "links": {
-        "pdf": "./papers/2025/svcqr/svcqr.html",
+        "pdf": "https://www.sciencedirect.com/science/article/pii/S221167532600031X",
         "code": "https://github.com/Stork343/sssvcqr",
         "doi": null,
         "html": "https://arxiv.org/html/2511.18106v2",
