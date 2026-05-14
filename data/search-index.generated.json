@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-04",
-  "generated_at": "2026-05-04T00:00:00.000Z",
+  "updated": "2026-05-14",
+  "generated_at": "2026-05-14T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -176,42 +176,44 @@
     },
     {
       "id": "svcqr",
-      "year": 2025,
+      "year": 2026,
       "title": {
         "zh": "Sparse-Smooth 空间变系数分位回归",
         "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
       },
       "authors": {
-        "zh": "Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle",
-        "en": "Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle"
+        "zh": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle",
+        "en": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle"
       },
       "venue": {
-        "zh": "arXiv 预印本；Spatial Statistics",
-        "en": "arXiv preprint; Spatial Statistics"
+        "zh": "Spatial Statistics",
+        "en": "Spatial Statistics"
       },
       "status": {
-        "zh": "状态：online",
-        "en": "Status: Online"
+        "zh": "",
+        "en": ""
       },
       "keywords": {
         "zh": [
-          "空间统计",
-          "变系数模型",
-          "分位回归",
-          "稀疏平滑",
-          "房价建模"
+          "Quantile regression",
+          "Spatially varying coefficients",
+          "Graph Laplacian",
+          "Variable selection",
+          "Group lasso",
+          "ADMM"
         ],
         "en": [
-          "spatial statistics",
-          "varying coefficient model",
-          "quantile regression",
-          "sparse smooth",
-          "housing price"
+          "Quantile regression",
+          "Spatially varying coefficients",
+          "Graph Laplacian",
+          "Variable selection",
+          "Group lasso",
+          "ADMM"
         ]
       },
       "links": {
-        "article": "https://arxiv.org/abs/2511.18106",
-        "pdf": "https://www.sciencedirect.com/science/article/pii/S221167532600031X"
+        "article": "https://www.sciencedirect.com/science/article/pii/S221167532600031X",
+        "pdf": "./papers/2025/svcqr/svcqr.html"
       },
       "paper_path": "papers/2025/svcqr/svcqr.html"
     },

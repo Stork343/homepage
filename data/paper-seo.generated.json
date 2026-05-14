@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-04",
+  "updated": "2026-05-14",
   "papers": [
     {
       "id": "svcqr",
@@ -9,20 +9,16 @@
         "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
       },
       "description": {
-        "zh": "Sparse-Smooth 空间变系数分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle. arXiv 预印本；Spatial Statistics, 2025.",
-        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression. Authors: Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle. arXiv preprint; Spatial Statistics, 2…"
+        "zh": "Sparse-Smooth 空间变系数分位回归. 作者: Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. Spatial Statistics, Volume 74, 2026, 100983.",
+        "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression. Authors: Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. Spatial Statistics, Volume 74, 2026,…"
       },
       "keywords": [
-        "空间统计",
-        "变系数模型",
-        "分位回归",
-        "稀疏平滑",
-        "房价建模",
-        "spatial statistics",
-        "varying coefficient model",
-        "quantile regression",
-        "sparse smooth",
-        "housing price"
+        "Quantile regression",
+        "Spatially varying coefficients",
+        "Graph Laplacian",
+        "Variable selection",
+        "Group lasso",
+        "ADMM"
       ],
       "canonical": "https://stork343.github.io/homepage/papers/2025/svcqr/svcqr.html",
       "og_image": "https://stork343.github.io/homepage/papers/2025/svcqr/spatial-statistics-cover.webp",
@@ -32,19 +28,19 @@
         "name": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression",
         "headline": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression",
         "inLanguage": "en",
-        "datePublished": "2025",
+        "datePublished": "2026",
         "author": [
           {
             "@type": "Person",
-            "name": "Hou Jian"
+            "name": "Jian Hou"
           },
           {
             "@type": "Person",
-            "name": "Meng Tan"
+            "name": "Tan Meng"
           },
           {
             "@type": "Person",
-            "name": "Tian Maozai"
+            "name": "Maozai Tian"
           },
           {
             "@type": "Person",
@@ -52,17 +48,21 @@
           },
           {
             "@type": "Person",
-            "name": "Wolfgang Karl Hardle"
+            "name": "Wolfgang Karl Härdle"
           }
         ],
         "isPartOf": {
           "@type": "Periodical",
-          "name": "arXiv preprint; Spatial Statistics"
+          "name": "Spatial Statistics",
+          "volumeNumber": "74"
         },
         "url": "https://stork343.github.io/homepage/papers/2025/svcqr/svcqr.html",
         "image": "https://stork343.github.io/homepage/papers/2025/svcqr/spatial-statistics-cover.webp",
+        "pagination": "100983",
+        "identifier": "https://doi.org/10.1016/j.spasta.2026.100983",
         "sameAs": [
-          "https://arxiv.org/abs/2511.18106"
+          "https://doi.org/10.1016/j.spasta.2026.100983",
+          "https://www.sciencedirect.com/science/article/pii/S221167532600031X"
         ]
       }
     },
