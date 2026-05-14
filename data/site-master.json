@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-04",
+  "updated": "2026-05-14",
   "site": {
     "base_url": "https://stork343.github.io/homepage/",
     "owner": {
@@ -245,26 +245,26 @@
     },
     {
       "id": "svcqr",
-      "year": 2025,
+      "year": 2026,
       "title": {
         "zh": "Sparse-Smooth 空间变系数分位回归",
         "en": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression"
       },
-      "authors": "Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle",
+      "authors": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle",
       "venue": {
-        "zh": "arXiv 预印本；Spatial Statistics",
-        "en": "arXiv preprint; Spatial Statistics"
+        "zh": "Spatial Statistics",
+        "en": "Spatial Statistics"
       },
       "status": {
-        "zh": "状态：online",
-        "en": "Status: Online"
+        "zh": "",
+        "en": ""
       },
       "links": {
-        "pdf": "https://www.sciencedirect.com/science/article/pii/S221167532600031X",
+        "pdf": "./papers/2025/svcqr/svcqr.html",
         "code": "https://github.com/Stork343/sssvcqr",
-        "doi": null,
-        "html": "https://arxiv.org/html/2511.18106v2",
-        "article": "https://arxiv.org/abs/2511.18106"
+        "doi": "https://doi.org/10.1016/j.spasta.2026.100983",
+        "html": "https://www.sciencedirect.com/science/article/pii/S221167532600031X",
+        "article": "https://www.sciencedirect.com/science/article/pii/S221167532600031X"
       },
       "image": {
         "src": "./papers/2025/svcqr/spatial-statistics-cover.jpg",
@@ -277,25 +277,37 @@
         }
       },
       "citation": {
-        "zh": "Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl Hardle. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025.",
-        "en": "Hou, J., Tan, M., Tian, M., Pan, J., & Hardle, W. K. Sparse-Smooth Spatially Varying Coefficient Quantile Regression. arXiv:2511.18106, 2025."
+        "zh": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. Sparse–smooth spatially varying coefficient quantile regression. Spatial Statistics, Volume 74, 2026, 100983, ISSN 2211-6753. https://doi.org/10.1016/j.spasta.2026.100983.",
+        "en": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. Sparse–smooth spatially varying coefficient quantile regression. Spatial Statistics, Volume 74, 2026, 100983, ISSN 2211-6753. https://doi.org/10.1016/j.spasta.2026.100983."
       },
-      "bibtex": "@article{hou2025svcqr,\n  title={Sparse-Smooth Spatially Varying Coefficient Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai and Pan, Jianxin and Hardle, Wolfgang Karl},\n  journal={arXiv preprint arXiv:2511.18106},\n  year={2025}\n}",
+      "bibtex": "@article{hou2026svcqr,\n  title={Sparse--smooth spatially varying coefficient quantile regression},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai and Pan, Jianxin and Härdle, Wolfgang Karl},\n  journal={Spatial Statistics},\n  volume={74},\n  pages={100983},\n  year={2026},\n  issn={2211-6753},\n  doi={10.1016/j.spasta.2026.100983},\n  url={https://www.sciencedirect.com/science/article/pii/S221167532600031X}\n}",
+      "publication_info": {
+        "display": {
+          "zh": "Volume 74, 2026, 100983",
+          "en": "Volume 74, 2026, 100983"
+        },
+        "date_published": "2026",
+        "volume": "74",
+        "article_number": "100983",
+        "issn": "2211-6753"
+      },
       "force_english_display": true,
       "keywords": {
         "zh": [
-          "空间统计",
-          "变系数模型",
-          "分位回归",
-          "稀疏平滑",
-          "房价建模"
+          "Quantile regression",
+          "Spatially varying coefficients",
+          "Graph Laplacian",
+          "Variable selection",
+          "Group lasso",
+          "ADMM"
         ],
         "en": [
-          "spatial statistics",
-          "varying coefficient model",
-          "quantile regression",
-          "sparse smooth",
-          "housing price"
+          "Quantile regression",
+          "Spatially varying coefficients",
+          "Graph Laplacian",
+          "Variable selection",
+          "Group lasso",
+          "ADMM"
         ]
       },
       "paper_page": {

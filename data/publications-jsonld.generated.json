@@ -108,15 +108,15 @@
         "author": [
           {
             "@type": "Person",
-            "name": "Hou Jian"
+            "name": "Jian Hou"
           },
           {
             "@type": "Person",
-            "name": "Meng Tan"
+            "name": "Tan Meng"
           },
           {
             "@type": "Person",
-            "name": "Tian Maozai"
+            "name": "Maozai Tian"
           },
           {
             "@type": "Person",
@@ -124,12 +124,13 @@
           },
           {
             "@type": "Person",
-            "name": "Wolfgang Karl Hardle"
+            "name": "Wolfgang Karl Härdle"
           }
         ],
-        "datePublished": "2025",
-        "isPartOf": "arXiv preprint; Spatial Statistics",
-        "url": "https://arxiv.org/abs/2511.18106"
+        "datePublished": "2026",
+        "isPartOf": "Spatial Statistics",
+        "url": "https://www.sciencedirect.com/science/article/pii/S221167532600031X",
+        "identifier": "https://doi.org/10.1016/j.spasta.2026.100983"
       }
     },
     {
