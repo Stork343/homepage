@@ -199,8 +199,8 @@
       "en": "Journal of Statistical Software"
     },
     "status": {
-      "zh": "状态：手稿",
-      "en": "Status: Manuscript"
+      "zh": "状态：已投稿",
+      "en": "Status: Submitted"
     },
     "links": {
       "pdf": null,
@@ -222,7 +222,7 @@
       "zh": "Hou Jian, Tian Maozai. sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R. Journal of Statistical Software, 2026.",
       "en": "Hou, J., & Tian, M. sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R. Journal of Statistical Software, 2026."
     },
-    "bibtex": "@article{hou2026jsssssvcqr,\n  title={sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R},\n  author={Hou, Jian and Tian, Maozai},\n  journal={Journal of Statistical Software},\n  year={2026},\n  note={Manuscript}\n}",
+    "bibtex": "@article{hou2026jsssssvcqr,\n  title={sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R},\n  author={Hou, Jian and Tian, Maozai},\n  journal={Journal of Statistical Software},\n  year={2026},\n  note={Submitted}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
