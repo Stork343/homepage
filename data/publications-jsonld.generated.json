@@ -87,11 +87,23 @@
         "author": [
           {
             "@type": "Person",
-            "name": "Hou Jian"
+            "name": "Jian Hou"
           },
           {
             "@type": "Person",
-            "name": "Tian Maozai"
+            "name": "Tan Meng"
+          },
+          {
+            "@type": "Person",
+            "name": "Maozai Tian"
+          },
+          {
+            "@type": "Person",
+            "name": "Jianxin Pan"
+          },
+          {
+            "@type": "Person",
+            "name": "Wolfgang Karl Härdle"
           }
         ],
         "datePublished": "2026",
