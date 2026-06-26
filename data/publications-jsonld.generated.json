@@ -83,7 +83,7 @@
       "position": 4,
       "item": {
         "@type": "ScholarlyArticle",
-        "name": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R",
+        "name": "Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression",
         "author": [
           {
             "@type": "Person",
@@ -107,8 +107,8 @@
           }
         ],
         "datePublished": "2026",
-        "isPartOf": "Journal of Statistical Software",
-        "url": "https://stork343.github.io/homepage/#publication-jss-sssvcqr"
+        "isPartOf": "ACM Transactions on Mathematical Software",
+        "url": "https://stork343.github.io/homepage/#publication-toms-sssvcqr"
       }
     },
     {

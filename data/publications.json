@@ -15,8 +15,8 @@
       "en": "Statistical Research"
     },
     "status": {
-      "zh": "状态:初审",
-      "en": "状态:初审"
+      "zh": "状态：外审",
+      "en": "Status: External Review"
     },
     "links": {
       "pdf": null,
@@ -39,7 +39,7 @@
       "zh": "侯健, 张丽平, 田茂再. 基于 Mallows 模型的大语言模型特征排序校准方法. 统计研究, 2025.",
       "en": "Hou, J., Zhang, L., & Tian, M. Feature Ranking Calibration for Large Language Models Based on the Mallows Model. Statistical Research, 2025."
     },
-    "bibtex": "@article{hou2025mallows,\n  title={Feature Ranking Calibration for Large Language Models Based on the Mallows Model},\n  author={Hou, Jian and Zhang, Liping and Tian, Maozai},\n  journal={Statistical Research},\n  year={2025},\n  note={状态:初审}\n}",
+    "bibtex": "@article{hou2025mallows,\n  title={Feature Ranking Calibration for Large Language Models Based on the Mallows Model},\n  author={Hou, Jian and Zhang, Liping and Tian, Maozai},\n  journal={Statistical Research},\n  year={2025},\n  note={Under external review}\n}",
     "keywords": {
       "zh": [
         "Mallows 模型",
@@ -76,8 +76,8 @@
       "en": "Statistica Sinica"
     },
     "status": {
-      "zh": "状态：准备投稿",
-      "en": "Status: In Preparation"
+      "zh": "状态：手稿",
+      "en": "Status: Manuscript"
     },
     "links": {
       "pdf": null,
@@ -100,7 +100,7 @@
       "zh": "Hou Jian, Meng Tan, Tian Maozai. 高维混合效应分位回归的联合惩罚与去偏推断. Statistica Sinica, 2025.",
       "en": "Hou, J., Tan, M., & Tian, M. Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression. Statistica Sinica, 2025."
     },
-    "bibtex": "@article{hou2025jpdi,\n  title={Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Statistica Sinica},\n  year={2025},\n  note={In preparation}\n}",
+    "bibtex": "@article{hou2025jpdi,\n  title={Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Statistica Sinica},\n  year={2025},\n  note={Manuscript}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
@@ -187,20 +187,20 @@
     }
   },
   {
-    "id": "jss-sssvcqr",
+    "id": "toms-sssvcqr",
     "year": 2026,
     "title": {
-      "zh": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R",
-      "en": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R"
+      "zh": "Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression",
+      "en": "Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression"
     },
     "authors": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle",
     "venue": {
-      "zh": "Journal of Statistical Software",
-      "en": "Journal of Statistical Software"
+      "zh": "ACM Transactions on Mathematical Software",
+      "en": "ACM Transactions on Mathematical Software"
     },
     "status": {
-      "zh": "状态：已投稿",
-      "en": "Status: Submitted"
+      "zh": "状态：外审",
+      "en": "Status: Under Review"
     },
     "links": {
       "pdf": null,
@@ -210,19 +210,19 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2026/jss-sssvcqr/jsslogo.jpg",
-      "width": 538,
-      "height": 392,
+      "src": "./papers/2026/toms-sssvcqr/toms-header.png",
+      "width": 780,
+      "height": 138,
       "alt": {
-        "zh": "Journal of Statistical Software logo preview",
-        "en": "Journal of Statistical Software logo preview"
+        "zh": "ACM Transactions on Mathematical Software 标识",
+        "en": "ACM Transactions on Mathematical Software masthead"
       }
     },
     "citation": {
-      "zh": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R. Journal of Statistical Software, 2026.",
-      "en": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R. Journal of Statistical Software, 2026."
+      "zh": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression. ACM Transactions on Mathematical Software, 2026.",
+      "en": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle. Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression. ACM Transactions on Mathematical Software, 2026."
     },
-    "bibtex": "@article{hou2026jsssssvcqr,\n  title={sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai and Pan, Jianxin and Härdle, Wolfgang Karl},\n  journal={Journal of Statistical Software},\n  year={2026},\n  note={Submitted}\n}",
+    "bibtex": "@article{hou2026tomssssvcqr,\n  title={Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai and Pan, Jianxin and Härdle, Wolfgang Karl},\n  journal={ACM Transactions on Mathematical Software},\n  year={2026},\n  note={Under review}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
@@ -401,8 +401,8 @@
       "en": "arXiv preprint; Statistical Papers"
     },
     "status": {
-      "zh": "状态：1st revise",
-      "en": "Status: 1st revise"
+      "zh": "状态：外审（一修）",
+      "en": "Status: Under Review (1st revise)"
     },
     "links": {
       "pdf": "https://arxiv.org/pdf/2510.24352",
@@ -425,7 +425,7 @@
       "zh": "Hou Jian, Meng Tan, Tian Maozai. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025.",
       "en": "Hou, J., Tan, M., & Tian, M. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025."
     },
-    "bibtex": "@article{hou2025snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2510.24352},\n  year={2025}\n}",
+    "bibtex": "@article{hou2025snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2510.24352},\n  year={2025},\n  note={Under review (1st revise)}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [

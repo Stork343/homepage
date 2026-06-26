@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-14",
-  "generated_at": "2026-05-14T00:00:00.000Z",
+  "updated": "2026-06-26",
+  "generated_at": "2026-06-26T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -18,8 +18,8 @@
         "en": "Statistical Research"
       },
       "status": {
-        "zh": "状态:初审",
-        "en": "状态:初审"
+        "zh": "状态：外审",
+        "en": "Status: External Review"
       },
       "keywords": {
         "zh": [
@@ -59,8 +59,8 @@
         "en": "Statistica Sinica"
       },
       "status": {
-        "zh": "状态：准备投稿",
-        "en": "Status: In Preparation"
+        "zh": "状态：手稿",
+        "en": "Status: Manuscript"
       },
       "keywords": {
         "zh": [
@@ -132,23 +132,23 @@
       "paper_path": null
     },
     {
-      "id": "jss-sssvcqr",
+      "id": "toms-sssvcqr",
       "year": 2026,
       "title": {
-        "zh": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R",
-        "en": "sssvcqr: Sparse-Smooth Spatially Varying Coefficient Quantile Regression in R"
+        "zh": "Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression",
+        "en": "Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression"
       },
       "authors": {
         "zh": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle",
         "en": "Jian Hou, Tan Meng, Maozai Tian, Jianxin Pan, Wolfgang Karl Härdle"
       },
       "venue": {
-        "zh": "Journal of Statistical Software",
-        "en": "Journal of Statistical Software"
+        "zh": "ACM Transactions on Mathematical Software",
+        "en": "ACM Transactions on Mathematical Software"
       },
       "status": {
-        "zh": "状态：已投稿",
-        "en": "Status: Submitted"
+        "zh": "状态：外审",
+        "en": "Status: Under Review"
       },
       "keywords": {
         "zh": [
@@ -274,8 +274,8 @@
         "en": "arXiv preprint; Statistical Papers"
       },
       "status": {
-        "zh": "状态：1st revise",
-        "en": "Status: 1st revise"
+        "zh": "状态：外审（一修）",
+        "en": "Status: Under Review (1st revise)"
       },
       "keywords": {
         "zh": [
