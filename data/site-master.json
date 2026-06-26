@@ -210,12 +210,12 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2026/toms-sssvcqr/toms-header.png",
-        "width": 780,
-        "height": 138,
+        "src": "./papers/2026/toms-sssvcqr/toms-cover.png",
+        "width": 1530,
+        "height": 1980,
         "alt": {
-          "zh": "ACM Transactions on Mathematical Software 标识",
-          "en": "ACM Transactions on Mathematical Software masthead"
+          "zh": "ACM TOMS 投稿论文首页缩略图",
+          "en": "First-page thumbnail of the ACM TOMS manuscript"
         }
       },
       "citation": {
