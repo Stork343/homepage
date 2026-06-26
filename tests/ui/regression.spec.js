@@ -71,7 +71,7 @@ test('Language rules: SCI cards keep English in zh, profile name becomes English
   await expect(
     page
       .locator('#publications-list .publication-card')
-      .filter({ hasText: 'Sparse-Smooth Spatially Varying Coefficient Quantile Regression' })
+      .filter({ hasText: 'Algorithm XXXX: sssvcqr' })
       .first()
   ).toBeVisible();
 
@@ -80,7 +80,7 @@ test('Language rules: SCI cards keep English in zh, profile name becomes English
   await expect(
     page
       .locator('#publications-list .publication-card')
-      .filter({ hasText: 'Sparse-Smooth Spatially Varying Coefficient Quantile Regression' })
+      .filter({ hasText: 'Algorithm XXXX: sssvcqr' })
       .first()
   ).toBeVisible();
 });
