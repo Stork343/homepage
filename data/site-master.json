@@ -530,8 +530,8 @@
         "en": "Acta Mathematicae Applicatae Sinica"
       },
       "status": {
-        "zh": "状态：二修复审",
-        "en": "Status: Second Revision Under Re-Review"
+        "zh": "状态：录用",
+        "en": "Status: Accepted"
       },
       "links": {
         "pdf": null,
@@ -554,7 +554,7 @@
         "zh": "侯健, 刘硕, 田茂再. 部分线性地理加权分位回归模型. 应用数学学报, 2025.",
         "en": "Hou, J., Liu, S., & Tian, M. Partially Linear Geographically Weighted Quantile Regression. Acta Mathematicae Applicatae Sinica, 2025."
       },
-      "bibtex": "@article{hou2025plgwqr,\n  title={Partially Linear Geographically Weighted Quantile Regression},\n  author={Hou, Jian and Liu, Shuo and Tian, Maozai},\n  journal={Acta Mathematicae Applicatae Sinica},\n  year={2025},\n  note={Under re-review}\n}",
+      "bibtex": "@article{hou2025plgwqr,\n  title={Partially Linear Geographically Weighted Quantile Regression},\n  author={Hou, Jian and Liu, Shuo and Tian, Maozai},\n  journal={Acta Mathematicae Applicatae Sinica},\n  year={2025},\n  note={Accepted}\n}",
       "keywords": {
         "zh": [
           "地理加权回归",
