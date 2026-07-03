@@ -1182,7 +1182,7 @@
     }
 
     let hadCachedData = false;
-    const cacheKey = "homepage-publications-cache-v4";
+    const cacheKey = "homepage-publications-cache-v5";
     try {
       const cached = getStorageItem(cacheKey);
       if (cached) {
