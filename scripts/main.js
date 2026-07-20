@@ -60,7 +60,7 @@
       nav_cv: "简历",
       nav_contact: "联系方式",
       profile_name: "侯健",
-      profile_title: "统计学在读博士 | 初级统计师",
+      profile_title: "统计学博士 管理科学与工程博士后",
       profile_desc: "主要关注分位回归、鞍点逼近、混合效应建模等领域。",
       research_title: "研究领域",
       research_qr_title: "分位回归",
@@ -134,7 +134,7 @@
       nav_cv: "CV",
       nav_contact: "Contact",
       profile_name: "Hou Jian",
-      profile_title: "PhD Candidate in Statistics | Junior Statistician",
+      profile_title: "PhD in Statistics | Postdoctoral Fellow in Management Science and Engineering",
       profile_desc: "Research interests include quantile regression, saddlepoint approximation, and mixed-effects modeling.",
       research_title: "Research Areas",
       research_qr_title: "Quantile Regression",
@@ -1182,7 +1182,7 @@
     }
 
     let hadCachedData = false;
-    const cacheKey = "homepage-publications-cache-v5";
+    const cacheKey = "homepage-publications-cache-v6";
     try {
       const cached = getStorageItem(cacheKey);
       if (cached) {
