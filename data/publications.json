@@ -187,6 +187,63 @@
     }
   },
   {
+    "id": "qvsd-spatiotemporal-extremes",
+    "year": 2026,
+    "title": {
+      "zh": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes",
+      "en": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes"
+    },
+    "authors": "Jian Hou",
+    "venue": {
+      "zh": "Journal of Computational and Graphical Statistics",
+      "en": "Journal of Computational and Graphical Statistics"
+    },
+    "status": {
+      "zh": "状态：手稿",
+      "en": "Status: Manuscript"
+    },
+    "links": {
+      "pdf": null,
+      "code": null,
+      "doi": null,
+      "html": null,
+      "article": null
+    },
+    "image": {
+      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.png",
+      "width": 850,
+      "height": 1100,
+      "alt": {
+        "zh": "JCGS 手稿首页缩略图",
+        "en": "First-page thumbnail of the JCGS manuscript"
+      }
+    },
+    "citation": {
+      "zh": "Hou, J. A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes. Journal of Computational and Graphical Statistics, 2026.",
+      "en": "Hou, J. A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes. Journal of Computational and Graphical Statistics, 2026."
+    },
+    "bibtex": "@article{hou2026qvsd,\n  title={A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes},\n  author={Hou, Jian},\n  journal={Journal of Computational and Graphical Statistics},\n  year={2026},\n  note={Manuscript}\n}",
+    "force_english_display": true,
+    "keywords": {
+      "zh": [
+        "quantile-dependent spatial dependence",
+        "spatio-temporal quantile regression",
+        "extreme event attribution",
+        "wet-bulb temperature",
+        "variogram analysis",
+        "bootstrap inference"
+      ],
+      "en": [
+        "quantile-dependent spatial dependence",
+        "spatio-temporal quantile regression",
+        "extreme event attribution",
+        "wet-bulb temperature",
+        "variogram analysis",
+        "bootstrap inference"
+      ]
+    }
+  },
+  {
     "id": "toms-sssvcqr",
     "year": 2026,
     "title": {
@@ -401,8 +458,8 @@
       "en": "arXiv preprint; Statistical Papers"
     },
     "status": {
-      "zh": "状态：外审（一修）",
-      "en": "Status: Under Review (1st revise)"
+      "zh": "状态：录用",
+      "en": "Status: Accepted"
     },
     "links": {
       "pdf": "https://arxiv.org/pdf/2510.24352",
@@ -425,7 +482,7 @@
       "zh": "Hou Jian, Meng Tan, Tian Maozai. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025.",
       "en": "Hou, J., Tan, M., & Tian, M. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025."
     },
-    "bibtex": "@article{hou2025snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2510.24352},\n  year={2025},\n  note={Under review (1st revise)}\n}",
+    "bibtex": "@article{hou2025snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2510.24352},\n  year={2025},\n  note={Accepted}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
@@ -466,8 +523,8 @@
       "en": "Acta Mathematicae Applicatae Sinica"
     },
     "status": {
-      "zh": "状态：二修复审",
-      "en": "Status: Second Revision Under Re-Review"
+      "zh": "状态：录用",
+      "en": "Status: Accepted"
     },
     "links": {
       "pdf": null,
@@ -490,7 +547,7 @@
       "zh": "侯健, 刘硕, 田茂再. 部分线性地理加权分位回归模型. 应用数学学报, 2025.",
       "en": "Hou, J., Liu, S., & Tian, M. Partially Linear Geographically Weighted Quantile Regression. Acta Mathematicae Applicatae Sinica, 2025."
     },
-    "bibtex": "@article{hou2025plgwqr,\n  title={Partially Linear Geographically Weighted Quantile Regression},\n  author={Hou, Jian and Liu, Shuo and Tian, Maozai},\n  journal={Acta Mathematicae Applicatae Sinica},\n  year={2025},\n  note={Under re-review}\n}",
+    "bibtex": "@article{hou2025plgwqr,\n  title={Partially Linear Geographically Weighted Quantile Regression},\n  author={Hou, Jian and Liu, Shuo and Tian, Maozai},\n  journal={Acta Mathematicae Applicatae Sinica},\n  year={2025},\n  note={Accepted}\n}",
     "keywords": {
       "zh": [
         "地理加权回归",
