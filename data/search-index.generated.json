@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-26",
-  "generated_at": "2026-06-26T00:00:00.000Z",
+  "updated": "2026-07-20",
+  "generated_at": "2026-07-20T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -123,6 +123,49 @@
           "mean arterial pressure",
           "irregular longitudinal data",
           "MIMIC-IV"
+        ]
+      },
+      "links": {
+        "article": null,
+        "pdf": null
+      },
+      "paper_path": null
+    },
+    {
+      "id": "qvsd-spatiotemporal-extremes",
+      "year": 2026,
+      "title": {
+        "zh": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes",
+        "en": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes"
+      },
+      "authors": {
+        "zh": "Jian Hou",
+        "en": "Jian Hou"
+      },
+      "venue": {
+        "zh": "Journal of Computational and Graphical Statistics",
+        "en": "Journal of Computational and Graphical Statistics"
+      },
+      "status": {
+        "zh": "状态：手稿",
+        "en": "Status: Manuscript"
+      },
+      "keywords": {
+        "zh": [
+          "quantile-dependent spatial dependence",
+          "spatio-temporal quantile regression",
+          "extreme event attribution",
+          "wet-bulb temperature",
+          "variogram analysis",
+          "bootstrap inference"
+        ],
+        "en": [
+          "quantile-dependent spatial dependence",
+          "spatio-temporal quantile regression",
+          "extreme event attribution",
+          "wet-bulb temperature",
+          "variogram analysis",
+          "bootstrap inference"
         ]
       },
       "links": {
@@ -274,8 +317,8 @@
         "en": "arXiv preprint; Statistical Papers"
       },
       "status": {
-        "zh": "状态：外审（一修）",
-        "en": "Status: Under Review (1st revise)"
+        "zh": "状态：录用",
+        "en": "Status: Accepted"
       },
       "keywords": {
         "zh": [
@@ -315,8 +358,8 @@
         "en": "Acta Mathematicae Applicatae Sinica"
       },
       "status": {
-        "zh": "状态：二修复审",
-        "en": "Status: Second Revision Under Re-Review"
+        "zh": "状态：录用",
+        "en": "Status: Accepted"
       },
       "keywords": {
         "zh": [
