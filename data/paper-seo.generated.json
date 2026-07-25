@@ -74,8 +74,8 @@
         "en": "Hierarchical composite quantile regression with adaptive Lasso"
       },
       "description": {
-        "zh": "带自适应 Lasso 的分层复合分位回归. 作者: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, Volume 245, December 2026, 106390.",
-        "en": "Hierarchical composite quantile regression with adaptive Lasso. Authors: Hou Jian, Meng Tan, Tian Maozai. Journal of Statistical Planning and Inference, Volume 245, December 2026,…"
+        "zh": "带自适应 Lasso 的分层复合分位回归. 作者: Jian Hou, Tan Meng, Maozai Tian. Journal of Statistical Planning and Inference, Volume 245, December 2026, 106390.",
+        "en": "Hierarchical composite quantile regression with adaptive Lasso. Authors: Jian Hou, Tan Meng, Maozai Tian. Journal of Statistical Planning and Inference, Volume 245, December 2026,…"
       },
       "keywords": [
         "分层模型",
@@ -101,15 +101,15 @@
         "author": [
           {
             "@type": "Person",
-            "name": "Hou Jian"
+            "name": "Jian Hou"
           },
           {
             "@type": "Person",
-            "name": "Meng Tan"
+            "name": "Tan Meng"
           },
           {
             "@type": "Person",
-            "name": "Tian Maozai"
+            "name": "Maozai Tian"
           }
         ],
         "isPartOf": {
