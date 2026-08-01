@@ -83,11 +83,19 @@
       "position": 4,
       "item": {
         "@type": "ScholarlyArticle",
-        "name": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes",
+        "name": "Spectral Detection of Spatial Homogenization During Extreme Climate Events",
         "author": [
           {
             "@type": "Person",
             "name": "Jian Hou"
+          },
+          {
+            "@type": "Person",
+            "name": "Tan Meng"
+          },
+          {
+            "@type": "Person",
+            "name": "Maozai Tian"
           }
         ],
         "datePublished": "2026",
