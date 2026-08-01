@@ -303,7 +303,7 @@
     },
     {
       "id": "snqesa",
-      "year": 2025,
+      "year": 2026,
       "title": {
         "zh": "自标准化分位经验鞍点逼近",
         "en": "Self-Normalized Quantile Empirical Saddlepoint Approximation"
@@ -313,12 +313,12 @@
         "en": "Hou Jian, Meng Tan, Tian Maozai"
       },
       "venue": {
-        "zh": "arXiv 预印本；Statistical Papers",
-        "en": "arXiv preprint; Statistical Papers"
+        "zh": "Statistical Papers",
+        "en": "Statistical Papers"
       },
       "status": {
-        "zh": "状态：录用",
-        "en": "Status: Accepted"
+        "zh": "",
+        "en": ""
       },
       "keywords": {
         "zh": [
@@ -337,8 +337,8 @@
         ]
       },
       "links": {
-        "article": "https://arxiv.org/abs/2510.24352",
-        "pdf": "https://arxiv.org/pdf/2510.24352"
+        "article": "https://link.springer.com/article/10.1007/s00362-026-01882-3",
+        "pdf": "https://link.springer.com/content/pdf/10.1007/s00362-026-01882-3.pdf"
       },
       "paper_path": null
     },
