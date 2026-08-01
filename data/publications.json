@@ -447,26 +447,26 @@
   },
   {
     "id": "snqesa",
-    "year": 2025,
+    "year": 2026,
     "title": {
       "zh": "自标准化分位经验鞍点逼近",
       "en": "Self-Normalized Quantile Empirical Saddlepoint Approximation"
     },
     "authors": "Hou Jian, Meng Tan, Tian Maozai",
     "venue": {
-      "zh": "arXiv 预印本；Statistical Papers",
-      "en": "arXiv preprint; Statistical Papers"
+      "zh": "Statistical Papers",
+      "en": "Statistical Papers"
     },
     "status": {
-      "zh": "状态：录用",
-      "en": "Status: Accepted"
+      "zh": "",
+      "en": ""
     },
     "links": {
-      "pdf": "https://arxiv.org/pdf/2510.24352",
+      "pdf": "https://link.springer.com/content/pdf/10.1007/s00362-026-01882-3.pdf",
       "code": "https://github.com/Stork343/self-normalized-quantile-saddlepoint",
-      "doi": "https://doi.org/10.48550/arXiv.2510.24352",
-      "html": "https://arxiv.org/html/2510.24352v1",
-      "article": "https://arxiv.org/abs/2510.24352"
+      "doi": "https://doi.org/10.1007/s00362-026-01882-3",
+      "html": "https://link.springer.com/article/10.1007/s00362-026-01882-3",
+      "article": "https://link.springer.com/article/10.1007/s00362-026-01882-3"
     },
     "image": {
       "src": "./papers/2025/snqesa/statistical-papers-cover-2019.jpg",
@@ -479,10 +479,20 @@
       }
     },
     "citation": {
-      "zh": "Hou Jian, Meng Tan, Tian Maozai. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025.",
-      "en": "Hou, J., Tan, M., & Tian, M. Self-Normalized Quantile Empirical Saddlepoint Approximation. arXiv:2510.24352, 2025."
+      "zh": "Hou Jian, Meng Tan, Tian Maozai. Self-Normalized Quantile Empirical Saddlepoint Approximation. Statistical Papers, 67(5), 106. https://doi.org/10.1007/s00362-026-01882-3.",
+      "en": "Hou, J., Tan, M., & Tian, M. (2026). Self-Normalized Quantile Empirical Saddlepoint Approximation. Statistical Papers, 67(5), 106. https://doi.org/10.1007/s00362-026-01882-3."
     },
-    "bibtex": "@article{hou2025snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={arXiv preprint arXiv:2510.24352},\n  year={2025},\n  note={Accepted}\n}",
+    "bibtex": "@article{hou2026snqesa,\n  title={Self-Normalized Quantile Empirical Saddlepoint Approximation},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Statistical Papers},\n  volume={67},\n  number={5},\n  year={2026},\n  pages={106},\n  doi={10.1007/s00362-026-01882-3}\n}",
+    "publication_info": {
+      "display": {
+        "zh": "Volume 67, Issue 5, October 2026, 106",
+        "en": "Volume 67, Issue 5, October 2026, 106"
+      },
+      "date_published": "2026-10",
+      "volume": "67",
+      "issue": "5",
+      "article_number": "106"
+    },
     "force_english_display": true,
     "keywords": {
       "zh": [
@@ -501,7 +511,7 @@
       ]
     },
     "metadata": {
-      "doi": "10.48550/arXiv.2510.24352",
+      "doi": "10.1007/s00362-026-01882-3",
       "arxiv_id": "2510.24352",
       "source": "local-links",
       "checked_at": "2026-02-24T19:40:44.381Z"
