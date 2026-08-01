@@ -190,10 +190,10 @@
     "id": "qvsd-spatiotemporal-extremes",
     "year": 2026,
     "title": {
-      "zh": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes",
-      "en": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes"
+      "zh": "Spectral Detection of Spatial Homogenization During Extreme Climate Events",
+      "en": "Spectral Detection of Spatial Homogenization During Extreme Climate Events"
     },
-    "authors": "Jian Hou",
+    "authors": "Jian Hou, Tan Meng, Maozai Tian",
     "venue": {
       "zh": "Journal of Computational and Graphical Statistics",
       "en": "Journal of Computational and Graphical Statistics"
@@ -219,10 +219,10 @@
       }
     },
     "citation": {
-      "zh": "Hou, J. A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes. Journal of Computational and Graphical Statistics, 2026.",
-      "en": "Hou, J. A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes. Journal of Computational and Graphical Statistics, 2026."
+      "zh": "Jian Hou, Tan Meng, Maozai Tian. Spectral Detection of Spatial Homogenization During Extreme Climate Events. Journal of Computational and Graphical Statistics, 2026.",
+      "en": "Hou, J., Tan, M., & Tian, M. Spectral Detection of Spatial Homogenization During Extreme Climate Events. Journal of Computational and Graphical Statistics, 2026."
     },
-    "bibtex": "@article{hou2026qvsd,\n  title={A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes},\n  author={Hou, Jian},\n  journal={Journal of Computational and Graphical Statistics},\n  year={2026},\n  note={Manuscript}\n}",
+    "bibtex": "@article{hou2026qvsd,\n  title={Spectral Detection of Spatial Homogenization During Extreme Climate Events},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of Computational and Graphical Statistics},\n  year={2026},\n  note={Manuscript}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [

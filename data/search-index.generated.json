@@ -135,12 +135,12 @@
       "id": "qvsd-spatiotemporal-extremes",
       "year": 2026,
       "title": {
-        "zh": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes",
-        "en": "A Quantile-Varying Spatial Dependence Framework for Spatio-Temporal Extremes"
+        "zh": "Spectral Detection of Spatial Homogenization During Extreme Climate Events",
+        "en": "Spectral Detection of Spatial Homogenization During Extreme Climate Events"
       },
       "authors": {
-        "zh": "Jian Hou",
-        "en": "Jian Hou"
+        "zh": "Jian Hou, Tan Meng, Maozai Tian",
+        "en": "Jian Hou, Tan Meng, Maozai Tian"
       },
       "venue": {
         "zh": "Journal of Computational and Graphical Statistics",
