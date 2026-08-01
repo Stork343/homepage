@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-20",
-  "generated_at": "2026-07-20T00:00:00.000Z",
+  "updated": "2026-08-01",
+  "generated_at": "2026-08-01T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -171,6 +171,49 @@
       "links": {
         "article": null,
         "pdf": null
+      },
+      "paper_path": null
+    },
+    {
+      "id": "tplaqr",
+      "year": 2026,
+      "title": {
+        "zh": "Tensor Partially Linear Additive Quantile Regression",
+        "en": "Tensor Partially Linear Additive Quantile Regression"
+      },
+      "authors": {
+        "zh": "Shuo Liu, Jiancheng Jiang, Jian Hou, Zhihao Wang, Maozai Tian",
+        "en": "Shuo Liu, Jiancheng Jiang, Jian Hou, Zhihao Wang, Maozai Tian"
+      },
+      "venue": {
+        "zh": "Journal of Multivariate Analysis",
+        "en": "Journal of Multivariate Analysis"
+      },
+      "status": {
+        "zh": "状态：录用",
+        "en": "Status: Accepted"
+      },
+      "keywords": {
+        "zh": [
+          "quantile regression",
+          "tensor regression",
+          "partially linear additive model",
+          "region selection",
+          "asymptotic theory",
+          "ADMM"
+        ],
+        "en": [
+          "quantile regression",
+          "tensor regression",
+          "partially linear additive model",
+          "region selection",
+          "asymptotic theory",
+          "ADMM"
+        ]
+      },
+      "links": {
+        "article": null,
+        "pdf": "./papers/2026/tplaqr/tplaqr.pdf"
       },
       "paper_path": null
     },

@@ -100,6 +100,39 @@
       "position": 5,
       "item": {
         "@type": "ScholarlyArticle",
+        "name": "Tensor Partially Linear Additive Quantile Regression",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Shuo Liu"
+          },
+          {
+            "@type": "Person",
+            "name": "Jiancheng Jiang"
+          },
+          {
+            "@type": "Person",
+            "name": "Jian Hou"
+          },
+          {
+            "@type": "Person",
+            "name": "Zhihao Wang"
+          },
+          {
+            "@type": "Person",
+            "name": "Maozai Tian"
+          }
+        ],
+        "datePublished": "2026",
+        "isPartOf": "Journal of Multivariate Analysis",
+        "url": "https://stork343.github.io/homepage/#publication-tplaqr"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "ScholarlyArticle",
         "name": "Algorithm XXXX: sssvcqr, ADMM Software with Sparse KKT Diagnostics for Graph-Regularized Spatial Quantile Regression",
         "author": [
           {
@@ -130,7 +163,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 6,
+      "position": 7,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Sparse-Smooth Spatially Varying Coefficient Quantile Regression",
@@ -164,7 +197,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 7,
+      "position": 8,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Hierarchical composite quantile regression with adaptive Lasso",
@@ -190,7 +223,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 8,
+      "position": 9,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Self-Normalized Quantile Empirical Saddlepoint Approximation",
@@ -216,7 +249,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 9,
+      "position": 10,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Partially Linear Geographically Weighted Quantile Regression",
@@ -241,7 +274,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 10,
+      "position": 11,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Constructing Relative Risk Confidence Intervals under Poisson Distribution via Saddlepoint Approximation",
@@ -267,7 +300,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 11,
+      "position": 12,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Influencing Factors of Commercial Housing Prices Based on GTWR with Heterogeneous Bandwidths",
@@ -297,7 +330,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 12,
+      "position": 13,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Analysis of Housing Price Influencing Factors Based on Multiscale Spatiotemporal Geographically Weighted Regression",
@@ -323,7 +356,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 13,
+      "position": 14,
       "item": {
         "@type": "ScholarlyArticle",
         "name": "Parameter Estimation for Mixed Geographically and Temporally Weighted Regression with Variable Selection",
