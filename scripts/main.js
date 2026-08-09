@@ -226,7 +226,10 @@
     ["shuoliu", "https://orcid.org/0000-0002-1183-2238"],
     ["王芝皓", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
     ["wangzhihao", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
-    ["zhihaowang", "https://www.researchgate.net/profile/Zhihao-Wang-14"]
+    ["zhihaowang", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+    ["wolfgangkarlhärdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
+    ["wolfgangkarlhardle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
+    ["wolfgangkarlhaerdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"]
   ]);
   const REVEAL_SELECTOR = [
     ".research-item",
