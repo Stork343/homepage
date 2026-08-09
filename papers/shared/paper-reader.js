@@ -78,6 +78,9 @@
       ["王芝皓", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
       ["wangzhihao", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
       ["zhihaowang", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+      ["潘建新", "https://staff.uic.edu.cn/jianxinpan/en"],
+      ["panjianxin", "https://staff.uic.edu.cn/jianxinpan/en"],
+      ["jianxinpan", "https://staff.uic.edu.cn/jianxinpan/en"],
       ["wolfgangkarlhärdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
       ["wolfgangkarlhardle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
       ["wolfgangkarlhaerdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"]
