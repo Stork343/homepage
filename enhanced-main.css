@@ -1122,6 +1122,36 @@ body{
   letter-spacing:.02em;
   margin:0;
 }
+.footer-meta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+}
+.footer-stats{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:8px;
+}
+.footer-stat{
+  display:inline-flex;
+  align-items:baseline;
+  gap:6px;
+  min-height:28px;
+  padding:4px 9px;
+  border:1px solid rgba(206,223,255,.32);
+  border-radius:3px;
+  color:#d2ddff;
+  font-size:12px;
+  line-height:1.4;
+}
+.footer-stat strong{
+  color:#ffffff;
+  font-size:14px;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
 .footer-legal{
   margin:0;
   color:#b8d2ff;
@@ -1220,6 +1250,11 @@ body{
     flex-direction:column;
     align-items:flex-start;
     gap:8px;
+  }
+  .footer-meta,
+  .footer-stats{
+    align-items:flex-start;
+    justify-content:flex-start;
   }
   .footer-legal{
     text-align:left;
@@ -1453,6 +1488,15 @@ html.theme-dark body{
 
 :root[data-theme="dark"] .footer-text{
   color:#d2dcff;
+}
+
+:root[data-theme="dark"] .footer-stat{
+  border-color:rgba(210,220,255,.3);
+  color:#d2dcff;
+}
+
+:root[data-theme="dark"] .footer-stat strong{
+  color:#ffffff;
 }
 
 /* 2026-02 visual polish layer */
