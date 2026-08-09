@@ -1141,6 +1141,28 @@ body.sidebar-open .side-panel {
   line-height: 1.55;
 }
 
+.tf-sidebar-author-link,
+.tf-sidebar-author-link:visited {
+  display: inline;
+  color: #9fc8ff !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  border-radius: 3px;
+}
+
+.tf-sidebar-author-link:hover {
+  color: #ffffff !important;
+  background: rgba(91, 154, 255, 0.24);
+  text-decoration-thickness: 2px;
+}
+
+.tf-sidebar-author-link:focus-visible {
+  outline: 2px solid #9fc8ff;
+  outline-offset: 2px;
+}
+
 .tf-empty-copy {
   color: #b9c2d1 !important;
   font-size: 13px;
