@@ -61,6 +61,68 @@
         .toLowerCase();
     }
 
+    const selfAuthorAliases = new Set(["侯健", "hou jian", "houjian", "jian hou"]);
+    const authorLinkOverrides = new Map([
+      ["张丽平", "https://orcid.org/0000-0002-6100-7105"],
+      ["zhangliping", "https://orcid.org/0000-0002-6100-7105"],
+      ["lipingzhang", "https://orcid.org/0000-0002-6100-7105"],
+      ["田茂再", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
+      ["tianmaozai", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
+      ["maozaitian", "https://scholar.google.com/citations?hl=zh-CN&user=cS-iT80AAAAJ"],
+      ["孟坦", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
+      ["mengtan", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
+      ["tanmeng", "https://www.researchgate.net/scientific-contributions/Meng-Tan-2329224989"],
+      ["刘硕", "https://orcid.org/0000-0002-1183-2238"],
+      ["liushuo", "https://orcid.org/0000-0002-1183-2238"],
+      ["shuoliu", "https://orcid.org/0000-0002-1183-2238"],
+      ["王芝皓", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+      ["wangzhihao", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+      ["zhihaowang", "https://www.researchgate.net/profile/Zhihao-Wang-14"],
+      ["wolfgangkarlhärdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
+      ["wolfgangkarlhardle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
+      ["wolfgangkarlhaerdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"]
+    ]);
+
+    function normalizeAuthorIdentity(value) {
+      return String(value || "")
+        .toLowerCase()
+        .replace(/[\u00b7.]/g, " ")
+        .replace(/[\s,，、;；]+/g, "")
+        .trim();
+    }
+
+    function splitAuthorNames(value) {
+      return String(value || "")
+        .replace(/、/g, ",")
+        .split(/[,，;；]/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function getAuthorProfileLink(name) {
+      const normalized = normalizeAuthorIdentity(name);
+      if (!normalized || selfAuthorAliases.has(normalized)) {
+        return "";
+      }
+      return authorLinkOverrides.get(normalized) || "";
+    }
+
+    function renderSidebarAuthorsHtml(value) {
+      const names = splitAuthorNames(value);
+      if (!names.length) {
+        return escapeHtml(value);
+      }
+      return names
+        .map((name) => {
+          const linkUrl = getAuthorProfileLink(name);
+          if (!linkUrl) {
+            return escapeHtml(name);
+          }
+          return `<a class="tf-sidebar-author-link" href="${escapeHtml(linkUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(name)}</a>`;
+        })
+        .join(", ");
+    }
+
     function getHomeHref() {
       return new URL("../../../index.html#publications", window.location.href).toString();
     }
@@ -329,7 +391,7 @@
                   ? `<a class="tf-sidebar-link" href="${escapeHtml(doiEntry.href)}" target="_blank" rel="noopener">Open DOI page</a>`
                   : ""
             }
-            ${authorsEntry && authorsEntry.text ? `<div class="tf-sidebar-authors">${escapeHtml(authorsEntry.text)}</div>` : ""}
+            ${authorsEntry && authorsEntry.text ? `<div class="tf-sidebar-authors">${renderSidebarAuthorsHtml(authorsEntry.text)}</div>` : ""}
 
             ${
               metaListClone && metaListClone.children.length
