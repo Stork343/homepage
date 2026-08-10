@@ -97,6 +97,7 @@
       cv_en_title: "English CV",
       cv_en_desc: "Download the latest English CV (PDF)",
       cv_updated: "最近更新：2026-08-10",
+      cv_updated_template: "最近更新：{date}",
       contact_title: "联系方式",
       contact_email_label: "邮箱",
       contact_affiliation_label: "机构",
@@ -107,6 +108,7 @@
       contact_collab_value: "欢迎学术合作与交流",
       contact_collab_people: "主要合作者：TIAN Maozai, MENG Tan, WANG Zhihao",
       footer_text: "© 2026 HOU Jian. 最后更新：2026年8月10日",
+      footer_text_template: "© {year} HOU Jian. 最后更新：{date}",
       footer_stats_label: "访问量统计",
       footer_stat_pv: "访问量",
       footer_stat_uv: "访客",
@@ -115,6 +117,10 @@
       label_doi: "DOI",
       label_html: "HTML",
       label_copy_citation: "复制引用",
+      label_citation_select: "引用格式",
+      label_citation_default: "默认引用",
+      label_citation_apa: "APA",
+      label_citation_gbt: "GB/T 7714",
       label_bibtex: "BibTeX",
       label_copy_bibtex: "复制 BibTeX",
       label_not_available: "暂不可用",
@@ -174,6 +180,7 @@
       cv_en_title: "English CV",
       cv_en_desc: "Download latest English CV (PDF)",
       cv_updated: "Last updated: 2026-08-10",
+      cv_updated_template: "Last updated: {date}",
       contact_title: "Contact",
       contact_email_label: "Email",
       contact_affiliation_label: "Affiliation",
@@ -184,6 +191,7 @@
       contact_collab_value: "Open to academic collaboration and discussion",
       contact_collab_people: "Main collaborators: TIAN Maozai, MENG Tan, WANG Zhihao",
       footer_text: "© 2026 HOU Jian. Last updated: August 10, 2026",
+      footer_text_template: "© {year} HOU Jian. Last updated: {date}",
       footer_stats_label: "Visitor statistics",
       footer_stat_pv: "Views",
       footer_stat_uv: "Visitors",
@@ -192,6 +200,10 @@
       label_doi: "DOI",
       label_html: "HTML",
       label_copy_citation: "Copy Citation",
+      label_citation_select: "Citation format",
+      label_citation_default: "Default",
+      label_citation_apa: "APA",
+      label_citation_gbt: "GB/T 7714",
       label_bibtex: "BibTeX",
       label_copy_bibtex: "Copy BibTeX",
       label_not_available: "Not available",
@@ -277,6 +289,46 @@
     return String(template).replace(/\{(\w+)\}/g, function (_, name) {
       return Object.prototype.hasOwnProperty.call(values || {}, name) ? values[name] : "";
     });
+  }
+
+  function formatCitation(pub, lang, format) {
+    if (format === "apa") {
+      const citationEn = localizedText(pub && pub.citation, "en") || localizedText(pub && pub.citation, "zh");
+      const titleEn = pub && pub.title && (pub.title.en || pub.title.zh);
+      return insertYearInCitation(citationEn, titleEn, pub && pub.year);
+    }
+    if (format === "gbt") {
+      const citationZh = localizedText(pub && pub.citation, "zh") || localizedText(pub && pub.citation, "en");
+      const titleZh = pub && pub.title && (pub.title.zh || pub.title.en);
+      return markCitationAsJournal(citationZh, titleZh);
+    }
+    return localizedText(pub && pub.citation, lang);
+  }
+
+  function insertYearInCitation(citation, title, year) {
+    if (!citation || !title) {
+      return citation || "";
+    }
+    const index = citation.indexOf(title);
+    if (index < 0) {
+      return citation;
+    }
+    const authors = citation.slice(0, index).replace(/\.\s*$/, "").trim();
+    const rest = citation.slice(index).trim();
+    return `${authors}. (${year || ""}). ${rest}`;
+  }
+
+  function markCitationAsJournal(citation, title) {
+    if (!citation || !title) {
+      return citation || "";
+    }
+    const index = citation.indexOf(title);
+    if (index < 0) {
+      return citation;
+    }
+    const authors = citation.slice(0, index).replace(/\.\s*$/, "").trim();
+    const afterTitle = citation.slice(index + title.length).replace(/^\.\s*/, "").trim();
+    return `${authors}. ${title}[J]. ${afterTitle}`;
   }
 
   function applyI18nText() {
@@ -967,12 +1019,26 @@
       linkNodes.push(createLinkOrPlaceholder(key, url));
     });
 
+    const citationSelect = document.createElement("select");
+    citationSelect.className = "citation-format-select";
+    citationSelect.setAttribute("aria-label", t("label_citation_select"));
+    [
+      ["default", t("label_citation_default")],
+      ["apa", t("label_citation_apa")],
+      ["gbt", t("label_citation_gbt")]
+    ].forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      citationSelect.appendChild(option);
+    });
+
     const copyCitationBtn = document.createElement("button");
     copyCitationBtn.type = "button";
     copyCitationBtn.className = "pub-link";
     copyCitationBtn.textContent = t("label_copy_citation");
     copyCitationBtn.addEventListener("click", () => {
-      copyText(localizedText(pub.citation, pubLang), t("toast_citation_copied"));
+      copyText(formatCitation(pub, pubLang, citationSelect.value), t("toast_citation_copied"));
     });
 
     const copyBibBtn = document.createElement("button");
@@ -990,6 +1056,8 @@
       }
     });
 
+    links.appendChild(createSeparator());
+    links.appendChild(citationSelect);
     links.appendChild(createSeparator());
     links.appendChild(copyCitationBtn);
     links.appendChild(createSeparator());
@@ -1302,6 +1370,29 @@
     }
   }
 
+  async function loadSiteMeta() {
+    try {
+      const response = await fetch("data/site-updated.generated.json", { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      const date = String(data && data.updated || "").trim();
+      if (!date) {
+        return;
+      }
+      const year = date.slice(0, 4);
+      document.querySelectorAll('[data-i18n="cv_updated"]').forEach((node) => {
+        node.textContent = formatI18n("cv_updated_template", { date });
+      });
+      document.querySelectorAll('[data-i18n="footer_text"]').forEach((node) => {
+        node.textContent = formatI18n("footer_text_template", { year, date });
+      });
+    } catch (_) {
+      // Keep the static fallback text in the HTML when the meta file is unavailable.
+    }
+  }
+
   function initNavigation() {
     const navbar = document.querySelector(".navbar");
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -1467,5 +1558,6 @@
     setTheme(state.theme);
     applyI18nText();
     await loadPublications();
+    loadSiteMeta();
   });
 })();

@@ -89,3 +89,17 @@ Examples:
 - Process guide: `docs/RELEASE_ROLLBACK.md`
 - QA checklist: `docs/QA_CHECKLIST.md`
 - Changelog: `CHANGELOG.md`
+
+## Optional: Auto-Sync Generated Data Workflow
+
+`docs/workflows/auto-sync-generated.yml` is a ready-to-use GitHub Action that
+regenerates all derived data and commits any changes after every push to `main`.
+It is kept as a template because creating a workflow file under
+`.github/workflows/` requires a token with `workflow` scope.
+
+To enable it:
+
+1. Run `gh auth refresh -s workflow` (or use a PAT with `workflow` scope).
+2. Move `docs/workflows/auto-sync-generated.yml` to
+   `.github/workflows/auto-sync-generated.yml`.
+3. Push the change.

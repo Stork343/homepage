@@ -123,8 +123,8 @@ function run() {
   assertContains(indexHtml, "Home citation export RIS button", /id=["']export-ris-btn["']/i, "index.html");
   assertContains(indexHtml, "Home citation export EndNote button", /id=["']export-endnote-btn["']/i, "index.html");
   assertContains(indexHtml, "Home citation export filtered scope", /id=["']export-filtered-only["']/i, "index.html");
-  assertContains(indexHtml, "Home CSS version tag", /enhanced-main\.css\?v=\d+/i, "index.html");
-  assertContains(indexHtml, "Home JS version tag", /scripts\/main\.js\?v=\d+/i, "index.html");
+  assertContains(indexHtml, "Home CSS version tag", /enhanced-main\.css\?v=[a-z0-9]+/i, "index.html");
+  assertContains(indexHtml, "Home JS version tag", /scripts\/main\.js\?v=[a-z0-9]+/i, "index.html");
 
   if (papers.length === 6) {
     pass("Paper pages count", "paper-pages.json has 6 configured paper pages");

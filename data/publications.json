@@ -579,6 +579,7 @@
   },
   {
     "id": "poisson-rr",
+    "published": true,
     "year": 2025,
     "title": {
       "zh": "泊松分布下基于鞍点逼近的相对风险置信区间构造",
@@ -640,6 +641,7 @@
   },
   {
     "id": "gtwr-housing",
+    "published": true,
     "year": 2022,
     "title": {
       "zh": "基于异窗宽GTWR模型的商品住宅价格影响因素研究",
@@ -701,6 +703,7 @@
   },
   {
     "id": "bgtwr-housing",
+    "published": true,
     "year": 2022,
     "title": {
       "zh": "基于多尺度时空地理加权回归模型的房价影响因素分析",
@@ -762,6 +765,7 @@
   },
   {
     "id": "mgtwr-variable-selection",
+    "published": true,
     "year": 2021,
     "title": {
       "zh": "基于变量选择的混合时空地理加权回归参数估计",

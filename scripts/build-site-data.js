@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const ROOT = path.resolve(__dirname, "..");
 const MASTER_FILE = path.join(ROOT, "data", "site-master.json");
@@ -13,8 +14,30 @@ const OUTPUT_FILES = {
   searchIndex: path.join(ROOT, "data", "search-index.generated.json"),
   publicationsJsonLd: path.join(ROOT, "data", "publications-jsonld.generated.json"),
   paperSeo: path.join(ROOT, "data", "paper-seo.generated.json"),
-  sitemap: path.join(ROOT, "sitemap.xml")
+  sitemap: path.join(ROOT, "sitemap.xml"),
+  siteUpdated: path.join(ROOT, "data", "site-updated.generated.json"),
+  indexHtml: path.join(ROOT, "index.html")
 };
+
+function todayLocal() {
+  return new Date().toLocaleDateString("en-CA");
+}
+
+function hashText(text) {
+  return crypto.createHash("sha1").update(String(text), "utf8").digest("hex").slice(0, 10);
+}
+
+function buildIndexHtml(root) {
+  const indexPath = path.join(root, "index.html");
+  const cssPath = path.join(root, "enhanced-main.css");
+  const jsPath = path.join(root, "scripts", "main.js");
+  let html = fs.readFileSync(indexPath, "utf8");
+  const cssHash = hashText(fs.readFileSync(cssPath, "utf8"));
+  const jsHash = hashText(fs.readFileSync(jsPath, "utf8"));
+  html = html.replace(/(enhanced-main\.css\?v=)[^"']+/g, `$1${cssHash}`);
+  html = html.replace(/(scripts\/main\.js\?v=)[^"']+/g, `$1${jsHash}`);
+  return html;
+}
 
 function normalizeRelPath(input) {
   return String(input || "").replace(/\\/g, "/").replace(/^\.?\//, "");
@@ -107,6 +130,9 @@ function buildPublications(master, metadataById) {
       /手稿/i.test(statusZh) ||
       /manuscript/i.test(statusZh) ||
       /manuscript/i.test(statusEn);
+    const isPublished =
+      Boolean(pub && pub.publication_info && pub.publication_info.display) ||
+      pub.published === true;
     const metadata = metadataById.get(String(pub.id || ""));
     if (!output.links || typeof output.links !== "object") {
       output.links = {};
@@ -125,6 +151,10 @@ function buildPublications(master, metadataById) {
     }
     if (isManuscript) {
       output.links.pdf = null;
+    }
+    if (!isPublished) {
+      output.links.pdf = null;
+      output.links.html = null;
     }
     output.keywords = {
       zh: uniqueStringList(
@@ -453,12 +483,29 @@ function main() {
     [OUTPUT_FILES.searchIndex, jsonText(searchIndex)],
     [OUTPUT_FILES.publicationsJsonLd, jsonText(publicationsJsonLd)],
     [OUTPUT_FILES.paperSeo, jsonText(paperSeo)],
-    [OUTPUT_FILES.sitemap, sitemap]
+    [OUTPUT_FILES.sitemap, sitemap],
+    [OUTPUT_FILES.siteUpdated, jsonText({ updated: todayLocal() })],
+    [OUTPUT_FILES.indexHtml, buildIndexHtml(ROOT)]
   ];
 
   if (checkMode) {
     let allOk = true;
     outputs.forEach(([filePath, nextText]) => {
+      if (filePath === OUTPUT_FILES.siteUpdated) {
+        if (!fs.existsSync(filePath)) {
+          console.error(`MISSING: ${path.relative(ROOT, filePath)} (run: node scripts/build-site-data.js --write)`);
+          allOk = false;
+        } else {
+          try {
+            JSON.parse(fs.readFileSync(filePath, "utf8"));
+            console.log(`OK: ${path.relative(ROOT, filePath)} exists (date refreshes on write).`);
+          } catch (error) {
+            console.error(`INVALID JSON: ${path.relative(ROOT, filePath)}`);
+            allOk = false;
+          }
+        }
+        return;
+      }
       const ok = writeOrCheck(filePath, nextText, false);
       if (!ok) {
         allOk = false;
