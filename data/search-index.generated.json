@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-01",
-  "generated_at": "2026-08-01T00:00:00.000Z",
+  "updated": "2026-08-10",
+  "generated_at": "2026-08-10T00:00:00.000Z",
   "entries": [
     {
       "id": "mallows-llm-ranking",
@@ -85,92 +85,45 @@
       "paper_path": null
     },
     {
-      "id": "qapsm-icu-bp",
-      "year": 2026,
-      "title": {
-        "zh": "A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories",
-        "en": "A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories"
-      },
-      "authors": {
-        "zh": "Hou Jian, Zhang Liping, Tian Maozai",
-        "en": "Hou Jian, Zhang Liping, Tian Maozai"
-      },
-      "venue": {
-        "zh": "Statistics in Medicine",
-        "en": "Statistics in Medicine"
-      },
-      "status": {
-        "zh": "Status: Manuscript",
-        "en": "Status: Manuscript"
-      },
-      "keywords": {
-        "zh": [
-          "quantile regression",
-          "profiled-score mixed-effects representation",
-          "reduced-rank modeling",
-          "trajectory heterogeneity",
-          "intensive care unit",
-          "mean arterial pressure",
-          "irregular longitudinal data",
-          "MIMIC-IV"
-        ],
-        "en": [
-          "quantile regression",
-          "profiled-score mixed-effects representation",
-          "reduced-rank modeling",
-          "trajectory heterogeneity",
-          "intensive care unit",
-          "mean arterial pressure",
-          "irregular longitudinal data",
-          "MIMIC-IV"
-        ]
-      },
-      "links": {
-        "article": null,
-        "pdf": null
-      },
-      "paper_path": null
-    },
-    {
       "id": "qvsd-spatiotemporal-extremes",
       "year": 2026,
       "title": {
-        "zh": "Spectral Detection of Spatial Homogenization During Extreme Climate Events",
-        "en": "Spectral Detection of Spatial Homogenization During Extreme Climate Events"
+        "zh": "Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China",
+        "en": "Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China"
       },
       "authors": {
         "zh": "Jian Hou, Tan Meng, Maozai Tian",
         "en": "Jian Hou, Tan Meng, Maozai Tian"
       },
       "venue": {
-        "zh": "Journal of Computational and Graphical Statistics",
-        "en": "Journal of Computational and Graphical Statistics"
+        "zh": "Journal of the Royal Statistical Society: Series C (Applied Statistics)",
+        "en": "Journal of the Royal Statistical Society: Series C (Applied Statistics)"
       },
       "status": {
-        "zh": "状态：手稿",
-        "en": "Status: Manuscript"
+        "zh": "状态：审稿中",
+        "en": "Status: Under Review"
       },
       "keywords": {
         "zh": [
-          "quantile-dependent spatial dependence",
-          "spatio-temporal quantile regression",
-          "extreme event attribution",
-          "wet-bulb temperature",
-          "variogram analysis",
-          "bootstrap inference"
+          "ERA5-Land",
+          "graph Laplacian",
+          "humid heat",
+          "randomisation inference",
+          "semivariance",
+          "spatial statistics"
         ],
         "en": [
-          "quantile-dependent spatial dependence",
-          "spatio-temporal quantile regression",
-          "extreme event attribution",
-          "wet-bulb temperature",
-          "variogram analysis",
-          "bootstrap inference"
+          "ERA5-Land",
+          "graph Laplacian",
+          "humid heat",
+          "randomisation inference",
+          "semivariance",
+          "spatial statistics"
         ]
       },
       "links": {
         "article": null,
-        "pdf": null
+        "pdf": "./papers/2026/qvsd-spatiotemporal-extremes/humid-heat-spatial-contraction-jrssc.pdf"
       },
       "paper_path": null
     },

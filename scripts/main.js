@@ -96,9 +96,11 @@
       cv_zh_desc: "下载最新中文 CV（PDF）",
       cv_en_title: "English CV",
       cv_en_desc: "Download the latest English CV (PDF)",
-      cv_updated: "最近更新：2026-04-07",
+      cv_updated: "最近更新：2026-08-10",
       contact_title: "联系方式",
       contact_email_label: "邮箱",
+      contact_qq_label: "QQ 邮箱",
+      contact_nudt_label: "NUDT 邮箱",
       contact_affiliation_label: "机构",
       contact_affiliation_value: "中国人民大学统计学院",
       contact_address_label: "地址",
@@ -106,7 +108,7 @@
       contact_collab_label: "研究合作",
       contact_collab_value: "欢迎学术合作与交流",
       contact_collab_people: "主要合作者：TIAN Maozai, MENG Tan, WANG Zhihao",
-      footer_text: "© 2026 HOU Jian. 最后更新：2026年6月",
+      footer_text: "© 2026 HOU Jian. 最后更新：2026年8月10日",
       footer_stats_label: "访问量统计",
       footer_stat_pv: "访问量",
       footer_stat_uv: "访客",
@@ -173,9 +175,11 @@
       cv_zh_desc: "Download latest Chinese CV (PDF)",
       cv_en_title: "English CV",
       cv_en_desc: "Download latest English CV (PDF)",
-      cv_updated: "Last updated: 2026-04-07",
+      cv_updated: "Last updated: 2026-08-10",
       contact_title: "Contact",
       contact_email_label: "Email",
+      contact_qq_label: "QQ Email",
+      contact_nudt_label: "NUDT Email",
       contact_affiliation_label: "Affiliation",
       contact_affiliation_value: "School of Statistics, Renmin University of China",
       contact_address_label: "Address",
@@ -183,7 +187,7 @@
       contact_collab_label: "Collaboration",
       contact_collab_value: "Open to academic collaboration and discussion",
       contact_collab_people: "Main collaborators: TIAN Maozai, MENG Tan, WANG Zhihao",
-      footer_text: "© 2026 HOU Jian. Last updated: June 2026",
+      footer_text: "© 2026 HOU Jian. Last updated: August 10, 2026",
       footer_stats_label: "Visitor statistics",
       footer_stat_pv: "Views",
       footer_stat_uv: "Visitors",
@@ -233,6 +237,31 @@
     ["wolfgangkarlhärdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
     ["wolfgangkarlhardle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"],
     ["wolfgangkarlhaerdle", "https://www.researchgate.net/profile/Wolfgang-Karl-Haerdle"]
+  ]);
+  const VENUE_URLS = new Map([
+    ["journal of computational and graphical statistics", "https://www.tandfonline.com/journals/ucgs20"],
+    ["statistica sinica", "https://www3.stat.sinica.edu.tw/statistica/"],
+    ["statistics in medicine", "https://onlinelibrary.wiley.com/journal/10970258"],
+    ["acm transactions on mathematical software", "https://dl.acm.org/journal/toms"],
+    ["spatial statistics", "https://www.sciencedirect.com/journal/spatial-statistics"],
+    ["journal of statistical planning and inference", "https://www.sciencedirect.com/journal/journal-of-statistical-planning-and-inference"],
+    ["journal of multivariate analysis", "https://www.sciencedirect.com/journal/journal-of-multivariate-analysis"],
+    ["journal of the royal statistical society: series c (applied statistics)", "https://academic.oup.com/jrsssc"],
+    ["statistical papers", "https://link.springer.com/journal/362"],
+    ["arxiv preprint; statistical papers", "https://link.springer.com/journal/362"],
+    ["arxiv 预印本；statistical papers", "https://link.springer.com/journal/362"],
+    ["acta mathematicae applicatae sinica", "https://applmath.cjoe.ac.cn/index_yysxxb.html"],
+    ["应用数学学报", "https://applmath.cjoe.ac.cn/index_yysxxb.html"],
+    ["statistical research", "https://tjyj.cbpt.cnki.net/portal"],
+    ["统计研究", "https://tjyj.cbpt.cnki.net/portal"],
+    ["statistics and information forum", "https://tjlt.cbpt.cnki.net"],
+    ["统计与信息论坛", "https://tjlt.cbpt.cnki.net"],
+    ["journal of applied statistics and management", "http://sltj.chinajournal.net.cn/WKB2/WebPublication/index.aspx?mid=SLTJ"],
+    ["数理统计与管理", "http://sltj.chinajournal.net.cn/WKB2/WebPublication/index.aspx?mid=SLTJ"],
+    ["statistics and management", "https://tjj.hebei.gov.cn/hetj/ztbd/tjygl/"],
+    ["统计与管理", "https://tjj.hebei.gov.cn/hetj/ztbd/tjygl/"],
+    ["mathematics in practice and theory", "https://ssjs.cbpt.cnki.net/WKA2/WebPublication/index.aspx?mid=SSJS"],
+    ["数学的实践与认识", "https://ssjs.cbpt.cnki.net/WKA2/WebPublication/index.aspx?mid=SSJS"]
   ]);
   const REVEAL_SELECTOR = [
     ".research-item",
@@ -519,6 +548,39 @@
 
   function getVenueKey(pub) {
     return normalizeSearchText(localizedText(pub && pub.venue, "en") || localizedText(pub && pub.venue, "zh"));
+  }
+
+  function getVenueUrl(venueText) {
+    const normalized = normalizeSearchText(venueText);
+    const direct = VENUE_URLS.get(normalized);
+    if (direct) {
+      return direct;
+    }
+    const journalName = normalized
+      .split(/[;；.．]/)[0]
+      .replace(/,\s*\d{4}\b.*$/, "")
+      .trim();
+    return VENUE_URLS.get(journalName) || "";
+  }
+
+  function getVenueLinkParts(venueText) {
+    const url = getVenueUrl(venueText);
+    if (!url) {
+      return null;
+    }
+    const normalized = normalizeSearchText(venueText);
+    if (VENUE_URLS.has(normalized)) {
+      return { url, label: venueText, rest: "" };
+    }
+    const journalName = normalized
+      .split(/[;；.．]/)[0]
+      .replace(/,\s*\d{4}\b.*$/, "")
+      .trim();
+    const escaped = journalName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const match = venueText.match(new RegExp(escaped, "i"));
+    const label = match ? match[0] : journalName;
+    const rest = match ? venueText.slice(match.index + match[0].length) : "";
+    return { url, label, rest };
   }
 
   function normalizeSearchText(value) {
@@ -855,7 +917,22 @@
 
     const venue = document.createElement("p");
     venue.className = "publication-venue";
-    venue.textContent = localizedText(pub.venue, pubLang);
+    const venueText = localizedText(pub.venue, pubLang);
+    const venueLinkParts = getVenueLinkParts(venueText);
+    if (venueLinkParts) {
+      const venueLink = document.createElement("a");
+      venueLink.className = "publication-venue-link";
+      venueLink.href = venueLinkParts.url;
+      venueLink.target = "_blank";
+      venueLink.rel = "noopener noreferrer";
+      venueLink.textContent = venueLinkParts.label;
+      venue.appendChild(venueLink);
+      if (venueLinkParts.rest) {
+        venue.appendChild(document.createTextNode(venueLinkParts.rest));
+      }
+    } else {
+      venue.textContent = venueText;
+    }
 
     const publicationInfoText = getPublicationInfoText(pub, pubLang);
     if (publicationInfoText) {
@@ -1194,7 +1271,7 @@
     }
 
     let hadCachedData = false;
-    const cacheKey = "homepage-publications-cache-v6";
+    const cacheKey = "homepage-publications-cache-v7";
     try {
       const cached = getStorageItem(cacheKey);
       if (cached) {
