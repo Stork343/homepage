@@ -315,6 +315,12 @@ summary:focus-visible {
   font-size:14px; color:#6C757D; margin-bottom:8px; line-height:1.5;
 }
 .publication-venue{ font-style: normal; }
+.publication-venue-link{
+  color:inherit; text-decoration:none; background:none; border:none;
+}
+.publication-venue-link:hover{
+  color:inherit; text-decoration:none; opacity:.85;
+}
 .publication-status{ color:#0A336D; font-weight:600; }
 
 .publication-links{

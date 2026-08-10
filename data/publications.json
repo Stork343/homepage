@@ -126,84 +126,23 @@
     }
   },
   {
-    "id": "qapsm-icu-bp",
-    "year": 2026,
-    "title": {
-      "zh": "A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories",
-      "en": "A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories"
-    },
-    "authors": "Hou Jian, Zhang Liping, Tian Maozai",
-    "venue": {
-      "zh": "Statistics in Medicine",
-      "en": "Statistics in Medicine"
-    },
-    "status": {
-      "zh": "Status: Manuscript",
-      "en": "Status: Manuscript"
-    },
-    "links": {
-      "pdf": null,
-      "code": null,
-      "doi": null,
-      "html": null,
-      "article": null
-    },
-    "image": {
-      "src": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp-cover.png",
-      "width": 595,
-      "height": 782,
-      "alt": {
-        "zh": "Statistics in Medicine manuscript cover preview",
-        "en": "Statistics in Medicine manuscript cover preview"
-      }
-    },
-    "citation": {
-      "zh": "Hou Jian, Zhang Liping, Tian Maozai. A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories. Statistics in Medicine, 2026.",
-      "en": "Hou, J., Zhang, L., & Tian, M. A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories. Statistics in Medicine, 2026."
-    },
-    "bibtex": "@article{hou2026qapsm,\n  title={A Quantile-Adaptive Profiled-Score Mixed-Effects Model for ICU Blood Pressure Trajectories},\n  author={Hou, Jian and Zhang, Liping and Tian, Maozai},\n  journal={Statistics in Medicine},\n  year={2026},\n  note={Manuscript}\n}",
-    "force_english_display": true,
-    "keywords": {
-      "zh": [
-        "quantile regression",
-        "profiled-score mixed-effects representation",
-        "reduced-rank modeling",
-        "trajectory heterogeneity",
-        "intensive care unit",
-        "mean arterial pressure",
-        "irregular longitudinal data",
-        "MIMIC-IV"
-      ],
-      "en": [
-        "quantile regression",
-        "profiled-score mixed-effects representation",
-        "reduced-rank modeling",
-        "trajectory heterogeneity",
-        "intensive care unit",
-        "mean arterial pressure",
-        "irregular longitudinal data",
-        "MIMIC-IV"
-      ]
-    }
-  },
-  {
     "id": "qvsd-spatiotemporal-extremes",
     "year": 2026,
     "title": {
-      "zh": "Spectral Detection of Spatial Homogenization During Extreme Climate Events",
-      "en": "Spectral Detection of Spatial Homogenization During Extreme Climate Events"
+      "zh": "Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China",
+      "en": "Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China"
     },
     "authors": "Jian Hou, Tan Meng, Maozai Tian",
     "venue": {
-      "zh": "Journal of Computational and Graphical Statistics",
-      "en": "Journal of Computational and Graphical Statistics"
+      "zh": "Journal of the Royal Statistical Society: Series C (Applied Statistics)",
+      "en": "Journal of the Royal Statistical Society: Series C (Applied Statistics)"
     },
     "status": {
-      "zh": "状态：手稿",
-      "en": "Status: Manuscript"
+      "zh": "状态：审稿中",
+      "en": "Status: Under Review"
     },
     "links": {
-      "pdf": null,
+      "pdf": "./papers/2026/qvsd-spatiotemporal-extremes/humid-heat-spatial-contraction-jrssc.pdf",
       "code": null,
       "doi": null,
       "html": null,
@@ -211,35 +150,35 @@
     },
     "image": {
       "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.png",
-      "width": 850,
-      "height": 1100,
+      "width": 1224,
+      "height": 1584,
       "alt": {
-        "zh": "JCGS 手稿首页缩略图",
-        "en": "First-page thumbnail of the JCGS manuscript"
+        "zh": "JRSS-C 投稿论文首页缩略图",
+        "en": "First-page thumbnail of the JRSS-C manuscript"
       }
     },
     "citation": {
-      "zh": "Jian Hou, Tan Meng, Maozai Tian. Spectral Detection of Spatial Homogenization During Extreme Climate Events. Journal of Computational and Graphical Statistics, 2026.",
-      "en": "Hou, J., Tan, M., & Tian, M. Spectral Detection of Spatial Homogenization During Extreme Climate Events. Journal of Computational and Graphical Statistics, 2026."
+      "zh": "Hou, J., Tan, M., & Tian, M. Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China. Journal of the Royal Statistical Society: Series C (Applied Statistics), 2026.",
+      "en": "Hou, J., Tan, M., & Tian, M. Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China. Journal of the Royal Statistical Society: Series C (Applied Statistics), 2026."
     },
-    "bibtex": "@article{hou2026qvsd,\n  title={Spectral Detection of Spatial Homogenization During Extreme Climate Events},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of Computational and Graphical Statistics},\n  year={2026},\n  note={Manuscript}\n}",
+    "bibtex": "@article{hou2026humidheat,\n  title={Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of the Royal Statistical Society: Series C (Applied Statistics)},\n  year={2026},\n  note={Under review}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
-        "quantile-dependent spatial dependence",
-        "spatio-temporal quantile regression",
-        "extreme event attribution",
-        "wet-bulb temperature",
-        "variogram analysis",
-        "bootstrap inference"
+        "ERA5-Land",
+        "graph Laplacian",
+        "humid heat",
+        "randomisation inference",
+        "semivariance",
+        "spatial statistics"
       ],
       "en": [
-        "quantile-dependent spatial dependence",
-        "spatio-temporal quantile regression",
-        "extreme event attribution",
-        "wet-bulb temperature",
-        "variogram analysis",
-        "bootstrap inference"
+        "ERA5-Land",
+        "graph Laplacian",
+        "humid heat",
+        "randomisation inference",
+        "semivariance",
+        "spatial statistics"
       ]
     }
   },

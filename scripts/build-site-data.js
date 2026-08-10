@@ -74,7 +74,7 @@ function jsonText(payload) {
 
 function extractPaperPages(publications) {
   return publications
-    .filter((pub) => pub && pub.paper_page && typeof pub.paper_page === "object")
+    .filter((pub) => pub && !pub.hidden && pub.paper_page && typeof pub.paper_page === "object")
     .map((pub) => {
       const page = pub.paper_page;
       const output = {
@@ -95,7 +95,9 @@ function extractPaperPages(publications) {
 }
 
 function buildPublications(master, metadataById) {
-  const publications = Array.isArray(master.publications) ? master.publications : [];
+  const publications = (Array.isArray(master.publications) ? master.publications : []).filter(
+    (pub) => !pub || !pub.hidden
+  );
   return publications.map((pub) => {
     const output = { ...pub };
     delete output.paper_page;
