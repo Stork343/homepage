@@ -1000,6 +1000,7 @@ body{
   border:1px solid var(--tf-border);
   box-shadow:none;
   pointer-events:auto;
+  overflow:visible;
 }
 .publication-card.has-thumb .pub-media img{
   width:100%;
