@@ -1010,16 +1010,16 @@ body{
 .publication-card.has-thumb.has-portrait-thumb .pub-media img{
   object-fit:contain;
 }
-/* 缩略图悬停渐变放大：鼠标移入缓慢放大，移出后恢复原状 */
-.publication-card.has-thumb .pub-media{
-  overflow:hidden;
+/* 缩略图悬停渐变放大：鼠标移入缓慢放大并溢出边框，移出后恢复原状 */
+.publication-card.has-thumb:hover .pub-media{
+  z-index:2;
 }
 .publication-card.has-thumb .pub-media img{
   transition:transform .55s cubic-bezier(.22,.61,.36,1);
   will-change:transform;
 }
 .publication-card.has-thumb:hover .pub-media img{
-  transform:scale(1.08);
+  transform:scale(1.12);
 }
 @media (prefers-reduced-motion: reduce){
   .publication-card.has-thumb:hover .pub-media img{
