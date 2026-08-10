@@ -151,11 +151,11 @@
       },
       "image": {
         "src": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp-cover.png",
-        "width": 595,
-        "height": 782,
+        "width": 600,
+        "height": 900,
         "alt": {
-          "zh": "Statistics in Medicine manuscript cover preview",
-          "en": "Statistics in Medicine manuscript cover preview"
+          "zh": "Statistics in Medicine 期刊封面",
+          "en": "Statistics in Medicine journal cover"
         }
       },
       "citation": {
@@ -212,11 +212,11 @@
       },
       "image": {
         "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.png",
-        "width": 1224,
-        "height": 1584,
+        "width": 600,
+        "height": 900,
         "alt": {
-          "zh": "JRSS-C 投稿论文首页缩略图",
-          "en": "First-page thumbnail of the JRSS-C manuscript"
+          "zh": "JRSS-C 期刊封面",
+          "en": "Journal of the Royal Statistical Society Series C cover"
         }
       },
       "citation": {
@@ -269,11 +269,11 @@
       },
       "image": {
         "src": "./papers/2026/tplaqr/tplaqr-cover.png",
-        "width": 1210,
-        "height": 1651,
+        "width": 600,
+        "height": 900,
         "alt": {
-          "zh": "Tensor Partially Linear Additive Quantile Regression 稿件首页缩略图",
-          "en": "First-page thumbnail of the Tensor Partially Linear Additive Quantile Regression manuscript"
+          "zh": "Journal of Multivariate Analysis 期刊封面",
+          "en": "Journal of Multivariate Analysis journal cover"
         }
       },
       "citation": {
@@ -326,11 +326,11 @@
       },
       "image": {
         "src": "./papers/2026/toms-sssvcqr/toms-cover.png",
-        "width": 1530,
-        "height": 1980,
+        "width": 600,
+        "height": 900,
         "alt": {
-          "zh": "ACM TOMS 投稿论文首页缩略图",
-          "en": "First-page thumbnail of the ACM TOMS manuscript"
+          "zh": "ACM TOMS 期刊封面",
+          "en": "ACM Transactions on Mathematical Software cover"
         }
       },
       "citation": {
