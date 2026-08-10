@@ -999,6 +999,7 @@ body{
   border-radius:2px;
   border:1px solid var(--tf-border);
   box-shadow:none;
+  pointer-events:auto;
 }
 .publication-card.has-thumb .pub-media img{
   width:100%;
