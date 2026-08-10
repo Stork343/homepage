@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Cross-platform static dev server (`scripts/serve.js`) used by Playwright.
 - Ready-to-use auto-sync workflow template under `docs/workflows/`.
 - Bilingual footer and skip-link copy.
+- Education timeline in the About section.
 - Automated UI regression tests with Playwright for dark mode persistence, TOC navigation, and language display rules.
 - One-command backup and restore scripts under `scripts/ops/`.
 - Release helper script `scripts/release.sh` with pre-release checks.
