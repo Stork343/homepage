@@ -18,7 +18,7 @@ module.exports = defineConfig({
     video: 'off'
   },
   webServer: {
-    command: `python3 -m http.server ${PORT}`,
+    command: `node scripts/serve.js ${PORT}`,
     port: Number(PORT),
     reuseExistingServer: !process.env.CI,
     timeout: 120000

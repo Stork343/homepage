@@ -133,6 +133,12 @@ function run() {
       publicationById.set(String(pub.id), pub);
     }
   });
+  const masterById = new Map();
+  master.publications.forEach((pub) => {
+    if (pub && pub.id) {
+      masterById.set(String(pub.id), pub);
+    }
+  });
 
   master.publications.forEach((pub) => {
     if (!pub || pub.hidden) {
@@ -263,14 +269,17 @@ function run() {
   }
 
   const allowedPdfFiles = new Set();
-  publications.filter(isPublishedPublication).forEach((pub) => {
+  masterById.forEach((pub) => {
+    if (!isPublishedPublication(pub)) {
+      return;
+    }
     const pdfLink = pub && pub.links && pub.links.pdf;
     if (pdfLink && !isHttpUrl(pdfLink)) {
       allowedPdfFiles.add(normalizeRelPath(pdfLink));
     }
   });
   papers.forEach((entry) => {
-    const pub = publicationById.get(String(entry.id || ""));
+    const pub = masterById.get(String(entry.id || ""));
     if (!pub || !isPublishedPublication(pub)) {
       return;
     }

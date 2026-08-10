@@ -150,9 +150,10 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp-cover.png",
-        "width": 600,
-        "height": 900,
+        "src": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp-cover.jpg",
+        "webp": "./papers/2026/qapsm-icu-bp/qapsm-icu-bp-cover.webp",
+        "width": 400,
+        "height": 600,
         "alt": {
           "zh": "Statistics in Medicine 期刊封面",
           "en": "Statistics in Medicine journal cover"
@@ -211,9 +212,10 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.png",
-        "width": 520,
-        "height": 677,
+        "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg",
+        "webp": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.webp",
+        "width": 400,
+        "height": 521,
         "alt": {
           "zh": "JRSS-C 期刊封面",
           "en": "Journal of the Royal Statistical Society Series C cover"
@@ -268,9 +270,10 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2026/tplaqr/tplaqr-cover.png",
-        "width": 563,
-        "height": 768,
+        "src": "./papers/2026/tplaqr/tplaqr-cover.jpg",
+        "webp": "./papers/2026/tplaqr/tplaqr-cover.webp",
+        "width": 400,
+        "height": 546,
         "alt": {
           "zh": "Journal of Multivariate Analysis 期刊封面",
           "en": "Journal of Multivariate Analysis journal cover"
@@ -325,7 +328,8 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2026/toms-sssvcqr/toms-cover.png",
+        "src": "./papers/2026/toms-sssvcqr/toms-cover.jpg",
+        "webp": "./papers/2026/toms-sssvcqr/toms-cover.webp",
         "width": 301,
         "height": 446,
         "alt": {

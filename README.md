@@ -19,7 +19,7 @@ This repository hosts a bilingual personal academic homepage and six local paper
 - `data/site-master.json`: canonical source for publications and paper-page mappings.
 - `papers/*/*/*.html`: paper subpages.
 - `papers/shared/paper-reader.js`: shared PDF reader logic.
-- `data/publications.json`: publication metadata.
+- `data/publications.json`: generated publication metadata (derived from `site-master.json`).
 - `data/paper-pages.json`: paper page configuration.
 - `data/paper-toc.generated.json`: pre-generated TOC cache.
 - `data/search-index.generated.json`: global academic search index.

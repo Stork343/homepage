@@ -4,16 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- One-click citation format switching (default / APA / GB/T 7714) on publication cards.
+- Footer visitor statistics via busuanzi.
+- Automatic publication PDF guard: unpublished entries are stripped of PDF/full-text links, and the validator rejects any unreferenced PDF in `papers/`.
+- Automatic last-updated date (`data/site-updated.generated.json`) and content-hash version tags for CSS/JS.
+- Cross-platform static dev server (`scripts/serve.js`) used by Playwright.
+- Ready-to-use auto-sync workflow template under `docs/workflows/`.
+- Bilingual footer and skip-link copy.
 - Automated UI regression tests with Playwright for dark mode persistence, TOC navigation, and language display rules.
 - One-command backup and restore scripts under `scripts/ops/`.
 - Release helper script `scripts/release.sh` with pre-release checks.
 - Lighthouse performance/accessibility gate script.
 
 ### Changed
+- Consolidated `enhanced-main.css` (removed ~2000 lines of duplicated/overridden rules) with browser-verified identical rendering.
+- Updated JRSS-C manuscript entry (title, venue, status, PDF removed until publication).
+- Switched manuscript thumbnails to official journal covers and compressed images (webp variants, smaller avatar).
+- Contact section merged into a single mailbox entry with three addresses.
+- Remote tracking switched to HTTPS for reliable pushes in this environment.
 - Paper reader now supports pre-generated TOC cache for faster and more stable section navigation.
 - CI pipeline expanded with acceptance checks, TOC cache freshness checks, UI tests, and Lighthouse gates.
 
 ### Fixed
+- Visual regression tests now skip on non-macOS platforms until Linux baselines are regenerated (current baselines are macOS-only).
+- `papers/README.md` maintenance instructions now point to `data/site-master.json`.
+- OneDrive sync artifacts guarded via `.gitignore` (`*MacBook*`).
 - SVCQR local PDF corruption issue; repository now uses full 52-page PDF.
 
 ## [2026-02-25]
