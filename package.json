@@ -13,6 +13,7 @@
     "seo:sync": "node scripts/sync-paper-seo.js --write",
     "metadata:enrich": "node scripts/enrich-metadata.js --write-cache",
     "test:ui": "playwright test",
+    "test:ui:core": "playwright test tests/ui/regression.spec.js tests/ui/accessibility.spec.js",
     "test:a11y": "playwright test tests/ui/accessibility.spec.js",
     "test:visual": "playwright test tests/ui/visual.spec.js",
     "lighthouse": "node scripts/run-lighthouse-check.js"

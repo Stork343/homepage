@@ -4,6 +4,11 @@ test.use({
   viewport: { width: 1440, height: 1024 }
 });
 
+test.skip(
+  process.platform !== "darwin",
+  "Visual baselines are macOS-only; regenerate snapshots on Linux before enabling cross-platform runs."
+);
+
 test("Homepage visual baseline", async ({ page }) => {
   await page.goto("/index.html");
   await page.emulateMedia({ reducedMotion: "reduce" });

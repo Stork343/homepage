@@ -149,9 +149,10 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.png",
-      "width": 520,
-      "height": 677,
+      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg",
+      "webp": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.webp",
+      "width": 400,
+      "height": 521,
       "alt": {
         "zh": "JRSS-C 期刊封面",
         "en": "Journal of the Royal Statistical Society Series C cover"
@@ -206,9 +207,10 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2026/tplaqr/tplaqr-cover.png",
-      "width": 563,
-      "height": 768,
+      "src": "./papers/2026/tplaqr/tplaqr-cover.jpg",
+      "webp": "./papers/2026/tplaqr/tplaqr-cover.webp",
+      "width": 400,
+      "height": 546,
       "alt": {
         "zh": "Journal of Multivariate Analysis 期刊封面",
         "en": "Journal of Multivariate Analysis journal cover"
@@ -263,7 +265,8 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2026/toms-sssvcqr/toms-cover.png",
+      "src": "./papers/2026/toms-sssvcqr/toms-cover.jpg",
+      "webp": "./papers/2026/toms-sssvcqr/toms-cover.webp",
       "width": 301,
       "height": 446,
       "alt": {
@@ -579,7 +582,6 @@
   },
   {
     "id": "poisson-rr",
-    "published": true,
     "year": 2025,
     "title": {
       "zh": "泊松分布下基于鞍点逼近的相对风险置信区间构造",
@@ -641,7 +643,6 @@
   },
   {
     "id": "gtwr-housing",
-    "published": true,
     "year": 2022,
     "title": {
       "zh": "基于异窗宽GTWR模型的商品住宅价格影响因素研究",
@@ -703,7 +704,6 @@
   },
   {
     "id": "bgtwr-housing",
-    "published": true,
     "year": 2022,
     "title": {
       "zh": "基于多尺度时空地理加权回归模型的房价影响因素分析",
@@ -765,7 +765,6 @@
   },
   {
     "id": "mgtwr-variable-selection",
-    "published": true,
     "year": 2021,
     "title": {
       "zh": "基于变量选择的混合时空地理加权回归参数估计",

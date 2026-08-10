@@ -124,6 +124,7 @@ function buildPublications(master, metadataById) {
   return publications.map((pub) => {
     const output = { ...pub };
     delete output.paper_page;
+    delete output.published;
     const statusZh = localizedText(pub.status, "zh");
     const statusEn = localizedText(pub.status, "en");
     const isManuscript =

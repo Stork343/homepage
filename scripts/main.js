@@ -112,6 +112,22 @@
       footer_stats_label: "访问量统计",
       footer_stat_pv: "访问量",
       footer_stat_uv: "访客",
+      skip_link: "跳到主要内容",
+      footer_info: "信息",
+      footer_link_about: "关于我",
+      footer_link_research: "研究领域",
+      footer_link_publications: "学术成果",
+      footer_open_access: "开放获取",
+      footer_link_working_papers: "工作论文",
+      footer_link_cv: "简历",
+      footer_link_code: "代码仓库",
+      footer_help: "帮助与联系",
+      footer_link_email: "邮箱",
+      footer_link_affiliation: "机构",
+      footer_link_address: "地址",
+      footer_keep_updated: "保持关注",
+      footer_note: "注册以接收最新的学术动态邮件。",
+      footer_signup: "订阅",
       label_pdf: "PDF",
       label_code: "Code",
       label_doi: "DOI",
@@ -195,6 +211,22 @@
       footer_stats_label: "Visitor statistics",
       footer_stat_pv: "Views",
       footer_stat_uv: "Visitors",
+      skip_link: "Skip to main content",
+      footer_info: "Information",
+      footer_link_about: "About",
+      footer_link_research: "Research Areas",
+      footer_link_publications: "Publications",
+      footer_open_access: "Open Access",
+      footer_link_working_papers: "Working Papers",
+      footer_link_cv: "Curriculum Vitae",
+      footer_link_code: "Code Repositories",
+      footer_help: "Help & Contact",
+      footer_link_email: "Email",
+      footer_link_affiliation: "Affiliation",
+      footer_link_address: "Address",
+      footer_keep_updated: "Keep up to date",
+      footer_note: "Register to receive personalised research updates by email.",
+      footer_signup: "Sign me up",
       label_pdf: "PDF",
       label_code: "Code",
       label_doi: "DOI",
@@ -1335,7 +1367,7 @@
     }
 
     let hadCachedData = false;
-    const cacheKey = "homepage-publications-cache-v7";
+    const cacheKey = "homepage-publications-cache-v8";
     try {
       const cached = getStorageItem(cacheKey);
       if (cached) {
