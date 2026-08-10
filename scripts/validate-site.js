@@ -34,6 +34,10 @@ function isHttpUrl(value) {
   return /^https?:\/\//i.test(String(value || "").trim());
 }
 
+function isPublishedPublication(pub) {
+  return Boolean(pub && pub.publication_info && pub.publication_info.display) || pub.published === true;
+}
+
 function resolveCandidatePath(pageRelPath, candidate) {
   const baseDir = path.posix.dirname(normalizeRelPath(pageRelPath));
   const joined = path.posix.join(baseDir, String(candidate || "").trim());
@@ -127,6 +131,22 @@ function run() {
   publications.forEach((pub) => {
     if (pub && pub.id) {
       publicationById.set(String(pub.id), pub);
+    }
+  });
+
+  master.publications.forEach((pub) => {
+    if (!pub || pub.hidden) {
+      return;
+    }
+    if (isPublishedPublication(pub)) {
+      return;
+    }
+    const links = pub.links || {};
+    if (links.pdf) {
+      fail(`Unpublished publication ${pub.id} must not expose a PDF link: ${links.pdf}`);
+    }
+    if (links.html) {
+      fail(`Unpublished publication ${pub.id} must not expose a full-text link: ${links.html}`);
     }
   });
 
@@ -240,6 +260,49 @@ function run() {
   }
   if (seoById.size !== papers.length) {
     fail(`paper-seo.generated paper count mismatch: seo ${seoById.size}, expected ${papers.length}`);
+  }
+
+  const allowedPdfFiles = new Set();
+  publications.filter(isPublishedPublication).forEach((pub) => {
+    const pdfLink = pub && pub.links && pub.links.pdf;
+    if (pdfLink && !isHttpUrl(pdfLink)) {
+      allowedPdfFiles.add(normalizeRelPath(pdfLink));
+    }
+  });
+  papers.forEach((entry) => {
+    const pub = publicationById.get(String(entry.id || ""));
+    if (!pub || !isPublishedPublication(pub)) {
+      return;
+    }
+    const html = fs.readFileSync(path.join(ROOT, entry.path), "utf8");
+    const pdfUrlMatch = html.match(/window\.__PAPER_PDF_URL__\s*=\s*"([^"]+)"/);
+    if (pdfUrlMatch) {
+      allowedPdfFiles.add(resolveCandidatePath(entry.path, pdfUrlMatch[1]));
+    }
+    (Array.isArray(entry.pdf_candidates) ? entry.pdf_candidates : []).forEach((candidate) => {
+      if (isHttpUrl(candidate)) {
+        return;
+      }
+      allowedPdfFiles.add(resolveCandidatePath(entry.path, candidate));
+    });
+  });
+  const papersRoot = path.join(ROOT, "papers");
+  if (fs.existsSync(papersRoot)) {
+    const stack = [papersRoot];
+    while (stack.length > 0) {
+      const dir = stack.pop();
+      fs.readdirSync(dir, { withFileTypes: true }).forEach((dirent) => {
+        const full = path.join(dir, dirent.name);
+        if (dirent.isDirectory()) {
+          stack.push(full);
+        } else if (dirent.isFile() && dirent.name.toLowerCase().endsWith(".pdf")) {
+          const rel = normalizeRelPath(path.relative(ROOT, full));
+          if (!allowedPdfFiles.has(rel)) {
+            fail(`Unreferenced or non-published PDF in public repo: ${rel}`);
+          }
+        }
+      });
+    }
   }
 
   const readerPath = path.join(ROOT, "papers", "shared", "paper-reader.js");

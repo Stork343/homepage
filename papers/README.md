@@ -33,4 +33,9 @@ When adding a new paper:
 
 1. Create `papers/<year>/<paper-id>/`.
 2. Put all local files for that paper in the folder.
-3. Update paths in `data/publications.json`.
+3. Add the paper entry (including `paper_page`) to `data/site-master.json`.
+4. Regenerate derived data:
+   ```sh
+   node scripts/build-site-data.js --write
+   node scripts/sync-paper-seo.js --write
+   ```

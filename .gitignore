@@ -9,3 +9,6 @@ node_modules/
 playwright-report/
 test-results/
 release-artifacts/
+
+# OneDrive multi-device sync artifacts
+*MacBook*
