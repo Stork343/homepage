@@ -28,7 +28,8 @@ function masterDataVersion(master) {
 }
 
 function hashText(text) {
-  return crypto.createHash("sha1").update(String(text), "utf8").digest("hex").slice(0, 10);
+  const normalized = String(text).replace(/\r\n/g, "\n");
+  return crypto.createHash("sha1").update(normalized, "utf8").digest("hex").slice(0, 10);
 }
 
 function buildIndexHtml(root) {
