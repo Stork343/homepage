@@ -60,7 +60,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:41.235Z"
+      "checked_at": "2026-08-10T18:12:07.067Z"
     }
   },
   {
@@ -122,7 +122,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:42.588Z"
+      "checked_at": "2026-08-10T18:12:08.915Z"
     }
   },
   {
@@ -181,6 +181,12 @@
         "semivariance",
         "spatial statistics"
       ]
+    },
+    "metadata": {
+      "doi": "",
+      "arxiv_id": "",
+      "source": "crossref",
+      "checked_at": "2026-08-10T18:12:11.613Z"
     }
   },
   {
@@ -239,6 +245,12 @@
         "asymptotic theory",
         "ADMM"
       ]
+    },
+    "metadata": {
+      "doi": "",
+      "arxiv_id": "",
+      "source": "local-links",
+      "checked_at": "2026-08-10T18:12:13.043Z"
     }
   },
   {
@@ -297,6 +309,12 @@
         "R package",
         "ADMM"
       ]
+    },
+    "metadata": {
+      "doi": "",
+      "arxiv_id": "",
+      "source": "local-links",
+      "checked_at": "2026-08-10T18:12:15.005Z"
     }
   },
   {
@@ -369,8 +387,8 @@
     "metadata": {
       "doi": "10.1016/j.spasta.2026.100983",
       "arxiv_id": "2511.18106",
-      "source": "local-links",
-      "checked_at": "2026-05-14T00:00:00.000Z"
+      "source": "arxiv-api",
+      "checked_at": "2026-08-10T18:12:15.645Z"
     }
   },
   {
@@ -438,10 +456,10 @@
       ]
     },
     "metadata": {
-      "doi": "",
+      "doi": "10.1016/j.jspi.2026.106390",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:44.381Z"
+      "checked_at": "2026-08-10T18:12:16.035Z"
     }
   },
   {
@@ -512,8 +530,8 @@
     "metadata": {
       "doi": "10.1007/s00362-026-01882-3",
       "arxiv_id": "2510.24352",
-      "source": "local-links",
-      "checked_at": "2026-02-24T19:40:44.381Z"
+      "source": "arxiv-api",
+      "checked_at": "2026-08-10T18:12:16.449Z"
     }
   },
   {
@@ -577,7 +595,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:45.430Z"
+      "checked_at": "2026-08-10T18:12:18.113Z"
     }
   },
   {
@@ -638,7 +656,7 @@
       "doi": "10.20207/j.cnki.1007-3116.20250703.001",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:46.040Z"
+      "checked_at": "2026-08-10T18:12:18.511Z"
     }
   },
   {
@@ -699,7 +717,7 @@
       "doi": "10.13860/j.cnki.sltj.20210722-025",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:46.476Z"
+      "checked_at": "2026-08-10T18:12:19.010Z"
     }
   },
   {
@@ -760,7 +778,7 @@
       "doi": "10.16722/j.issn.1674-537x.2022.10.001",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:47.001Z"
+      "checked_at": "2026-08-10T18:12:32.411Z"
     }
   },
   {
@@ -821,7 +839,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-02-24T19:40:49.674Z"
+      "checked_at": "2026-08-10T18:12:34.729Z"
     }
   }
 ]

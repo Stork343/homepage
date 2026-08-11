@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-24T19:40:49.674Z",
+  "updated": "2026-08-10T18:12:34.730Z",
   "source": "site-master.json",
   "entries": [
     {
       "id": "mallows-llm-ranking",
-      "checked_at": "2026-02-24T19:40:41.235Z",
+      "checked_at": "2026-08-10T18:12:07.067Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -15,7 +15,51 @@
     },
     {
       "id": "jpdi-mixed-qr",
-      "checked_at": "2026-02-24T19:40:42.588Z",
+      "checked_at": "2026-08-10T18:12:08.915Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "qapsm-icu-bp",
+      "checked_at": "2026-08-10T18:12:10.195Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "qvsd-spatiotemporal-extremes",
+      "checked_at": "2026-08-10T18:12:11.613Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "crossref",
+      "confidence": 0.86
+    },
+    {
+      "id": "tplaqr",
+      "checked_at": "2026-08-10T18:12:13.043Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "toms-sssvcqr",
+      "checked_at": "2026-08-10T18:12:15.005Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -26,20 +70,20 @@
     },
     {
       "id": "svcqr",
-      "checked_at": "2026-05-14T00:00:00.000Z",
+      "checked_at": "2026-08-10T18:12:15.645Z",
       "doi": "10.1016/j.spasta.2026.100983",
       "doi_url": "https://doi.org/10.1016/j.spasta.2026.100983",
       "arxiv_id": "2511.18106",
       "arxiv_abs": "https://arxiv.org/abs/2511.18106",
       "arxiv_pdf": "https://arxiv.org/pdf/2511.18106.pdf",
-      "source": "local-links",
+      "source": "arxiv-api",
       "confidence": 1
     },
     {
       "id": "hcqr",
-      "checked_at": "2026-02-24T19:40:44.381Z",
-      "doi": "",
-      "doi_url": "",
+      "checked_at": "2026-08-10T18:12:16.035Z",
+      "doi": "10.1016/j.jspi.2026.106390",
+      "doi_url": "https://doi.org/10.1016/j.jspi.2026.106390",
       "arxiv_id": "",
       "arxiv_abs": "",
       "arxiv_pdf": "",
@@ -48,18 +92,18 @@
     },
     {
       "id": "snqesa",
-      "checked_at": "2026-02-24T19:40:44.381Z",
+      "checked_at": "2026-08-10T18:12:16.449Z",
       "doi": "10.1007/s00362-026-01882-3",
       "doi_url": "https://doi.org/10.1007/s00362-026-01882-3",
       "arxiv_id": "2510.24352",
       "arxiv_abs": "https://arxiv.org/abs/2510.24352",
       "arxiv_pdf": "https://arxiv.org/pdf/2510.24352.pdf",
-      "source": "local-links",
+      "source": "arxiv-api",
       "confidence": 1
     },
     {
       "id": "plgwqr",
-      "checked_at": "2026-02-24T19:40:45.430Z",
+      "checked_at": "2026-08-10T18:12:18.113Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -70,7 +114,7 @@
     },
     {
       "id": "poisson-rr",
-      "checked_at": "2026-02-24T19:40:46.040Z",
+      "checked_at": "2026-08-10T18:12:18.511Z",
       "doi": "10.20207/j.cnki.1007-3116.20250703.001",
       "doi_url": "https://doi.org/10.20207/j.cnki.1007-3116.20250703.001",
       "arxiv_id": "",
@@ -81,7 +125,7 @@
     },
     {
       "id": "gtwr-housing",
-      "checked_at": "2026-02-24T19:40:46.476Z",
+      "checked_at": "2026-08-10T18:12:19.010Z",
       "doi": "10.13860/j.cnki.sltj.20210722-025",
       "doi_url": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
       "arxiv_id": "",
@@ -92,7 +136,7 @@
     },
     {
       "id": "bgtwr-housing",
-      "checked_at": "2026-02-24T19:40:47.001Z",
+      "checked_at": "2026-08-10T18:12:32.411Z",
       "doi": "10.16722/j.issn.1674-537x.2022.10.001",
       "doi_url": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
       "arxiv_id": "",
@@ -103,7 +147,7 @@
     },
     {
       "id": "mgtwr-variable-selection",
-      "checked_at": "2026-02-24T19:40:49.674Z",
+      "checked_at": "2026-08-10T18:12:34.729Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
