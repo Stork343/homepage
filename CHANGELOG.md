@@ -25,12 +25,15 @@ All notable changes to this project will be documented in this file.
 - Remote tracking switched to HTTPS for reliable pushes in this environment.
 - Paper reader now supports pre-generated TOC cache for faster and more stable section navigation.
 - CI pipeline expanded with acceptance checks, TOC cache freshness checks, UI tests, and Lighthouse gates.
+- Compressed SVCQR PDF from ~17 MB to ~3.8 MB (image re-encoding, text layer preserved).
+- Renamed `site-master.json` `updated` to `data_version` and refreshed the DOI/arXiv metadata cache.
 
 ### Fixed
 - Visual regression tests now skip on non-macOS platforms until Linux baselines are regenerated (current baselines are macOS-only).
 - `papers/README.md` maintenance instructions now point to `data/site-master.json`.
 - OneDrive sync artifacts guarded via `.gitignore` (`*MacBook*`).
 - SVCQR local PDF corruption issue; repository now uses full 52-page PDF.
+- Removed a spurious Crossref DOI match for the unpublished JRSS-C manuscript.
 
 ## [2026-02-25]
 ### Added

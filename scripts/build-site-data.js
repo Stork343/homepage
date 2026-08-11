@@ -23,6 +23,10 @@ function todayLocal() {
   return new Date().toLocaleDateString("en-CA");
 }
 
+function masterDataVersion(master) {
+  return String(master && (master.data_version || master.updated) || "").trim();
+}
+
 function hashText(text) {
   return crypto.createHash("sha1").update(String(text), "utf8").digest("hex").slice(0, 10);
 }
@@ -179,7 +183,7 @@ function buildPublications(master, metadataById) {
 
 function buildPaperPages(master) {
   return {
-    updated: String(master.updated || ""),
+    updated: masterDataVersion(master),
     papers: extractPaperPages(Array.isArray(master.publications) ? master.publications : [])
   };
 }
@@ -187,8 +191,8 @@ function buildPaperPages(master) {
 function buildPaperToc(master) {
   const papers = extractPaperPages(Array.isArray(master.publications) ? master.publications : []);
   return {
-    updated: String(master.updated || ""),
-    generated_at: `${String(master.updated || "1970-01-01")}T00:00:00.000Z`,
+    updated: masterDataVersion(master),
+    generated_at: `${masterDataVersion(master) || "1970-01-01"}T00:00:00.000Z`,
     papers: papers.map((entry) => ({
       id: entry.id,
       path: entry.path,
@@ -215,8 +219,8 @@ function buildSearchIndex(master, publications) {
   const paperPages = extractPaperPages(Array.isArray(master.publications) ? master.publications : []);
   const pathById = new Map(paperPages.map((entry) => [entry.id, entry.path]));
   return {
-    updated: String(master.updated || ""),
-    generated_at: `${String(master.updated || "1970-01-01")}T00:00:00.000Z`,
+    updated: masterDataVersion(master),
+    generated_at: `${masterDataVersion(master) || "1970-01-01"}T00:00:00.000Z`,
     entries: publications.map((pub) => {
       const id = String(pub.id || "").trim();
       const keywordsZh = uniqueStringList(pub && pub.keywords && pub.keywords.zh);
@@ -409,7 +413,7 @@ function buildPaperSeo(master, publications) {
   }
 
   return {
-    updated: String(master.updated || ""),
+    updated: masterDataVersion(master),
     papers
   };
 }
