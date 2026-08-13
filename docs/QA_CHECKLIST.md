@@ -13,7 +13,7 @@
 - `npm run lighthouse`
 - `scripts/validate-site.js` rejects unpublished papers exposing PDF/full-text links and any unreferenced PDF under `papers/`.
 - Citation format selector renders on every publication card; APA and GB/T 7714 copies match the expected format.
-- Footer visitor stats containers render; page/CV dates follow `data/site-updated.generated.json`.
+- Footer visitor stats containers render from `data/visitor-stats.generated.json`; page/CV dates follow `data/site-updated.generated.json`.
 
 ## Manual Checks
 - Home page dark mode toggles correctly and persists after refresh.

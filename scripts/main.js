@@ -1433,6 +1433,27 @@
     }
   }
 
+  async function loadVisitorStats() {
+    const pageviewsEl = document.getElementById("stat-pageviews");
+    const visitorsEl = document.getElementById("stat-visitors");
+    if (!pageviewsEl || !visitorsEl) {
+      return;
+    }
+    try {
+      const response = await fetch("data/visitor-stats.generated.json", { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      const format = (value) =>
+        typeof value === "number" && Number.isFinite(value) ? value.toLocaleString("en-US") : "--";
+      pageviewsEl.textContent = format(data && data.pageviews);
+      visitorsEl.textContent = format(data && data.visitors);
+    } catch (_) {
+      // Keep the "--" placeholders when stats are not available.
+    }
+  }
+
   function initNavigation() {
     const navbar = document.querySelector(".navbar");
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -1599,5 +1620,6 @@
     applyI18nText();
     await loadPublications();
     loadSiteMeta();
+    loadVisitorStats();
   });
 })();
