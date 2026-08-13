@@ -115,7 +115,6 @@
       footer_text_template: "© {year} HOU Jian. 最后更新：{date}",
       footer_stats_label: "访问量统计",
       footer_stat_pv: "访问量",
-      footer_stat_uv: "访客",
       skip_link: "跳到主要内容",
       footer_info: "信息",
       footer_link_about: "关于我",
@@ -218,7 +217,6 @@
       footer_text_template: "© {year} HOU Jian. Last updated: {date}",
       footer_stats_label: "Visitor statistics",
       footer_stat_pv: "Views",
-      footer_stat_uv: "Visitors",
       skip_link: "Skip to main content",
       footer_info: "Information",
       footer_link_about: "About",
@@ -1433,27 +1431,6 @@
     }
   }
 
-  async function loadVisitorStats() {
-    const pageviewsEl = document.getElementById("stat-pageviews");
-    const visitorsEl = document.getElementById("stat-visitors");
-    if (!pageviewsEl || !visitorsEl) {
-      return;
-    }
-    try {
-      const response = await fetch("data/visitor-stats.generated.json", { cache: "no-cache" });
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      const data = await response.json();
-      const format = (value) =>
-        typeof value === "number" && Number.isFinite(value) ? value.toLocaleString("en-US") : "--";
-      pageviewsEl.textContent = format(data && data.pageviews);
-      visitorsEl.textContent = format(data && data.visitors);
-    } catch (_) {
-      // Keep the "--" placeholders when stats are not available.
-    }
-  }
-
   function initNavigation() {
     const navbar = document.querySelector(".navbar");
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -1620,6 +1597,5 @@
     applyI18nText();
     await loadPublications();
     loadSiteMeta();
-    loadVisitorStats();
   });
 })();
