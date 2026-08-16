@@ -197,16 +197,16 @@
       },
       "authors": "Jian Hou, Tan Meng, Maozai Tian",
       "venue": {
-        "zh": "Journal of the Royal Statistical Society: Series C (Applied Statistics)",
-        "en": "Journal of the Royal Statistical Society: Series C (Applied Statistics)"
+        "zh": "Journal of the American Statistical Association",
+        "en": "Journal of the American Statistical Association"
       },
       "status": {
-        "zh": "状态：审稿中",
-        "en": "Status: Under Review"
+        "zh": "状态：已投稿",
+        "en": "Status: Submitted"
       },
       "links": {
         "pdf": null,
-        "code": null,
+        "code": "https://github.com/Stork343/spatial-wbt-reproducibility",
         "doi": null,
         "html": null,
         "article": null
@@ -214,18 +214,18 @@
       "image": {
         "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg",
         "webp": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.webp",
-        "width": 400,
-        "height": 521,
+        "width": 200,
+        "height": 259,
         "alt": {
-          "zh": "JRSS-C 期刊封面",
-          "en": "Journal of the Royal Statistical Society Series C cover"
+          "zh": "Journal of the American Statistical Association 期刊封面",
+          "en": "Journal of the American Statistical Association cover"
         }
       },
       "citation": {
-        "zh": "Hou, J., Tan, M., & Tian, M. Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China. Journal of the Royal Statistical Society: Series C (Applied Statistics), 2026.",
-        "en": "Hou, J., Tan, M., & Tian, M. Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China. Journal of the Royal Statistical Society: Series C (Applied Statistics), 2026."
+        "zh": "Hou, J., Tan, M., & Tian, M. Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China. Journal of the American Statistical Association, 2026.",
+        "en": "Hou, J., Tan, M., & Tian, M. Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China. Journal of the American Statistical Association, 2026."
       },
-      "bibtex": "@article{hou2026humidheat,\n  title={Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of the Royal Statistical Society: Series C (Applied Statistics)},\n  year={2026},\n  note={Under review}\n}",
+      "bibtex": "@article{hou2026humidheat,\n  title={Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of the American Statistical Association},\n  year={2026},\n  note={Submitted}\n}",
       "force_english_display": true,
       "keywords": {
         "zh": [
