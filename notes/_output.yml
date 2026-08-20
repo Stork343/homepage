@@ -5,7 +5,7 @@ bookdown::gitbook:
       collapse: subsection
       scroll_highlight: yes
       before: |
-        <li><a href="./" class="toc-home">统计方法讲义</a></li>
+        <li><a href="./" class="toc-home">统计方法笔记</a></li>
       after: |
         <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
     toolbar:

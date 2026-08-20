@@ -1,7 +1,17 @@
-# 统计方法讲义（bookdown 子站）
+# 统计方法笔记（bookdown 子站）
 
-个人主页配套的统计讲义，由 [bookdown](https://bookdown.org/yihui/bookdown/)
-渲染为 GitBook 风格静态站点。访问入口：主页导航「讲义」→ `notes/_book/`。
+个人主页配套的统计笔记，整理作者已发表论文中的模型、估计方法与
+理论性质，由 [bookdown](https://bookdown.org/yihui/bookdown/) 渲染为
+GitBook 风格静态站点。访问入口：主页导航「笔记」→ `notes/_book/`。
+
+## 章节一览
+
+1. 泊松相对风险的鞍点逼近置信区间（统计与信息论坛 2025）
+2. 自标准化分位经验鞍点逼近（Statistical Papers 2026）
+3. 稀疏-平滑空间变系数分位回归（Spatial Statistics 2026）
+4. 分层复合分位回归与自适应 Lasso（JSPI 2026）
+5. 混合时空地理加权回归的变量选择（数学的实践与认识 2021）
+6. 异窗宽 GTWR 模型（数理统计与管理 2022）
 
 ## 目录结构
 
@@ -78,6 +88,8 @@ python -m http.server 8000   # http://localhost:8000
 
 ## 新增章节
 
-1. 新建 `04-my-chapter.Rmd`（编号继续递增）；
+1. 新建 `07-my-chapter.Rmd`（编号继续递增）；
 2. 在 `index.Rmd` 前言补一句说明（可选）；
-3. 本地渲染检查无警告后提交。
+3. **图内文字必须用英文**（R 图形设备在 CI 无中文字体，中文会显示
+   为方块）；正文与表格可用中文；
+4. 本地渲染检查无警告后提交。

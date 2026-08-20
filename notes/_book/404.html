@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | 统计方法讲义</title>
-  <meta name="description" content="侯健个人主页配套统计讲义（bookdown 演示）：分位回归、鞍点逼近与混合效应建模。" />
+  <title>Page not found | 统计方法笔记</title>
+  <meta name="description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | 统计方法讲义" />
+  <meta property="og:title" content="Page not found | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套统计讲义（bookdown 演示）：分位回归、鞍点逼近与混合效应建模。" />
+  <meta property="og:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | 统计方法讲义" />
+  <meta name="twitter:title" content="Page not found | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套统计讲义（bookdown 演示）：分位回归、鞍点逼近与混合效应建模。" />
+  <meta name="twitter:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-20" />
+<meta name="date" content="2026-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -160,33 +160,59 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./" class="toc-home">统计方法讲义</a></li>
+<li><a href="./" class="toc-home">统计方法笔记</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E6%9C%AC%E4%B9%A6"><i class="fa fa-check"></i><b>1.1</b> 如何构建本书</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#%E7%AB%A0%E8%8A%82%E7%9B%AE%E5%BD%95"><i class="fa fa-check"></i><b>1.2</b> 章节目录</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="qr.html"><a href="qr.html"><i class="fa fa-check"></i><b>2</b> 分位回归简介</a>
+<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 泊松相对风险的鞍点逼近置信区间</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="qr.html"><a href="qr.html#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.1</b> 目标函数</a></li>
-<li class="chapter" data-level="2.2" data-path="qr.html"><a href="qr.html#qr-demo"><i class="fa fa-check"></i><b>2.2</b> 数值演示</a></li>
-<li class="chapter" data-level="2.3" data-path="qr.html"><a href="qr.html#%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>2.3</b> 小结</a></li>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%97%AE%E9%A2%98"><i class="fa fa-check"></i><b>2.1</b> 模型与问题</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><i class="fa fa-check"></i><b>2.2</b> 鞍点逼近的基本原理</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.3</b> 相对风险的鞍点逼近区间</a></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.4</b> 数值演示</a></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>2.5</b> 要点小结</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="sp.html"><a href="sp.html"><i class="fa fa-check"></i><b>3</b> 鞍点逼近初步</a>
+<li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 自标准化分位经验鞍点逼近</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="sp.html"><a href="sp.html#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><i class="fa fa-check"></i><b>3.1</b> 基本思想</a></li>
-<li class="chapter" data-level="3.2" data-path="sp.html"><a href="sp.html#sec:saddle-formula"><i class="fa fa-check"></i><b>3.2</b> 鞍点逼近公式</a></li>
-<li class="chapter" data-level="3.3" data-path="sp.html"><a href="sp.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>3.3</b> 数值演示</a></li>
-<li class="chapter" data-level="3.4" data-path="sp.html"><a href="sp.html#%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>3.4</b> 小结</a></li>
+<li class="chapter" data-level="3.1" data-path="snqesa.html"><a href="snqesa.html#%E5%88%86%E4%BD%8D%E6%8E%A8%E6%96%AD%E7%9A%84%E5%9B%B0%E9%9A%BE"><i class="fa fa-check"></i><b>3.1</b> 分位推断的困难</a></li>
+<li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91"><i class="fa fa-check"></i><b>3.2</b> 经验鞍点逼近</a></li>
+<li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#snqesa-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><i class="fa fa-check"></i><b>3.3</b> SNQESA 的核心思想</a></li>
+<li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.4</b> 数值演示</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="me.html"><a href="me.html"><i class="fa fa-check"></i><b>4</b> 线性混合效应模型</a>
+<li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 稀疏-平滑空间变系数分位回归</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="me.html"><a href="me.html#%E6%A8%A1%E5%9E%8B%E5%BD%A2%E5%BC%8F"><i class="fa fa-check"></i><b>4.1</b> 模型形式</a></li>
-<li class="chapter" data-level="4.2" data-path="me.html"><a href="me.html#%E4%B8%8E%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9A%84%E8%81%94%E7%B3%BB"><i class="fa fa-check"></i><b>4.2</b> 与分位回归的联系</a></li>
-<li class="chapter" data-level="4.3" data-path="me.html"><a href="me.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>4.3</b> 数值演示</a></li>
-<li class="chapter" data-level="4.4" data-path="me.html"><a href="me.html#%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>4.4</b> 小结</a></li>
+<li class="chapter" data-level="4.1" data-path="svcqr.html"><a href="svcqr.html#%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%B1%80-%E5%B1%80%E9%83%A8%E5%88%86%E8%A7%A3"><i class="fa fa-check"></i><b>4.1</b> 模型：全局-局部分解</a></li>
+<li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%AD%A3%E5%88%99%E5%8C%96"><i class="fa fa-check"></i><b>4.2</b> 图拉普拉斯正则化</a></li>
+<li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>4.3</b> 目标函数与估计</a></li>
+<li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.4</b> 数值演示</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层复合分位回归与自适应 Lasso</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hcqr.html"><a href="hcqr.html#%E5%88%86%E5%B1%82%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>5.1</b> 分层线性模型</a></li>
+<li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9B%AE%E6%A0%87"><i class="fa fa-check"></i><b>5.2</b> 复合分位回归目标</a></li>
+<li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E4%BC%B0%E8%AE%A1em-%E7%AE%97%E6%B3%95%E4%B8%8E-ald-%E7%9A%84%E8%81%94%E7%B3%BB"><i class="fa fa-check"></i><b>5.3</b> 估计：EM 算法与 ALD 的联系</a></li>
+<li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.4</b> 数值演示</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 混合时空地理加权回归的变量选择</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>6.1</b> 模型定义</a></li>
+<li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E6%B3%95"><i class="fa fa-check"></i><b>6.2</b> 两步估计法</a></li>
+<li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.3</b> 变量选择的动机</a></li>
+<li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.4</b> 数值演示</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 异窗宽 GTWR 模型</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#gtwr-%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>7.1</b> GTWR 模型</a></li>
+<li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E5%8A%A8%E6%9C%BA%E4%B8%8E%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>7.2</b> 异窗宽的动机与定义</a></li>
+<li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.3</b> 数值演示</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-5"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
@@ -200,7 +226,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计方法讲义</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计方法笔记</a>
           </h1>
         </div>
 

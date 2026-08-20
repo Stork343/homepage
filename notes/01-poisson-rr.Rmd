@@ -1,0 +1,200 @@
+# 泊松相对风险的鞍点逼近置信区间 {#poisson-rr}
+
+本章整理自：侯健, 刘硕, 田茂再. 泊松分布下基于鞍点逼近的相对风险置信
+区间构造. *统计与信息论坛*, 2025, 40(08): 3-13 [@hou2025poissonrr]。
+
+## 模型与问题
+
+在流行病学的随机对照试验中，**相对风险**（Relative Risk, RR）是比较
+暴露组与对照组事件发生率的常用指标。设暴露组（$i=1$）与对照组
+（$i=0$）各有 $N_i$ 名研究对象，观察期内发病数 $Y_i$ 服从泊松分布：
+
+\begin{equation}
+Y_i \sim \mathrm{Poisson}(\lambda_i N_i^*),
+\qquad
+\mathrm{P}(Y_i = y_i \mid \lambda_i, N_i) =
+\frac{(\lambda_i N_i^*)^{y_i}}{y_i!} e^{-\lambda_i N_i^*},
+(\#eq:poisson-pmf)
+\end{equation}
+
+其中 $N_i^*$ 为单位时间内的平均观察人数，$\lambda_i$ 为发病率。相对
+风险定义为
+
+\begin{equation}
+\mathrm{RR} = \frac{\lambda_1}{\lambda_0} = \frac{a/t_E}{b/t_C}
+= \frac{a \cdot t_C}{b \cdot t_E},
+(\#eq:rr-def)
+\end{equation}
+
+其中 $a, b$ 分别为两组发病人数，$t_E, t_C$ 为观察时间。$\mathrm{RR}=1$
+表示暴露无影响，$>1$ 为风险因子，$<1$ 为保护因子。对 RR 做区间估计时，
+传统方法（Wald、对数 Wald、Woolf、似然比、Fieller、精确条件法）各有
+局限：误差大、覆盖率低、区间不合理（如出现负下限）等。
+
+## 鞍点逼近的基本原理
+
+鞍点逼近由 Daniels 提出 [@daniels1954saddlepoint]，其出发点是**拉普
+拉斯逼近**：对密度 $f(x) = e^{h(x)}$，在 $h'(x_0)=0$ 处做二阶泰勒
+展开并积分，得到
+
+\begin{equation}
+\int_{-\infty}^{+\infty} f(x)\, dx \approx
+\exp\{h(\hat{x})\} \left(\frac{2\pi}{-h''(\hat{x})}\right)^{1/2}.
+(\#eq:laplace)
+\end{equation}
+
+将 $f(x)$ 视为边际密度 $f(x)=\int m(x,t)\,dt$，对 $\kappa(x,t)=\log
+m(x,t)$ 关于 $t$ 再做一次拉普拉斯逼近；结合矩生成函数与逆转公式，
+可得密度的鞍点逼近公式：
+
+\begin{equation}
+f(x) \approx
+\frac{1}{\sqrt{2\pi K_X''(\hat{t}(x))}}
+\exp\{K_X(\hat{t}(x)) - \hat{t}(x) x\},
+(\#eq:spa-formula)
+\end{equation}
+
+其中 $K_X(t)=\log \mathrm{E}(e^{tX})$ 为累积量生成函数，
+$\hat{t}(x)$ 满足鞍点方程 $K_X'(\hat{t}(x)) = x$。在复平面上
+$\hat{t}(x)$ 是 $K_X(t) - tx$ 的鞍点，而非极值点。
+
+## 相对风险的鞍点逼近区间
+
+将 RR 的极大似然估计记为 $\hat{R} = \hat\lambda_1 / \hat\lambda_0$。
+对 $\hat{R} \le r$ 作变换：
+
+\begin{equation}
+\mathrm{P}(\hat{R} \le r) = \mathrm{P}(Y_0 N_1 - r N_0 Y_1 \le 0),
+(\#eq:cdf-transform)
+\end{equation}
+
+定义 $Z = N_1 Y_0 - r N_0 Y_1$，利用 $Y_0, Y_1$ 的独立性，其矩生成
+函数为
+
+\begin{equation}
+\varphi_Z(\theta) = \exp\{N_0 \lambda_0 (e^{\theta N_1} - 1) +
+N_1 \lambda_1 (e^{-\theta N_0 r} - 1)\},
+(\#eq:mgf-z)
+\end{equation}
+
+累积量生成函数及其导数：
+
+\begin{align}
+K_Z(\theta) &= N_0 \lambda_0 (e^{\theta N_1} - 1) + N_1 \lambda_1 (e^{-\theta N_0 r} - 1), \\
+\mu_Z(\theta) &= K_Z'(\theta) = N_1 N_0 \lambda_0 e^{\theta N_1} - N_1 N_0 \lambda_1 r e^{-\theta N_0 r}, \\
+\sigma_Z^2(\theta) &= K_Z''(\theta) = N_1^2 N_0 \lambda_0 e^{\theta N_1} + N_1 N_0^2 \lambda_1 r^2 e^{-\theta N_0 r}.
+\end{align}
+
+令 $K_Z'(\theta) = 0$ 得到**鞍点方程**：
+
+\begin{equation}
+N_1 N_0 \lambda_0 e^{\theta N_1} - N_1 N_0 \lambda_1 r e^{-\theta N_0 r} = 0,
+(\#eq:saddle-eq)
+\end{equation}
+
+通常没有显式解，用数值方法（如 `uniroot`）求解。将鞍点 $\hat\theta$
+代入 Jensen 型逼近公式，得到尾概率
+
+\begin{equation}
+\mathrm{P}(\hat{R}' \ge r) \approx
+\frac{\varphi_Z(\hat\theta) e^{-\hat\theta r}}{\sigma_Z(\hat\theta)}
+\left\{1 - e^{-|\hat\theta|}\right\}
+\left[B_0(\lambda) + \frac{1}{\sigma_Z(\hat\theta)} \cdots \right],
+(\#eq:jensen)
+\end{equation}
+
+其中 $\lambda = |\hat\theta| \sigma_Z(\hat\theta)$，
+$B_0(\lambda) = \lambda e^{\lambda^2/2}\{1 - \Phi(\lambda)\}$，其余
+$B_k(\lambda)$ 为高阶修正项（见论文式 (28) 及其后定义）。于是
+$\hat{R}$ 的近似分布函数为 $\hat{F}_{\hat{R}}(r) \approx
+1 - \mathrm{P}(\hat{R}' \ge r)$，置信下限与上限分别由
+
+\begin{equation}
+\hat{F}_{\hat{R}}(r \mid \hat{R}_L) = \frac{\alpha}{2},
+\qquad
+\hat{F}_{\hat{R}}(r \mid \hat{R}_U) = 1 - \frac{\alpha}{2}
+(\#eq:ci-equations)
+\end{equation}
+
+解出，得到 $100(1-\alpha)\%$ 置信区间 $(\max\{\hat{R}_L, 0\},
+\hat{R}_U]$。
+
+::: {.theorem #saddle-approx name="鞍点逼近的区间精度"}
+在论文的正则条件下，Jensen 型公式给出的尾概率逼近具有 $O(n^{-3/2})$
+量级的相对误差（相比正态近似的 $O(n^{-1/2})$），因而由其反转得到的
+置信区间**覆盖率更接近名义水平**，且在小样本下区间长度通常更短。
+:::
+
+## 数值演示
+
+下面用模拟复现论文的核心结论：比较鞍点逼近区间（SPA）与 Wald 区间
+的覆盖率与平均长度。设定 $\lambda_0 = 0.8, \lambda_1 = 0.4$（即
+$\mathrm{RR}=2$），$N_0 = N_1 = 100$。
+
+```{r spa-setup}
+# ---- 鞍点逼近区间（SPA）实现 ----
+spa_ci <- function(y0, y1, n0, n1, alpha = 0.05) {
+  lam0 <- y0 / n0; lam1 <- y1 / n1
+  rhat <- lam1 / lam0
+  # 尾概率函数：P(Z <= 0)，Z = N1*Y0 - r*N0*Y1
+  tail_prob <- function(r) {
+    f <- function(th) {
+      mu <- n1 * n0 * lam0 * exp(th * n1) - n1 * n0 * lam1 * r * exp(-th * n0 * r)
+      mu
+    }
+    th0 <- tryCatch(uniroot(f, c(-20, 20), extendInt = "yes")$root,
+                    error = function(e) 0)
+    K  <- n0 * lam0 * (exp(th0 * n1) - 1) + n1 * lam1 * (exp(-th0 * n0 * r) - 1)
+    s2 <- n1^2 * n0 * lam0 * exp(th0 * n1) + n1 * n0^2 * lam1 * r^2 * exp(-th0 * n0 * r)
+    # 一阶鞍点逼近（Lugannani-Rice 型）
+    w <- sign(th0) * sqrt(2 * (th0 * 0 - K))   # w = sign(t)*sqrt(-2K(t)) 近似
+    if (s2 <= 0 || is.nan(w)) return(NA)
+    pnorm(w) + dnorm(w) * (1 / w - 1 / (th0 * sqrt(s2)))
+  }
+  # 反转尾概率求上下限（数值求根）
+  g <- function(r) tail_prob(r) - alpha / 2        # 下限：P(Z<=0) = alpha/2
+  h <- function(r) tail_prob(r) - (1 - alpha / 2)  # 上限
+  lo <- tryCatch(uniroot(g, c(1e-6, rhat))$root, error = function(e) NA)
+  hi <- tryCatch(uniroot(h, c(rhat, 1e4))$root, error = function(e) NA)
+  c(lo, hi)
+}
+
+set.seed(2026)
+mc <- 200; n0 <- n1 <- 100; lam0 <- 0.8; lam1 <- 0.4
+res <- t(replicate(mc, {
+  y0 <- rpois(1, lam0 * n0); y1 <- rpois(1, lam1 * n1)
+  ci <- spa_ci(y0, y1, n0, n1)
+  rhat <- (y1 / n1) / (y0 / n0)
+  wald_se <- rhat * sqrt(1 / y0 + 1 / y1)          # Delta 方法标准误
+  c(lo_spa = ci[1], hi_spa = ci[2],
+    lo_wald = max(rhat - 1.96 * wald_se, 0), hi_wald = rhat + 1.96 * wald_se)
+}))
+```
+
+```{r spa-summary, echo=FALSE, fig.cap="SPA 与 Wald 区间的覆盖率与平均长度比较（R=2，N=100，200 次模拟）", fig.align="center"}
+ok <- !is.na(res[, 1]) & !is.na(res[, 2])
+res <- res[ok, ]
+cover <- function(lo, hi) mean(lo <= 2 & hi >= 2)
+len <- function(lo, hi) mean(hi - lo)
+tab <- rbind(
+  SPA   = c(cover(res[, 1], res[, 2]), len(res[, 1], res[, 2])),
+  Wald  = c(cover(res[, 3], res[, 4]), len(res[, 3], res[, 4]))
+)
+colnames(tab) <- c("Coverage", "Avg length")
+tab
+barplot(tab[, 1], beside = TRUE, col = c("#0955a4", "#9db8d9"),
+        ylim = c(0, 1), main = "Coverage (nominal 95%)",
+        ylab = "Coverage", names.arg = rownames(tab))
+abline(h = 0.95, lty = 2, col = "#c0392b")
+```
+
+## 要点小结
+
+- 式 \@ref(eq:spa-formula) 是鞍点逼近的通用公式，关键是求解鞍点
+  方程 \@ref(eq:saddle-eq)；
+- RR 推断的难点在于 $\hat{R}$ 是两泊松计数之比：鞍点逼近直接对
+  $Z = N_1 Y_0 - r N_0 Y_1$ 的累积量生成函数工作，回避了 Delta 方法
+  的粗糙近似；
+- 论文的模拟表明：SPA 区间在小样本（$N=5, 15, 25$）下覆盖率最接近
+  95% 且区间最短；在 $R$ 偏离 1 较大时 Wald 法偶尔更优，但 SPA 全程
+  稳健。
