@@ -97,6 +97,41 @@ const checks = [
     bg: "#204c8b",
     min: 4.5,
     label: "Primary button text on blue background"
+  },
+  {
+    scope: "notes.sidebar",
+    fg: "#ffffff",
+    bg: "#0955a4",
+    min: 4.5,
+    label: "Bookdown sidebar text on Taylor & Francis blue"
+  },
+  {
+    scope: "notes.sidebar",
+    fg: "#eaf2fb",
+    bg: "#0955a4",
+    min: 4.5,
+    label: "Bookdown sidebar TOC links on Taylor & Francis blue"
+  },
+  {
+    scope: "notes.body",
+    fg: "#002244",
+    bg: "#ffffff",
+    min: 4.5,
+    label: "Bookdown headings on white background"
+  },
+  {
+    scope: "notes.body",
+    fg: "#0955a4",
+    bg: "#ffffff",
+    min: 4.5,
+    label: "Bookdown body links on white background"
+  },
+  {
+    scope: "notes.body",
+    fg: "#2c2c2c",
+    bg: "#f4f8fd",
+    min: 4.5,
+    label: "Bookdown code text on code block background"
   }
 ];
 
