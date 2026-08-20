@@ -7,7 +7,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./" class="toc-home">统计方法讲义</a></li>
       after: |
-        <li><a href="https://stork343.github.io/homepage/" target="_blank" rel="noopener">← 返回个人主页</a></li>
+        <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
     toolbar:
       position: fixed
     search: yes
