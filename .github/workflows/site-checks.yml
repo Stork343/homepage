@@ -76,6 +76,7 @@ jobs:
           args: >-
             --no-progress
             --verbose
+            --no-cache
             --accept 429
             --exclude-loopback
             --timeout 20
