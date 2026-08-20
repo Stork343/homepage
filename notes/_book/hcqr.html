@@ -23,7 +23,7 @@
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -335,8 +335,8 @@ Lasso 剔除冗余变量的效果。</p>
 <span id="cb147-23"><a href="hcqr.html#cb147-23" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>)<span class="sc">$</span>par        <span class="co"># 单分位（LAD）</span></span>
 <span id="cb147-24"><a href="hcqr.html#cb147-24" tabindex="-1"></a>fit_ols <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X <span class="sc">-</span> <span class="dv">1</span>))               <span class="co"># OLS</span></span></code></pre></div>
 <pre><code>##              b0       b1         b2        b3
-## CQR -0.02225574 2.141738 -0.7439185 0.5494043
-## LAD  1.06427994 2.161940 -0.7843831 0.5438026
+## CQR -0.02274794 2.138366 -0.7471819 0.5498610
+## LAD  1.06282889 2.160439 -0.7838267 0.5436222
 ## OLS  0.99999714 2.151665 -0.7740400 0.5688560</code></pre>
 <pre><code>## RMSE: CQR = 0.532 , LAD = 0.14 , OLS = 0.14</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hcqr-summary"></span>
