@@ -27,7 +27,9 @@ jobs:
         uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install bookdown
-        run: Rscript -e "install.packages('bookdown', repos = 'https://cloud.r-project.org')"
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: bookdown
 
       - name: Render book
         working-directory: notes
