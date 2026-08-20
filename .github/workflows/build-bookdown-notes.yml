@@ -11,6 +11,12 @@ on:
 permissions:
   contents: write
 
+# Serialize writers to main with auto-sync-generated.yml to avoid
+# concurrent-push races.
+concurrency:
+  group: main-writers
+  cancel-in-progress: false
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -42,7 +48,9 @@ jobs:
           git add notes/_book
           if ! git diff --cached --quiet; then
             git commit -m "chore: render bookdown notes"
-            git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
+            REMOTE="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git pull --rebase "$REMOTE" main || true
+            git push "$REMOTE" HEAD:main
           else
             echo "No rendered changes."
           fi
