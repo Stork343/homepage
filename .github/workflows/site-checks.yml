@@ -76,7 +76,6 @@ jobs:
           args: >-
             --no-progress
             --verbose
-            --no-cache
             --accept 429
             --exclude-loopback
             --timeout 20
@@ -85,6 +84,7 @@ jobs:
             --exclude "https://www.researchgate.net/.*"
             --exclude "https://kns.cnki.net/.*"
             --exclude "https://link.cnki.net/.*"
+            --exclude "https://cdn.jsdelivr.net/.*"
             index.html papers
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
