@@ -77,7 +77,6 @@ jobs:
             --no-progress
             --verbose
             --accept 429
-            --exclude-mail
             --exclude-loopback
             --timeout 20
             --max-concurrency 6
