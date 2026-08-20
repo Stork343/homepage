@@ -8,6 +8,12 @@ on:
 permissions:
   contents: write
 
+# Serialize writers to main with build-bookdown-notes.yml to avoid
+# concurrent-push races.
+concurrency:
+  group: main-writers
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
