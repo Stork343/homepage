@@ -4,10 +4,21 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const http = require('http');
-const { spawn, execFileSync } = require('child_process');
+const { spawn, spawnSync, execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const PORT = Number.parseInt(process.env.LH_PORT || '4174', 10);
+
+// Windows ships `python` (not `python3`); prefer python3 when available.
+function pythonBin() {
+  if (process.platform !== 'win32') return 'python3';
+  try {
+    require('child_process').execFileSync('python3', ['--version'], { stdio: 'ignore' });
+    return 'python3';
+  } catch (_) {
+    return 'python';
+  }
+}
 const PERF_THRESHOLD = Number.parseFloat(process.env.LH_PERF_THRESHOLD || '0.90');
 const A11Y_THRESHOLD = Number.parseFloat(process.env.LH_A11Y_THRESHOLD || '0.90');
 const LCP_THRESHOLD = Number.parseFloat(process.env.LH_LCP_THRESHOLD || '2500');
@@ -42,8 +53,6 @@ function waitForServer(timeoutMs = 15000) {
 
 function runLighthouse(url, outputPath) {
   const args = [
-    '--yes',
-    'lighthouse',
     url,
     '--quiet',
     '--output=json',
@@ -52,7 +61,20 @@ function runLighthouse(url, outputPath) {
     '--only-categories=performance,accessibility',
     '--chrome-flags=--headless=new --no-sandbox --disable-gpu'
   ];
-  execFileSync('npx', args, { stdio: 'inherit', cwd: ROOT });
+  // Invoke the local lighthouse CLI directly (npx .cmd resolution is
+  // unreliable on Windows).
+  const res = spawnSync(process.execPath, [path.join(ROOT, 'node_modules', 'lighthouse', 'cli', 'index.js'), ...args], {
+    stdio: 'inherit',
+    cwd: ROOT
+  });
+  if (res.status !== 0) {
+    // On Windows, chrome-launcher can fail to remove its temp profile
+    // (EPERM) after a successful run; a produced report is still valid.
+    if (!fs.existsSync(outputPath)) {
+      throw new Error(`Lighthouse run failed (exit ${res.status}).`);
+    }
+    console.warn(`Warning: lighthouse exited with ${res.status} but produced a report; continuing.`);
+  }
 
   const report = JSON.parse(fs.readFileSync(outputPath, 'utf8'));
   const performance = Number(report.categories.performance && report.categories.performance.score);
@@ -77,7 +99,7 @@ async function main() {
     throw new Error('No Lighthouse URLs configured.');
   }
 
-  const server = spawn('python3', ['-m', 'http.server', String(PORT)], {
+  const server = spawn(pythonBin(), ['-m', 'http.server', String(PORT)], {
     cwd: ROOT,
     stdio: 'ignore'
   });
