@@ -57,6 +57,7 @@
       nav_about: "关于我",
       nav_research: "研究领域",
       nav_publications: "学术成果",
+      nav_notes: "讲义",
       nav_cv: "简历",
       nav_contact: "联系方式",
       profile_name: "侯健",
@@ -159,6 +160,7 @@
       nav_about: "About",
       nav_research: "Research",
       nav_publications: "Publications",
+      nav_notes: "Notes",
       nav_cv: "CV",
       nav_contact: "Contact",
       profile_name: "Hou Jian",
@@ -1454,8 +1456,11 @@
 
     navLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href") || "";
+        // External links (e.g. the bookdown notes sub-site) navigate normally.
+        if (!href.startsWith("#")) return;
         e.preventDefault();
-        const id = this.getAttribute("href").slice(1);
+        const id = href.slice(1);
         const target = document.getElementById(id);
         if (!target) return;
 

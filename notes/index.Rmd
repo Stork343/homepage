@@ -1,0 +1,46 @@
+---
+title: "统计方法讲义"
+subtitle: "分位回归 · 鞍点逼近 · 混合效应建模"
+author: "侯健"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+description: "侯健个人主页配套统计讲义（bookdown 演示）：分位回归、鞍点逼近与混合效应建模。"
+github-repo: Stork343/homepage
+---
+
+# 前言 {#intro}
+
+本讲义是个人主页的配套学习笔记，由 **bookdown** 渲染而成——一种用 R Markdown
+写作、可输出 HTML / PDF / ePub 的长文档工具[^bookdown]。本书演示了 bookdown
+的几个核心能力：
+
+* **多章节组织**：每章一个 `.Rmd` 文件，侧边栏自动生成目录；
+* **交叉引用**：如第 \@ref(qr) 章介绍分位回归，其中的公式 \@ref(eq:qr-objective)
+  与图 \@ref(fig:qr-fit) 均可自动编号、跨章节跳转；
+* **公式与定理环境**：见第 \@ref(sp) 章的定理 \@ref(thm:saddle)；
+* **R 代码直接运行**：所有代码块在渲染时执行，结果嵌入文档；
+* **参考文献**：使用 BibTeX（见第 \@ref(me) 章的引用示例）。
+
+[^bookdown]: 官方文档见 <https://bookdown.org/yihui/bookdown/>。
+
+## 如何构建本书
+
+在 `notes/` 目录下执行：
+
+```r
+bookdown::render_book("index.Rmd")
+```
+
+产物输出到 `notes/_book/` 目录，即为一套可直接部署的静态站点。
+
+## 章节目录
+
+- \@ref(qr) 分位回归简介
+- \@ref(sp) 鞍点逼近初步
+- \@ref(me) 线性混合效应模型
+
+<!-- 以下为占位，保证 gitbook 目录结构完整 -->

@@ -1,0 +1,69 @@
+/* 统计方法讲义 - 自定义样式（贴近主页深蓝主题 #1d2088） */
+
+body {
+  font-family: "Source Serif 4", "Source Sans 3", "Noto Serif SC",
+    "PingFang SC", "Microsoft YaHei", serif;
+}
+
+.book .book-body .page-wrapper .page-inner {
+  max-width: 860px;
+}
+
+.book .book-body .page-wrapper {
+  background: #ffffff;
+  color: #2c2c2c;
+}
+
+/* 章节标题 */
+.book .book-body .page-wrapper .page-inner section.normal h1,
+.book .book-body .page-wrapper .page-inner section.normal h2,
+.book .book-body .page-wrapper .page-inner section.normal h3 {
+  color: #1d2088;
+}
+
+/* 链接 */
+.book .book-body .page-wrapper .page-inner section.normal a {
+  color: #1d2088;
+}
+
+/* 目录 */
+.book .book-summary {
+  background: #1d2088;
+  color: #ffffff;
+}
+
+.book .book-summary ul.summary li a,
+.book .book-summary ul.summary li span {
+  color: #e8e9f7;
+}
+
+.book .book-summary ul.summary li.active > a {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.book .book-summary ul.summary li a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.book .book-summary .toc-home {
+  font-weight: 700;
+  font-size: 1.05em;
+}
+
+/* 代码块 */
+.book .book-body .page-wrapper .page-inner section.normal pre {
+  background: #f6f7fb;
+  border: 1px solid #e3e5f0;
+}
+
+/* 表格 */
+.book .book-body .page-wrapper .page-inner section.normal table td,
+.book .book-body .page-wrapper .page-inner section.normal table th {
+  border-color: #d9dbea;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal table tr:nth-child(2n) {
+  background: #f4f5fb;
+}
