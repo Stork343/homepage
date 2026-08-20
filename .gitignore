@@ -12,3 +12,7 @@ release-artifacts/
 
 # OneDrive multi-device sync artifacts
 *MacBook*
+
+# bookdown render intermediates
+notes/_bookdown_files/
+notes/notes-book_files/
