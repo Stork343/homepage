@@ -57,7 +57,7 @@
       nav_about: "关于我",
       nav_research: "研究领域",
       nav_publications: "学术成果",
-      nav_notes: "讲义",
+      nav_notes: "笔记",
       nav_cv: "简历",
       nav_contact: "联系方式",
       profile_name: "侯健",

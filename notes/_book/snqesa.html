@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 3 自标准化分位经验鞍点逼近 | 统计方法笔记</title>
+  <meta name="description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 3 自标准化分位经验鞍点逼近 | 统计方法笔记" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="github-repo" content="Stork343/homepage" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 3 自标准化分位经验鞍点逼近 | 统计方法笔记" />
+  
+  <meta name="twitter:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  
+
+<meta name="author" content="侯健" />
+
+
+<meta name="date" content="2026-08-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="poisson-rr.html"/>
+<link rel="next" href="svcqr.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./" class="toc-home">统计方法笔记</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 泊松相对风险的鞍点逼近置信区间</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%97%AE%E9%A2%98"><i class="fa fa-check"></i><b>2.1</b> 模型与问题</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><i class="fa fa-check"></i><b>2.2</b> 鞍点逼近的基本原理</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.3</b> 相对风险的鞍点逼近区间</a></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.4</b> 数值演示</a></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>2.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 自标准化分位经验鞍点逼近</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="snqesa.html"><a href="snqesa.html#%E5%88%86%E4%BD%8D%E6%8E%A8%E6%96%AD%E7%9A%84%E5%9B%B0%E9%9A%BE"><i class="fa fa-check"></i><b>3.1</b> 分位推断的困难</a></li>
+<li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91"><i class="fa fa-check"></i><b>3.2</b> 经验鞍点逼近</a></li>
+<li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#snqesa-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><i class="fa fa-check"></i><b>3.3</b> SNQESA 的核心思想</a></li>
+<li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.4</b> 数值演示</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 稀疏-平滑空间变系数分位回归</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="svcqr.html"><a href="svcqr.html#%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%B1%80-%E5%B1%80%E9%83%A8%E5%88%86%E8%A7%A3"><i class="fa fa-check"></i><b>4.1</b> 模型：全局-局部分解</a></li>
+<li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%AD%A3%E5%88%99%E5%8C%96"><i class="fa fa-check"></i><b>4.2</b> 图拉普拉斯正则化</a></li>
+<li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>4.3</b> 目标函数与估计</a></li>
+<li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.4</b> 数值演示</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层复合分位回归与自适应 Lasso</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hcqr.html"><a href="hcqr.html#%E5%88%86%E5%B1%82%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>5.1</b> 分层线性模型</a></li>
+<li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9B%AE%E6%A0%87"><i class="fa fa-check"></i><b>5.2</b> 复合分位回归目标</a></li>
+<li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E4%BC%B0%E8%AE%A1em-%E7%AE%97%E6%B3%95%E4%B8%8E-ald-%E7%9A%84%E8%81%94%E7%B3%BB"><i class="fa fa-check"></i><b>5.3</b> 估计：EM 算法与 ALD 的联系</a></li>
+<li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.4</b> 数值演示</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 混合时空地理加权回归的变量选择</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>6.1</b> 模型定义</a></li>
+<li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E6%B3%95"><i class="fa fa-check"></i><b>6.2</b> 两步估计法</a></li>
+<li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.3</b> 变量选择的动机</a></li>
+<li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.4</b> 数值演示</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 异窗宽 GTWR 模型</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#gtwr-%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>7.1</b> GTWR 模型</a></li>
+<li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E5%8A%A8%E6%9C%BA%E4%B8%8E%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>7.2</b> 异窗宽的动机与定义</a></li>
+<li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.3</b> 数值演示</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-5"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="../../" class="toc-home">← 返回个人主页</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">统计方法笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="snqesa" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">第 3</span> 自标准化分位经验鞍点逼近<a href="snqesa.html#snqesa" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>本章整理自：Hou Jian, Meng Tan, Tian Maozai. Self-normalized quantile
+empirical saddlepoint approximation. <em>Statistical Papers</em>, 2026, 67(5),
+106 <span class="citation">(<a href="#ref-hou2026snqesa">Hou, Meng, and Tian 2026b</a>)</span>。</p>
+<div id="分位推断的困难" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 分位推断的困难<a href="snqesa.html#%E5%88%86%E4%BD%8D%E6%8E%A8%E6%96%AD%E7%9A%84%E5%9B%B0%E9%9A%BE" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>对总体分位数 <span class="math inline">\(q_\tau\)</span> 做频率推断（置信区间、检验）时，经典做法基于
+分位回归/次序统计量的渐近正态性：</p>
+<p><span class="math display" id="eq:qr-asym">\[\begin{equation}
+\sqrt{n}\bigl(\hat{q}_\tau - q_\tau\bigr) \xrightarrow{d}
+N\!\left(0,\ \frac{\tau(1-\tau)}{f(q_\tau)^2}\right),
+\tag{3.1}
+\end{equation}\]</span></p>
+<p>其中 <span class="math inline">\(f\)</span> 为总体密度。这个方差公式包含<strong>未知密度</strong> <span class="math inline">\(f(q_\tau)\)</span>，实际
+使用时有三个痛点：</p>
+<ol style="list-style-type: decimal">
+<li><strong>密度估计</strong>：核密度估计需要选择带宽 <span class="math inline">\(h\)</span>，带宽不合适则区间失真；</li>
+<li><strong>边界问题</strong>：<span class="math inline">\(q_\tau\)</span> 靠近支撑边界时核估计偏差大；</li>
+<li><strong>重尾情形</strong>：<span class="math inline">\(f\)</span> 变化剧烈时正态近似的收敛速度很慢。</li>
+</ol>
+<p>这正是 Wald 型与 Hall–Sheather 型区间在重尾、偏斜分布和极端分位下
+失效的原因。</p>
+</div>
+<div id="经验鞍点逼近" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 经验鞍点逼近<a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>经验鞍点逼近</strong>（Empirical Saddlepoint Approximation, ESA）由
+Daniels 的鞍点逼近 <span class="citation">(<a href="#ref-daniels1954saddlepoint">Daniels 1954</a>)</span> 与经验矩生成函数结合
+而来：对样本 <span class="math inline">\(X_1, \dots, X_n\)</span>，用经验矩生成函数
+<span class="math inline">\(\hat{M}(t) = n^{-1}\sum_i e^{tX_i}\)</span> 代替未知的 <span class="math inline">\(M(t)\)</span>，累积量生成
+函数取 <span class="math inline">\(\hat{K}(t) = \log \hat{M}(t)\)</span>，鞍点方程 <span class="math inline">\(\hat{K}&#39;(\hat t) = x\)</span>
+通常有解且唯一。与正态近似相比，ESA 的尾概率逼近具有<strong>高阶精度</strong>
+（相对误差 <span class="math inline">\(O(n^{-3/2})\)</span>），且不需要估计密度。</p>
+</div>
+<div id="snqesa-的核心思想" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> SNQESA 的核心思想<a href="snqesa.html#snqesa-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>SNQESA 针对<strong>分位数</strong>这一目标泛函做了两个关键设计：</p>
+<p><strong>1. 指示器得分的自标准化枢轴。</strong> 对固定阈值 <span class="math inline">\(q\)</span>，定义指示器得分
+<span class="math inline">\(U_i(q) = \mathbf{1}\{X_i \le q\}\)</span>，则 <span class="math inline">\(U_i(q) \sim \mathrm{Bernoulli}(F(q))\)</span>
+独立同分布。分位推断转化为对 Bernoulli 参数 <span class="math inline">\(F(q)\)</span> 的推断，而
+<span class="math inline">\(F(q)\)</span> 恰为<strong>有界</strong>参数——这避免了重尾分布下无界矩带来的问题。
+为消除尺度影响，构造<strong>自标准化枢轴</strong></p>
+<p><span class="math display" id="eq:selfnorm-pivot">\[\begin{equation}
+T_n(q) = \frac{\sum_i \bigl(U_i(q) - \tau\bigr)}
+{\sqrt{\sum_i \bigl(U_i(q) - \bar U\bigr)^2}},
+\tag{3.2}
+\end{equation}\]</span></p>
+<p>其分布不依赖未知尺度，且对偏斜、重尾分布稳健。</p>
+<p><strong>2. 约束经验鞍点逼近。</strong> 在自标准化枢轴的基础上，用约束形式的
+经验鞍点逼近计算尾概率 <span class="math inline">\(\mathrm{P}(T_n(q) \ge t)\)</span>：在”总体均值为
+指定值”的经验似然型约束下对累积量生成函数做鞍点展开。尾概率的
+高阶精度直接转化为<strong>置信区间的二阶覆盖率</strong>。</p>
+<div class="theorem">
+<p><span id="thm:snqesa" class="theorem"><strong>定理 3.1  (SNQESA 的精度) </strong></span>在温和的局部正则条件下，SNQESA 的尾概率逼近具有高阶精度；将其反转
+得到的置信区间覆盖误差为 <span class="math inline">\(O(n^{-1})\)</span>（二阶正确），且不依赖带宽选择、
+不受边界效应影响。</p>
+</div>
+</div>
+<div id="数值演示-1" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> 数值演示<a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>先看一个核心机制：<strong>为什么自标准化枢轴比”直接正态近似”稳健</strong>。
+对标准正态样本，均值型枢轴的 ESA 尾概率与正态近似几乎重合；但对
+重尾分布（如 <span class="math inline">\(t_3\)</span>），正态近似明显失效，而鞍点逼近仍保持精度。</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="snqesa.html#cb142-1" tabindex="-1"></a><span class="co"># 经验鞍点逼近的尾概率（Lugannani-Rice 形式，检验 xbar &gt;= x0）</span></span>
+<span id="cb142-2"><a href="snqesa.html#cb142-2" tabindex="-1"></a>esa_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x, x0) {</span>
+<span id="cb142-3"><a href="snqesa.html#cb142-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb142-4"><a href="snqesa.html#cb142-4" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">-</span> x0</span>
+<span id="cb142-5"><a href="snqesa.html#cb142-5" tabindex="-1"></a>  <span class="co"># 鞍点方程：mean(y * exp(th*y)) / mean(exp(th*y)) = 0</span></span>
+<span id="cb142-6"><a href="snqesa.html#cb142-6" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th <span class="sc">*</span> y))</span>
+<span id="cb142-7"><a href="snqesa.html#cb142-7" tabindex="-1"></a>  th0 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">extendInt =</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">$</span>root,</span>
+<span id="cb142-8"><a href="snqesa.html#cb142-8" tabindex="-1"></a>                  <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
+<span id="cb142-9"><a href="snqesa.html#cb142-9" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(th0)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb142-10"><a href="snqesa.html#cb142-10" tabindex="-1"></a>  K  <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">mean</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y)))</span>
+<span id="cb142-11"><a href="snqesa.html#cb142-11" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
+<span id="cb142-12"><a href="snqesa.html#cb142-12" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
+<span id="cb142-13"><a href="snqesa.html#cb142-13" tabindex="-1"></a>  K2 <span class="ot">&lt;-</span> m2 <span class="sc">-</span> m1<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb142-14"><a href="snqesa.html#cb142-14" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th0) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">max</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> K, <span class="dv">0</span>))</span>
+<span id="cb142-15"><a href="snqesa.html#cb142-15" tabindex="-1"></a>  u <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">*</span> K2)</span>
+<span id="cb142-16"><a href="snqesa.html#cb142-16" tabindex="-1"></a>  <span class="cf">if</span> (u <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">is.nan</span>(w)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb142-17"><a href="snqesa.html#cb142-17" tabindex="-1"></a>  <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> u)</span>
+<span id="cb142-18"><a href="snqesa.html#cb142-18" tabindex="-1"></a>}</span>
+<span id="cb142-19"><a href="snqesa.html#cb142-19" tabindex="-1"></a></span>
+<span id="cb142-20"><a href="snqesa.html#cb142-20" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb142-21"><a href="snqesa.html#cb142-21" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb142-22"><a href="snqesa.html#cb142-22" tabindex="-1"></a>x_norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb142-23"><a href="snqesa.html#cb142-23" tabindex="-1"></a>x_t3   <span class="ot">&lt;-</span> <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>)</span>
+<span id="cb142-24"><a href="snqesa.html#cb142-24" tabindex="-1"></a>tgrid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.2</span>, <span class="fl">3.2</span>, <span class="at">by =</span> <span class="fl">0.25</span>)</span>
+<span id="cb142-25"><a href="snqesa.html#cb142-25" tabindex="-1"></a><span class="co"># 检验 xbar &gt;= mu + t * s / sqrt(n)，即枢轴 T = sqrt(n)(xbar-mu)/s &gt;= t</span></span>
+<span id="cb142-26"><a href="snqesa.html#cb142-26" tabindex="-1"></a>esa_norm <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_norm, <span class="fu">mean</span>(x_norm) <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_norm) <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
+<span id="cb142-27"><a href="snqesa.html#cb142-27" tabindex="-1"></a>esa_t3   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_t3,   <span class="fu">mean</span>(x_t3)   <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_t3)   <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:esa-plot"></span>
+<img src="notes-book_files/figure-html/esa-plot-1.png" alt="经验鞍点逼近与正态近似的尾概率（左：正态样本；右：t3 重尾样本）" width="672" />
+<p class="caption">
+图 3.1: 经验鞍点逼近与正态近似的尾概率（左：正态样本；右：t3 重尾样本）
+</p>
+</div>
+<p>从上图可见：正态样本下 ESA 与正态近似重合（此时二者都正确）；而
+重尾 <span class="math inline">\(t_3\)</span> 样本下，两者出现明显分歧——ESA 的尾概率由数据自身驱动，
+正是 SNQESA 在重尾分布下保持可靠覆盖的原因。论文的蒙特卡洛实验
+（涵盖轻尾、重尾、多峰分布）进一步表明：SNQESA 在小样本到中等样本
+下覆盖率稳定、区间长度有竞争力，且比大规模 <span class="math inline">\(B\)</span> 重抽样方案快若干
+数量级；滚动窗口的 VaR 实证也展示了尾部性能与计算效率的提升。</p>
+</div>
+<div id="要点小结-1" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> 要点小结<a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>分位推断的经典公式 <a href="snqesa.html#eq:qr-asym">(3.1)</a> 依赖未知密度，SNQESA 通过
+<strong>指示器得分的 Bernoulli 归约</strong>彻底绕开密度估计与带宽选择；</li>
+<li><strong>自标准化枢轴</strong> <a href="snqesa.html#eq:selfnorm-pivot">(3.2)</a> 是有界变量的标准化和，
+对重尾与极端分位稳健；</li>
+<li>约束经验鞍点逼近提供高阶尾精度，反转后得到二阶正确的置信区间；</li>
+<li>方法可自然推广到两样本分位差与回归型设定，是核方法、bootstrap
+与经验似然 <span class="citation">(<a href="#ref-owen1988empirical">Owen 1988</a>)</span> 之外的一种解析透明的替代方案。</li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-daniels1954saddlepoint" class="csl-entry">
+Daniels, Henry E. 1954. <span>“Saddlepoint Approximations in Statistics.”</span> <em>The Annals of Mathematical Statistics</em> 25 (4): 631–50.
+</div>
+<div id="ref-hou2026snqesa" class="csl-entry">
+Hou, Jian, Tan Meng, and Maozai Tian. 2026b. <span>“Self-Normalized Quantile Empirical Saddlepoint Approximation.”</span> <em>Statistical Papers</em> 67 (5): 106. <a href="https://doi.org/10.1007/s00362-026-01882-3">https://doi.org/10.1007/s00362-026-01882-3</a>.
+</div>
+<div id="ref-owen1988empirical" class="csl-entry">
+Owen, Art B. 1988. <span>“Empirical Likelihood Ratio Confidence Intervals for a Single Functional.”</span> <em>Biometrika</em> 75 (2): 237–49.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="poisson-rr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="svcqr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection",
+    "scroll_highlight": true
+  },
+  "toolbar": {
+    "position": "fixed"
+  },
+  "info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

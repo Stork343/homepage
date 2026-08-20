@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>统计方法笔记</title>
+  <title>第 5 分层复合分位回归与自适应 Lasso | 统计方法笔记</title>
   <meta name="description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="统计方法笔记" />
+  <meta property="og:title" content="第 5 分层复合分位回归与自适应 Lasso | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="统计方法笔记" />
+  <meta name="twitter:title" content="第 5 分层复合分位回归与自适应 Lasso | 统计方法笔记" />
   
   <meta name="twitter:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="poisson-rr.html"/>
+<link rel="prev" href="svcqr.html"/>
+<link rel="next" href="mgtwr.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -234,40 +234,146 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">统计方法笔记</h1>
-<h2 class="subtitle"><em>从已发表论文出发的理论整理</em></h2>
-<p class="author"><em>侯健</em></p>
-<p class="date"><em>2026-08-21</em></p>
+<div id="hcqr" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">第 5</span> 分层复合分位回归与自适应 Lasso<a href="hcqr.html#hcqr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>本章整理自：Hou Jian, Meng Tan, Tian Maozai. Hierarchical composite
+quantile regression with adaptive Lasso. <em>Journal of Statistical
+Planning and Inference</em>, 2026, 245, 106390 <span class="citation">(<a href="#ref-hou2026hcqr">Hou, Meng, and Tian 2026a</a>)</span>。</p>
+<div id="分层线性模型" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> 分层线性模型<a href="hcqr.html#%E5%88%86%E5%B1%82%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>考虑 <span class="math inline">\(J\)</span> 组数据，第 <span class="math inline">\(j\)</span> 组含 <span class="math inline">\(n_j\)</span> 个观测。第一层（个体层）：</p>
+<p><span class="math display" id="eq:level1">\[\begin{equation}
+Y_{ij} = X_{ij} \beta_j + \varepsilon_{ij},
+\qquad i = 1, \dots, n_j,
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>其中 <span class="math inline">\(\beta_j\)</span> 为组特定系数向量。第二层（组层）刻画组间变异：</p>
+<p><span class="math display" id="eq:level2">\[\begin{equation}
+\beta_j = Z_j \gamma + v_j, \qquad v_j \sim N(0, T),
+\tag{5.2}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(Z_j\)</span> 为组级协变量构成的块对角设计矩阵（每个第一层系数可配自己的
+组级协变量），<span class="math inline">\(\gamma\)</span> 为固定效应，<span class="math inline">\(v_j\)</span> 为随机效应。合并两层：</p>
+<p><span class="math display" id="eq:hier-merged">\[\begin{equation}
+Y_{ij} = X_{ij} Z_j \gamma + X_{ij} v_j + \varepsilon_{ij},
+\tag{5.3}
+\end{equation}\]</span></p>
+<p>固定效应部分为 <span class="math inline">\(X_{ij} Z_j \gamma\)</span>，随机效应部分为 <span class="math inline">\(X_{ij} v_j\)</span>。</p>
 </div>
-<div id="intro" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">第 1</span> 前言<a href="index.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>本笔记整理作者已发表论文中的理论内容——包括模型设定、估计方法、
-理论性质与数值要点，并附可复现的 R 演示。与论文的完整论述相比，
-这里的每章更像一张”理论卡片”：先给模型，再讲方法，最后用数值
-验证核心结论。</p>
-<p>笔记按主题组织为六章：</p>
+<div id="复合分位回归目标" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 复合分位回归目标<a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9B%AE%E6%A0%87" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>对分层数据，单一分位只能刻画条件分布的一个切片。借鉴复合分位回归
+（CQR）的思想，取一组分位水平 <span class="math inline">\(0 &lt; \tau_1 &lt; \cdots &lt; \tau_K &lt; 1\)</span>，
+联合估计：</p>
+<p><span class="math display" id="eq:cqr-obj">\[\begin{equation}
+\bigl(\hat b_{\tau_1}, \dots, \hat b_{\tau_K}, \hat\gamma_{\mathrm{CQR}}\bigr)
+= \arg\min_{b_{\tau_k}, \gamma}\
+\sum_{k=1}^{K} \sum_{j=1}^{J} \sum_{i=1}^{n_j}
+\rho_{\tau_k}\bigl(Y_{ij} - b_{\tau_k} - X_{ij} Z_j \gamma - X_{ij} v_j\bigr),
+\tag{5.4}
+\end{equation}\]</span>
+\end{equation}</p>
+<p>其中 <span class="math inline">\(b_{\tau_k}\)</span> 为分位特定截距。多分位聚合在误差分布非高斯时显著
+提升效率。变量选择通过<strong>自适应 Lasso</strong> <span class="citation">(<a href="#ref-zou2006adaptive">Zou 2006</a>)</span> 实现：
+对 <span class="math inline">\(\gamma\)</span> 施加 <span class="math inline">\(\lambda \sum_f \hat w_f |\gamma_f|\)</span>，权重取
+<span class="math inline">\(\hat w_f = (|\tilde\gamma_f| + a)^{-\gamma}\)</span>（<span class="math inline">\(\tilde\gamma\)</span> 为初估）。</p>
+</div>
+<div id="估计em-算法与-ald-的联系" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> 估计：EM 算法与 ALD 的联系<a href="hcqr.html#%E4%BC%B0%E8%AE%A1em-%E7%AE%97%E6%B3%95%E4%B8%8E-ald-%E7%9A%84%E8%81%94%E7%B3%BB" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>目标 <a href="hcqr.html#eq:cqr-obj">(5.4)</a> 中含不可观测的随机效应 <span class="math inline">\(v_j\)</span>，论文用 EM 算法
+处理。关键技巧是<strong>分位损失与不对称拉普拉斯分布（ALD）的等价性</strong>
+<span class="citation">(<a href="#ref-yu2001mcmc">Yu and Moyeed 2001</a>)</span>：最小化 <span class="math inline">\(\rho_\tau(u)\)</span> 等价于最大化 ALD 的似然。于是：</p>
 <ul>
-<li><a href="poisson-rr.html#poisson-rr">2</a> 泊松相对风险的鞍点逼近置信区间（统计与信息论坛 2025）</li>
-<li><a href="snqesa.html#snqesa">3</a> 自标准化分位经验鞍点逼近（Statistical Papers 2026）</li>
-<li><a href="svcqr.html#svcqr">4</a> 稀疏-平滑空间变系数分位回归（Spatial Statistics 2026）</li>
-<li><a href="hcqr.html#hcqr">5</a> 分层复合分位回归与自适应 Lasso（JSPI 2026）</li>
-<li><a href="mgtwr.html#mgtwr">6</a> 混合时空地理加权回归的变量选择（数学的实践与认识 2021）</li>
-<li><a href="gtwr.html#gtwr">7</a> 异窗宽 GTWR 模型（数理统计与管理 2022）</li>
+<li><p><strong>E 步</strong>：在正态工作假设（<span class="math inline">\(\varepsilon_{ij} \sim N(0, \sigma^2)\)</span>，
+<span class="math inline">\(v_j \sim N(0, T)\)</span>）下计算 <span class="math inline">\(v_j\)</span> 的条件分布。由联合正态性，
+<span class="math inline">\(v_j \mid Y_j \sim N(v_j^*, T^*)\)</span>，其中</p>
+<p><span class="math display" id="eq:estep">\[\begin{equation}
+T^* = \sigma^2\bigl(X_j^\top X_j + \sigma^2 T^{-1}\bigr)^{-1},
+\qquad
+v_j^* = \sigma^{-2} T^* X_j^\top\bigl(Y_j - X_j Z_j \gamma\bigr);
+\tag{5.5}
+\end{equation}\]</span></p></li>
+<li><p><strong>M 步</strong>：在 ALD 工作假设下更新固定效应 <span class="math inline">\(\gamma\)</span>（分位损失目标）
+与方差分量 <span class="math inline">\((T, \sigma^2)\)</span>。</p></li>
 </ul>
-<p>其中第一、二章围绕<strong>鞍点逼近</strong>这一条主线：第一章处理泊松分布下的
-比率推断，第二章处理分布自由的分位推断。第三、四章围绕<strong>分位回归
-的模型扩展</strong>：空间变系数与分层结构。第五、六章围绕<strong>时空地理加权
-回归</strong>：变量选择与异窗宽设定。</p>
-<div id="使用说明" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> 使用说明<a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>这种”E 步正态、M 步 ALD”的混合设定不影响 <span class="math inline">\(\gamma\)</span> 的一致性，但让
+EM 在似然框架内可操作。</p>
+<div class="theorem">
+<p><span id="thm:hcqr" class="theorem"><strong>定理 5.1  (HCQR 的估计性质) </strong></span>在论文的正则条件下，HCQR 的固定效应估计量 <span class="math inline">\(\hat\gamma\)</span> 相合且渐近
+正态；自适应 Lasso 的选择权重使其具有 <strong>oracle 性质</strong>——真实系数为
+零的变量以概率趋于 1 被剔除，非零变量的估计与”已知真实模型”的
+估计渐近等价。</p>
+</div>
+</div>
+<div id="数值演示-3" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> 数值演示<a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>下面演示 CQR 相对单分位回归与 OLS 的稳健性增益：误差服从重尾
+<span class="math inline">\(t_3\)</span> 分布，比较三种方法对斜率 <span class="math inline">\(\gamma\)</span> 的估计精度。再演示自适应
+Lasso 剔除冗余变量的效果。</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="hcqr.html#cb147-1" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="cf">function</span>(u, tau) u <span class="sc">*</span> (tau <span class="sc">-</span> (u <span class="sc">&lt;</span> <span class="dv">0</span>))</span>
+<span id="cb147-2"><a href="hcqr.html#cb147-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb147-3"><a href="hcqr.html#cb147-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">400</span>; p <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb147-4"><a href="hcqr.html#cb147-4" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> p), n, p))</span>
+<span id="cb147-5"><a href="hcqr.html#cb147-5" tabindex="-1"></a>beta_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb147-6"><a href="hcqr.html#cb147-6" tabindex="-1"></a>y <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta_true <span class="sc">+</span> <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>) <span class="sc">*</span> <span class="dv">2</span>   <span class="co"># 重尾误差</span></span>
+<span id="cb147-7"><a href="hcqr.html#cb147-7" tabindex="-1"></a></span>
+<span id="cb147-8"><a href="hcqr.html#cb147-8" tabindex="-1"></a><span class="co"># CQR 目标：y = b_k + X gamma（各分位共享斜率）</span></span>
+<span id="cb147-9"><a href="hcqr.html#cb147-9" tabindex="-1"></a>tau_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb147-10"><a href="hcqr.html#cb147-10" tabindex="-1"></a>cq_obj <span class="ot">&lt;-</span> <span class="cf">function</span>(par) {</span>
+<span id="cb147-11"><a href="hcqr.html#cb147-11" tabindex="-1"></a>  b <span class="ot">&lt;-</span> par[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(tau_vec)]</span>
+<span id="cb147-12"><a href="hcqr.html#cb147-12" tabindex="-1"></a>  g <span class="ot">&lt;-</span> par[(<span class="fu">length</span>(tau_vec) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(par)]</span>
+<span id="cb147-13"><a href="hcqr.html#cb147-13" tabindex="-1"></a>  Xg <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(X <span class="sc">%*%</span> g)</span>
+<span id="cb147-14"><a href="hcqr.html#cb147-14" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">outer</span>(<span class="fu">as.numeric</span>(y), b, <span class="st">&quot;-&quot;</span>) <span class="sc">-</span> <span class="fu">matrix</span>(Xg, <span class="at">nrow =</span> <span class="fu">length</span>(y), <span class="at">ncol =</span> <span class="fu">length</span>(b))</span>
+<span id="cb147-15"><a href="hcqr.html#cb147-15" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">sapply</span>(<span class="fu">seq_along</span>(tau_vec), <span class="cf">function</span>(k) <span class="fu">sum</span>(<span class="fu">rho</span>(r[, k], tau_vec[k]))))</span>
+<span id="cb147-16"><a href="hcqr.html#cb147-16" tabindex="-1"></a>}</span>
+<span id="cb147-17"><a href="hcqr.html#cb147-17" tabindex="-1"></a>fit_cqr <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">median</span>(y), <span class="fu">length</span>(tau_vec)), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">ncol</span>(X))),</span>
+<span id="cb147-18"><a href="hcqr.html#cb147-18" tabindex="-1"></a>                 cq_obj, <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>)</span>
+<span id="cb147-19"><a href="hcqr.html#cb147-19" tabindex="-1"></a>gamma_cqr <span class="ot">&lt;-</span> fit_cqr<span class="sc">$</span>par[(<span class="fu">length</span>(tau_vec) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(fit_cqr<span class="sc">$</span>par)]</span>
+<span id="cb147-20"><a href="hcqr.html#cb147-20" tabindex="-1"></a></span>
+<span id="cb147-21"><a href="hcqr.html#cb147-21" tabindex="-1"></a>fit_lad <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">ncol</span>(X)),</span>
+<span id="cb147-22"><a href="hcqr.html#cb147-22" tabindex="-1"></a>                 <span class="cf">function</span>(par) <span class="fu">sum</span>(<span class="fu">rho</span>(<span class="fu">as.numeric</span>(y) <span class="sc">-</span> X <span class="sc">%*%</span> par, <span class="fl">0.5</span>)),</span>
+<span id="cb147-23"><a href="hcqr.html#cb147-23" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>)<span class="sc">$</span>par        <span class="co"># 单分位（LAD）</span></span>
+<span id="cb147-24"><a href="hcqr.html#cb147-24" tabindex="-1"></a>fit_ols <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X <span class="sc">-</span> <span class="dv">1</span>))               <span class="co"># OLS</span></span></code></pre></div>
+<pre><code>##              b0       b1         b2        b3
+## CQR -0.02225574 2.141738 -0.7439185 0.5494043
+## LAD  1.06427994 2.161940 -0.7843831 0.5438026
+## OLS  0.99999714 2.151665 -0.7740400 0.5688560</code></pre>
+<pre><code>## RMSE: CQR = 0.532 , LAD = 0.14 , OLS = 0.14</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hcqr-summary"></span>
+<img src="notes-book_files/figure-html/hcqr-summary-1.png" alt="重尾误差下三种估计的系数估计对比（虚线为真值）" width="672" />
+<p class="caption">
+图 5.1: 重尾误差下三种估计的系数估计对比（虚线为真值）
+</p>
+</div>
+<p>重尾误差下 OLS 的 RMSE 明显更大，CQR 与 LAD 稳健；而 CQR 聚合了
+多个分位的信息，通常比单分位（LAD）更高效。论文在分层设定下结合
+自适应 Lasso 后，还能以概率趋于 1 正确剔除无关组级协变量。</p>
+</div>
+<div id="要点小结-3" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> 要点小结<a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>每章末尾的 R 代码块均可在渲染时直接执行，只依赖 R 基础包；</li>
-<li>公式编号与定理引用遵循 bookdown 约定，如式 <a href="poisson-rr.html#eq:spa-formula">(2.4)</a>、
-定理 <a href="poisson-rr.html#thm:saddle-approx">2.1</a>；</li>
-<li>引用格式见各章首行的论文出处。</li>
+<li>式 <a href="hcqr.html#eq:hier-merged">(5.3)</a> 将分层结构写为固定效应 + 随机效应的线性
+组合，是 EM 可操作的基础；</li>
+<li>式 <a href="hcqr.html#eq:cqr-obj">(5.4)</a> 的复合分位目标在多分位间共享信息，重尾误差
+下比均值回归稳健、比单分位高效；</li>
+<li><strong>ALD 等价性</strong>是连接”鲁棒分位目标”与”似然 EM 框架”的桥梁
+（E 步正态、M 步 ALD）；</li>
+<li>自适应 Lasso 权重带来 oracle 性质的变量选择（定理
+<a href="hcqr.html#thm:hcqr">5.1</a>）。</li>
 </ul>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hou2026hcqr" class="csl-entry">
+Hou, Jian, Tan Meng, and Maozai Tian. 2026a. <span>“Hierarchical Composite Quantile Regression with Adaptive <span>L</span>asso.”</span> <em>Journal of Statistical Planning and Inference</em> 245: 106390. <a href="https://doi.org/10.1016/j.jspi.2026.106390">https://doi.org/10.1016/j.jspi.2026.106390</a>.
+</div>
+<div id="ref-yu2001mcmc" class="csl-entry">
+Yu, Keming, and Rana A Moyeed. 2001. <span>“Bayesian Quantile Regression.”</span> <em>Statistics &amp; Probability Letters</em> 54 (4): 437–47.
+</div>
+<div id="ref-zou2006adaptive" class="csl-entry">
+Zou, Hui. 2006. <span>“The Adaptive Lasso and Its Oracle Properties.”</span> <em>Journal of the American Statistical Association</em> 101 (476): 1418–29.
 </div>
 </div>
             </section>
@@ -275,8 +381,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-
-<a href="poisson-rr.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="svcqr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mgtwr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
