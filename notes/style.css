@@ -1,4 +1,8 @@
-/* 统计方法讲义 - 自定义样式（贴近主页深蓝主题 #1d2088） */
+/* 统计方法讲义 - 自定义样式
+ * 配色方案：Taylor & Francis 品牌蓝
+ *   主蓝 #0955A4（侧栏背景） · 亮蓝 #006DB4（hover 点缀） · 深蓝 #002244（正文标题）
+ * 取自 taylorandfrancis.com 官网主色（#006db4 / #0955a4 / #002244）。
+ */
 
 body {
   font-family: "Source Serif 4", "Source Sans 3", "Noto Serif SC",
@@ -14,37 +18,41 @@ body {
   color: #2c2c2c;
 }
 
-/* 章节标题 */
+/* 章节标题：T&F 深蓝 */
 .book .book-body .page-wrapper .page-inner section.normal h1,
 .book .book-body .page-wrapper .page-inner section.normal h2,
 .book .book-body .page-wrapper .page-inner section.normal h3 {
-  color: #1d2088;
+  color: #002244;
 }
 
-/* 链接 */
+/* 链接：T&F 主蓝 */
 .book .book-body .page-wrapper .page-inner section.normal a {
-  color: #1d2088;
+  color: #0955a4;
 }
 
-/* 目录 */
+.book .book-body .page-wrapper .page-inner section.normal a:hover {
+  color: #006db4;
+}
+
+/* 目录侧栏：T&F 主蓝 */
 .book .book-summary {
-  background: #1d2088;
+  background: #0955a4;
   color: #ffffff;
 }
 
 .book .book-summary ul.summary li a,
 .book .book-summary ul.summary li span {
-  color: #e8e9f7;
+  color: #eaf2fb;
 }
 
 .book .book-summary ul.summary li.active > a {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .book .book-summary ul.summary li a:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .book .book-summary .toc-home {
@@ -54,16 +62,16 @@ body {
 
 /* 代码块 */
 .book .book-body .page-wrapper .page-inner section.normal pre {
-  background: #f6f7fb;
-  border: 1px solid #e3e5f0;
+  background: #f4f8fd;
+  border: 1px solid #d8e4f2;
 }
 
 /* 表格 */
 .book .book-body .page-wrapper .page-inner section.normal table td,
 .book .book-body .page-wrapper .page-inner section.normal table th {
-  border-color: #d9dbea;
+  border-color: #d3dfee;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal table tr:nth-child(2n) {
-  background: #f4f5fb;
+  background: #f2f7fc;
 }
