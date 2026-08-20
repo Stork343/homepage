@@ -31,6 +31,18 @@ cd notes\_book
 python -m http.server 8000   # http://localhost:8000
 ```
 
+> **缓存注意**：若曾修改章节结构或出现 TOC 链接异常（如指向错误的
+> 章节文件），先删除渲染缓存再重建：
+>
+> ```powershell
+> cd notes
+> Remove-Item -Recurse -Force _bookdown_files, notes-book_files
+> Rscript -e "bookdown::render_book('index.Rmd')"
+> ```
+>
+> 正式产物以 CI 渲染为准（workflow 在推送后自动渲染提交，环境无
+> 缓存，产物最稳定）。
+
 ## 写作约定（重要）
 
 1. **定理环境用 fenced Div，不用 `\begin{theorem}`**：
