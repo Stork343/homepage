@@ -491,9 +491,10 @@ N_1 N_0 \lambda_0 e^{\theta N_1} - N_1 N_0 \lambda_1 r e^{-\theta N_0 r} = 0,
 <span class="math inline">\(\lambda e^{\lambda^2/2}\{1-\Phi(\lambda)\} = \lambda \cdot
 \mathrm{Mills}(-\lambda)\)</span>，直接用 <code>pnorm(..., lower.tail = FALSE)</code>
 计算尾部。</li>
-<li><strong>覆盖率的蒙特卡洛规模</strong>：本文的数值例为控制渲染时间取 200 次
-重复。若要精确复现，应增加至数千次并固定随机种子
-（<code>set.seed</code>），否则机器间的小数位会有出入。</li>
+<li><strong>中心区域的精度</strong>：一阶 Lugannani–Rice 公式在尾部表现优异
+（见例 2），但在分布的<strong>中心</strong>（<span class="math inline">\(u \to 0\)</span>）精度下降；构造完整
+置信区间时需使用含 <span class="math inline">\(B_0, \dots, B_6\)</span> 修正的高阶公式，并在反转
+尾概率时对 <span class="math inline">\(w \approx 0\)</span> 的情形做连续性处理。</li>
 <li><strong>区间端点</strong>：<span class="math inline">\(\hat R\)</span> 的支撑为 <span class="math inline">\((0, +\infty)\)</span>，反转方程
 <span class="math inline">\(\hat F_{\hat R}(r) = \alpha/2\)</span> 的下限可能接近 0，统一取
 <span class="math inline">\(\max\{\hat R_L, 0\}\)</span>；对下限求根时区间应从 <span class="math inline">\(10^{-6}\)</span> 开始，
@@ -517,57 +518,48 @@ N_1 N_0 \lambda_0 e^{\theta N_1} - N_1 N_0 \lambda_1 r e^{-\theta N_0 r} = 0,
 <span id="cb1-11"><a href="poisson-rr.html#cb1-11" tabindex="-1"></a>  <span class="at">MC_mean =</span> <span class="fu">mean</span>(Rhat), <span class="at">ratio_mean =</span> lam1 <span class="sc">/</span> lam0)</span></code></pre></div>
 <pre><code>##     MC_var  Delta_var    MC_mean ratio_mean 
 ## 0.02062021 0.01875000 0.51293391 0.50000000</code></pre>
-<p><strong>例 2：鞍点区间与 Wald 区间的比较。</strong> 采用一阶 Lugannani–Rice
-公式（与高阶修正形式在 <span class="math inline">\(\lambda\)</span> 不极端时数值非常接近，但实现
-简洁得多）比较覆盖率与平均长度。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="poisson-rr.html#cb3-1" tabindex="-1"></a>spa_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(y0, y1, n0, n1, <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
-<span id="cb3-2"><a href="poisson-rr.html#cb3-2" tabindex="-1"></a>  lam0 <span class="ot">&lt;-</span> y0 <span class="sc">/</span> n0; lam1 <span class="ot">&lt;-</span> y1 <span class="sc">/</span> n1</span>
-<span id="cb3-3"><a href="poisson-rr.html#cb3-3" tabindex="-1"></a>  rhat <span class="ot">&lt;-</span> lam1 <span class="sc">/</span> lam0</span>
-<span id="cb3-4"><a href="poisson-rr.html#cb3-4" tabindex="-1"></a>  tail <span class="ot">&lt;-</span> <span class="cf">function</span>(r) {                     <span class="co"># P(Z &lt;= 0)，Z = N1*Y0 - r*N0*Y1</span></span>
-<span id="cb3-5"><a href="poisson-rr.html#cb3-5" tabindex="-1"></a>    f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) n1 <span class="sc">*</span> n0 <span class="sc">*</span> lam0 <span class="sc">*</span> <span class="fu">exp</span>(th <span class="sc">*</span> n1) <span class="sc">-</span></span>
-<span id="cb3-6"><a href="poisson-rr.html#cb3-6" tabindex="-1"></a>      n1 <span class="sc">*</span> n0 <span class="sc">*</span> lam1 <span class="sc">*</span> r <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>th <span class="sc">*</span> n0 <span class="sc">*</span> r)</span>
-<span id="cb3-7"><a href="poisson-rr.html#cb3-7" tabindex="-1"></a>    th0 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="at">extendInt =</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">$</span>root,</span>
-<span id="cb3-8"><a href="poisson-rr.html#cb3-8" tabindex="-1"></a>                    <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
-<span id="cb3-9"><a href="poisson-rr.html#cb3-9" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.na</span>(th0)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb3-10"><a href="poisson-rr.html#cb3-10" tabindex="-1"></a>    K <span class="ot">&lt;-</span> n0 <span class="sc">*</span> lam0 <span class="sc">*</span> (<span class="fu">exp</span>(th0 <span class="sc">*</span> n1) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> n1 <span class="sc">*</span> lam1 <span class="sc">*</span> (<span class="fu">exp</span>(<span class="sc">-</span>th0 <span class="sc">*</span> n0 <span class="sc">*</span> r) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb3-11"><a href="poisson-rr.html#cb3-11" tabindex="-1"></a>    s2 <span class="ot">&lt;-</span> n1<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> n0 <span class="sc">*</span> lam0 <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> n1) <span class="sc">+</span> n1 <span class="sc">*</span> n0<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> lam1 <span class="sc">*</span> r<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>th0 <span class="sc">*</span> n0 <span class="sc">*</span> r)</span>
-<span id="cb3-12"><a href="poisson-rr.html#cb3-12" tabindex="-1"></a>    w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th0) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> K)           <span class="co"># Lugannani-Rice 的 w</span></span>
-<span id="cb3-13"><a href="poisson-rr.html#cb3-13" tabindex="-1"></a>    u <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(s2)                     <span class="co"># u = th * sigma</span></span>
-<span id="cb3-14"><a href="poisson-rr.html#cb3-14" tabindex="-1"></a>    <span class="cf">if</span> (u <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">is.nan</span>(w)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb3-15"><a href="poisson-rr.html#cb3-15" tabindex="-1"></a>    <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> u)</span>
-<span id="cb3-16"><a href="poisson-rr.html#cb3-16" tabindex="-1"></a>  }</span>
-<span id="cb3-17"><a href="poisson-rr.html#cb3-17" tabindex="-1"></a>  lo <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(<span class="cf">function</span>(r) <span class="fu">tail</span>(r) <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb3-18"><a href="poisson-rr.html#cb3-18" tabindex="-1"></a>                         <span class="fu">c</span>(<span class="fl">1e-6</span>, rhat))<span class="sc">$</span>root, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
-<span id="cb3-19"><a href="poisson-rr.html#cb3-19" tabindex="-1"></a>  hi <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(<span class="cf">function</span>(r) <span class="fu">tail</span>(r) <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>),</span>
-<span id="cb3-20"><a href="poisson-rr.html#cb3-20" tabindex="-1"></a>                         <span class="fu">c</span>(rhat, <span class="fl">1e4</span>))<span class="sc">$</span>root, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
-<span id="cb3-21"><a href="poisson-rr.html#cb3-21" tabindex="-1"></a>  <span class="fu">c</span>(lo, hi)</span>
-<span id="cb3-22"><a href="poisson-rr.html#cb3-22" tabindex="-1"></a>}</span>
-<span id="cb3-23"><a href="poisson-rr.html#cb3-23" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb3-24"><a href="poisson-rr.html#cb3-24" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="dv">200</span>; n0 <span class="ot">&lt;-</span> n1 <span class="ot">&lt;-</span> <span class="dv">100</span>; lam0 <span class="ot">&lt;-</span> <span class="fl">0.8</span>; lam1 <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb3-25"><a href="poisson-rr.html#cb3-25" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">replicate</span>(mc, {</span>
-<span id="cb3-26"><a href="poisson-rr.html#cb3-26" tabindex="-1"></a>  y0 <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, lam0 <span class="sc">*</span> n0); y1 <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, lam1 <span class="sc">*</span> n1)</span>
-<span id="cb3-27"><a href="poisson-rr.html#cb3-27" tabindex="-1"></a>  ci <span class="ot">&lt;-</span> <span class="fu">spa_ci</span>(y0, y1, n0, n1)</span>
-<span id="cb3-28"><a href="poisson-rr.html#cb3-28" tabindex="-1"></a>  rhat <span class="ot">&lt;-</span> (y1 <span class="sc">/</span> n1) <span class="sc">/</span> (y0 <span class="sc">/</span> n0)</span>
-<span id="cb3-29"><a href="poisson-rr.html#cb3-29" tabindex="-1"></a>  se <span class="ot">&lt;-</span> rhat <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">/</span> y0 <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> y1)</span>
-<span id="cb3-30"><a href="poisson-rr.html#cb3-30" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">lo1 =</span> ci[<span class="dv">1</span>], <span class="at">hi1 =</span> ci[<span class="dv">2</span>],</span>
-<span id="cb3-31"><a href="poisson-rr.html#cb3-31" tabindex="-1"></a>    <span class="at">lo2 =</span> <span class="fu">max</span>(rhat <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se, <span class="dv">0</span>), <span class="at">hi2 =</span> rhat <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se)</span>
-<span id="cb3-32"><a href="poisson-rr.html#cb3-32" tabindex="-1"></a>}))</span>
-<span id="cb3-33"><a href="poisson-rr.html#cb3-33" tabindex="-1"></a>ok <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(res[, <span class="dv">1</span>]); res <span class="ot">&lt;-</span> res[ok, ]</span>
-<span id="cb3-34"><a href="poisson-rr.html#cb3-34" tabindex="-1"></a>cover <span class="ot">&lt;-</span> <span class="cf">function</span>(lo, hi) <span class="fu">mean</span>(lo <span class="sc">&lt;=</span> <span class="dv">2</span> <span class="sc">&amp;</span> hi <span class="sc">&gt;=</span> <span class="dv">2</span>)</span>
-<span id="cb3-35"><a href="poisson-rr.html#cb3-35" tabindex="-1"></a>len <span class="ot">&lt;-</span> <span class="cf">function</span>(lo, hi) <span class="fu">mean</span>(hi <span class="sc">-</span> lo)</span>
-<span id="cb3-36"><a href="poisson-rr.html#cb3-36" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">SPA =</span> <span class="fu">c</span>(<span class="fu">cover</span>(res[, <span class="dv">1</span>], res[, <span class="dv">2</span>]), <span class="fu">len</span>(res[, <span class="dv">1</span>], res[, <span class="dv">2</span>])),</span>
-<span id="cb3-37"><a href="poisson-rr.html#cb3-37" tabindex="-1"></a>             <span class="at">Wald =</span> <span class="fu">c</span>(<span class="fu">cover</span>(res[, <span class="dv">3</span>], res[, <span class="dv">4</span>]), <span class="fu">len</span>(res[, <span class="dv">3</span>], res[, <span class="dv">4</span>])))</span>
-<span id="cb3-38"><a href="poisson-rr.html#cb3-38" tabindex="-1"></a><span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Coverage&quot;</span>, <span class="st">&quot;Avg length&quot;</span>)</span>
-<span id="cb3-39"><a href="poisson-rr.html#cb3-39" tabindex="-1"></a>tab</span></code></pre></div>
-<pre><code>##      Coverage Avg length
-## SPA         0  0.8625801
-## Wald        0  0.6394539</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:spa-plot"></span>
-<img src="notes-book_files/figure-html/spa-plot-1.png" alt="鞍点与 Wald 区间的覆盖率与平均长度（R=2，N=100，名义水平 95%）" width="672" />
+<p><strong>例 2：鞍点逼近的尾概率精度。</strong> 以泊松计数
+<span class="math inline">\(Y \sim \mathrm{Poisson}(10)\)</span> 为例，比较右尾概率
+<span class="math inline">\(\mathrm{P}(Y \ge k)\)</span> 的三种算法：Lugannani–Rice 型鞍点近似、精确
+值 <span class="math inline">\(1 - F(k-1)\)</span> 与正态近似。鞍点公式在尾部表现出高阶精度；正态
+近似在尾部明显低估。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="poisson-rr.html#cb3-1" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb3-2"><a href="poisson-rr.html#cb3-2" tabindex="-1"></a>kvec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">12</span>, <span class="dv">30</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
+<span id="cb3-3"><a href="poisson-rr.html#cb3-3" tabindex="-1"></a>lr_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(k) {</span>
+<span id="cb3-4"><a href="poisson-rr.html#cb3-4" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) mu <span class="sc">*</span> <span class="fu">exp</span>(th) <span class="sc">-</span> (k <span class="sc">-</span> <span class="fl">0.5</span>)   <span class="co"># K&#39;(th) = x，x 取 k-0.5（连续性修正）</span></span>
+<span id="cb3-5"><a href="poisson-rr.html#cb3-5" tabindex="-1"></a>  th0 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))<span class="sc">$</span>root)  <span class="co"># 尾部鞍点 th0 &gt; 0</span></span>
+<span id="cb3-6"><a href="poisson-rr.html#cb3-6" tabindex="-1"></a>  K  <span class="ot">&lt;-</span> mu <span class="sc">*</span> (<span class="fu">exp</span>(th0) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="poisson-rr.html#cb3-7" tabindex="-1"></a>  K2 <span class="ot">&lt;-</span> mu <span class="sc">*</span> <span class="fu">exp</span>(th0)</span>
+<span id="cb3-8"><a href="poisson-rr.html#cb3-8" tabindex="-1"></a>  w  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> (th0 <span class="sc">*</span> (k <span class="sc">-</span> <span class="fl">0.5</span>) <span class="sc">-</span> K))</span>
+<span id="cb3-9"><a href="poisson-rr.html#cb3-9" tabindex="-1"></a>  u  <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(K2)</span>
+<span id="cb3-10"><a href="poisson-rr.html#cb3-10" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> u <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> w)    <span class="co"># P(Y &gt;= k)</span></span>
+<span id="cb3-11"><a href="poisson-rr.html#cb3-11" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="poisson-rr.html#cb3-12" tabindex="-1"></a>exact  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(kvec <span class="sc">-</span> <span class="dv">1</span>, mu)</span>
+<span id="cb3-13"><a href="poisson-rr.html#cb3-13" tabindex="-1"></a>normal <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>((kvec <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">-</span> mu) <span class="sc">/</span> <span class="fu">sqrt</span>(mu))</span>
+<span id="cb3-14"><a href="poisson-rr.html#cb3-14" tabindex="-1"></a>lr <span class="ot">&lt;-</span> <span class="fu">sapply</span>(kvec, lr_tail)</span>
+<span id="cb3-15"><a href="poisson-rr.html#cb3-15" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(<span class="at">k =</span> kvec, <span class="at">exact =</span> exact,</span>
+<span id="cb3-16"><a href="poisson-rr.html#cb3-16" tabindex="-1"></a>            <span class="at">saddlepoint =</span> lr, <span class="at">normal =</span> normal), <span class="dv">6</span>)</span></code></pre></div>
+<pre><code>##        k    exact saddlepoint   normal
+##  [1,] 12 0.303224    0.304014 0.317628
+##  [2,] 14 0.135536    0.136405 0.134191
+##  [3,] 16 0.048740    0.049280 0.040995
+##  [4,] 18 0.014278    0.014510 0.008853
+##  [5,] 20 0.003454    0.003530 0.001332
+##  [6,] 22 0.000700    0.000719 0.000138
+##  [7,] 24 0.000120    0.000124 0.000010
+##  [8,] 26 0.000018    0.000018 0.000000
+##  [9,] 28 0.000002    0.000002 0.000000
+## [10,] 30 0.000000    0.000000 0.000000</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:poisson-tail-plot"></span>
+<img src="notes-book_files/figure-html/poisson-tail-plot-1.png" alt="泊松(10) 右尾概率：鞍点逼近、精确值与正态近似（对数尺度）" width="672" />
 <p class="caption">
-图 2.1: 鞍点与 Wald 区间的覆盖率与平均长度（R=2，N=100，名义水平 95%）
+图 2.1: 泊松(10) 右尾概率：鞍点逼近、精确值与正态近似（对数尺度）
 </p>
 </div>
+<p>在尾部，鞍点近似与精确值几乎重合，而正态近似系统性低估尾概率——这与前文关于鞍点公式 <span class="math inline">\(O(n^{-3/2})\)</span> 相对误差的讨论一致。需要说明的是，一阶
+Lugannani–Rice 公式的优势区域是尾部；在分布的<strong>中心</strong>（<span class="math inline">\(u\)</span> 很小）
+其精度下降，这正是采用含 Edgeworth 修正的高阶公式（<span class="math inline">\(B_0, \dots,
+B_6\)</span> 项）的原因。</p>
 </div>
 <div id="注记" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> 注记<a href="poisson-rr.html#%E6%B3%A8%E8%AE%B0" class="anchor-section" aria-label="Anchor link to header"></a></h2>

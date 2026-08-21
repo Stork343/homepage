@@ -233,9 +233,10 @@ $O(n^{-1/2})$），由其反转得到的置信区间覆盖率更接近名义水�
    $\lambda e^{\lambda^2/2}\{1-\Phi(\lambda)\} = \lambda \cdot
    \mathrm{Mills}(-\lambda)$，直接用 `pnorm(..., lower.tail = FALSE)`
    计算尾部。
-3. **覆盖率的蒙特卡洛规模**：本文的数值例为控制渲染时间取 200 次
-   重复。若要精确复现，应增加至数千次并固定随机种子
-   （`set.seed`），否则机器间的小数位会有出入。
+3. **中心区域的精度**：一阶 Lugannani–Rice 公式在尾部表现优异
+   （见例 2），但在分布的**中心**（$u \to 0$）精度下降；构造完整
+   置信区间时需使用含 $B_0, \dots, B_6$ 修正的高阶公式，并在反转
+   尾概率时对 $w \approx 0$ 的情形做连续性处理。
 4. **区间端点**：$\hat R$ 的支撑为 $(0, +\infty)$，反转方程
    $\hat F_{\hat R}(r) = \alpha/2$ 的下限可能接近 0，统一取
    $\max\{\hat R_L, 0\}$；对下限求根时区间应从 $10^{-6}$ 开始，
@@ -260,58 +261,46 @@ c(MC_var = var(Rhat), Delta_var = var_delta,
   MC_mean = mean(Rhat), ratio_mean = lam1 / lam0)
 ```
 
-**例 2：鞍点区间与 Wald 区间的比较。** 采用一阶 Lugannani–Rice
-公式（与高阶修正形式在 $\lambda$ 不极端时数值非常接近，但实现
-简洁得多）比较覆盖率与平均长度。
+**例 2：鞍点逼近的尾概率精度。** 以泊松计数
+$Y \sim \mathrm{Poisson}(10)$ 为例，比较右尾概率
+$\mathrm{P}(Y \ge k)$ 的三种算法：Lugannani–Rice 型鞍点近似、精确
+值 $1 - F(k-1)$ 与正态近似。鞍点公式在尾部表现出高阶精度；正态
+近似在尾部明显低估。
 
-```{r spa-demo}
-spa_ci <- function(y0, y1, n0, n1, alpha = 0.05) {
-  lam0 <- y0 / n0; lam1 <- y1 / n1
-  rhat <- lam1 / lam0
-  tail <- function(r) {                     # P(Z <= 0)，Z = N1*Y0 - r*N0*Y1
-    f <- function(th) n1 * n0 * lam0 * exp(th * n1) -
-      n1 * n0 * lam1 * r * exp(-th * n0 * r)
-    th0 <- tryCatch(uniroot(f, c(-20, 20), extendInt = "yes")$root,
-                    error = function(e) NA)
-    if (is.na(th0)) return(NA)
-    K <- n0 * lam0 * (exp(th0 * n1) - 1) + n1 * lam1 * (exp(-th0 * n0 * r) - 1)
-    s2 <- n1^2 * n0 * lam0 * exp(th0 * n1) + n1 * n0^2 * lam1 * r^2 * exp(-th0 * n0 * r)
-    w <- sign(th0) * sqrt(-2 * K)           # Lugannani-Rice 的 w
-    u <- th0 * sqrt(s2)                     # u = th * sigma
-    if (u == 0 || is.nan(w)) return(NA)
-    pnorm(w) + dnorm(w) * (1 / w - 1 / u)
-  }
-  lo <- tryCatch(uniroot(function(r) tail(r) - alpha / 2,
-                         c(1e-6, rhat))$root, error = function(e) NA)
-  hi <- tryCatch(uniroot(function(r) tail(r) - (1 - alpha / 2),
-                         c(rhat, 1e4))$root, error = function(e) NA)
-  c(lo, hi)
+```{r poisson-tail}
+mu <- 10
+kvec <- seq(12, 30, by = 2)
+lr_tail <- function(k) {
+  f <- function(th) mu * exp(th) - (k - 0.5)   # K'(th) = x，x 取 k-0.5（连续性修正）
+  th0 <- as.numeric(uniroot(f, c(0, 5))$root)  # 尾部鞍点 th0 > 0
+  K  <- mu * (exp(th0) - 1)
+  K2 <- mu * exp(th0)
+  w  <- sqrt(2 * (th0 * (k - 0.5) - K))
+  u  <- th0 * sqrt(K2)
+  1 - pnorm(w) + dnorm(w) * (1 / u - 1 / w)    # P(Y >= k)
 }
-set.seed(2026)
-mc <- 200; n0 <- n1 <- 100; lam0 <- 0.8; lam1 <- 0.4
-res <- t(replicate(mc, {
-  y0 <- rpois(1, lam0 * n0); y1 <- rpois(1, lam1 * n1)
-  ci <- spa_ci(y0, y1, n0, n1)
-  rhat <- (y1 / n1) / (y0 / n0)
-  se <- rhat * sqrt(1 / y0 + 1 / y1)
-  c(lo1 = ci[1], hi1 = ci[2],
-    lo2 = max(rhat - 1.96 * se, 0), hi2 = rhat + 1.96 * se)
-}))
-ok <- !is.na(res[, 1]); res <- res[ok, ]
-cover <- function(lo, hi) mean(lo <= 2 & hi >= 2)
-len <- function(lo, hi) mean(hi - lo)
-tab <- rbind(SPA = c(cover(res[, 1], res[, 2]), len(res[, 1], res[, 2])),
-             Wald = c(cover(res[, 3], res[, 4]), len(res[, 3], res[, 4])))
-colnames(tab) <- c("Coverage", "Avg length")
-tab
+exact  <- 1 - ppois(kvec - 1, mu)
+normal <- 1 - pnorm((kvec - 0.5 - mu) / sqrt(mu))
+lr <- sapply(kvec, lr_tail)
+round(cbind(k = kvec, exact = exact,
+            saddlepoint = lr, normal = normal), 6)
 ```
 
-```{r spa-plot, echo=FALSE, fig.cap="鞍点与 Wald 区间的覆盖率与平均长度（R=2，N=100，名义水平 95%）"}
-barplot(tab[, 1], beside = TRUE, col = c("#0955a4", "#9db8d9"),
-        ylim = c(0, 1), main = "Coverage (nominal 95%)", ylab = "Coverage",
-        names.arg = rownames(tab))
-abline(h = 0.95, lty = 2, col = "#c0392b")
+```{r poisson-tail-plot, echo=FALSE, fig.cap="泊松(10) 右尾概率：鞍点逼近、精确值与正态近似（对数尺度）"}
+par(mar = c(4, 4, 3, 1))
+plot(kvec, exact, type = "b", pch = 19, col = "#1d2088", log = "y",
+     xlab = "k", ylab = "P(Y >= k)", main = "Poisson(10) upper tail")
+lines(kvec, lr, type = "b", pch = 17, col = "#0955a4", lty = 2)
+lines(kvec, normal, type = "b", pch = 15, col = "#c0392b", lty = 3)
+legend("topright", c("exact", "saddlepoint", "normal"),
+       pch = c(19, 17, 15), lty = 1:3, col = c("#1d2088", "#0955a4", "#c0392b"),
+       bty = "n")
 ```
+
+在尾部，鞍点近似与精确值几乎重合，而正态近似系统性低估尾概率——这与前文关于鞍点公式 $O(n^{-3/2})$ 相对误差的讨论一致。需要说明的是，一阶
+Lugannani–Rice 公式的优势区域是尾部；在分布的**中心**（$u$ 很小）
+其精度下降，这正是采用含 Edgeworth 修正的高阶公式（$B_0, \dots,
+B_6$ 项）的原因。
 
 ## 注记
 

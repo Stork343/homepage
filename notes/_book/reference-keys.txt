@@ -4,7 +4,7 @@ eq:laplace
 eq:saddle-eq
 eq:ci-equations
 thm:saddle-approx
-fig:spa-plot
+fig:poisson-tail-plot
 eq:lr-formula
 fig:esa-plot
 eq:cond-normal
