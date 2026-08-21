@@ -87,13 +87,13 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2025/jpdi-mixed-qr/dblqmm.png",
-      "webp": "./papers/2025/jpdi-mixed-qr/dblqmm.webp",
-      "width": 1024,
-      "height": 1024,
+      "src": "./papers/2025/jpdi-mixed-qr/SJOS-thumbnail.jpg",
+      "webp": null,
+      "width": 412,
+      "height": 274,
       "alt": {
-        "zh": "论文数值实验图",
-        "en": "Numerical experiment figure from the paper"
+        "zh": "斯堪的纳统计期刊封面",
+        "en": "Scandinavian Journal of Statistics cover"
       }
     },
     "citation": {
