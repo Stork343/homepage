@@ -340,7 +340,7 @@
     },
     {
       "id": "plgwqr",
-      "year": 2025,
+      "year": 2026,
       "title": {
         "zh": "部分线性地理加权分位回归模型",
         "en": "Partially Linear Geographically Weighted Quantile Regression"
@@ -354,8 +354,8 @@
         "en": "Acta Mathematicae Applicatae Sinica"
       },
       "status": {
-        "zh": "状态：录用",
-        "en": "Status: Accepted"
+        "zh": "",
+        "en": ""
       },
       "keywords": {
         "zh": [

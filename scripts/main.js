@@ -369,6 +369,11 @@
     }
     const authors = citation.slice(0, index).replace(/\.\s*$/, "").trim();
     const afterTitle = citation.slice(index + title.length).replace(/^\.\s*/, "").trim();
+    const existingMarker = afterTitle.match(/^\[[^\]]+\]/);
+    if (existingMarker) {
+      const remainder = afterTitle.slice(existingMarker[0].length).replace(/^\.\s*/, "").trim();
+      return `${authors}. ${title}${existingMarker[0]}. ${remainder}`;
+    }
     return `${authors}. ${title}[J]. ${afterTitle}`;
   }
 
