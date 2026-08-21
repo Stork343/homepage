@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
+  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
+  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
+  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
@@ -163,133 +163,109 @@ div.csl-indent {
 <li><a href="./" class="toc-home">统计方法笔记</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
 <li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 鞍点逼近：从拉普拉斯积分到相对风险置信区间</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>2.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88"><i class="fa fa-check"></i><b>2.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><i class="fa fa-check"></i><b>2.3</b> 数学工具详解</a>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87"><i class="fa fa-check"></i><b>2.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88-var%CE%BB%E2%82%81%CE%BB%E2%82%80-%E9%95%BF%E6%88%90%E9%82%A3%E4%B8%AA%E6%A0%B7%E5%AD%90"><i class="fa fa-check"></i><b>2.3.1</b> Delta 方法：为什么 Var(λ̂₁/λ̂₀) 长成那个样子</a></li>
-<li class="chapter" data-level="2.3.2" data-path="poisson-rr.html"><a href="poisson-rr.html#laplace-%E9%80%BC%E8%BF%91%E9%9E%8D%E7%82%B9%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>2.3.2</b> Laplace 逼近：鞍点方法的地基</a></li>
-<li class="chapter" data-level="2.3.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E6%95%B0%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.3.3</b> 累积量生成函数：为什么是”对数”矩生成函数</a></li>
-<li class="chapter" data-level="2.3.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%B9%E5%81%B6"><i class="fa fa-check"></i><b>2.3.4</b> 逆转公式：密度与特征函数的对偶</a></li>
-<li class="chapter" data-level="2.3.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.3.5</b> 鞍点方程的数值求解</a></li>
+<li class="chapter" data-level="2.1.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95"><i class="fa fa-check"></i><b>2.1.1</b> Delta 方法</a></li>
+<li class="chapter" data-level="2.1.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%A7%AF%E5%88%86"><i class="fa fa-check"></i><b>2.1.2</b> 拉普拉斯积分</a></li>
+<li class="chapter" data-level="2.1.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.1.3</b> 累积量生成函数</a></li>
+<li class="chapter" data-level="2.1.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>2.1.4</b> 逆转公式</a></li>
+<li class="chapter" data-level="2.1.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.1.5</b> 鞍点方程的数值求解</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4</b> 论文未展示的详细推导</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E4%BB%8E-mathrmphat-r-le-r-%E5%88%B0-mathrmpz-le-0"><i class="fa fa-check"></i><b>2.4.1</b> 从 <span class="math inline">\(\mathrm{P}(\hat R \le r)\)</span> 到 <span class="math inline">\(\mathrm{P}(Z \le 0)\)</span></a></li>
-<li class="chapter" data-level="2.4.2" data-path="poisson-rr.html"><a href="poisson-rr.html#z-%E7%9A%84%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%A4%E6%AD%A5%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4.2</b> <span class="math inline">\(Z\)</span> 的矩生成函数：两步推导</a></li>
-<li class="chapter" data-level="2.4.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E4%B8%8E-jensen-%E5%85%AC%E5%BC%8F%E5%90%84%E9%A1%B9%E7%9A%84%E5%90%AB%E4%B9%89"><i class="fa fa-check"></i><b>2.4.3</b> 鞍点方程与 Jensen 公式各项的含义</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F"><i class="fa fa-check"></i><b>2.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="2.6" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.6</b> 数值演示</a></li>
-<li class="chapter" data-level="2.7" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><i class="fa fa-check"></i><b>2.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.2</b> 相对风险的鞍点置信区间</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97"><i class="fa fa-check"></i><b>2.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E4%BE%8B"><i class="fa fa-check"></i><b>2.4</b> 数值例</a></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%B3%A8%E8%AE%B0"><i class="fa fa-check"></i><b>2.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 分位推断的分布自由路线：自标准化与经验鞍点</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="snqesa.html"><a href="snqesa.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-1"><i class="fa fa-check"></i><b>3.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-1"><i class="fa fa-check"></i><b>3.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-1"><i class="fa fa-check"></i><b>3.3</b> 数学工具详解</a>
+<li class="chapter" data-level="3.1" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-1"><i class="fa fa-check"></i><b>3.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="snqesa.html"><a href="snqesa.html#%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E5%88%B0%E6%A0%B7%E6%9C%AC%E5%88%86%E4%BD%8D%E6%95%B0"><i class="fa fa-check"></i><b>3.3.1</b> 次序统计量到样本分位数</a></li>
-<li class="chapter" data-level="3.3.2" data-path="snqesa.html"><a href="snqesa.html#bernoulli-%E5%BD%92%E7%BA%A6%E6%8A%8A%E5%88%86%E4%BD%8D%E6%95%B0%E5%BD%93%E5%8F%82%E6%95%B0"><i class="fa fa-check"></i><b>3.3.2</b> Bernoulli 归约：把分位数当参数</a></li>
-<li class="chapter" data-level="3.3.3" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E4%B8%BA%E4%BB%80%E4%B9%88-t-%E5%9E%8B%E6%9E%A2%E8%BD%B4%E6%B6%88%E5%8E%BB%E5%B0%BA%E5%BA%A6"><i class="fa fa-check"></i><b>3.3.3</b> 自标准化：为什么 t 型枢轴消去尺度</a></li>
-<li class="chapter" data-level="3.3.4" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9"><i class="fa fa-check"></i><b>3.3.4</b> 经验矩生成函数与经验鞍点</a></li>
-<li class="chapter" data-level="3.3.5" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E7%9A%84%E5%B0%BE%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>3.3.5</b> 经验鞍点的尾概率公式</a></li>
+<li class="chapter" data-level="3.1.1" data-path="snqesa.html"><a href="snqesa.html#%E6%A0%B7%E6%9C%AC%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E6%B8%90%E8%BF%91%E5%88%86%E5%B8%83"><i class="fa fa-check"></i><b>3.1.1</b> 样本分位数的渐近分布</a></li>
+<li class="chapter" data-level="3.1.2" data-path="snqesa.html"><a href="snqesa.html#%E6%8C%87%E7%A4%BA%E5%99%A8%E5%BD%92%E7%BA%A6"><i class="fa fa-check"></i><b>3.1.2</b> 指示器归约</a></li>
+<li class="chapter" data-level="3.1.3" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4"><i class="fa fa-check"></i><b>3.1.3</b> 自标准化枢轴</a></li>
+<li class="chapter" data-level="3.1.4" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9"><i class="fa fa-check"></i><b>3.1.4</b> 经验矩生成函数与经验鞍点</a></li>
+<li class="chapter" data-level="3.1.5" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E7%9A%84%E5%B0%BE%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>3.1.5</b> 经验鞍点的尾概率公式</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-1"><i class="fa fa-check"></i><b>3.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>3.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4%E7%9A%84%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E5%B1%95%E5%BC%80"><i class="fa fa-check"></i><b>3.4.1</b> 自标准化枢轴的经验鞍点展开</a></li>
-<li class="chapter" data-level="3.4.2" data-path="snqesa.html"><a href="snqesa.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%86%E7%9B%96%E8%AF%AF%E5%B7%AE%E6%98%AF-on-1"><i class="fa fa-check"></i><b>3.4.2</b> 为什么覆盖误差是 <span class="math inline">\(O(n^{-1})\)</span></a></li>
+<li class="chapter" data-level="3.2.1" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4%E7%9A%84%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E5%B1%95%E5%BC%80"><i class="fa fa-check"></i><b>3.2.1</b> 自标准化枢轴的经验鞍点展开</a></li>
+<li class="chapter" data-level="3.2.2" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%86%E7%9B%96%E8%AF%AF%E5%B7%AE%E7%9A%84%E9%98%B6"><i class="fa fa-check"></i><b>3.2.2</b> 覆盖误差的阶</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-1"><i class="fa fa-check"></i><b>3.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="3.6" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.6</b> 数值演示</a></li>
-<li class="chapter" data-level="3.7" data-path="snqesa.html"><a href="snqesa.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-1"><i class="fa fa-check"></i><b>3.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-1"><i class="fa fa-check"></i><b>3.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E4%BE%8B-1"><i class="fa fa-check"></i><b>3.4</b> 数值例</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E6%B3%A8%E8%AE%B0-1"><i class="fa fa-check"></i><b>3.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 空间变系数建模的图正则化路线</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="svcqr.html"><a href="svcqr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-2"><i class="fa fa-check"></i><b>4.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-2"><i class="fa fa-check"></i><b>4.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-2"><i class="fa fa-check"></i><b>4.3</b> 数学工具详解</a>
+<li class="chapter" data-level="4.1" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-2"><i class="fa fa-check"></i><b>4.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%B8%8E%E4%B8%89%E7%A7%8D%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF"><i class="fa fa-check"></i><b>4.3.1</b> 图、邻接矩阵与三种拉普拉斯</a></li>
-<li class="chapter" data-level="4.3.2" data-path="svcqr.html"><a href="svcqr.html#%E5%86%85%E8%95%B4%E9%AB%98%E6%96%AF%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA"><i class="fa fa-check"></i><b>4.3.2</b> 内蕴高斯马尔可夫随机场</a></li>
-<li class="chapter" data-level="4.3.3" data-path="svcqr.html"><a href="svcqr.html#%E7%BB%84%E6%83%A9%E7%BD%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-delta_j_2-%E8%80%8C%E4%B8%8D%E6%98%AF-delta_j_1"><i class="fa fa-check"></i><b>4.3.3</b> 组惩罚：为什么是 <span class="math inline">\(\|\delta_j\|_2\)</span> 而不是 <span class="math inline">\(\|\delta_j\|_1\)</span></a></li>
-<li class="chapter" data-level="4.3.4" data-path="svcqr.html"><a href="svcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E7%9A%84%E6%AC%A1%E6%A2%AF%E5%BA%A6%E4%B8%8E%E8%BF%91%E7%AB%AF%E6%98%A0%E5%B0%84"><i class="fa fa-check"></i><b>4.3.4</b> 分位损失的次梯度与近端映射</a></li>
-<li class="chapter" data-level="4.3.5" data-path="svcqr.html"><a href="svcqr.html#admm-%E7%9A%84%E5%A5%97%E8%B7%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AD%A5%E9%83%BD%E6%98%AF%E9%97%AD%E5%BC%8F"><i class="fa fa-check"></i><b>4.3.5</b> ADMM 的套路：为什么每步都是闭式</a></li>
+<li class="chapter" data-level="4.1.1" data-path="svcqr.html"><a href="svcqr.html#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%B8%8E%E4%B8%89%E7%A7%8D%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF"><i class="fa fa-check"></i><b>4.1.1</b> 邻接矩阵与三种拉普拉斯</a></li>
+<li class="chapter" data-level="4.1.2" data-path="svcqr.html"><a href="svcqr.html#%E5%86%85%E8%95%B4%E9%AB%98%E6%96%AF%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA"><i class="fa fa-check"></i><b>4.1.2</b> 内蕴高斯马尔可夫随机场</a></li>
+<li class="chapter" data-level="4.1.3" data-path="svcqr.html"><a href="svcqr.html#%E7%BB%84%E6%83%A9%E7%BD%9A"><i class="fa fa-check"></i><b>4.1.3</b> 组惩罚</a></li>
+<li class="chapter" data-level="4.1.4" data-path="svcqr.html"><a href="svcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E7%9A%84%E6%AC%A1%E6%A2%AF%E5%BA%A6%E4%B8%8E%E8%BF%91%E7%AB%AF%E6%98%A0%E5%B0%84"><i class="fa fa-check"></i><b>4.1.4</b> 分位损失的次梯度与近端映射</a></li>
+<li class="chapter" data-level="4.1.5" data-path="svcqr.html"><a href="svcqr.html#admm"><i class="fa fa-check"></i><b>4.1.5</b> ADMM</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-2"><i class="fa fa-check"></i><b>4.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-1"><i class="fa fa-check"></i><b>4.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="svcqr.html"><a href="svcqr.html#%E5%8F%AF%E8%AF%86%E5%88%AB%E6%80%A7%E7%BA%A6%E6%9D%9F%E4%BB%8E%E5%93%AA%E6%9D%A5"><i class="fa fa-check"></i><b>4.4.1</b> 可识别性约束从哪来</a></li>
-<li class="chapter" data-level="4.4.2" data-path="svcqr.html"><a href="svcqr.html#%E7%A9%BA%E9%97%B4%E5%88%86%E5%9D%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><i class="fa fa-check"></i><b>4.4.2</b> 空间分块交叉验证</a></li>
+<li class="chapter" data-level="4.2.1" data-path="svcqr.html"><a href="svcqr.html#%E5%8F%AF%E8%AF%86%E5%88%AB%E6%80%A7%E7%BA%A6%E6%9D%9F"><i class="fa fa-check"></i><b>4.2.1</b> 可识别性约束</a></li>
+<li class="chapter" data-level="4.2.2" data-path="svcqr.html"><a href="svcqr.html#%E7%A9%BA%E9%97%B4%E5%88%86%E5%9D%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><i class="fa fa-check"></i><b>4.2.2</b> 空间分块交叉验证</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-2"><i class="fa fa-check"></i><b>4.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="4.6" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.6</b> 数值演示</a></li>
-<li class="chapter" data-level="4.7" data-path="svcqr.html"><a href="svcqr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-2"><i class="fa fa-check"></i><b>4.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-2"><i class="fa fa-check"></i><b>4.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-2"><i class="fa fa-check"></i><b>4.4</b> 数值例</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E6%B3%A8%E8%AE%B0-2"><i class="fa fa-check"></i><b>4.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层数据鲁棒回归：复合分位与 EM</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="hcqr.html"><a href="hcqr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-3"><i class="fa fa-check"></i><b>5.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-3"><i class="fa fa-check"></i><b>5.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-3"><i class="fa fa-check"></i><b>5.3</b> 数学工具详解</a>
+<li class="chapter" data-level="5.1" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-3"><i class="fa fa-check"></i><b>5.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="hcqr.html"><a href="hcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7"><i class="fa fa-check"></i><b>5.3.1</b> 分位损失与不对称拉普拉斯分布的等价性</a></li>
-<li class="chapter" data-level="5.3.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83e-%E6%AD%A5%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>5.3.2</b> 多元正态的条件分布：E 步的地基</a></li>
-<li class="chapter" data-level="5.3.3" data-path="hcqr.html"><a href="hcqr.html#em-%E7%AE%97%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%AD%E4%BB%A3%E5%8D%95%E8%B0%83%E4%B8%8A%E5%8D%87"><i class="fa fa-check"></i><b>5.3.3</b> EM 算法：为什么迭代单调上升</a></li>
-<li class="chapter" data-level="5.3.4" data-path="hcqr.html"><a href="hcqr.html#%E6%96%B9%E5%B7%AE%E5%88%86%E9%87%8F%E7%9A%84%E7%9F%A9%E6%9B%B4%E6%96%B0"><i class="fa fa-check"></i><b>5.3.4</b> 方差分量的矩更新</a></li>
+<li class="chapter" data-level="5.1.1" data-path="hcqr.html"><a href="hcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83"><i class="fa fa-check"></i><b>5.1.1</b> 分位损失与不对称拉普拉斯分布</a></li>
+<li class="chapter" data-level="5.1.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83"><i class="fa fa-check"></i><b>5.1.2</b> 多元正态的条件分布</a></li>
+<li class="chapter" data-level="5.1.3" data-path="hcqr.html"><a href="hcqr.html#em-%E7%AE%97%E6%B3%95"><i class="fa fa-check"></i><b>5.1.3</b> EM 算法</a></li>
+<li class="chapter" data-level="5.1.4" data-path="hcqr.html"><a href="hcqr.html#%E6%96%B9%E5%B7%AE%E5%88%86%E9%87%8F%E7%9A%84%E7%9F%A9%E6%9B%B4%E6%96%B0"><i class="fa fa-check"></i><b>5.1.4</b> 方差分量的矩更新</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-3"><i class="fa fa-check"></i><b>5.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-2"><i class="fa fa-check"></i><b>5.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="hcqr.html"><a href="hcqr.html#e-%E6%AD%A5%E5%85%AC%E5%BC%8F%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>5.4.1</b> E 步公式的完整推导</a></li>
-<li class="chapter" data-level="5.4.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E7%9B%AE%E6%A0%87%E7%9A%84%E6%A2%AF%E5%BA%A6%E7%BB%93%E6%9E%84"><i class="fa fa-check"></i><b>5.4.2</b> 复合分位目标的梯度结构</a></li>
+<li class="chapter" data-level="5.2.1" data-path="hcqr.html"><a href="hcqr.html#e-%E6%AD%A5%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>5.2.1</b> E 步公式</a></li>
+<li class="chapter" data-level="5.2.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E7%9B%AE%E6%A0%87%E7%9A%84%E6%A2%AF%E5%BA%A6%E7%BB%93%E6%9E%84"><i class="fa fa-check"></i><b>5.2.2</b> 复合分位目标的梯度结构</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-3"><i class="fa fa-check"></i><b>5.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="5.6" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.6</b> 数值演示</a></li>
-<li class="chapter" data-level="5.7" data-path="hcqr.html"><a href="hcqr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-3"><i class="fa fa-check"></i><b>5.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-3"><i class="fa fa-check"></i><b>5.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-3"><i class="fa fa-check"></i><b>5.4</b> 数值例</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E6%B3%A8%E8%AE%B0-3"><i class="fa fa-check"></i><b>5.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 时空回归的混合设定与变量选择</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="mgtwr.html"><a href="mgtwr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-4"><i class="fa fa-check"></i><b>6.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-4"><i class="fa fa-check"></i><b>6.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-4"><i class="fa fa-check"></i><b>6.3</b> 数学工具详解</a>
+<li class="chapter" data-level="6.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-4"><i class="fa fa-check"></i><b>6.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%A0%B8%E5%87%BD%E6%95%B0%E6%9D%83%E9%87%8D%E5%A6%82%E4%BD%95%E9%9A%8F%E8%B7%9D%E7%A6%BB%E8%A1%B0%E5%87%8F"><i class="fa fa-check"></i><b>6.3.1</b> 核函数：权重如何随距离衰减</a></li>
-<li class="chapter" data-level="6.3.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E8%B7%9D%E7%A6%BB%E4%B8%8E%E6%9D%83%E9%87%8D%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.3.2</b> 时空距离与权重矩阵</a></li>
-<li class="chapter" data-level="6.3.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%B8%8E%E5%B8%BD%E5%AD%90%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.3.3</b> 加权最小二乘与帽子矩阵</a></li>
-<li class="chapter" data-level="6.3.4" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%94%E9%99%A4%E8%83%BD%E6%94%B9%E5%96%84%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>6.3.4</b> 变量选择：为什么”剔除”能改善估计</a></li>
+<li class="chapter" data-level="6.1.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%A0%B8%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>6.1.1</b> 核函数</a></li>
+<li class="chapter" data-level="6.1.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E8%B7%9D%E7%A6%BB%E4%B8%8E%E6%9D%83%E9%87%8D%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.1.2</b> 时空距离与权重矩阵</a></li>
+<li class="chapter" data-level="6.1.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%B8%8E%E5%B8%BD%E5%AD%90%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.1.3</b> 加权最小二乘与帽子矩阵</a></li>
+<li class="chapter" data-level="6.1.4" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.1.4</b> 变量选择的动机</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>6.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-3"><i class="fa fa-check"></i><b>6.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%81%8F%E5%B7%AE%E5%88%86%E6%9E%90"><i class="fa fa-check"></i><b>6.4.1</b> 两步估计的偏差分析</a></li>
-<li class="chapter" data-level="6.4.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E5%B9%B3%E7%A8%B3%E6%80%A7%E6%A3%80%E9%AA%8C%E7%9A%84%E6%9E%84%E9%80%A0"><i class="fa fa-check"></i><b>6.4.2</b> 时空平稳性检验的构造</a></li>
+<li class="chapter" data-level="6.2.1" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%81%8F%E5%B7%AE"><i class="fa fa-check"></i><b>6.2.1</b> 两步估计的偏差</a></li>
+<li class="chapter" data-level="6.2.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E5%B9%B3%E7%A8%B3%E6%80%A7%E6%A3%80%E9%AA%8C"><i class="fa fa-check"></i><b>6.2.2</b> 时空平稳性检验</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-4"><i class="fa fa-check"></i><b>6.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="6.6" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.6</b> 数值演示</a></li>
-<li class="chapter" data-level="6.7" data-path="mgtwr.html"><a href="mgtwr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-4"><i class="fa fa-check"></i><b>6.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-4"><i class="fa fa-check"></i><b>6.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-4"><i class="fa fa-check"></i><b>6.4</b> 数值例</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E6%B3%A8%E8%AE%B0-4"><i class="fa fa-check"></i><b>6.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 局部回归的窗宽设定：从同窗宽到异窗宽</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-5"><i class="fa fa-check"></i><b>7.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-5"><i class="fa fa-check"></i><b>7.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-5"><i class="fa fa-check"></i><b>7.3</b> 数学工具详解</a>
+<li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-5"><i class="fa fa-check"></i><b>7.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="gtwr.html"><a href="gtwr.html#%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E5%88%86%E8%A7%A3"><i class="fa fa-check"></i><b>7.3.1</b> 局部加权最小二乘的偏差-方差分解</a></li>
-<li class="chapter" data-level="7.3.2" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E7%A9%BA%E9%97%B4%E5%88%86%E5%B8%83%E7%9A%84%E5%BD%A2%E7%8A%B6%E6%8F%8F%E8%BF%B0"><i class="fa fa-check"></i><b>7.3.2</b> 标准差椭圆：空间分布的形状描述</a></li>
-<li class="chapter" data-level="7.3.3" data-path="gtwr.html"><a href="gtwr.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%A4%AD%E5%9C%86%E8%80%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E7%9A%84%E7%A9%BA%E9%97%B4%E7%BD%91%E6%A0%BC"><i class="fa fa-check"></i><b>7.3.3</b> 为什么用椭圆而非简单的空间网格</a></li>
+<li class="chapter" data-level="7.1.1" data-path="gtwr.html"><a href="gtwr.html#%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E5%88%86%E8%A7%A3"><i class="fa fa-check"></i><b>7.1.1</b> 局部加权最小二乘的偏差-方差分解</a></li>
+<li class="chapter" data-level="7.1.2" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86"><i class="fa fa-check"></i><b>7.1.2</b> 标准差椭圆</a></li>
+<li class="chapter" data-level="7.1.3" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>7.1.3</b> 异窗宽估计</a></li>
+<li class="chapter" data-level="7.1.4" data-path="gtwr.html"><a href="gtwr.html#%E6%9C%89%E6%95%88%E8%87%AA%E7%94%B1%E5%BA%A6"><i class="fa fa-check"></i><b>7.1.4</b> 有效自由度</a></li>
+<li class="chapter" data-level="7.1.5" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95"><i class="fa fa-check"></i><b>7.1.5</b> 标准差椭圆分类算法</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-5"><i class="fa fa-check"></i><b>7.4</b> 论文未展示的详细推导</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E4%BC%B0%E8%AE%A1%E6%98%AF%E9%80%90%E5%8C%BA%E5%9F%9F%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98"><i class="fa fa-check"></i><b>7.4.1</b> 异窗宽估计是逐区域加权最小二乘</a></li>
-<li class="chapter" data-level="7.4.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E6%9C%89%E6%95%88%E8%87%AA%E7%94%B1%E5%BA%A6"><i class="fa fa-check"></i><b>7.4.2</b> 异窗宽的有效自由度</a></li>
-<li class="chapter" data-level="7.4.3" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A5%E9%AA%A4"><i class="fa fa-check"></i><b>7.4.3</b> 标准差椭圆分类算法的步骤</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="gtwr.html"><a href="gtwr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-5"><i class="fa fa-check"></i><b>7.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="7.6" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.6</b> 数值演示</a></li>
-<li class="chapter" data-level="7.7" data-path="gtwr.html"><a href="gtwr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-5"><i class="fa fa-check"></i><b>7.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-5"><i class="fa fa-check"></i><b>7.2</b> 实现与计算</a></li>
+<li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
@@ -313,108 +289,80 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="snqesa" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">第 3</span> 分位推断的分布自由路线：自标准化与经验鞍点<a href="snqesa.html#snqesa" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>对应论文：Hou Jian, Meng Tan, Tian Maozai. Self-normalized quantile
-empirical saddlepoint approximation. <em>Statistical Papers</em>, 2026, 67(5),
-106 <span class="citation">(<a href="#ref-hou2026snqesa">Hou, Meng, and Tian 2026b</a>)</span>。本章是论文的补充材料：补齐”自标准化枢轴”与
-“经验鞍点逼近”这两个工具的全部推导，以及它们为什么能绕开密度估计。</p>
-<div id="背景与动机-1" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> 背景与动机<a href="snqesa.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>问题起源。</strong> 对总体分位数 <span class="math inline">\(q_\tau\)</span> 做区间估计，教科书路线是：样本
-分位数 <span class="math inline">\(\hat q_\tau\)</span> 渐近正态，方差含<strong>未知密度</strong> <span class="math inline">\(f(q_\tau)\)</span>：</p>
-<p><span class="math display">\[
-\sqrt{n}\bigl(\hat q_\tau - q_\tau\bigr) \xrightarrow{d}
-N\!\left(0,\ \frac{\tau(1-\tau)}{f(q_\tau)^2}\right).
-\]</span></p>
-<p>要把它变成可用的区间，必须估计 <span class="math inline">\(f(q_\tau)\)</span>：核密度估计（带宽敏感、
-在支撑边界失真）或差分商估计（Hall–Sheather 的 <span class="math inline">\(h\)</span> 选择同样脆弱）
-<span class="citation">(<a href="#ref-hall1988distribution">Hall and Sheather 1988</a>)</span>。此外，重尾分布下正态近似的收敛极慢——分位
-推断因此长期依赖”近似正态 + 密度估计”这个双重近似。</p>
-<p><strong>分布自由路线的谱系。</strong> 绕开密度的三条已知路线：</p>
-<ol style="list-style-type: decimal">
-<li><strong>bootstrap</strong> <span class="citation">(<a href="#ref-davison1997bootstrap">Davison and Hinkley 1997</a>)</span>：重抽样逼近 <span class="math inline">\(\hat q_\tau\)</span> 的
-分布，不假设分布形式，但需要大 <span class="math inline">\(B\)</span>，且重尾下尾部行为仍依赖
-重抽样极端值；</li>
-<li><strong>经验似然（EL）</strong> <span class="citation">(<a href="#ref-owen1988empirical">Owen 1988</a>)</span>：在矩约束下做似然比，
-对分位数可用”指示器”约束构造，但 EL 的尾精度只有 <span class="math inline">\(O(n^{-1})\)</span>，
-且小样本下可能出现无解（空交集）；</li>
-<li><strong>鞍点逼近</strong>：把第 <a href="poisson-rr.html#poisson-rr">2</a> 章的解析鞍点推广为<strong>经验
-鞍点</strong>——用经验矩生成函数代替未知的矩生成函数，保留高阶精度
-但不再需要解析形式。</li>
-</ol>
-<p>论文的 SNQESA 是第 2、3 条路线的结合：用<strong>指示器得分</strong>把分位推断
-化为 Bernoulli 参数的推断（EL 的思路），再用<strong>自标准化枢轴</strong>消去
-尺度，最后用<strong>约束经验鞍点逼近</strong>提供高阶尾精度。三者各自解决一个
-问题：Bernoulli 归约解决”重尾无矩”、自标准化解决”未知尺度”、
-ESA 解决”精度与带宽”。</p>
-</div>
-<div id="论文工作概览-1" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> 论文工作概览<a href="snqesa.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>论文构造了枢轴 <span class="math inline">\(T_n(q)\)</span>（指示器得分的自标准化和），在其上用约束
-经验鞍点逼近计算尾概率，反转得到 <span class="math inline">\(q_\tau\)</span> 的置信区间与检验。方法
-不估计密度、无带宽参数；在偏斜、重尾分布与极端分位下保持可靠覆盖，
-计算量远小于大规模 bootstrap。本章补充工具推导与实现细节。</p>
-</div>
-<div id="数学工具详解-1" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> 数学工具详解<a href="snqesa.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="次序统计量到样本分位数" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> 次序统计量到样本分位数<a href="snqesa.html#%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E5%88%B0%E6%A0%B7%E6%9C%AC%E5%88%86%E4%BD%8D%E6%95%B0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>设 <span class="math inline">\(X_{(1)} \le \cdots \le X_{(n)}\)</span> 为次序统计量，经验分位数
-<span class="math inline">\(\hat q_\tau = X_{(\lceil n\tau \rceil)}\)</span>。其渐近分布为</p>
+<p>总体分位数 <span class="math inline">\(q_\tau\)</span> 的区间估计是统计推断的基本问题。样本分位数
+<span class="math inline">\(\hat q_\tau\)</span> 的渐近分布为</p>
 <p><span class="math display">\[
 \sqrt{n}\bigl(\hat q_\tau - q_\tau\bigr) \xrightarrow{d}
 N\!\left(0,\ \frac{\tau(1-\tau)}{f(q_\tau)^2}\right),
 \]</span></p>
-<p>可由二项计数推导：<span class="math inline">\(n\hat F_n(q_\tau) \sim \mathrm{Binomial}(n, \tau)\)</span>，
-结合 <span class="math inline">\(F(q_\tau) = \tau\)</span> 与 <span class="math inline">\(F\)</span> 在 <span class="math inline">\(q_\tau\)</span> 处的一阶泰勒展开
+<p>方差中含未知密度 <span class="math inline">\(f(q_\tau)\)</span>。要构造可用的区间，必须估计该密度：
+核密度估计对带宽敏感、在支撑边界失真；差分商估计对平滑参数
+<span class="math inline">\(h\)</span> 同样脆弱 <span class="citation">(<a href="#ref-hall1988distribution">Hall and Sheather 1988</a>)</span>。此外，在重尾分布下正态近似
+收敛极慢。绕开密度的已知路线有三条：bootstrap 重抽样，不假设
+分布形式但代价高昂 <span class="citation">(<a href="#ref-davison1997bootstrap">Davison and Hinkley 1997</a>)</span>；经验似然
+<span class="citation">(<a href="#ref-owen1988empirical">Owen 1988</a>)</span>，在矩约束下构造似然比，但尾精度只有
+<span class="math inline">\(O(n^{-1})\)</span> 且小样本可能无解；以及把第 <a href="poisson-rr.html#poisson-rr">2</a> 章的
+解析鞍点推广为经验鞍点——以经验矩生成函数代替未知的矩生成函数，
+保留高阶精度而无需求解析形式。</p>
+<p>自标准化分位经验鞍点逼近（SNQESA, Hou, Meng &amp; Tian 2026
+<span class="citation">(<a href="#ref-hou2026snqesa">Hou, Meng, and Tian 2026b</a>)</span>）综合后两条路线：以指示器得分把分位推断化为
+Bernoulli 参数的推断，以自标准化枢轴消去尺度，再以约束经验鞍点
+提供高阶尾精度。本章展开这一方法所需的数学准备与详细推导。</p>
+<div id="数学准备-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 数学准备<a href="snqesa.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="样本分位数的渐近分布" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> 样本分位数的渐近分布<a href="snqesa.html#%E6%A0%B7%E6%9C%AC%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E6%B8%90%E8%BF%91%E5%88%86%E5%B8%83" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>设 <span class="math inline">\(X_{(1)} \le \cdots \le X_{(n)}\)</span> 为次序统计量，经验分位数
+<span class="math inline">\(\hat q_\tau = X_{(\lceil n\tau \rceil)}\)</span>。其渐近分布可自二项计数
+推出：<span class="math inline">\(n\hat F_n(q_\tau) \sim \mathrm{Binomial}(n, \tau)\)</span>，结合
+<span class="math inline">\(F(q_\tau) = \tau\)</span> 与 <span class="math inline">\(F\)</span> 在 <span class="math inline">\(q_\tau\)</span> 处的一阶 Taylor 展开
 <span class="math inline">\(\hat F_n(q_\tau) - \tau \approx f(q_\tau)(\hat q_\tau - q_\tau)\)</span>，
-再用 Delta 方法。注意推导中密度 <span class="math inline">\(f(q_\tau)\)</span> 作为<strong>斜率</strong>自然出现——
-这就是”分位推断绕不开密度”的根源，除非换一条路。</p>
+再用 Delta 方法即得上述公式。推导中密度 <span class="math inline">\(f(q_\tau)\)</span> 作为斜率自然
+出现——这正是分位推断绕不开密度的根源，除非更换路线。</p>
 </div>
-<div id="bernoulli-归约把分位数当参数" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Bernoulli 归约：把分位数当参数<a href="snqesa.html#bernoulli-%E5%BD%92%E7%BA%A6%E6%8A%8A%E5%88%86%E4%BD%8D%E6%95%B0%E5%BD%93%E5%8F%82%E6%95%B0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>对固定阈值 <span class="math inline">\(q\)</span>，定义 <span class="math inline">\(U_i(q) = \mathbf{1}\{X_i \le q\}\)</span>。则
+<div id="指示器归约" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> 指示器归约<a href="snqesa.html#%E6%8C%87%E7%A4%BA%E5%99%A8%E5%BD%92%E7%BA%A6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>对固定阈值 <span class="math inline">\(q\)</span>，定义 <span class="math inline">\(U_i(q) = \mathbf{1}\{X_i \le q\}\)</span>，则
 <span class="math inline">\(U_i(q) \overset{\text{i.i.d.}}{\sim} \mathrm{Bernoulli}(F(q))\)</span>，
-且 <span class="math inline">\(\mathrm{E}[U_i(q)] = F(q)\)</span>。于是”推断 <span class="math inline">\(F(q)\)</span> 是否为 <span class="math inline">\(\tau\)</span>”
-等价于”推断 <span class="math inline">\(q\)</span> 是否为 <span class="math inline">\(q_\tau\)</span>“（单调性：<span class="math inline">\(F(q) \ge \tau \iff
-q \ge q_\tau\)</span>）。Bernoulli 变量<strong>有界</strong>：矩生成函数处处有限、所有
-矩存在——即使 <span class="math inline">\(X\)</span> 本身重尾到一阶矩都不存在。这一归约把”重尾
-分布上的分位推断”变成”有界变量上的均值推断”，是全文最关键的
-一步。</p>
+且 <span class="math inline">\(\mathrm{E}[U_i(q)] = F(q)\)</span>。于是”检验 <span class="math inline">\(F(q)\)</span> 是否为 <span class="math inline">\(\tau\)</span>”
+等价于”检验 <span class="math inline">\(q\)</span> 是否为 <span class="math inline">\(q_\tau\)</span>“，因为 <span class="math inline">\(F\)</span> 单调：
+<span class="math inline">\(F(q) \ge \tau \iff q \ge q_\tau\)</span>。Bernoulli 变量有界，其矩生成函数
+处处有限、各阶矩均存在——即使 <span class="math inline">\(X\)</span> 本身重尾到一阶矩都不存在。
+由此，重尾分布上的分位推断被转化为有界变量上的均值推断，这是
+整个方法的出发点。</p>
 </div>
-<div id="自标准化为什么-t-型枢轴消去尺度" class="section level3 hasAnchor" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> 自标准化：为什么 t 型枢轴消去尺度<a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E4%B8%BA%E4%BB%80%E4%B9%88-t-%E5%9E%8B%E6%9E%A2%E8%BD%B4%E6%B6%88%E5%8E%BB%E5%B0%BA%E5%BA%A6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="自标准化枢轴" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> 自标准化枢轴<a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>对均值 <span class="math inline">\(\mu\)</span> 的推断，经典枢轴 <span class="math inline">\(T = \sqrt{n}(\bar X - \mu)/s\)</span>
 （<span class="math inline">\(s\)</span> 为样本标准差）的分布不依赖未知尺度 <span class="math inline">\(\sigma\)</span>：分子分母同
-尺度，<span class="math inline">\(\sigma\)</span> 相消。严格地说，<span class="math inline">\(T\)</span> 的渐近分布是 <span class="math inline">\(N(0,1)\)</span>（无论
-<span class="math inline">\(\sigma\)</span> 多大），有限样本下是 <span class="math inline">\(t_{n-1}\)</span>（正态总体时）。这个性质
-对<strong>指示器得分</strong>同样成立：</p>
+尺度而相消。此性质对指示器得分同样成立：</p>
 <p><span class="math display">\[
 T_n(q) = \frac{\sum_i (U_i(q) - \tau)}
 {\sqrt{\sum_i (U_i(q) - \bar U)^2}},
 \]</span></p>
-<p>分母是 <span class="math inline">\(U_i(q)\)</span> 的样本标准差——它只依赖 <span class="math inline">\(F(q)\)</span>（Bernoulli 的
-方差是 <span class="math inline">\(F(q)(1-F(q))\)</span>），不依赖 <span class="math inline">\(X\)</span> 的尺度。这就是论文式
-“自标准化枢轴”的由来：<strong>分布自由 + 尺度自由</strong>。</p>
+<p>分母是 <span class="math inline">\(U_i(q)\)</span> 的样本标准差，只依赖 <span class="math inline">\(F(q)\)</span>（Bernoulli 方差为
+<span class="math inline">\(F(q)(1-F(q))\)</span>），与 <span class="math inline">\(X\)</span> 的尺度无关。由此枢轴同时具备分布自由
+与尺度自由。</p>
 </div>
-<div id="经验矩生成函数与经验鞍点" class="section level3 hasAnchor" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> 经验矩生成函数与经验鞍点<a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>样本 <span class="math inline">\(Y_1, \dots, Y_n\)</span> 的经验矩生成函数
-<span class="math inline">\(\hat M(t) = n^{-1}\sum_i e^{t Y_i}\)</span>，经验累积量生成函数
-<span class="math inline">\(\hat K(t) = \log \hat M(t)\)</span>。关键性质：</p>
+<div id="经验矩生成函数与经验鞍点" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> 经验矩生成函数与经验鞍点<a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>样本 <span class="math inline">\(Y_1, \dots, Y_n\)</span> 的经验矩生成函数为
+<span class="math inline">\(\hat M(t) = n^{-1}\sum_i e^{t Y_i}\)</span>，经验累积量生成函数为
+<span class="math inline">\(\hat K(t) = \log \hat M(t)\)</span>。它有下列性质：</p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(\hat K\)</span> 是凸函数（<span class="math inline">\(\hat K&#39;&#39;(t) \ge 0\)</span>，等号仅在所有 <span class="math inline">\(Y_i\)</span>
-相等时取到），因此<strong>鞍点方程 <span class="math inline">\(\hat K&#39;(t) = x\)</span> 的解存在且唯一</strong>，
+<li><span class="math inline">\(\hat K\)</span> 是凸函数（<span class="math inline">\(\hat K&#39;&#39;(t) \ge 0\)</span>，且仅在所有 <span class="math inline">\(Y_i\)</span> 相等
+时取等号），因此鞍点方程 <span class="math inline">\(\hat K&#39;(t) = x\)</span> 的解存在且唯一，
 当且仅当 <span class="math inline">\(x\)</span> 落在样本值的最小值与最大值之间；</li>
-<li><span class="math inline">\(\hat M(t)\)</span> 处处有限（有限和），无矩条件限制；</li>
-<li>由大数定律，<span class="math inline">\(\hat K(t) \to K(t)\)</span>（逐点），经验鞍点的估计误差
-传播为尾概率的 <span class="math inline">\(O(n^{-3/2})\)</span> 相对误差（解析鞍点同阶）。</li>
+<li><span class="math inline">\(\hat M(t)\)</span> 是有限和，处处有限，无矩条件限制；</li>
+<li>由大数定律 <span class="math inline">\(\hat K(t) \to K(t)\)</span> 逐点成立，经验鞍点带来的估计
+误差传播为尾概率的 <span class="math inline">\(O(n^{-3/2})\)</span> 相对误差，与解析鞍点同阶。</li>
 </ol>
 </div>
-<div id="经验鞍点的尾概率公式" class="section level3 hasAnchor" number="3.3.5">
-<h3><span class="header-section-number">3.3.5</span> 经验鞍点的尾概率公式<a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E7%9A%84%E5%B0%BE%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>对检验 <span class="math inline">\(H_0: \mu = \mu_0\)</span>（或等价地 <span class="math inline">\(\bar Y \ge y_0\)</span>），设
-<span class="math inline">\(Y_i&#39; = Y_i - y_0\)</span>，鞍点 <span class="math inline">\(\hat t\)</span> 满足 <span class="math inline">\(\hat K&#39;(\hat t) = 0\)</span>
-（即 <span class="math inline">\(\sum_i Y_i&#39; e^{\hat t Y_i&#39;} = 0\)</span>）。Lugannani–Rice 型公式
+<div id="经验鞍点的尾概率公式" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> 经验鞍点的尾概率公式<a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E7%9A%84%E5%B0%BE%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>对假设 <span class="math inline">\(H_0: \mu = \mu_0\)</span>（等价地检验 <span class="math inline">\(\bar Y \ge y_0\)</span>），令
+<span class="math inline">\(Y_i&#39; = Y_i - y_0\)</span>，鞍点 <span class="math inline">\(\hat t\)</span> 满足 <span class="math inline">\(\hat K&#39;(\hat t) = 0\)</span>，
+即 <span class="math inline">\(\sum_i Y_i&#39; e^{\hat t Y_i&#39;} = 0\)</span>。Lugannani–Rice 型公式
 <span class="citation">(<a href="#ref-lugannani1980saddle">Lugannani and Rice 1980</a>)</span> 给出</p>
 <p><span class="math display" id="eq:lr-formula">\[\begin{equation}
 \mathrm{P}\bigl(\bar Y \ge y_0\bigr) \approx
@@ -427,73 +375,69 @@ w = \operatorname{sgn}(\hat t)\sqrt{-2\hat K(\hat t)},
 \qquad
 u = \hat t \sqrt{n\,\hat K&#39;&#39;(\hat t)}.
 \]</span></p>
-<p>这个公式是第 <a href="poisson-rr.html#poisson-rr">2</a> 章 Jensen 公式的”一阶截断”：<span class="math inline">\(w\)</span>
-携带偏差信息（<span class="math inline">\(w=0\)</span> 时退化为正态），<span class="math inline">\(1/w - 1/u\)</span> 是曲率修正。</p>
+<p>该式是第 <a href="poisson-rr.html#poisson-rr">2</a> 章 Jensen 公式的一阶截断：<span class="math inline">\(w\)</span> 携带
+偏差信息（<span class="math inline">\(w = 0\)</span> 时退化为正态），<span class="math inline">\(1/w - 1/u\)</span> 为曲率修正。</p>
 </div>
 </div>
-<div id="论文未展示的详细推导-1" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> 论文未展示的详细推导<a href="snqesa.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="自标准化枢轴的经验鞍点展开" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> 自标准化枢轴的经验鞍点展开<a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4%E7%9A%84%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E5%B1%95%E5%BC%80" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>论文对 <span class="math inline">\(T_n(q)\)</span> 的尾概率 <span class="math inline">\(\mathrm{P}(T_n(q) \ge t)\)</span> 做约束 ESA。
-推导的关键步骤：</p>
-<p><strong>第 1 步：化为线性形式。</strong> 固定 <span class="math inline">\(t\)</span>，事件 <span class="math inline">\(\{T_n(q) \ge t\}\)</span>
-等价于</p>
+<div id="详细推导" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 详细推导<a href="snqesa.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="自标准化枢轴的经验鞍点展开" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> 自标准化枢轴的经验鞍点展开<a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4%E7%9A%84%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E5%B1%95%E5%BC%80" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>对 <span class="math inline">\(T_n(q)\)</span> 的尾概率 <span class="math inline">\(\mathrm{P}(T_n(q) \ge t)\)</span> 做约束经验鞍点
+展开，步骤如下。</p>
+<p><strong>第 1 步：线性化。</strong> 固定 <span class="math inline">\(t\)</span>，事件 <span class="math inline">\(\{T_n(q) \ge t\}\)</span> 等价于</p>
 <p><span class="math display">\[
 \sum_i \bigl[U_i(q) - \tau\bigr] - t \sqrt{\sum_i \bigl(U_i(q) - \bar U\bigr)^2}
 \ge 0.
 \]</span></p>
-<p>分母含平方根，不是线性统计量。约束 ESA 的处理是：把问题嵌入
-“<span class="math inline">\(\mathrm{E}[U_i] = p\)</span> 固定”的经验似然型约束族，在约束下
-<span class="math inline">\(\sum (U_i - \bar U)^2 / n \to p(1-p)\)</span> 是确定性的，于是渐近地</p>
+<p>分母含平方根，并非线性统计量。约束经验鞍点的处理思路是把问题
+嵌入”<span class="math inline">\(\mathrm{E}[U_i] = p\)</span> 固定”的经验似然型约束族：在约束下
+<span class="math inline">\(\sum (U_i - \bar U)^2 / n \to p(1-p)\)</span> 是确定性的，故渐近地</p>
 <p><span class="math display">\[
 T_n(q) \approx \frac{\sum_i (U_i(q) - \tau)}
 {\sqrt{n\, p(1-p)}},
 \]</span></p>
-<p>尾概率问题化为<strong>线性统计量</strong> <span class="math inline">\(\sum_i (U_i(q) - \tau - t\sqrt{p(1-p)}/n \cdot \sqrt{n})\)</span>… 的鞍点计算。</p>
-<p><strong>第 2 步：在约束族上做鞍点展开。</strong> 对每个 <span class="math inline">\(t\)</span>，在”总体均值 =
-当前经验均值 + 偏移”的约束下计算指数倾斜分布，鞍点方程
+<p>尾概率问题从而化为线性统计量的鞍点计算。</p>
+<p><strong>第 2 步：约束族上的鞍点展开。</strong> 对每个 <span class="math inline">\(t\)</span>，在”总体均值等于
+当前经验均值加偏移”的约束下构造指数倾斜分布，鞍点方程取
 <span class="math inline">\(\hat K&#39;(\hat t) = \tau + t\sqrt{\hat p(1-\hat p)}/\sqrt{n}\)</span>
 （<span class="math inline">\(\hat p = \bar U\)</span>），再代回式 <a href="snqesa.html#eq:lr-formula">(3.1)</a>。</p>
-<p><strong>第 3 步：反演。</strong> 对固定的置信水平 <span class="math inline">\(1-\alpha\)</span>，解
-<span class="math inline">\(\mathrm{P}(T_n(q) \ge t) = \alpha/2\)</span> 得到临界值 <span class="math inline">\(t^*\)</span>，再解
-<span class="math inline">\(T_n(q) = t^*\)</span> 得到 <span class="math inline">\(q\)</span> 的区间端点。因为 <span class="math inline">\(T_n(q)\)</span> 关于 <span class="math inline">\(q\)</span>
-单调（<span class="math inline">\(U_i(q)\)</span> 随 <span class="math inline">\(q\)</span> 递增），反演是良定义的。</p>
+<p><strong>第 3 步：反演。</strong> 对置信水平 <span class="math inline">\(1-\alpha\)</span>，先解
+<span class="math inline">\(\mathrm{P}(T_n(q) \ge t) = \alpha/2\)</span> 得临界值 <span class="math inline">\(t^*\)</span>，再解
+<span class="math inline">\(T_n(q) = t^*\)</span> 得 <span class="math inline">\(q\)</span> 的区间端点。由于 <span class="math inline">\(T_n(q)\)</span> 关于 <span class="math inline">\(q\)</span> 单调
+（<span class="math inline">\(U_i(q)\)</span> 随 <span class="math inline">\(q\)</span> 递增），反演是良定义的。</p>
 </div>
-<div id="为什么覆盖误差是-on-1" class="section level3 hasAnchor" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> 为什么覆盖误差是 <span class="math inline">\(O(n^{-1})\)</span><a href="snqesa.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%86%E7%9B%96%E8%AF%AF%E5%B7%AE%E6%98%AF-on-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>正态近似的覆盖误差是 <span class="math inline">\(O(n^{-1/2})\)</span>（Edgeworth 展开的第一修正项
-是 <span class="math inline">\(n^{-1/2}\)</span> 阶，由偏度驱动）。鞍点逼近的尾概率相对误差
-<span class="math inline">\(O(n^{-3/2})\)</span>，反转后累积到覆盖误差 <span class="math inline">\(O(n^{-1})\)</span>——即<strong>二阶正确</strong>。
-论文定理的陈述即此结论；这里补一句直观：偏度修正已经被 <span class="math inline">\(w\)</span> 项
-吸收（<span class="math inline">\(w\)</span> 是倾斜后标准化的偏差），所以剩下的是 <span class="math inline">\(O(n^{-1})\)</span> 的
-峰度级修正。</p>
+<div id="覆盖误差的阶" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> 覆盖误差的阶<a href="snqesa.html#%E8%A6%86%E7%9B%96%E8%AF%AF%E5%B7%AE%E7%9A%84%E9%98%B6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>正态近似的覆盖误差为 <span class="math inline">\(O(n^{-1/2})\)</span>：Edgeworth 展开的第一修正项
+是 <span class="math inline">\(n^{-1/2}\)</span> 阶的，由偏度驱动。鞍点逼近的尾概率相对误差为
+<span class="math inline">\(O(n^{-3/2})\)</span>，反转后累积为 <span class="math inline">\(O(n^{-1})\)</span> 的覆盖误差，即二阶正确。
+直观上看，偏度修正已被 <span class="math inline">\(w\)</span> 项吸收（<span class="math inline">\(w\)</span> 为倾斜后标准化的偏差），
+剩余的是 <span class="math inline">\(O(n^{-1})\)</span> 的峰度级修正。</p>
 </div>
 </div>
-<div id="实现细节与数值注意-1" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> 实现细节与数值注意<a href="snqesa.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="实现与计算-1" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> 实现与计算<a href="snqesa.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li><strong>鞍点方程求解</strong>：<span class="math inline">\(f(t) = \sum_i y_i e^{t y_i} = 0\)</span> 单调递增，
-解唯一；用 <code>uniroot</code> 时注意 <span class="math inline">\(y_i\)</span> 全同号时解在无穷远
-（对应 <span class="math inline">\(x\)</span> 在样本范围外），应返回边界值并标记不可用。</li>
-<li><strong><span class="math inline">\(w\)</span> 的数值</strong>：<span class="math inline">\(\hat K(\hat t)\)</span> 在鞍点处 <span class="math inline">\(\le 0\)</span>（凸函数在
-非零点取值低于 <span class="math inline">\(K(0)=0\)</span>），但浮点误差可能使 <span class="math inline">\(-2\hat K\)</span> 微负，
-用 <code>max(-2*K, 0)</code> 保护。</li>
+解唯一。用 <code>uniroot</code> 时须注意：当 <span class="math inline">\(y_i\)</span> 全同号时解在无穷远
+（对应 <span class="math inline">\(x\)</span> 落在样本范围外），应返回边界值并标记不可用。</li>
+<li><strong><span class="math inline">\(w\)</span> 的数值</strong>：<span class="math inline">\(\hat K(\hat t)\)</span> 在鞍点处不大于零（凸函数在
+非零点的取值低于 <span class="math inline">\(K(0) = 0\)</span>），但浮点误差可能使 <span class="math inline">\(-2\hat K\)</span>
+微负，用 <code>max(-2*K, 0)</code> 保护。</li>
 <li><strong>极端分位</strong>：<span class="math inline">\(\tau\)</span> 接近 0 或 1 时，指示器 <span class="math inline">\(U_i(q)\)</span> 几乎为
-常数，分母 <span class="math inline">\(\sqrt{\sum (U_i - \bar U)^2}\)</span> 接近 0，枢轴数值
-不稳定；论文用 Bernoulli 归约的有界性缓解，但实现时仍建议
-对 <span class="math inline">\(\min(n\tau, n(1-\tau)) &lt; 5\)</span> 的情形给出警告或退化为精确
-二项区间。</li>
-<li><strong>与 bootstrap 的对比</strong>：ESA 每次只解一个一维方程，<span class="math inline">\(O(n)\)</span>
-复杂度；<span class="math inline">\(B\)</span> 次 bootstrap 是 <span class="math inline">\(O(Bn)\)</span>。论文报告的速度优势来自
-此。</li>
+常数，分母 <span class="math inline">\(\sqrt{\sum (U_i - \bar U)^2}\)</span> 接近零，枢轴数值不稳
+定。Bernoulli 归约的有界性对此有所缓解，但实现时仍建议对
+<span class="math inline">\(\min(n\tau, n(1-\tau)) &lt; 5\)</span> 的情形退回精确二项区间。</li>
+<li><strong>与 bootstrap 的对比</strong>：经验鞍点每次只解一个一维方程，复杂度
+为 <span class="math inline">\(O(n)\)</span>，而 <span class="math inline">\(B\)</span> 次 bootstrap 为 <span class="math inline">\(O(Bn)\)</span>；在重尾小样本下，
+前者的速度优势最为明显。</li>
 </ol>
 </div>
-<div id="数值演示-1" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> 数值演示<a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>演示 1：重尾样本下 ESA 与正态近似的分歧。</strong> 这是论文”重尾稳健”
-论点的最小复现：<span class="math inline">\(n = 60\)</span> 的 <span class="math inline">\(t_3\)</span> 样本，比较均值型枢轴的 ESA
-尾概率与 <span class="math inline">\(t\)</span> 近似。</p>
+<div id="数值例-1" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> 数值例<a href="snqesa.html#%E6%95%B0%E5%80%BC%E4%BE%8B-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>例：重尾样本下经验鞍点与正态近似的分歧。</strong> 用 <span class="math inline">\(n = 60\)</span> 的
+<span class="math inline">\(t_3\)</span> 样本比较均值型枢轴的经验鞍点尾概率与 <span class="math inline">\(t\)</span> 近似。</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="snqesa.html#cb5-1" tabindex="-1"></a><span class="co"># Lugannani-Rice 型经验鞍点尾概率：P(xbar &gt;= x0)</span></span>
 <span id="cb5-2"><a href="snqesa.html#cb5-2" tabindex="-1"></a>esa_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x, x0) {</span>
 <span id="cb5-3"><a href="snqesa.html#cb5-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
@@ -531,31 +475,30 @@ T_n(q) \approx \frac{\sum_i (U_i(q) - \tau)}
 ##  [8,] 2.95        0.0023            1.4857        1.4795
 ##  [9,] 3.20        0.0011            1.4220        1.4167</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:esa-plot"></span>
-<img src="notes-book_files/figure-html/esa-plot-1.png" alt="t3 重尾样本下 ESA 与正态近似的尾概率分歧" width="672" />
+<img src="notes-book_files/figure-html/esa-plot-1.png" alt="t3 重尾样本下经验鞍点与正态近似的尾概率分歧" width="672" />
 <p class="caption">
-图 3.1: t3 重尾样本下 ESA 与正态近似的尾概率分歧
+图 3.1: t3 重尾样本下经验鞍点与正态近似的尾概率分歧
 </p>
 </div>
-<p>正态样本下两条曲线几乎重合（正态近似此时也正确）；<span class="math inline">\(t_3\)</span> 样本下
-出现明显分歧——<span class="math inline">\(t\)</span> 近似把尾部压得过低（它假设总体是正态的），
-而 ESA 的尾概率完全由数据驱动。论文的蒙特卡洛实验（轻尾/重尾/
-多峰分布）表明，把这一机制用于分位数枢轴后，覆盖率在
-<span class="math inline">\(n = 30\)</span> 到 <span class="math inline">\(n = 200\)</span> 区间内都稳定接近名义水平。</p>
+<p>正态样本下两条曲线几乎重合（此时正态近似正确）；<span class="math inline">\(t_3\)</span> 样本下明显
+分歧：<span class="math inline">\(t\)</span> 近似基于总体正态的假设，把尾部压得过低，而经验鞍点的
+尾概率完全由数据驱动。蒙特卡洛实验（涵盖轻尾、重尾与多峰分布）
+表明，把该机制用于分位数枢轴后，覆盖率在 <span class="math inline">\(n = 30\)</span> 到 <span class="math inline">\(n = 200\)</span>
+范围内稳定接近名义水平。</p>
 </div>
-<div id="延伸阅读-1" class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> 延伸阅读<a href="snqesa.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="注记-1" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> 注记<a href="snqesa.html#%E6%B3%A8%E8%AE%B0-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><strong>Lugannani &amp; Rice (1980)</strong> <span class="citation">(<a href="#ref-lugannani1980saddle">Lugannani and Rice 1980</a>)</span>：式
-<a href="snqesa.html#eq:lr-formula">(3.1)</a> 的原始出处，含误差阶分析；</li>
-<li><strong>Hall &amp; Sheather (1988)</strong> <span class="citation">(<a href="#ref-hall1988distribution">Hall and Sheather 1988</a>)</span>：被 SNQESA
-取代的”核差分估计密度”路线，对照阅读可看清 SNQESA 省掉了什么；</li>
-<li><strong>Owen (1988)</strong> <span class="citation">(<a href="#ref-owen1988empirical">Owen 1988</a>)</span>：经验似然的原始构造，
-SNQESA 的约束 ESA 与其共享”约束族”思想，但尾精度不同；</li>
-<li><strong>Davison &amp; Hinkley (1997)</strong> <span class="citation">(<a href="#ref-davison1997bootstrap">Davison and Hinkley 1997</a>)</span>：bootstrap
-鞍点（第 9 章），解析 CGF 不可得时的替代方案；</li>
-<li>与本笔记第 <a href="poisson-rr.html#poisson-rr">2</a> 章的关联：解析鞍点（第 2 章）与
-经验鞍点（本章）的对照——一个用模型的 CGF，一个用数据的经验
-CGF。</li>
+<li>Lugannani &amp; Rice (1980) <span class="citation">(<a href="#ref-lugannani1980saddle">Lugannani and Rice 1980</a>)</span> 是式
+<a href="snqesa.html#eq:lr-formula">(3.1)</a> 的原始出处，含误差阶分析。</li>
+<li>Hall &amp; Sheather (1988) <span class="citation">(<a href="#ref-hall1988distribution">Hall and Sheather 1988</a>)</span> 给出核差分密度
+估计路线，与之对照可看清本方法省去了哪些环节。</li>
+<li>Owen (1988) <span class="citation">(<a href="#ref-owen1988empirical">Owen 1988</a>)</span> 是经验似然的原始构造，约束
+经验鞍点与其共享”约束族”思想，但尾精度不同。</li>
+<li>Davison &amp; Hinkley (1997) <span class="citation">(<a href="#ref-davison1997bootstrap">Davison and Hinkley 1997</a>)</span> 讨论 bootstrap
+鞍点（第 9 章），是解析累积量生成函数不可得时的替代方案。</li>
+<li>与第 <a href="poisson-rr.html#poisson-rr">2</a> 章的对照：解析鞍点使用模型的累积量生成
+函数，本章的经验鞍点使用数据的经验版本。</li>
 </ul>
 
 </div>
