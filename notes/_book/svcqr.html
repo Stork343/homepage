@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 4 稀疏-平滑空间变系数分位回归 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 4 稀疏-平滑空间变系数分位回归 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta property="og:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 4 稀疏-平滑空间变系数分位回归 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="twitter:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-20" />
+<meta name="date" content="2026-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,13 +167,27 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 泊松相对风险的鞍点逼近置信区间</a>
+<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 鞍点逼近：从拉普拉斯积分到相对风险置信区间</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%97%AE%E9%A2%98"><i class="fa fa-check"></i><b>2.1</b> 模型与问题</a></li>
-<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><i class="fa fa-check"></i><b>2.2</b> 鞍点逼近的基本原理</a></li>
-<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.3</b> 相对风险的鞍点逼近区间</a></li>
-<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.4</b> 数值演示</a></li>
-<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>2.5</b> 要点小结</a></li>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>2.1</b> 背景与动机</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88"><i class="fa fa-check"></i><b>2.2</b> 论文工作概览</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><i class="fa fa-check"></i><b>2.3</b> 数学工具详解</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88-var%CE%BB%E2%82%81%CE%BB%E2%82%80-%E9%95%BF%E6%88%90%E9%82%A3%E4%B8%AA%E6%A0%B7%E5%AD%90"><i class="fa fa-check"></i><b>2.3.1</b> Delta 方法：为什么 Var(λ̂₁/λ̂₀) 长成那个样子</a></li>
+<li class="chapter" data-level="2.3.2" data-path="poisson-rr.html"><a href="poisson-rr.html#laplace-%E9%80%BC%E8%BF%91%E9%9E%8D%E7%82%B9%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>2.3.2</b> Laplace 逼近：鞍点方法的地基</a></li>
+<li class="chapter" data-level="2.3.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E6%95%B0%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.3.3</b> 累积量生成函数：为什么是”对数”矩生成函数</a></li>
+<li class="chapter" data-level="2.3.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%B9%E5%81%B6"><i class="fa fa-check"></i><b>2.3.4</b> 逆转公式：密度与特征函数的对偶</a></li>
+<li class="chapter" data-level="2.3.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.3.5</b> 鞍点方程的数值求解</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4</b> 论文未展示的详细推导</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E4%BB%8E-mathrmphat-r-le-r-%E5%88%B0-mathrmpz-le-0"><i class="fa fa-check"></i><b>2.4.1</b> 从 <span class="math inline">\(\mathrm{P}(\hat R \le r)\)</span> 到 <span class="math inline">\(\mathrm{P}(Z \le 0)\)</span></a></li>
+<li class="chapter" data-level="2.4.2" data-path="poisson-rr.html"><a href="poisson-rr.html#z-%E7%9A%84%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%A4%E6%AD%A5%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4.2</b> <span class="math inline">\(Z\)</span> 的矩生成函数：两步推导</a></li>
+<li class="chapter" data-level="2.4.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E4%B8%8E-jensen-%E5%85%AC%E5%BC%8F%E5%90%84%E9%A1%B9%E7%9A%84%E5%90%AB%E4%B9%89"><i class="fa fa-check"></i><b>2.4.3</b> 鞍点方程与 Jensen 公式各项的含义</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F"><i class="fa fa-check"></i><b>2.5</b> 实现细节与数值注意</a></li>
+<li class="chapter" data-level="2.6" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.6</b> 数值演示</a></li>
+<li class="chapter" data-level="2.7" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><i class="fa fa-check"></i><b>2.7</b> 延伸阅读</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 自标准化分位经验鞍点逼近</a>
 <ul>
@@ -181,7 +195,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91"><i class="fa fa-check"></i><b>3.2</b> 经验鞍点逼近</a></li>
 <li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#snqesa-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><i class="fa fa-check"></i><b>3.3</b> SNQESA 的核心思想</a></li>
 <li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.4</b> 数值演示</a></li>
-<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 稀疏-平滑空间变系数分位回归</a>
 <ul>
@@ -189,7 +203,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%AD%A3%E5%88%99%E5%8C%96"><i class="fa fa-check"></i><b>4.2</b> 图拉普拉斯正则化</a></li>
 <li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>4.3</b> 目标函数与估计</a></li>
 <li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.4</b> 数值演示</a></li>
-<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层复合分位回归与自适应 Lasso</a>
 <ul>
@@ -197,7 +211,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9B%AE%E6%A0%87"><i class="fa fa-check"></i><b>5.2</b> 复合分位回归目标</a></li>
 <li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E4%BC%B0%E8%AE%A1em-%E7%AE%97%E6%B3%95%E4%B8%8E-ald-%E7%9A%84%E8%81%94%E7%B3%BB"><i class="fa fa-check"></i><b>5.3</b> 估计：EM 算法与 ALD 的联系</a></li>
 <li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.4</b> 数值演示</a></li>
-<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 混合时空地理加权回归的变量选择</a>
 <ul>
@@ -205,14 +219,14 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E6%B3%95"><i class="fa fa-check"></i><b>6.2</b> 两步估计法</a></li>
 <li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.3</b> 变量选择的动机</a></li>
 <li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.4</b> 数值演示</a></li>
-<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 异窗宽 GTWR 模型</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#gtwr-%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>7.1</b> GTWR 模型</a></li>
 <li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E5%8A%A8%E6%9C%BA%E4%B8%8E%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>7.2</b> 异窗宽的动机与定义</a></li>
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.3</b> 数值演示</a></li>
-<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-5"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
@@ -326,50 +340,50 @@ check loss 的近端映射是不对称软阈值，<span class="math inline">\((\
 <span class="math inline">\(\beta_2(u) = 2 + 3u_1\)</span>（空间变效应）。用简化近端梯度法求解平方损失
 版本的目标（结构相同：组惩罚 + 拉普拉斯平滑），演示组惩罚如何将
 <span class="math inline">\(\delta_1\)</span> 收缩为零而保留 <span class="math inline">\(\delta_2\)</span>。</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="svcqr.html#cb143-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb143-2"><a href="svcqr.html#cb143-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">120</span></span>
-<span id="cb143-3"><a href="svcqr.html#cb143-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">runif</span>(n), <span class="fu">runif</span>(n))            <span class="co"># 空间位置</span></span>
-<span id="cb143-4"><a href="svcqr.html#cb143-4" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">rnorm</span>(n))                   <span class="co"># 全局协变量（含截距）</span></span>
-<span id="cb143-5"><a href="svcqr.html#cb143-5" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); X2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb143-6"><a href="svcqr.html#cb143-6" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.8</span>)</span>
-<span id="cb143-7"><a href="svcqr.html#cb143-7" tabindex="-1"></a>betaG <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)                          <span class="co"># 全局基线</span></span>
-<span id="cb143-8"><a href="svcqr.html#cb143-8" tabindex="-1"></a>delta_true <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">0</span>, n), <span class="dv">3</span> <span class="sc">*</span> u[, <span class="dv">1</span>])  <span class="co"># 真偏差：1 为零，2 变化</span></span>
-<span id="cb143-9"><a href="svcqr.html#cb143-9" tabindex="-1"></a>y <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> alpha <span class="sc">+</span> X1 <span class="sc">*</span> betaG[<span class="dv">1</span>] <span class="sc">+</span> X2 <span class="sc">*</span> (betaG[<span class="dv">2</span>] <span class="sc">+</span> delta_true[, <span class="dv">2</span>]) <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb143-10"><a href="svcqr.html#cb143-10" tabindex="-1"></a></span>
-<span id="cb143-11"><a href="svcqr.html#cb143-11" tabindex="-1"></a><span class="co"># --- kNN 图 + 对称归一化拉普拉斯 ---</span></span>
-<span id="cb143-12"><a href="svcqr.html#cb143-12" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(u))</span>
-<span id="cb143-13"><a href="svcqr.html#cb143-13" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb143-14"><a href="svcqr.html#cb143-14" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
-<span id="cb143-15"><a href="svcqr.html#cb143-15" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb143-16"><a href="svcqr.html#cb143-16" tabindex="-1"></a>  nn <span class="ot">&lt;-</span> <span class="fu">order</span>(dist_mat[i, ])[<span class="dv">2</span><span class="sc">:</span>(k <span class="sc">+</span> <span class="dv">1</span>)]</span>
-<span id="cb143-17"><a href="svcqr.html#cb143-17" tabindex="-1"></a>  A[i, nn] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dist_mat[i, nn]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.15</span><span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb143-18"><a href="svcqr.html#cb143-18" tabindex="-1"></a>}</span>
-<span id="cb143-19"><a href="svcqr.html#cb143-19" tabindex="-1"></a>A <span class="ot">&lt;-</span> (A <span class="sc">+</span> <span class="fu">t</span>(A)) <span class="sc">/</span> <span class="dv">2</span>                        <span class="co"># 对称化（互近邻近似）</span></span>
-<span id="cb143-20"><a href="svcqr.html#cb143-20" tabindex="-1"></a>A[A <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb143-21"><a href="svcqr.html#cb143-21" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(A)</span>
-<span id="cb143-22"><a href="svcqr.html#cb143-22" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d)) <span class="sc">%*%</span> A <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d))</span>
-<span id="cb143-23"><a href="svcqr.html#cb143-23" tabindex="-1"></a></span>
-<span id="cb143-24"><a href="svcqr.html#cb143-24" tabindex="-1"></a><span class="co"># --- 近端梯度：min 0.5||r||^2 + lam1*sum(wj||dj||_2) + lam2*sum(dj&#39;Ldj) ---</span></span>
-<span id="cb143-25"><a href="svcqr.html#cb143-25" tabindex="-1"></a>prox_group <span class="ot">&lt;-</span> <span class="cf">function</span>(v, lam) {           <span class="co"># 组软阈值</span></span>
-<span id="cb143-26"><a href="svcqr.html#cb143-26" tabindex="-1"></a>  nrm <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(v<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb143-27"><a href="svcqr.html#cb143-27" tabindex="-1"></a>  <span class="cf">if</span> (nrm <span class="sc">&lt;=</span> lam) <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(v)) <span class="cf">else</span> v <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> lam <span class="sc">/</span> nrm)</span>
-<span id="cb143-28"><a href="svcqr.html#cb143-28" tabindex="-1"></a>}</span>
-<span id="cb143-29"><a href="svcqr.html#cb143-29" tabindex="-1"></a>fit_svc <span class="ot">&lt;-</span> <span class="cf">function</span>(lam1, lam2, <span class="at">steps =</span> <span class="dv">400</span>, <span class="at">lr =</span> <span class="fl">0.02</span>) {</span>
-<span id="cb143-30"><a href="svcqr.html#cb143-30" tabindex="-1"></a>  alpha_hat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>); bG <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>); d1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n); d2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
-<span id="cb143-31"><a href="svcqr.html#cb143-31" tabindex="-1"></a>  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>steps) {</span>
-<span id="cb143-32"><a href="svcqr.html#cb143-32" tabindex="-1"></a>    r <span class="ot">&lt;-</span> y <span class="sc">-</span> Z <span class="sc">%*%</span> alpha_hat <span class="sc">-</span> X1 <span class="sc">*</span> bG[<span class="dv">1</span>] <span class="sc">-</span> X2 <span class="sc">*</span> bG[<span class="dv">2</span>] <span class="sc">-</span> X1 <span class="sc">*</span> d1 <span class="sc">-</span> X2 <span class="sc">*</span> d2</span>
-<span id="cb143-33"><a href="svcqr.html#cb143-33" tabindex="-1"></a>    <span class="co"># 梯度（alpha, bG）</span></span>
-<span id="cb143-34"><a href="svcqr.html#cb143-34" tabindex="-1"></a>    alpha_hat <span class="ot">&lt;-</span> alpha_hat <span class="sc">+</span> lr <span class="sc">*</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> r</span>
-<span id="cb143-35"><a href="svcqr.html#cb143-35" tabindex="-1"></a>    bG <span class="ot">&lt;-</span> bG <span class="sc">+</span> lr <span class="sc">*</span> <span class="fu">c</span>(<span class="fu">sum</span>(r <span class="sc">*</span> X1), <span class="fu">sum</span>(r <span class="sc">*</span> X2))</span>
-<span id="cb143-36"><a href="svcqr.html#cb143-36" tabindex="-1"></a>    <span class="co"># 梯度 + 近端（d1, d2）</span></span>
-<span id="cb143-37"><a href="svcqr.html#cb143-37" tabindex="-1"></a>    g1 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">sum</span>(r <span class="sc">*</span> X1) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> lam2 <span class="sc">*</span> L <span class="sc">%*%</span> d1</span>
-<span id="cb143-38"><a href="svcqr.html#cb143-38" tabindex="-1"></a>    g2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">sum</span>(r <span class="sc">*</span> X2) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> lam2 <span class="sc">*</span> L <span class="sc">%*%</span> d2</span>
-<span id="cb143-39"><a href="svcqr.html#cb143-39" tabindex="-1"></a>    d1 <span class="ot">&lt;-</span> <span class="fu">prox_group</span>(d1 <span class="sc">-</span> lr <span class="sc">*</span> g1, lr <span class="sc">*</span> lam1)</span>
-<span id="cb143-40"><a href="svcqr.html#cb143-40" tabindex="-1"></a>    d2 <span class="ot">&lt;-</span> <span class="fu">prox_group</span>(d2 <span class="sc">-</span> lr <span class="sc">*</span> g2, lr <span class="sc">*</span> lam1)</span>
-<span id="cb143-41"><a href="svcqr.html#cb143-41" tabindex="-1"></a>  }</span>
-<span id="cb143-42"><a href="svcqr.html#cb143-42" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">alpha =</span> alpha_hat, <span class="at">betaG =</span> bG, <span class="at">d1 =</span> d1, <span class="at">d2 =</span> d2)</span>
-<span id="cb143-43"><a href="svcqr.html#cb143-43" tabindex="-1"></a>}</span>
-<span id="cb143-44"><a href="svcqr.html#cb143-44" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_svc</span>(<span class="at">lam1 =</span> <span class="dv">6</span>, <span class="at">lam2 =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="svcqr.html#cb6-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb6-2"><a href="svcqr.html#cb6-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb6-3"><a href="svcqr.html#cb6-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">runif</span>(n), <span class="fu">runif</span>(n))            <span class="co"># 空间位置</span></span>
+<span id="cb6-4"><a href="svcqr.html#cb6-4" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">rnorm</span>(n))                   <span class="co"># 全局协变量（含截距）</span></span>
+<span id="cb6-5"><a href="svcqr.html#cb6-5" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); X2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb6-6"><a href="svcqr.html#cb6-6" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.8</span>)</span>
+<span id="cb6-7"><a href="svcqr.html#cb6-7" tabindex="-1"></a>betaG <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)                          <span class="co"># 全局基线</span></span>
+<span id="cb6-8"><a href="svcqr.html#cb6-8" tabindex="-1"></a>delta_true <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">0</span>, n), <span class="dv">3</span> <span class="sc">*</span> u[, <span class="dv">1</span>])  <span class="co"># 真偏差：1 为零，2 变化</span></span>
+<span id="cb6-9"><a href="svcqr.html#cb6-9" tabindex="-1"></a>y <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> alpha <span class="sc">+</span> X1 <span class="sc">*</span> betaG[<span class="dv">1</span>] <span class="sc">+</span> X2 <span class="sc">*</span> (betaG[<span class="dv">2</span>] <span class="sc">+</span> delta_true[, <span class="dv">2</span>]) <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb6-10"><a href="svcqr.html#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="svcqr.html#cb6-11" tabindex="-1"></a><span class="co"># --- kNN 图 + 对称归一化拉普拉斯 ---</span></span>
+<span id="cb6-12"><a href="svcqr.html#cb6-12" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(u))</span>
+<span id="cb6-13"><a href="svcqr.html#cb6-13" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb6-14"><a href="svcqr.html#cb6-14" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
+<span id="cb6-15"><a href="svcqr.html#cb6-15" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb6-16"><a href="svcqr.html#cb6-16" tabindex="-1"></a>  nn <span class="ot">&lt;-</span> <span class="fu">order</span>(dist_mat[i, ])[<span class="dv">2</span><span class="sc">:</span>(k <span class="sc">+</span> <span class="dv">1</span>)]</span>
+<span id="cb6-17"><a href="svcqr.html#cb6-17" tabindex="-1"></a>  A[i, nn] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dist_mat[i, nn]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.15</span><span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb6-18"><a href="svcqr.html#cb6-18" tabindex="-1"></a>}</span>
+<span id="cb6-19"><a href="svcqr.html#cb6-19" tabindex="-1"></a>A <span class="ot">&lt;-</span> (A <span class="sc">+</span> <span class="fu">t</span>(A)) <span class="sc">/</span> <span class="dv">2</span>                        <span class="co"># 对称化（互近邻近似）</span></span>
+<span id="cb6-20"><a href="svcqr.html#cb6-20" tabindex="-1"></a>A[A <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-21"><a href="svcqr.html#cb6-21" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(A)</span>
+<span id="cb6-22"><a href="svcqr.html#cb6-22" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d)) <span class="sc">%*%</span> A <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d))</span>
+<span id="cb6-23"><a href="svcqr.html#cb6-23" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="svcqr.html#cb6-24" tabindex="-1"></a><span class="co"># --- 近端梯度：min 0.5||r||^2 + lam1*sum(wj||dj||_2) + lam2*sum(dj&#39;Ldj) ---</span></span>
+<span id="cb6-25"><a href="svcqr.html#cb6-25" tabindex="-1"></a>prox_group <span class="ot">&lt;-</span> <span class="cf">function</span>(v, lam) {           <span class="co"># 组软阈值</span></span>
+<span id="cb6-26"><a href="svcqr.html#cb6-26" tabindex="-1"></a>  nrm <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(v<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb6-27"><a href="svcqr.html#cb6-27" tabindex="-1"></a>  <span class="cf">if</span> (nrm <span class="sc">&lt;=</span> lam) <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(v)) <span class="cf">else</span> v <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> lam <span class="sc">/</span> nrm)</span>
+<span id="cb6-28"><a href="svcqr.html#cb6-28" tabindex="-1"></a>}</span>
+<span id="cb6-29"><a href="svcqr.html#cb6-29" tabindex="-1"></a>fit_svc <span class="ot">&lt;-</span> <span class="cf">function</span>(lam1, lam2, <span class="at">steps =</span> <span class="dv">400</span>, <span class="at">lr =</span> <span class="fl">0.02</span>) {</span>
+<span id="cb6-30"><a href="svcqr.html#cb6-30" tabindex="-1"></a>  alpha_hat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>); bG <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>); d1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n); d2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
+<span id="cb6-31"><a href="svcqr.html#cb6-31" tabindex="-1"></a>  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>steps) {</span>
+<span id="cb6-32"><a href="svcqr.html#cb6-32" tabindex="-1"></a>    r <span class="ot">&lt;-</span> y <span class="sc">-</span> Z <span class="sc">%*%</span> alpha_hat <span class="sc">-</span> X1 <span class="sc">*</span> bG[<span class="dv">1</span>] <span class="sc">-</span> X2 <span class="sc">*</span> bG[<span class="dv">2</span>] <span class="sc">-</span> X1 <span class="sc">*</span> d1 <span class="sc">-</span> X2 <span class="sc">*</span> d2</span>
+<span id="cb6-33"><a href="svcqr.html#cb6-33" tabindex="-1"></a>    <span class="co"># 梯度（alpha, bG）</span></span>
+<span id="cb6-34"><a href="svcqr.html#cb6-34" tabindex="-1"></a>    alpha_hat <span class="ot">&lt;-</span> alpha_hat <span class="sc">+</span> lr <span class="sc">*</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> r</span>
+<span id="cb6-35"><a href="svcqr.html#cb6-35" tabindex="-1"></a>    bG <span class="ot">&lt;-</span> bG <span class="sc">+</span> lr <span class="sc">*</span> <span class="fu">c</span>(<span class="fu">sum</span>(r <span class="sc">*</span> X1), <span class="fu">sum</span>(r <span class="sc">*</span> X2))</span>
+<span id="cb6-36"><a href="svcqr.html#cb6-36" tabindex="-1"></a>    <span class="co"># 梯度 + 近端（d1, d2）</span></span>
+<span id="cb6-37"><a href="svcqr.html#cb6-37" tabindex="-1"></a>    g1 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">sum</span>(r <span class="sc">*</span> X1) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> lam2 <span class="sc">*</span> L <span class="sc">%*%</span> d1</span>
+<span id="cb6-38"><a href="svcqr.html#cb6-38" tabindex="-1"></a>    g2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">sum</span>(r <span class="sc">*</span> X2) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> lam2 <span class="sc">*</span> L <span class="sc">%*%</span> d2</span>
+<span id="cb6-39"><a href="svcqr.html#cb6-39" tabindex="-1"></a>    d1 <span class="ot">&lt;-</span> <span class="fu">prox_group</span>(d1 <span class="sc">-</span> lr <span class="sc">*</span> g1, lr <span class="sc">*</span> lam1)</span>
+<span id="cb6-40"><a href="svcqr.html#cb6-40" tabindex="-1"></a>    d2 <span class="ot">&lt;-</span> <span class="fu">prox_group</span>(d2 <span class="sc">-</span> lr <span class="sc">*</span> g2, lr <span class="sc">*</span> lam1)</span>
+<span id="cb6-41"><a href="svcqr.html#cb6-41" tabindex="-1"></a>  }</span>
+<span id="cb6-42"><a href="svcqr.html#cb6-42" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">alpha =</span> alpha_hat, <span class="at">betaG =</span> bG, <span class="at">d1 =</span> d1, <span class="at">d2 =</span> d2)</span>
+<span id="cb6-43"><a href="svcqr.html#cb6-43" tabindex="-1"></a>}</span>
+<span id="cb6-44"><a href="svcqr.html#cb6-44" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_svc</span>(<span class="at">lam1 =</span> <span class="dv">6</span>, <span class="at">lam2 =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## betaG estimate: -3.364798e+297 -3.250235e+298 (true 1, 2)</code></pre>
 <pre><code>## ||d1||2 = Inf (should be 0)</code></pre>
 <pre><code>## ||d2||2 = Inf</code></pre>
@@ -385,8 +399,8 @@ check loss 的近端映射是不对称软阈值，<span class="math inline">\((\
 误差模拟进一步显示，SS–SVCQR 在恢复异质空间模式上优于核方法类
 替代方案。</p>
 </div>
-<div id="要点小结-2" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> 要点小结<a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="要点小结-1" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> 要点小结<a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>式 <a href="svcqr.html#eq:svcqr-decomp">(4.2)</a> 的<strong>全局-局部分解</strong>是稀疏性的来源：
 同质效应自动退化为全局系数；</li>

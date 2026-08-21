@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 3 自标准化分位经验鞍点逼近 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 3 自标准化分位经验鞍点逼近 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta property="og:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 3 自标准化分位经验鞍点逼近 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="twitter:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-20" />
+<meta name="date" content="2026-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,13 +167,27 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 泊松相对风险的鞍点逼近置信区间</a>
+<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 鞍点逼近：从拉普拉斯积分到相对风险置信区间</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%97%AE%E9%A2%98"><i class="fa fa-check"></i><b>2.1</b> 模型与问题</a></li>
-<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><i class="fa fa-check"></i><b>2.2</b> 鞍点逼近的基本原理</a></li>
-<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.3</b> 相对风险的鞍点逼近区间</a></li>
-<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.4</b> 数值演示</a></li>
-<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>2.5</b> 要点小结</a></li>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>2.1</b> 背景与动机</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88"><i class="fa fa-check"></i><b>2.2</b> 论文工作概览</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><i class="fa fa-check"></i><b>2.3</b> 数学工具详解</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88-var%CE%BB%E2%82%81%CE%BB%E2%82%80-%E9%95%BF%E6%88%90%E9%82%A3%E4%B8%AA%E6%A0%B7%E5%AD%90"><i class="fa fa-check"></i><b>2.3.1</b> Delta 方法：为什么 Var(λ̂₁/λ̂₀) 长成那个样子</a></li>
+<li class="chapter" data-level="2.3.2" data-path="poisson-rr.html"><a href="poisson-rr.html#laplace-%E9%80%BC%E8%BF%91%E9%9E%8D%E7%82%B9%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>2.3.2</b> Laplace 逼近：鞍点方法的地基</a></li>
+<li class="chapter" data-level="2.3.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E6%95%B0%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.3.3</b> 累积量生成函数：为什么是”对数”矩生成函数</a></li>
+<li class="chapter" data-level="2.3.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%B9%E5%81%B6"><i class="fa fa-check"></i><b>2.3.4</b> 逆转公式：密度与特征函数的对偶</a></li>
+<li class="chapter" data-level="2.3.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.3.5</b> 鞍点方程的数值求解</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4</b> 论文未展示的详细推导</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E4%BB%8E-mathrmphat-r-le-r-%E5%88%B0-mathrmpz-le-0"><i class="fa fa-check"></i><b>2.4.1</b> 从 <span class="math inline">\(\mathrm{P}(\hat R \le r)\)</span> 到 <span class="math inline">\(\mathrm{P}(Z \le 0)\)</span></a></li>
+<li class="chapter" data-level="2.4.2" data-path="poisson-rr.html"><a href="poisson-rr.html#z-%E7%9A%84%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%A4%E6%AD%A5%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4.2</b> <span class="math inline">\(Z\)</span> 的矩生成函数：两步推导</a></li>
+<li class="chapter" data-level="2.4.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E4%B8%8E-jensen-%E5%85%AC%E5%BC%8F%E5%90%84%E9%A1%B9%E7%9A%84%E5%90%AB%E4%B9%89"><i class="fa fa-check"></i><b>2.4.3</b> 鞍点方程与 Jensen 公式各项的含义</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F"><i class="fa fa-check"></i><b>2.5</b> 实现细节与数值注意</a></li>
+<li class="chapter" data-level="2.6" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.6</b> 数值演示</a></li>
+<li class="chapter" data-level="2.7" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><i class="fa fa-check"></i><b>2.7</b> 延伸阅读</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 自标准化分位经验鞍点逼近</a>
 <ul>
@@ -181,7 +195,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91"><i class="fa fa-check"></i><b>3.2</b> 经验鞍点逼近</a></li>
 <li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#snqesa-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><i class="fa fa-check"></i><b>3.3</b> SNQESA 的核心思想</a></li>
 <li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.4</b> 数值演示</a></li>
-<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 稀疏-平滑空间变系数分位回归</a>
 <ul>
@@ -189,7 +203,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%AD%A3%E5%88%99%E5%8C%96"><i class="fa fa-check"></i><b>4.2</b> 图拉普拉斯正则化</a></li>
 <li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>4.3</b> 目标函数与估计</a></li>
 <li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.4</b> 数值演示</a></li>
-<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层复合分位回归与自适应 Lasso</a>
 <ul>
@@ -197,7 +211,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9B%AE%E6%A0%87"><i class="fa fa-check"></i><b>5.2</b> 复合分位回归目标</a></li>
 <li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E4%BC%B0%E8%AE%A1em-%E7%AE%97%E6%B3%95%E4%B8%8E-ald-%E7%9A%84%E8%81%94%E7%B3%BB"><i class="fa fa-check"></i><b>5.3</b> 估计：EM 算法与 ALD 的联系</a></li>
 <li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.4</b> 数值演示</a></li>
-<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 混合时空地理加权回归的变量选择</a>
 <ul>
@@ -205,14 +219,14 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E6%B3%95"><i class="fa fa-check"></i><b>6.2</b> 两步估计法</a></li>
 <li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.3</b> 变量选择的动机</a></li>
 <li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.4</b> 数值演示</a></li>
-<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 异窗宽 GTWR 模型</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#gtwr-%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>7.1</b> GTWR 模型</a></li>
 <li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E5%8A%A8%E6%9C%BA%E4%B8%8E%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>7.2</b> 异窗宽的动机与定义</a></li>
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.3</b> 数值演示</a></li>
-<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-5"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
@@ -297,33 +311,33 @@ T_n(q) = \frac{\sum_i \bigl(U_i(q) - \tau\bigr)}
 <p>先看一个核心机制：<strong>为什么自标准化枢轴比”直接正态近似”稳健</strong>。
 对标准正态样本，均值型枢轴的 ESA 尾概率与正态近似几乎重合；但对
 重尾分布（如 <span class="math inline">\(t_3\)</span>），正态近似明显失效，而鞍点逼近仍保持精度。</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="snqesa.html#cb142-1" tabindex="-1"></a><span class="co"># 经验鞍点逼近的尾概率（Lugannani-Rice 形式，检验 xbar &gt;= x0）</span></span>
-<span id="cb142-2"><a href="snqesa.html#cb142-2" tabindex="-1"></a>esa_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x, x0) {</span>
-<span id="cb142-3"><a href="snqesa.html#cb142-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb142-4"><a href="snqesa.html#cb142-4" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">-</span> x0</span>
-<span id="cb142-5"><a href="snqesa.html#cb142-5" tabindex="-1"></a>  <span class="co"># 鞍点方程：mean(y * exp(th*y)) / mean(exp(th*y)) = 0</span></span>
-<span id="cb142-6"><a href="snqesa.html#cb142-6" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th <span class="sc">*</span> y))</span>
-<span id="cb142-7"><a href="snqesa.html#cb142-7" tabindex="-1"></a>  th0 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">extendInt =</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">$</span>root,</span>
-<span id="cb142-8"><a href="snqesa.html#cb142-8" tabindex="-1"></a>                  <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
-<span id="cb142-9"><a href="snqesa.html#cb142-9" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(th0)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb142-10"><a href="snqesa.html#cb142-10" tabindex="-1"></a>  K  <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">mean</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y)))</span>
-<span id="cb142-11"><a href="snqesa.html#cb142-11" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
-<span id="cb142-12"><a href="snqesa.html#cb142-12" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
-<span id="cb142-13"><a href="snqesa.html#cb142-13" tabindex="-1"></a>  K2 <span class="ot">&lt;-</span> m2 <span class="sc">-</span> m1<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb142-14"><a href="snqesa.html#cb142-14" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th0) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">max</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> K, <span class="dv">0</span>))</span>
-<span id="cb142-15"><a href="snqesa.html#cb142-15" tabindex="-1"></a>  u <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">*</span> K2)</span>
-<span id="cb142-16"><a href="snqesa.html#cb142-16" tabindex="-1"></a>  <span class="cf">if</span> (u <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">is.nan</span>(w)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb142-17"><a href="snqesa.html#cb142-17" tabindex="-1"></a>  <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> u)</span>
-<span id="cb142-18"><a href="snqesa.html#cb142-18" tabindex="-1"></a>}</span>
-<span id="cb142-19"><a href="snqesa.html#cb142-19" tabindex="-1"></a></span>
-<span id="cb142-20"><a href="snqesa.html#cb142-20" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb142-21"><a href="snqesa.html#cb142-21" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb142-22"><a href="snqesa.html#cb142-22" tabindex="-1"></a>x_norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb142-23"><a href="snqesa.html#cb142-23" tabindex="-1"></a>x_t3   <span class="ot">&lt;-</span> <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>)</span>
-<span id="cb142-24"><a href="snqesa.html#cb142-24" tabindex="-1"></a>tgrid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.2</span>, <span class="fl">3.2</span>, <span class="at">by =</span> <span class="fl">0.25</span>)</span>
-<span id="cb142-25"><a href="snqesa.html#cb142-25" tabindex="-1"></a><span class="co"># 检验 xbar &gt;= mu + t * s / sqrt(n)，即枢轴 T = sqrt(n)(xbar-mu)/s &gt;= t</span></span>
-<span id="cb142-26"><a href="snqesa.html#cb142-26" tabindex="-1"></a>esa_norm <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_norm, <span class="fu">mean</span>(x_norm) <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_norm) <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
-<span id="cb142-27"><a href="snqesa.html#cb142-27" tabindex="-1"></a>esa_t3   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_t3,   <span class="fu">mean</span>(x_t3)   <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_t3)   <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="snqesa.html#cb5-1" tabindex="-1"></a><span class="co"># 经验鞍点逼近的尾概率（Lugannani-Rice 形式，检验 xbar &gt;= x0）</span></span>
+<span id="cb5-2"><a href="snqesa.html#cb5-2" tabindex="-1"></a>esa_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x, x0) {</span>
+<span id="cb5-3"><a href="snqesa.html#cb5-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb5-4"><a href="snqesa.html#cb5-4" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">-</span> x0</span>
+<span id="cb5-5"><a href="snqesa.html#cb5-5" tabindex="-1"></a>  <span class="co"># 鞍点方程：mean(y * exp(th*y)) / mean(exp(th*y)) = 0</span></span>
+<span id="cb5-6"><a href="snqesa.html#cb5-6" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th <span class="sc">*</span> y))</span>
+<span id="cb5-7"><a href="snqesa.html#cb5-7" tabindex="-1"></a>  th0 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">extendInt =</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">$</span>root,</span>
+<span id="cb5-8"><a href="snqesa.html#cb5-8" tabindex="-1"></a>                  <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
+<span id="cb5-9"><a href="snqesa.html#cb5-9" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(th0)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb5-10"><a href="snqesa.html#cb5-10" tabindex="-1"></a>  K  <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">mean</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y)))</span>
+<span id="cb5-11"><a href="snqesa.html#cb5-11" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
+<span id="cb5-12"><a href="snqesa.html#cb5-12" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
+<span id="cb5-13"><a href="snqesa.html#cb5-13" tabindex="-1"></a>  K2 <span class="ot">&lt;-</span> m2 <span class="sc">-</span> m1<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-14"><a href="snqesa.html#cb5-14" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th0) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">max</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> K, <span class="dv">0</span>))</span>
+<span id="cb5-15"><a href="snqesa.html#cb5-15" tabindex="-1"></a>  u <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">*</span> K2)</span>
+<span id="cb5-16"><a href="snqesa.html#cb5-16" tabindex="-1"></a>  <span class="cf">if</span> (u <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">is.nan</span>(w)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb5-17"><a href="snqesa.html#cb5-17" tabindex="-1"></a>  <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> u)</span>
+<span id="cb5-18"><a href="snqesa.html#cb5-18" tabindex="-1"></a>}</span>
+<span id="cb5-19"><a href="snqesa.html#cb5-19" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="snqesa.html#cb5-20" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb5-21"><a href="snqesa.html#cb5-21" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb5-22"><a href="snqesa.html#cb5-22" tabindex="-1"></a>x_norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb5-23"><a href="snqesa.html#cb5-23" tabindex="-1"></a>x_t3   <span class="ot">&lt;-</span> <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>)</span>
+<span id="cb5-24"><a href="snqesa.html#cb5-24" tabindex="-1"></a>tgrid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.2</span>, <span class="fl">3.2</span>, <span class="at">by =</span> <span class="fl">0.25</span>)</span>
+<span id="cb5-25"><a href="snqesa.html#cb5-25" tabindex="-1"></a><span class="co"># 检验 xbar &gt;= mu + t * s / sqrt(n)，即枢轴 T = sqrt(n)(xbar-mu)/s &gt;= t</span></span>
+<span id="cb5-26"><a href="snqesa.html#cb5-26" tabindex="-1"></a>esa_norm <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_norm, <span class="fu">mean</span>(x_norm) <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_norm) <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
+<span id="cb5-27"><a href="snqesa.html#cb5-27" tabindex="-1"></a>esa_t3   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_t3,   <span class="fu">mean</span>(x_t3)   <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_t3)   <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:esa-plot"></span>
 <img src="notes-book_files/figure-html/esa-plot-1.png" alt="经验鞍点逼近与正态近似的尾概率（左：正态样本；右：t3 重尾样本）" width="672" />
 <p class="caption">
@@ -337,8 +351,8 @@ T_n(q) = \frac{\sum_i \bigl(U_i(q) - \tau\bigr)}
 下覆盖率稳定、区间长度有竞争力，且比大规模 <span class="math inline">\(B\)</span> 重抽样方案快若干
 数量级；滚动窗口的 VaR 实证也展示了尾部性能与计算效率的提升。</p>
 </div>
-<div id="要点小结-1" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> 要点小结<a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="要点小结" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> 要点小结<a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>分位推断的经典公式 <a href="snqesa.html#eq:qr-asym">(3.1)</a> 依赖未知密度，SNQESA 通过
 <strong>指示器得分的 Bernoulli 归约</strong>彻底绕开密度估计与带宽选择；</li>
