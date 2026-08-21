@@ -78,8 +78,8 @@
       },
       "authors": "Hou Jian, Meng Tan, Tian Maozai",
       "venue": {
-        "zh": "Statistica Sinica",
-        "en": "Statistica Sinica"
+        "zh": "斯堪的纳统计期刊",
+        "en": "Scandinavian Journal of Statistics"
       },
       "status": {
         "zh": "状态：手稿",
@@ -93,20 +93,20 @@
         "article": null
       },
       "image": {
-        "src": "./papers/2025/jpdi-mixed-qr/Sinica.jpg",
-        "webp": "./papers/2025/jpdi-mixed-qr/Sinica.webp",
-        "width": 187,
-        "height": 269,
+        "src": "./papers/2025/jpdi-mixed-qr/dblqmm.png",
+        "webp": "./papers/2025/jpdi-mixed-qr/dblqmm.webp",
+        "width": 1024,
+        "height": 1024,
         "alt": {
-          "zh": "Statistica Sinica 封面缩略图",
-          "en": "Statistica Sinica cover thumbnail"
+          "zh": "论文数值实验图",
+          "en": "Numerical experiment figure from the paper"
         }
       },
       "citation": {
-        "zh": "Hou Jian, Meng Tan, Tian Maozai. 高维混合效应分位回归的联合惩罚与去偏推断. Statistica Sinica, 2025.",
-        "en": "Hou, J., Tan, M., & Tian, M. Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression. Statistica Sinica, 2025."
+        "zh": "Hou Jian, Meng Tan, Tian Maozai. 高维混合效应分位回归的联合惩罚与去偏推断. 斯堪的纳统计期刊, 2025.",
+        "en": "Hou, J., Tan, M., & Tian, M. Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression. Scandinavian Journal of Statistics, 2025."
       },
-      "bibtex": "@article{hou2025jpdi,\n  title={Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Statistica Sinica},\n  year={2025},\n  note={Manuscript}\n}",
+      "bibtex": "@article{hou2025jpdi,\n  title={Jointly Penalised and Debiased Inference for High-Dimensional Mixed Effects Quantile Regression},\n  author={Hou, Jian and Tan, Meng and Tian, Maozai},\n  journal={Scandinavian Journal of Statistics},\n  year={2025},\n  note={Manuscript}\n}",
       "force_english_display": true,
       "keywords": {
         "zh": [

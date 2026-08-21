@@ -290,6 +290,7 @@
     ["journal of computational and graphical statistics", "https://www.tandfonline.com/journals/ucgs20"],
     ["journal of the american statistical association", "https://www.tandfonline.com/journals/uasa20"],
     ["statistica sinica", "https://www3.stat.sinica.edu.tw/statistica/"],
+    ["scandinavian journal of statistics", "https://onlinelibrary.wiley.com/journal/14679469"],
     ["statistics in medicine", "https://onlinelibrary.wiley.com/journal/10970258"],
     ["acm transactions on mathematical software", "https://dl.acm.org/journal/toms"],
     ["spatial statistics", "https://www.sciencedirect.com/journal/spatial-statistics"],
