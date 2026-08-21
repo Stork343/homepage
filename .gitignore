@@ -16,3 +16,6 @@ release-artifacts/
 # bookdown render intermediates
 notes/_bookdown_files/
 notes/notes-book_files/
+
+# DSH agent runtime workspace (sessions / paste attachments)
+.dsh/
