@@ -1,120 +1,226 @@
-# 稀疏-平滑空间变系数分位回归 {#svcqr}
+# 空间变系数建模的图正则化路线 {#svcqr}
 
-本章整理自：Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang
-Karl Härdle. Sparse–smooth spatially varying coefficient quantile
-regression. *Spatial Statistics*, 2026, 74, 100983 [@hou2026svcqr]。
+对应论文：Hou Jian, Meng Tan, Tian Maozai, Jianxin Pan, Wolfgang Karl
+Härdle. Sparse–smooth spatially varying coefficient quantile regression.
+*Spatial Statistics*, 2026, 74, 100983 [@hou2026svcqr]。本章是论文的
+补充材料：补齐图拉普拉斯、内蕴 GMRF、组惩罚与 ADMM 这些论文直接
+使用但未展开的工具。
 
-## 模型：全局-局部分解
+## 背景与动机
 
-空间非平稳性（回归关系随地理位置变化）是空间数据分析的基本挑战。
-设观测 $\{(Y_i, Z_i, X_i, u_i): i=1,\dots,n\}$，其中 $u_i \in \mathbb{R}^2$
-为空间位置，$Z_i$ 为纯全局效应的协变量，$X_i$ 为可能具有空间变效应的
-协变量。条件 $\tau$ 分位数建模为
+**问题起源。** 空间非平稳性指回归关系随地理位置变化。经典工具是
+GWR [@fotheringham1996geographically]：在每个位置 $u$ 处做核加权
+局部回归。GWR 有三个已知缺陷：
 
-\begin{equation}
-Q_\tau\{Y_i \mid Z_i, X_i, u_i\} =
-Z_i^\top \alpha + \sum_{j=1}^{p} X_{ij} \beta_j(u_i),
-(\#eq:svcqr-model)
-\end{equation}
+1. **多重共线性**：每个位置的局部设计矩阵可能病态，系数估计
+   方差大；
+2. **带宽敏感**：窗宽 $h$ 的小变动导致估计大变动；
+3. **缺乏简约性**：所有系数处处变化——即使某效应实际是全局常数，
+   GWR 也给出 $n$ 个不同的局部估计，解释困难。
 
-其中 $\alpha$ 为全局系数，$\beta_j(\cdot)$ 为空间变系数函数。与 GWR
-[ @fotheringham1996geographically] 让所有系数处处变化不同，论文将每个
-变系数分解为**全局基线 + 空间偏差**：
+**正则化路线的谱系。** 与"局部加权"相对的是"全局正则化"：把
+$n$ 个位置的系数作为整体，用惩罚项同时施加**稀疏**（哪些系数
+真正随空间变化）与**平滑**（空间上相邻的系数应相近）。这一路线
+的工具箱包括：图拉普拉斯（谱图论）、组 Lasso（结构化稀疏）、
+高斯马尔可夫随机场（贝叶斯解释）、ADMM（凸优化）。论文的
+SS–SVCQR 是这些工具在"空间变系数分位回归"上的组合。本章逐一
+补齐工具本身。
 
-\begin{equation}
-\beta_j(u) = \beta_{G,j} + \delta_j(u), \qquad j = 1, \dots, p,
-(\#eq:svcqr-decomp)
-\end{equation}
+## 论文工作概览
 
-当预测变量 $j$ 的效果确实同质时，$\delta_j(\cdot)$ 应被收缩为零，模型
-退化为普通全局分位回归——这就是"稀疏"的含义。
+论文把每个变系数 $\beta_j(u)$ 分解为全局基线 $\beta_{G,j}$ 与空间
+偏差 $\delta_j(u)$；用组 $L_2$ 惩罚让不必要的 $\delta_j$ 整组收缩
+为零（稀疏），用归一化图拉普拉斯惩罚让保留的 $\delta_j$ 空间平滑；
+在分位损失下用 ADMM 求解；理论上证明全局估计量的 $\sqrt{n}$
+正态性与"全局 vs 局部"结构的选择一致性。
 
-## 图拉普拉斯正则化
+## 数学工具详解
 
-位置 $\{u_i\}$ 通常不规则分布。论文用**互 k-近邻 + 高斯核**构造邻接
-矩阵：
+### 图、邻接矩阵与三种拉普拉斯
 
-\begin{equation}
-A_{i\ell} =
+把 $n$ 个空间位置看成图的顶点，边由邻近关系定义。设 $A$ 为对称
+邻接矩阵（$A_{i\ell} > 0$ 当且仅当 $i, \ell$ 相邻），
+$D = \mathrm{diag}(A\mathbf 1)$ 为度矩阵。图上有三种常用拉普拉斯：
+
+| 名称 | 定义 | 谱范围 | 适用 |
+|---|---|---|---|
+| 组合拉普拉斯 | $L = D - A$ | $[0, 2d_{\max}]$ | 规则网格 |
+| 对称归一化 | $L_{\mathrm{sym}} = I - D^{-1/2} A D^{-1/2}$ | $[0, 2]$ | 不规则采样 |
+| 随机游走 | $L_{\mathrm{rw}} = I - D^{-1} A$ | $[0, 2]$ | 概率解释 |
+
+论文用 $L_{\mathrm{sym}}$，理由有二：（i）谱界于 $[0,2]$，惩罚强度
+与 $n$ 无关；（ii）度归一化使密集采样区域不会被过度惩罚——空间
+数据常聚簇，$D - A$ 在聚簇处会给出更大的二次型。
+
+**谱界 $[0, 2]$ 的证明（补充）。** 对任意 $v$：
+
+$$
+v^\top L_{\mathrm{sym}} v = \frac12 \sum_{i,\ell} A_{i\ell}
+\left(\frac{v_i}{\sqrt{d_i}} - \frac{v_\ell}{\sqrt{d_\ell}}\right)^2 \ge 0,
+$$
+
+且由 $A_{i\ell} \le \sqrt{d_i d_\ell}$（Cauchy–Schwarz），
+
+$$
+v^\top L_{\mathrm{sym}} v \le
+\sum_{i,\ell} A_{i\ell}\Bigl(\frac{v_i^2}{d_i} + \frac{v_\ell^2}{d_\ell}\Bigr)
+= 2 \sum_i v_i^2,
+$$
+
+即 $0 \le v^\top L_{\mathrm{sym}} v \le 2\|v\|^2$。论文式 (6) 的
+粗糙度二次型就是这个半范数的展开形式——它惩罚的是**归一化偏差
+之比** $\delta_i/\sqrt{d_i} - \delta_\ell/\sqrt{d_\ell}$，而非原始
+偏差，这正是度归一化的体现。
+
+### 内蕴高斯马尔可夫随机场
+
+$L_{\mathrm{sym}}$ 半正定且奇异（零空间含 $D^{1/2}\mathbf 1_C$），
+把它当精度矩阵得到的是**内蕴** GMRF（intrinsic GMRF）：
+
+$$
+p(\delta) \propto \exp\Bigl\{-\frac{\lambda_2^2}{2}\, \delta^\top
+L_{\mathrm{sym}} \delta\Bigr\},
+$$
+
+"内蕴"指这个密度是**不可归一化**的（$L$ 奇异 → 积分发散），
+只能作为条件分布使用。其条件解释很直观：对每个顶点 $i$，
+
+$$
+\delta_i \mid \delta_{-i} \sim
+N\!\Bigl(\frac{1}{\sqrt{d_i}}\sum_{\ell \in \mathcal{N}(i)}
+\frac{A_{i\ell}}{\sqrt{d_\ell}} \delta_\ell,\
+\frac{1}{\lambda_2^2 d_i}\Bigr),
+$$
+
+即 $\delta_i$ 的条件均值是邻居的**度加权归一化平均**，条件方差与
+度成反比（度大的顶点信息多、先验更紧）。把正则化理解为"先验"后，
+$\lambda_2$ 就是先验精度——这是论文"贝叶斯解释"的全部内容。
+
+### 组惩罚：为什么是 $\|\delta_j\|_2$ 而不是 $\|\delta_j\|_1$
+
+论文的稀疏惩罚是组 $L_2$ 范数 $\lambda_1 w_j \|\delta_j\|_2$。与
+逐元素 $L_1$ 的差别：
+
+- **$L_1$（lasso）** 把 $\delta_j$ 的**个别元素**压到零——对
+  "空间上处处为零 vs 处处非零"的结构选择是错误工具（会把一个
+  平滑场挖成稀疏噪声）；
+- **组 $L_2$（group lasso）** 把**整组** $\delta_j$（$n$ 个位置
+  的向量）作为一个原子：要么整体保留、要么整体为零。这正是
+  "该系数是否随空间变化"的二值决策。
+
+组惩罚的邻近算子（proximal map）是**组软阈值**：
+
+$$
+\mathrm{prox}_{\lambda \|\cdot\|_2}(v) =
 \begin{cases}
-\exp\!\left(-\frac{\|u_i - u_\ell\|_2^2}{\sigma^2}\right),
-& u_\ell \in \mathcal{N}_k(u_i) \ \text{或} \ u_i \in \mathcal{N}_k(u_\ell),\\
-0, & \text{否则},
+0, & \|v\|_2 \le \lambda,\\
+v\,(1 - \lambda/\|v\|_2), & \|v\|_2 > \lambda,
 \end{cases}
-(\#eq:adjacency)
-\end{equation}
+$$
 
-并采用**对称归一化拉普拉斯** $L_{\mathrm{sym}} = I - D^{-1/2} A D^{-1/2}$
-（$D = \mathrm{diag}(A\mathbf{1})$）。与未归一化拉普拉斯 $D - A$ 相比，
-$L_{\mathrm{sym}}$ 的谱界于 $[0, 2]$，且按节点度归一——在采样密集区域
-惩罚不会被放大。偏差向量 $\delta_j = (\delta_j(u_1), \dots, \delta_j(u_n))^\top$
-的空间粗糙度由二次型
+与 lasso 的逐元素软阈值同构，只是阈值作用在范数上。自适应权重
+$w_j = (\|\tilde\delta_j\|_2 + a)^{-\gamma}$ 模仿自适应 Lasso
+[@zou2006adaptive]：先粗估 $\tilde\delta_j$，范数小的组获得大
+惩罚、更容易被剔除——保证 oracle 性质的关键。
 
-\begin{equation}
-\delta_j^\top L_{\mathrm{sym}} \delta_j =
-\frac{1}{2}\sum_{(i,\ell)\in E} A_{i\ell}
-\left(\frac{\delta_j(u_i)}{\sqrt{d_i}} - \frac{\delta_j(u_\ell)}{\sqrt{d_\ell}}\right)^2
-(\#eq:roughness)
-\end{equation}
+### 分位损失的次梯度与近端映射
 
-刻画，其概率解释为对 $\delta_j$ 施加**内蕴高斯马尔可夫随机场**
-（intrinsic GMRF）先验 $p(\delta_j) \propto \exp(-\lambda_2^2 \delta_j^\top
-L_{\mathrm{sym}} \delta_j / 2)$。
+check loss $\rho_\tau(u) = u(\tau - \mathbf 1\{u<0\})$ 在 $u=0$
+处不可微，次梯度为
 
-为保证可识别性，偏差需满足度加权中心化约束 $\mathbf{1}_C^\top D \delta_j = 0$
-（每个连通分量 $C$ 上），此时 $\beta_{G,j}$ 解释为系数的度加权空间
-平均。
+$$
+\partial \rho_\tau(u) = \tau - \mathbf 1\{u < 0\} - [0,1]\cdot
+\mathbf 1\{u = 0\}.
+$$
 
-## 目标函数与估计
+其近端映射（论文式 (13)）是**不对称软阈值**：
 
-联合估计 $(\alpha, \beta_G, \{\delta_j\})$ 的凸目标为
+$$
+\mathrm{prox}_{\gamma \rho_\tau}(v) =
+\begin{cases}
+v - \gamma\tau, & v > \gamma\tau,\\
+0, & -\gamma(1-\tau) \le v \le \gamma\tau,\\
+v + \gamma(1-\tau), & v < -\gamma(1-\tau),
+\end{cases}
+$$
 
-\begin{equation}
-\min_{\theta_P, \Theta_L}\ \sum_{i=1}^{n} \rho_\tau\!\left(Y_i - Z_i^\top\alpha -
-X_i^\top\beta_G - \sum_{j=1}^{p} X_{ij}\delta_j(u_i)\right)
-+ \lambda_1 \sum_{j=1}^{p} w_j \|\delta_j\|_2
-+ \lambda_2 \sum_{j=1}^{p} \delta_j^\top L_{\mathrm{sym}} \delta_j,
-(\#eq:svcqr-obj)
-\end{equation}
+推导：最小化 $\rho_\tau(u) + \frac{1}{2\gamma}(u-v)^2$，一阶条件
+$v - u \in \gamma\,\partial\rho_\tau(u)$，分三段解出。$\tau = 1/2$
+时退化为对称软阈值（L1 去噪），$\tau \neq 1/2$ 时阈值区间不对称
+——这是分位损失"不对称"在算法层的体现。
 
-其中 $\rho_\tau(u) = u(\tau - \mathbf{1}\{u < 0\})$ 为分位损失，
-$w_j = (\|\tilde\delta_j\|_2 + a)^{-\gamma}$ 为自适应组权重（类似自适应
-Lasso [@zou2006adaptive] 的组版本），$(\lambda_1, \lambda_2)$ 用空间分块
-交叉验证选取。第一项惩罚项实现**组选择**（整组 $\delta_j$ 收缩为
-零 → 全局效应），第二项实现**空间平滑**。目标函数凸，可用 ADMM 求解：
-check loss 的近端映射是不对称软阈值，$(\alpha, \beta_G)$ 的更新是线性
-系统，$\delta_j$ 的更新解 $2\lambda_2 L + \rho_s X_{\odot j} X_{\odot j}^\top
-+ \rho_z I$ 的稀疏线性系统。
+### ADMM 的套路：为什么每步都是闭式
 
-::: {.theorem #svcqr-oracle name="SVCQR 的 oracle 性质"}
-在论文的温和正则条件下，SS–SVCQR 估计量满足：
+ADMM 把原问题拆成"光滑二次部分"与"可分离非光滑部分"，用对偶
+变量耦合。论文问题（式 (12)）的三个模块：
 
-1. **选择一致性**：$\mathrm{P}(\hat\delta_j \equiv 0) \to 1$（当
-   $\delta_{0,j} \equiv 0$），即全局-局部分量以概率趋于 1 被正确区分；
-2. **渐近正态性**：全局估计量 $\hat\alpha, \hat\beta_G$ 以 $\sqrt{n}$
-   速率收敛且渐近正态，与"已知哪些系数局部变化"的 oracle 估计量
-   具有相同的极限分布。
-:::
+1. **$(\alpha, \beta_G)$ 更新**：二次型最小化 → 线性方程组，设计
+   矩阵 $[Z\ X]$ 固定，可预分解一次（Cholesky），每轮只做回代；
+2. **$s$ 更新（残差）**：check loss 的近端映射 → 不对称软阈值，
+   逐元素闭式；
+3. **$\delta_j$ 更新**：二次型（拉普拉斯平滑）+ 组惩罚 → 解
+   $(2\lambda_2 L + \rho_s X_{\odot j} X_{\odot j}^\top + \rho_z I)\delta_j = \text{常数}$
+   后接组软阈值；系数矩阵稀疏（$L$ 稀疏），用共轭梯度或预分解。
+
+ADMM 的收敛保证来自目标函数**凸性** + 各子问题**精确求解**。
+论文的数值部分显示几十轮内实用收敛。
+
+## 论文未展示的详细推导
+
+### 可识别性约束从哪来
+
+分解 $\beta_j(u) = \beta_{G,j} + \delta_j(u)$ 有一个自由度过剩：
+把 $\beta_{G,j}$ 加上常数 $c$、$\delta_j$ 减去 $c$ 得到同一个
+$\beta_j(\cdot)$。论文的约束 $\mathbf 1_C^\top D \delta_j = 0$
+（每个连通分量上度加权中心化）是消除该自由度的一种规范选择。
+它的几何含义：$L_{\mathrm{sym}}$ 的零空间由 $D^{1/2}\mathbf 1_C$
+张成，约束 $D^{1/2}\delta_j \perp D^{1/2}\mathbf 1_C$（等价于
+$\mathbf 1_C^\top D \delta_j = 0$）让 $\delta_j$ 落在零空间的正交
+补上。在此约束下，$\beta_{G,j}$ 恰为 $\beta_j(\cdot)$ 的**度加权
+空间平均**：
+
+$$
+\beta_{G,j} = \frac{\sum_i d_i \beta_j(u_i)}{\sum_i d_i},
+$$
+
+偏差 $\delta_j$ 才是纯粹的"空间变化"部分。约束的投影算子（论文
+式 (11)）就是减去每分量上的加权均值，每轮迭代后执行一次。
+
+### 空间分块交叉验证
+
+$(\lambda_1, \lambda_2)$ 的选取不能用普通 $K$-折 CV：随机分折会把
+空间邻近的样本分到不同折，空间相关性使验证集"泄漏"。空间分块 CV
+把研究区域划分成 $K$ 个空间块（如 $k$-means 聚类位置），每折用
+整块做验证。论文补充材料未展示的细节：块的数目 $K$ 建议取
+$5 \sim 10$，块大小应大于图的有效相关长度（$\approx$ 高斯核的
+$2\sigma$），否则泄漏依旧。
+
+## 实现细节与数值注意
+
+1. **kNN 图**：$k$ 太小图不连通（$L$ 零空间分裂，约束复杂），
+   太大图过密（惩罚失去局部性）。经验取 $k = 6 \sim 10$，并检查
+   图连通性；论文的"互 kNN"（$u_\ell \in \mathcal{N}_k(u_i)$ **或**
+   $u_i \in \mathcal{N}_k(u_\ell)$）比"双向 kNN"更容易保证连通。
+2. **高斯核带宽 $\sigma$**：邻接权重 $\exp(-\|u_i - u_\ell\|^2/\sigma^2)$
+   的 $\sigma$ 可取位置距离的某个分位数（如中位数距离的 $1/2$）；
+   权重对 $\sigma$ 的敏感度远低于 GWR 的窗宽对 $h$ 的敏感度
+   （因为 $L$ 只做相对平滑，绝对尺度由 $\lambda_2$ 吸收）。
+3. **$\lambda_2$ 很大时的退化**：$\lambda_2 \to \infty$ 强制
+   $\delta_j$ 在连通分量上为常数 → 模型退化为全局回归；$\lambda_2
+   \to 0$ 时 $\delta_j$ 无平滑 → 每个位置独立。网格搜索 $\lambda_2$
+   时这两个方向都是合法边界，注意观察解是否退化以缩小搜索范围。
+4. **度为零的顶点**：孤立点 $d_i = 0$ 使 $D^{-1/2}$ 无定义；
+   应在建图后删除孤立点或强制 $k \ge 1$。
 
 ## 数值演示
 
-模拟 $n = 120$ 个位置：$\beta_{G,1} = 1$（全局效应，$\delta_1 = 0$），
-$\beta_2(u) = 2 + 3u_1$（空间变效应）。用简化近端梯度法求解平方损失
-版本的目标（结构相同：组惩罚 + 拉普拉斯平滑），演示组惩罚如何将
-$\delta_1$ 收缩为零而保留 $\delta_2$。
+**演示 1：kNN 图与归一化拉普拉斯的粗糙度。** 验证谱界 $[0,2]$
+与粗糙度的"归一化偏差"形式。
 
-```{r svcqr-sim}
+```{r graph-demo}
 set.seed(2026)
-n <- 120
-u <- cbind(runif(n), runif(n))            # 空间位置
-Z <- cbind(1, rnorm(n))                   # 全局协变量（含截距）
-X1 <- rnorm(n); X2 <- rnorm(n)
-alpha <- c(0.5, -0.8)
-betaG <- c(1, 2)                          # 全局基线
-delta_true <- cbind(rep(0, n), 3 * u[, 1])  # 真偏差：1 为零，2 变化
-y <- Z %*% alpha + X1 * betaG[1] + X2 * (betaG[2] + delta_true[, 2]) + rnorm(n)
-
-# --- kNN 图 + 对称归一化拉普拉斯 ---
+n <- 80
+u <- cbind(runif(n), runif(n))
 dist_mat <- as.matrix(dist(u))
 k <- 8
 A <- matrix(0, n, n)
@@ -122,62 +228,47 @@ for (i in 1:n) {
   nn <- order(dist_mat[i, ])[2:(k + 1)]
   A[i, nn] <- exp(-dist_mat[i, nn]^2 / (2 * 0.15^2))
 }
-A <- (A + t(A)) / 2                        # 对称化（互近邻近似）
-A[A > 0] <- 1
+A <- (A + t(A)) / 2; A[A > 0] <- 1
 d <- rowSums(A)
 L <- diag(n) - diag(1 / sqrt(d)) %*% A %*% diag(1 / sqrt(d))
+ev <- eigen(L, symmetric = TRUE)$values
+cat("eigenvalue range of Lsym:", round(min(ev), 3), "to", round(max(ev), 3), "\n")
+delta <- sin(2 * pi * u[, 1])            # 平滑场
+noise <- rnorm(n)                        # 粗糙场
+cat("roughness(smooth)/||d||2:", round(sum(delta * (L %*% delta)) / sum(delta^2), 3), "\n")
+cat("roughness(noise)/||d||2:", round(sum(noise * (L %*% noise)) / sum(noise^2), 3), "\n")
+```
 
-# --- 近端梯度：min 0.5||r||^2 + lam1*sum(wj||dj||_2) + lam2*sum(dj'Ldj) ---
-prox_group <- function(v, lam) {           # 组软阈值
+平滑场的粗糙度远小于噪声场——这正是"$L$ 惩罚平滑偏差"的机制：
+同一 $\lambda_2$ 下，平滑 $\delta$ 付出的代价低、粗糙 $\delta$
+付出的代价高。
+
+**演示 2：组软阈值的整组收缩。** 展示组惩罚对"真为零的组"与
+"真非零的组"的差别处理。
+
+```{r group-demo}
+prox_group <- function(v, lam) {
   nrm <- sqrt(sum(v^2))
   if (nrm <= lam) rep(0, length(v)) else v * (1 - lam / nrm)
 }
-fit_svc <- function(lam1, lam2, steps = 400, lr = 0.02) {
-  alpha_hat <- c(0, 0); bG <- c(0, 0); d1 <- rep(0, n); d2 <- rep(0, n)
-  for (s in 1:steps) {
-    r <- y - Z %*% alpha_hat - X1 * bG[1] - X2 * bG[2] - X1 * d1 - X2 * d2
-    # 梯度（alpha, bG）
-    alpha_hat <- alpha_hat + lr * t(Z) %*% r
-    bG <- bG + lr * c(sum(r * X1), sum(r * X2))
-    # 梯度 + 近端（d1, d2）
-    g1 <- -sum(r * X1) + 2 * lam2 * L %*% d1
-    g2 <- -sum(r * X2) + 2 * lam2 * L %*% d2
-    d1 <- prox_group(d1 - lr * g1, lr * lam1)
-    d2 <- prox_group(d2 - lr * g2, lr * lam1)
-  }
-  list(alpha = alpha_hat, betaG = bG, d1 = d1, d2 = d2)
-}
-fit <- fit_svc(lam1 = 6, lam2 = 4)
+set.seed(2026)
+v_zero <- rnorm(10, 0, 0.3)     # 应收缩为零的组
+v_real <- rnorm(10, 3, 0.5)     # 应保留的组
+cat("||prox(v_zero, 2)||2 =", round(sqrt(sum(prox_group(v_zero, 2)^2)), 3), "\n")
+cat("||prox(v_real, 2)||2 =", round(sqrt(sum(prox_group(v_real, 2)^2)), 3),
+    " (before:", round(sqrt(sum(v_real^2)), 3), ")\n")
 ```
 
-```{r svcqr-summary, echo=FALSE, fig.cap="组惩罚的效果：左图为 δ2 估计 vs 真值，右图为 δ1 的估计（应收缩到零）", fig.align="center"}
-cat("betaG estimate:", round(fit$betaG, 2), "(true 1, 2)\n")
-cat("||d1||2 =", round(sqrt(sum(fit$d1^2)), 3), "(should be 0)\n")
-cat("||d2||2 =", round(sqrt(sum(fit$d2^2)), 3), "\n")
-par(mfrow = c(1, 2))
-plot(delta_true[, 2], fit$d2, pch = 20, col = "#0955a4",
-     xlab = "true delta2", ylab = "estimated delta2",
-     main = "delta2 (spatially varying)")
-abline(0, 1, lty = 2, col = "#c0392b")
-plot(seq_len(n), fit$d1, pch = 20, col = "#9db8d9",
-     xlab = "index", ylab = "estimated delta1",
-     main = "delta1 (should be 0)")
-abline(h = 0, lty = 2, col = "#c0392b")
-```
+## 延伸阅读
 
-演示表明：$\delta_1$ 被组惩罚几乎完全收缩为零（$\|\hat\delta_1\|_2
-\approx 0$），而 $\delta_2$ 的估计与真值高度吻合——这正是定理
-\@ref(thm:svcqr-oracle) 选择一致性在有限样本下的体现。论文的重尾
-误差模拟进一步显示，SS–SVCQR 在恢复异质空间模式上优于核方法类
-替代方案。
-
-## 要点小结
-
-- 式 \@ref(eq:svcqr-decomp) 的**全局-局部分解**是稀疏性的来源：
-  同质效应自动退化为全局系数；
-- 式 \@ref(eq:roughness) 的归一化拉普拉斯惩罚同时处理**不规则采样
-  密度**与**几何保真**，且有 GMRF 先验解释；
-- 式 \@ref(eq:svcqr-obj) 是凸问题，ADMM 各步均有闭式解，可扩展至
-  大规模空间数据；
-- oracle 性质（定理 \@ref(thm:svcqr-oracle)）为"全局 vs 局部"的结构
-  选择提供了理论保证。
+- **谱图论**：Chung (1997), *Spectral Graph Theory*——$L_{\mathrm{sym}}$
+   谱性质的系统论述；
+- **GMRF**：Rue & Held (2005), *Gaussian Markov Random Fields*——
+   内蕴 GMRF 的条件解释与计算；
+- **组惩罚**：Yuan & Lin (2006) 的原始 group lasso 论文；
+   Zou (2006) [@zou2006adaptive] 的自适应权重；
+- **ADMM**：Boyd et al. (2011), *Distributed Optimization and
+   Statistical Learning via the Alternating Direction Method of
+   Multipliers*——收敛性证明与常见 prox 表；
+- 与本笔记第 \@ref(hcqr) 章的关联：分位回归的两种算法路线
+  （ADMM 直接优化 vs EM 概率路线）的对照。
