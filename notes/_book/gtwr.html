@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
+  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
+  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
+  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
@@ -163,133 +163,109 @@ div.csl-indent {
 <li><a href="./" class="toc-home">统计方法笔记</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
 <li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 鞍点逼近：从拉普拉斯积分到相对风险置信区间</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>2.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88"><i class="fa fa-check"></i><b>2.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><i class="fa fa-check"></i><b>2.3</b> 数学工具详解</a>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87"><i class="fa fa-check"></i><b>2.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88-var%CE%BB%E2%82%81%CE%BB%E2%82%80-%E9%95%BF%E6%88%90%E9%82%A3%E4%B8%AA%E6%A0%B7%E5%AD%90"><i class="fa fa-check"></i><b>2.3.1</b> Delta 方法：为什么 Var(λ̂₁/λ̂₀) 长成那个样子</a></li>
-<li class="chapter" data-level="2.3.2" data-path="poisson-rr.html"><a href="poisson-rr.html#laplace-%E9%80%BC%E8%BF%91%E9%9E%8D%E7%82%B9%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>2.3.2</b> Laplace 逼近：鞍点方法的地基</a></li>
-<li class="chapter" data-level="2.3.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E6%95%B0%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.3.3</b> 累积量生成函数：为什么是”对数”矩生成函数</a></li>
-<li class="chapter" data-level="2.3.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%B9%E5%81%B6"><i class="fa fa-check"></i><b>2.3.4</b> 逆转公式：密度与特征函数的对偶</a></li>
-<li class="chapter" data-level="2.3.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.3.5</b> 鞍点方程的数值求解</a></li>
+<li class="chapter" data-level="2.1.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95"><i class="fa fa-check"></i><b>2.1.1</b> Delta 方法</a></li>
+<li class="chapter" data-level="2.1.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%A7%AF%E5%88%86"><i class="fa fa-check"></i><b>2.1.2</b> 拉普拉斯积分</a></li>
+<li class="chapter" data-level="2.1.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.1.3</b> 累积量生成函数</a></li>
+<li class="chapter" data-level="2.1.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>2.1.4</b> 逆转公式</a></li>
+<li class="chapter" data-level="2.1.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.1.5</b> 鞍点方程的数值求解</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4</b> 论文未展示的详细推导</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E4%BB%8E-mathrmphat-r-le-r-%E5%88%B0-mathrmpz-le-0"><i class="fa fa-check"></i><b>2.4.1</b> 从 <span class="math inline">\(\mathrm{P}(\hat R \le r)\)</span> 到 <span class="math inline">\(\mathrm{P}(Z \le 0)\)</span></a></li>
-<li class="chapter" data-level="2.4.2" data-path="poisson-rr.html"><a href="poisson-rr.html#z-%E7%9A%84%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%A4%E6%AD%A5%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4.2</b> <span class="math inline">\(Z\)</span> 的矩生成函数：两步推导</a></li>
-<li class="chapter" data-level="2.4.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E4%B8%8E-jensen-%E5%85%AC%E5%BC%8F%E5%90%84%E9%A1%B9%E7%9A%84%E5%90%AB%E4%B9%89"><i class="fa fa-check"></i><b>2.4.3</b> 鞍点方程与 Jensen 公式各项的含义</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F"><i class="fa fa-check"></i><b>2.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="2.6" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.6</b> 数值演示</a></li>
-<li class="chapter" data-level="2.7" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><i class="fa fa-check"></i><b>2.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.2</b> 相对风险的鞍点置信区间</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97"><i class="fa fa-check"></i><b>2.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E4%BE%8B"><i class="fa fa-check"></i><b>2.4</b> 数值例</a></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%B3%A8%E8%AE%B0"><i class="fa fa-check"></i><b>2.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 分位推断的分布自由路线：自标准化与经验鞍点</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="snqesa.html"><a href="snqesa.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-1"><i class="fa fa-check"></i><b>3.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-1"><i class="fa fa-check"></i><b>3.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-1"><i class="fa fa-check"></i><b>3.3</b> 数学工具详解</a>
+<li class="chapter" data-level="3.1" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-1"><i class="fa fa-check"></i><b>3.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="snqesa.html"><a href="snqesa.html#%E6%AC%A1%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F%E5%88%B0%E6%A0%B7%E6%9C%AC%E5%88%86%E4%BD%8D%E6%95%B0"><i class="fa fa-check"></i><b>3.3.1</b> 次序统计量到样本分位数</a></li>
-<li class="chapter" data-level="3.3.2" data-path="snqesa.html"><a href="snqesa.html#bernoulli-%E5%BD%92%E7%BA%A6%E6%8A%8A%E5%88%86%E4%BD%8D%E6%95%B0%E5%BD%93%E5%8F%82%E6%95%B0"><i class="fa fa-check"></i><b>3.3.2</b> Bernoulli 归约：把分位数当参数</a></li>
-<li class="chapter" data-level="3.3.3" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E4%B8%BA%E4%BB%80%E4%B9%88-t-%E5%9E%8B%E6%9E%A2%E8%BD%B4%E6%B6%88%E5%8E%BB%E5%B0%BA%E5%BA%A6"><i class="fa fa-check"></i><b>3.3.3</b> 自标准化：为什么 t 型枢轴消去尺度</a></li>
-<li class="chapter" data-level="3.3.4" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9"><i class="fa fa-check"></i><b>3.3.4</b> 经验矩生成函数与经验鞍点</a></li>
-<li class="chapter" data-level="3.3.5" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E7%9A%84%E5%B0%BE%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>3.3.5</b> 经验鞍点的尾概率公式</a></li>
+<li class="chapter" data-level="3.1.1" data-path="snqesa.html"><a href="snqesa.html#%E6%A0%B7%E6%9C%AC%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E6%B8%90%E8%BF%91%E5%88%86%E5%B8%83"><i class="fa fa-check"></i><b>3.1.1</b> 样本分位数的渐近分布</a></li>
+<li class="chapter" data-level="3.1.2" data-path="snqesa.html"><a href="snqesa.html#%E6%8C%87%E7%A4%BA%E5%99%A8%E5%BD%92%E7%BA%A6"><i class="fa fa-check"></i><b>3.1.2</b> 指示器归约</a></li>
+<li class="chapter" data-level="3.1.3" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4"><i class="fa fa-check"></i><b>3.1.3</b> 自标准化枢轴</a></li>
+<li class="chapter" data-level="3.1.4" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9"><i class="fa fa-check"></i><b>3.1.4</b> 经验矩生成函数与经验鞍点</a></li>
+<li class="chapter" data-level="3.1.5" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E7%9A%84%E5%B0%BE%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>3.1.5</b> 经验鞍点的尾概率公式</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-1"><i class="fa fa-check"></i><b>3.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>3.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4%E7%9A%84%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E5%B1%95%E5%BC%80"><i class="fa fa-check"></i><b>3.4.1</b> 自标准化枢轴的经验鞍点展开</a></li>
-<li class="chapter" data-level="3.4.2" data-path="snqesa.html"><a href="snqesa.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%86%E7%9B%96%E8%AF%AF%E5%B7%AE%E6%98%AF-on-1"><i class="fa fa-check"></i><b>3.4.2</b> 为什么覆盖误差是 <span class="math inline">\(O(n^{-1})\)</span></a></li>
+<li class="chapter" data-level="3.2.1" data-path="snqesa.html"><a href="snqesa.html#%E8%87%AA%E6%A0%87%E5%87%86%E5%8C%96%E6%9E%A2%E8%BD%B4%E7%9A%84%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E5%B1%95%E5%BC%80"><i class="fa fa-check"></i><b>3.2.1</b> 自标准化枢轴的经验鞍点展开</a></li>
+<li class="chapter" data-level="3.2.2" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%86%E7%9B%96%E8%AF%AF%E5%B7%AE%E7%9A%84%E9%98%B6"><i class="fa fa-check"></i><b>3.2.2</b> 覆盖误差的阶</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-1"><i class="fa fa-check"></i><b>3.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="3.6" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.6</b> 数值演示</a></li>
-<li class="chapter" data-level="3.7" data-path="snqesa.html"><a href="snqesa.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-1"><i class="fa fa-check"></i><b>3.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-1"><i class="fa fa-check"></i><b>3.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E4%BE%8B-1"><i class="fa fa-check"></i><b>3.4</b> 数值例</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E6%B3%A8%E8%AE%B0-1"><i class="fa fa-check"></i><b>3.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 空间变系数建模的图正则化路线</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="svcqr.html"><a href="svcqr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-2"><i class="fa fa-check"></i><b>4.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-2"><i class="fa fa-check"></i><b>4.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-2"><i class="fa fa-check"></i><b>4.3</b> 数学工具详解</a>
+<li class="chapter" data-level="4.1" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-2"><i class="fa fa-check"></i><b>4.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%B8%8E%E4%B8%89%E7%A7%8D%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF"><i class="fa fa-check"></i><b>4.3.1</b> 图、邻接矩阵与三种拉普拉斯</a></li>
-<li class="chapter" data-level="4.3.2" data-path="svcqr.html"><a href="svcqr.html#%E5%86%85%E8%95%B4%E9%AB%98%E6%96%AF%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA"><i class="fa fa-check"></i><b>4.3.2</b> 内蕴高斯马尔可夫随机场</a></li>
-<li class="chapter" data-level="4.3.3" data-path="svcqr.html"><a href="svcqr.html#%E7%BB%84%E6%83%A9%E7%BD%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-delta_j_2-%E8%80%8C%E4%B8%8D%E6%98%AF-delta_j_1"><i class="fa fa-check"></i><b>4.3.3</b> 组惩罚：为什么是 <span class="math inline">\(\|\delta_j\|_2\)</span> 而不是 <span class="math inline">\(\|\delta_j\|_1\)</span></a></li>
-<li class="chapter" data-level="4.3.4" data-path="svcqr.html"><a href="svcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E7%9A%84%E6%AC%A1%E6%A2%AF%E5%BA%A6%E4%B8%8E%E8%BF%91%E7%AB%AF%E6%98%A0%E5%B0%84"><i class="fa fa-check"></i><b>4.3.4</b> 分位损失的次梯度与近端映射</a></li>
-<li class="chapter" data-level="4.3.5" data-path="svcqr.html"><a href="svcqr.html#admm-%E7%9A%84%E5%A5%97%E8%B7%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AD%A5%E9%83%BD%E6%98%AF%E9%97%AD%E5%BC%8F"><i class="fa fa-check"></i><b>4.3.5</b> ADMM 的套路：为什么每步都是闭式</a></li>
+<li class="chapter" data-level="4.1.1" data-path="svcqr.html"><a href="svcqr.html#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E4%B8%8E%E4%B8%89%E7%A7%8D%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF"><i class="fa fa-check"></i><b>4.1.1</b> 邻接矩阵与三种拉普拉斯</a></li>
+<li class="chapter" data-level="4.1.2" data-path="svcqr.html"><a href="svcqr.html#%E5%86%85%E8%95%B4%E9%AB%98%E6%96%AF%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA"><i class="fa fa-check"></i><b>4.1.2</b> 内蕴高斯马尔可夫随机场</a></li>
+<li class="chapter" data-level="4.1.3" data-path="svcqr.html"><a href="svcqr.html#%E7%BB%84%E6%83%A9%E7%BD%9A"><i class="fa fa-check"></i><b>4.1.3</b> 组惩罚</a></li>
+<li class="chapter" data-level="4.1.4" data-path="svcqr.html"><a href="svcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E7%9A%84%E6%AC%A1%E6%A2%AF%E5%BA%A6%E4%B8%8E%E8%BF%91%E7%AB%AF%E6%98%A0%E5%B0%84"><i class="fa fa-check"></i><b>4.1.4</b> 分位损失的次梯度与近端映射</a></li>
+<li class="chapter" data-level="4.1.5" data-path="svcqr.html"><a href="svcqr.html#admm"><i class="fa fa-check"></i><b>4.1.5</b> ADMM</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-2"><i class="fa fa-check"></i><b>4.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-1"><i class="fa fa-check"></i><b>4.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="svcqr.html"><a href="svcqr.html#%E5%8F%AF%E8%AF%86%E5%88%AB%E6%80%A7%E7%BA%A6%E6%9D%9F%E4%BB%8E%E5%93%AA%E6%9D%A5"><i class="fa fa-check"></i><b>4.4.1</b> 可识别性约束从哪来</a></li>
-<li class="chapter" data-level="4.4.2" data-path="svcqr.html"><a href="svcqr.html#%E7%A9%BA%E9%97%B4%E5%88%86%E5%9D%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><i class="fa fa-check"></i><b>4.4.2</b> 空间分块交叉验证</a></li>
+<li class="chapter" data-level="4.2.1" data-path="svcqr.html"><a href="svcqr.html#%E5%8F%AF%E8%AF%86%E5%88%AB%E6%80%A7%E7%BA%A6%E6%9D%9F"><i class="fa fa-check"></i><b>4.2.1</b> 可识别性约束</a></li>
+<li class="chapter" data-level="4.2.2" data-path="svcqr.html"><a href="svcqr.html#%E7%A9%BA%E9%97%B4%E5%88%86%E5%9D%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><i class="fa fa-check"></i><b>4.2.2</b> 空间分块交叉验证</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-2"><i class="fa fa-check"></i><b>4.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="4.6" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.6</b> 数值演示</a></li>
-<li class="chapter" data-level="4.7" data-path="svcqr.html"><a href="svcqr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-2"><i class="fa fa-check"></i><b>4.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-2"><i class="fa fa-check"></i><b>4.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-2"><i class="fa fa-check"></i><b>4.4</b> 数值例</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E6%B3%A8%E8%AE%B0-2"><i class="fa fa-check"></i><b>4.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层数据鲁棒回归：复合分位与 EM</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="hcqr.html"><a href="hcqr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-3"><i class="fa fa-check"></i><b>5.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-3"><i class="fa fa-check"></i><b>5.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-3"><i class="fa fa-check"></i><b>5.3</b> 数学工具详解</a>
+<li class="chapter" data-level="5.1" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-3"><i class="fa fa-check"></i><b>5.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="hcqr.html"><a href="hcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7"><i class="fa fa-check"></i><b>5.3.1</b> 分位损失与不对称拉普拉斯分布的等价性</a></li>
-<li class="chapter" data-level="5.3.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83e-%E6%AD%A5%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>5.3.2</b> 多元正态的条件分布：E 步的地基</a></li>
-<li class="chapter" data-level="5.3.3" data-path="hcqr.html"><a href="hcqr.html#em-%E7%AE%97%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%AD%E4%BB%A3%E5%8D%95%E8%B0%83%E4%B8%8A%E5%8D%87"><i class="fa fa-check"></i><b>5.3.3</b> EM 算法：为什么迭代单调上升</a></li>
-<li class="chapter" data-level="5.3.4" data-path="hcqr.html"><a href="hcqr.html#%E6%96%B9%E5%B7%AE%E5%88%86%E9%87%8F%E7%9A%84%E7%9F%A9%E6%9B%B4%E6%96%B0"><i class="fa fa-check"></i><b>5.3.4</b> 方差分量的矩更新</a></li>
+<li class="chapter" data-level="5.1.1" data-path="hcqr.html"><a href="hcqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83"><i class="fa fa-check"></i><b>5.1.1</b> 分位损失与不对称拉普拉斯分布</a></li>
+<li class="chapter" data-level="5.1.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83"><i class="fa fa-check"></i><b>5.1.2</b> 多元正态的条件分布</a></li>
+<li class="chapter" data-level="5.1.3" data-path="hcqr.html"><a href="hcqr.html#em-%E7%AE%97%E6%B3%95"><i class="fa fa-check"></i><b>5.1.3</b> EM 算法</a></li>
+<li class="chapter" data-level="5.1.4" data-path="hcqr.html"><a href="hcqr.html#%E6%96%B9%E5%B7%AE%E5%88%86%E9%87%8F%E7%9A%84%E7%9F%A9%E6%9B%B4%E6%96%B0"><i class="fa fa-check"></i><b>5.1.4</b> 方差分量的矩更新</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-3"><i class="fa fa-check"></i><b>5.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-2"><i class="fa fa-check"></i><b>5.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="hcqr.html"><a href="hcqr.html#e-%E6%AD%A5%E5%85%AC%E5%BC%8F%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>5.4.1</b> E 步公式的完整推导</a></li>
-<li class="chapter" data-level="5.4.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E7%9B%AE%E6%A0%87%E7%9A%84%E6%A2%AF%E5%BA%A6%E7%BB%93%E6%9E%84"><i class="fa fa-check"></i><b>5.4.2</b> 复合分位目标的梯度结构</a></li>
+<li class="chapter" data-level="5.2.1" data-path="hcqr.html"><a href="hcqr.html#e-%E6%AD%A5%E5%85%AC%E5%BC%8F"><i class="fa fa-check"></i><b>5.2.1</b> E 步公式</a></li>
+<li class="chapter" data-level="5.2.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E7%9B%AE%E6%A0%87%E7%9A%84%E6%A2%AF%E5%BA%A6%E7%BB%93%E6%9E%84"><i class="fa fa-check"></i><b>5.2.2</b> 复合分位目标的梯度结构</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-3"><i class="fa fa-check"></i><b>5.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="5.6" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.6</b> 数值演示</a></li>
-<li class="chapter" data-level="5.7" data-path="hcqr.html"><a href="hcqr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-3"><i class="fa fa-check"></i><b>5.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-3"><i class="fa fa-check"></i><b>5.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-3"><i class="fa fa-check"></i><b>5.4</b> 数值例</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E6%B3%A8%E8%AE%B0-3"><i class="fa fa-check"></i><b>5.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 时空回归的混合设定与变量选择</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="mgtwr.html"><a href="mgtwr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-4"><i class="fa fa-check"></i><b>6.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-4"><i class="fa fa-check"></i><b>6.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-4"><i class="fa fa-check"></i><b>6.3</b> 数学工具详解</a>
+<li class="chapter" data-level="6.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-4"><i class="fa fa-check"></i><b>6.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%A0%B8%E5%87%BD%E6%95%B0%E6%9D%83%E9%87%8D%E5%A6%82%E4%BD%95%E9%9A%8F%E8%B7%9D%E7%A6%BB%E8%A1%B0%E5%87%8F"><i class="fa fa-check"></i><b>6.3.1</b> 核函数：权重如何随距离衰减</a></li>
-<li class="chapter" data-level="6.3.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E8%B7%9D%E7%A6%BB%E4%B8%8E%E6%9D%83%E9%87%8D%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.3.2</b> 时空距离与权重矩阵</a></li>
-<li class="chapter" data-level="6.3.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%B8%8E%E5%B8%BD%E5%AD%90%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.3.3</b> 加权最小二乘与帽子矩阵</a></li>
-<li class="chapter" data-level="6.3.4" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%94%E9%99%A4%E8%83%BD%E6%94%B9%E5%96%84%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>6.3.4</b> 变量选择：为什么”剔除”能改善估计</a></li>
+<li class="chapter" data-level="6.1.1" data-path="mgtwr.html"><a href="mgtwr.html#%E6%A0%B8%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>6.1.1</b> 核函数</a></li>
+<li class="chapter" data-level="6.1.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E8%B7%9D%E7%A6%BB%E4%B8%8E%E6%9D%83%E9%87%8D%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.1.2</b> 时空距离与权重矩阵</a></li>
+<li class="chapter" data-level="6.1.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%B8%8E%E5%B8%BD%E5%AD%90%E7%9F%A9%E9%98%B5"><i class="fa fa-check"></i><b>6.1.3</b> 加权最小二乘与帽子矩阵</a></li>
+<li class="chapter" data-level="6.1.4" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.1.4</b> 变量选择的动机</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>6.4</b> 论文未展示的详细推导</a>
+<li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-3"><i class="fa fa-check"></i><b>6.2</b> 详细推导</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%81%8F%E5%B7%AE%E5%88%86%E6%9E%90"><i class="fa fa-check"></i><b>6.4.1</b> 两步估计的偏差分析</a></li>
-<li class="chapter" data-level="6.4.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E5%B9%B3%E7%A8%B3%E6%80%A7%E6%A3%80%E9%AA%8C%E7%9A%84%E6%9E%84%E9%80%A0"><i class="fa fa-check"></i><b>6.4.2</b> 时空平稳性检验的构造</a></li>
+<li class="chapter" data-level="6.2.1" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%81%8F%E5%B7%AE"><i class="fa fa-check"></i><b>6.2.1</b> 两步估计的偏差</a></li>
+<li class="chapter" data-level="6.2.2" data-path="mgtwr.html"><a href="mgtwr.html#%E6%97%B6%E7%A9%BA%E5%B9%B3%E7%A8%B3%E6%80%A7%E6%A3%80%E9%AA%8C"><i class="fa fa-check"></i><b>6.2.2</b> 时空平稳性检验</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-4"><i class="fa fa-check"></i><b>6.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="6.6" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.6</b> 数值演示</a></li>
-<li class="chapter" data-level="6.7" data-path="mgtwr.html"><a href="mgtwr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-4"><i class="fa fa-check"></i><b>6.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-4"><i class="fa fa-check"></i><b>6.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-4"><i class="fa fa-check"></i><b>6.4</b> 数值例</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E6%B3%A8%E8%AE%B0-4"><i class="fa fa-check"></i><b>6.5</b> 注记</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 局部回归的窗宽设定：从同窗宽到异窗宽</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-5"><i class="fa fa-check"></i><b>7.1</b> 背景与动机</a></li>
-<li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-5"><i class="fa fa-check"></i><b>7.2</b> 论文工作概览</a></li>
-<li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-5"><i class="fa fa-check"></i><b>7.3</b> 数学工具详解</a>
+<li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-5"><i class="fa fa-check"></i><b>7.1</b> 数学准备</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="gtwr.html"><a href="gtwr.html#%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E5%88%86%E8%A7%A3"><i class="fa fa-check"></i><b>7.3.1</b> 局部加权最小二乘的偏差-方差分解</a></li>
-<li class="chapter" data-level="7.3.2" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E7%A9%BA%E9%97%B4%E5%88%86%E5%B8%83%E7%9A%84%E5%BD%A2%E7%8A%B6%E6%8F%8F%E8%BF%B0"><i class="fa fa-check"></i><b>7.3.2</b> 标准差椭圆：空间分布的形状描述</a></li>
-<li class="chapter" data-level="7.3.3" data-path="gtwr.html"><a href="gtwr.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%A4%AD%E5%9C%86%E8%80%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E7%9A%84%E7%A9%BA%E9%97%B4%E7%BD%91%E6%A0%BC"><i class="fa fa-check"></i><b>7.3.3</b> 为什么用椭圆而非简单的空间网格</a></li>
+<li class="chapter" data-level="7.1.1" data-path="gtwr.html"><a href="gtwr.html#%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E5%88%86%E8%A7%A3"><i class="fa fa-check"></i><b>7.1.1</b> 局部加权最小二乘的偏差-方差分解</a></li>
+<li class="chapter" data-level="7.1.2" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86"><i class="fa fa-check"></i><b>7.1.2</b> 标准差椭圆</a></li>
+<li class="chapter" data-level="7.1.3" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>7.1.3</b> 异窗宽估计</a></li>
+<li class="chapter" data-level="7.1.4" data-path="gtwr.html"><a href="gtwr.html#%E6%9C%89%E6%95%88%E8%87%AA%E7%94%B1%E5%BA%A6"><i class="fa fa-check"></i><b>7.1.4</b> 有效自由度</a></li>
+<li class="chapter" data-level="7.1.5" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95"><i class="fa fa-check"></i><b>7.1.5</b> 标准差椭圆分类算法</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-5"><i class="fa fa-check"></i><b>7.4</b> 论文未展示的详细推导</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E4%BC%B0%E8%AE%A1%E6%98%AF%E9%80%90%E5%8C%BA%E5%9F%9F%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98"><i class="fa fa-check"></i><b>7.4.1</b> 异窗宽估计是逐区域加权最小二乘</a></li>
-<li class="chapter" data-level="7.4.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E6%9C%89%E6%95%88%E8%87%AA%E7%94%B1%E5%BA%A6"><i class="fa fa-check"></i><b>7.4.2</b> 异窗宽的有效自由度</a></li>
-<li class="chapter" data-level="7.4.3" data-path="gtwr.html"><a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A5%E9%AA%A4"><i class="fa fa-check"></i><b>7.4.3</b> 标准差椭圆分类算法的步骤</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="gtwr.html"><a href="gtwr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-5"><i class="fa fa-check"></i><b>7.5</b> 实现细节与数值注意</a></li>
-<li class="chapter" data-level="7.6" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.6</b> 数值演示</a></li>
-<li class="chapter" data-level="7.7" data-path="gtwr.html"><a href="gtwr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-5"><i class="fa fa-check"></i><b>7.7</b> 延伸阅读</a></li>
+<li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-5"><i class="fa fa-check"></i><b>7.2</b> 实现与计算</a></li>
+<li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
@@ -313,40 +289,27 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="gtwr" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">第 7</span> 局部回归的窗宽设定：从同窗宽到异窗宽<a href="gtwr.html#gtwr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>对应论文：侯健, 王芝皓, 田茂再, 窦燕. 基于异窗宽 GTWR 模型的商品
-住宅价格影响因素研究. <em>数理统计与管理</em>, 2022, 41(06): 1003-1014
-<span class="citation">(<a href="#ref-hou2022gtwr">侯健 et al. 2022</a>)</span>。本章是论文的补充材料：补齐窗宽问题的偏差-方差
-分析、标准差椭圆这一空间统计工具的完整计算，以及区域划分的
-算法细节。</p>
-<div id="背景与动机-5" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> 背景与动机<a href="gtwr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>问题起源。</strong> 商品住宅价格的空间建模中，回归系数（如面积、区位、
-朝向的影响）随位置与时间变化。GTWR <span class="citation">(<a href="#ref-huang2010geographically">Huang et al. 2010</a>)</span>
-在 GWR 上加入时间维度，是房价研究的常用工具。但 GTWR 有一个
-隐含假设：<strong>所有样本、所有因素共用同一个窗宽 <span class="math inline">\(h\)</span></strong>。这个假设的
-后果是：如果城市不同区域的空间异质性强度不同（老城区效应变化
-平缓、新开发区效应变化剧烈），单一 <span class="math inline">\(h\)</span> 必然在某个区域过拟合、
+<p>商品住宅价格的空间建模中，回归系数（如面积、区位、朝向的影响）
+随位置与时间变化。GTWR <span class="citation">(<a href="#ref-huang2010geographically">Huang et al. 2010</a>)</span> 在 GWR
+<span class="citation">(<a href="#ref-fotheringham1996geographically">Fotheringham et al. 1996</a>)</span> 的基础上加入时间维度，是房价
+研究的常用工具。但 GTWR 隐含一个假设：所有样本、所有因素共用同
+一个窗宽 <span class="math inline">\(h\)</span>。若城市不同区域的空间异质性强度不同（老城区效应变化
+平缓、新开发区效应变化剧烈），单一 <span class="math inline">\(h\)</span> 必然在某一个区域过拟合、
 在另一个区域欠拟合。</p>
-<p><strong>窗宽问题的本质。</strong> 窗宽是核回归的<strong>平滑参数</strong>：<span class="math inline">\(h\)</span> 小则局部
-偏差小、方差大；<span class="math inline">\(h\)</span> 大则相反。最优 <span class="math inline">\(h\)</span> 取决于未知的二阶结构
-（效应曲率）与噪声水平——两者都可能随区域变化。论文的”异窗宽”
-是对”每个区域有自己的最优 <span class="math inline">\(h\)</span>“这一事实的直接回应，而区域划分
-用<strong>标准差椭圆分类算法</strong>实现。本章补齐这两个工具的细节。</p>
-</div>
-<div id="论文工作概览-5" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> 论文工作概览<a href="gtwr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>论文提出异窗宽 GTWR：把研究区域划分为 <span class="math inline">\(m\)</span> 个子区域，每个子区域
-<span class="math inline">\(k\)</span> 使用自己的窗宽 <span class="math inline">\(h_k\)</span>，在各区域内做加权最小二乘；区域划分
-采用标准差椭圆分类算法（依据指标空间分布的标准差椭圆形态聚类）；
-在商品住宅价格数据上验证了异窗宽设定在拟合与解释上的改进。</p>
-</div>
-<div id="数学工具详解-5" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> 数学工具详解<a href="gtwr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="局部加权最小二乘的偏差-方差分解" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> 局部加权最小二乘的偏差-方差分解<a href="gtwr.html#%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E5%88%86%E8%A7%A3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>GTWR 在每个位置 <span class="math inline">\(i\)</span> 处的系数估计是加权最小二乘：
+<p>窗宽是核回归的平滑参数：<span class="math inline">\(h\)</span> 小则局部偏差小、方差大，<span class="math inline">\(h\)</span> 大则
+相反。最优 <span class="math inline">\(h\)</span> 取决于未知的二阶结构（效应曲率）与噪声水平，而
+两者都可能随区域变化。异窗宽 GTWR（侯健, 王芝皓, 田茂再 &amp; 窦燕
+2022 <span class="citation">(<a href="#ref-hou2022gtwr">侯健 et al. 2022</a>)</span>）把研究区域划分为 <span class="math inline">\(m\)</span> 个子区域，每个子区域
+<span class="math inline">\(k\)</span> 使用自己的窗宽 <span class="math inline">\(h_k\)</span>，在各区域内做加权最小二乘；区域划分采用
+标准差椭圆分类算法。本章给出窗宽问题的偏差-方差分析、标准差
+椭圆的计算与区域划分的算法细节。</p>
+<div id="数学准备-5" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> 数学准备<a href="gtwr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="局部加权最小二乘的偏差-方差分解" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> 局部加权最小二乘的偏差-方差分解<a href="gtwr.html#%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E5%88%86%E8%A7%A3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>GTWR 在每个位置 <span class="math inline">\(i\)</span> 处的系数估计为加权最小二乘
 <span class="math inline">\(\hat\beta(u_i) = (X^\top W_i X)^{-1} X^\top W_i y\)</span>。设真实模型为
-<span class="math inline">\(y = X\beta(u) + \varepsilon\)</span>，<span class="math inline">\(\mathrm{Var}(\varepsilon) = \sigma^2 I\)</span>。
+<span class="math inline">\(y = X\beta(u) + \varepsilon\)</span>，<span class="math inline">\(\mathrm{Var}(\varepsilon) = \sigma^2 I\)</span>，
 条件偏差与方差为</p>
 <p><span class="math display">\[
 \mathrm{Bias}\bigl[\hat\beta(u_i)\bigr] \approx
@@ -355,112 +318,104 @@ div.csl-indent {
 \mathrm{Var}\bigl[\hat\beta(u_i)\bigr] \approx
 \frac{\sigma^2\, c_2}{n h^2\, f_u(u_i)},
 \]</span></p>
-<p>其中 <span class="math inline">\(c_1, c_2\)</span> 为核常数，<span class="math inline">\(f_u\)</span> 为位置密度。两条规律：</p>
+<p>其中 <span class="math inline">\(c_1, c_2\)</span> 为核常数，<span class="math inline">\(f_u\)</span> 为位置密度。由此得到两条规律：</p>
 <ol style="list-style-type: decimal">
-<li><strong>偏差 ∝ <span class="math inline">\(h^2 \cdot \beta&#39;&#39;\)</span></strong>：效应曲率 <span class="math inline">\(\beta&#39;&#39;\)</span> 大的区域
-（变化剧烈）需要小 <span class="math inline">\(h\)</span> 控制偏差；</li>
-<li><strong>方差 ∝ <span class="math inline">\(1/(h^2 \cdot f_u)\)</span></strong>：采样稀疏区域（<span class="math inline">\(f_u\)</span> 小）需要
+<li>偏差正比于 <span class="math inline">\(h^2 \cdot \beta&#39;&#39;\)</span>：效应曲率 <span class="math inline">\(\beta&#39;&#39;\)</span> 大的区域（变化
+剧烈）需要小 <span class="math inline">\(h\)</span> 控制偏差；</li>
+<li>方差正比于 <span class="math inline">\(1/(h^2 \cdot f_u)\)</span>：采样稀疏的区域（<span class="math inline">\(f_u\)</span> 小）需要
 大 <span class="math inline">\(h\)</span> 控制方差。</li>
 </ol>
-<p><strong>同一个 <span class="math inline">\(h\)</span> 无法同时满足两个区域</strong>——这正是异窗宽的数学依据。
-总均方误差 <span class="math inline">\(\mathrm{MSE} = \mathrm{Bias}^2 + \mathrm{Var}\)</span> 对 <span class="math inline">\(h\)</span>
-的权衡在每处都不同，最优窗宽 <span class="math inline">\(h^*(u_i)\)</span> 是位置的函数。</p>
+<p>同一个 <span class="math inline">\(h\)</span> 无法同时满足两个区域——这就是异窗宽的数学依据。总均方
+误差 <span class="math inline">\(\mathrm{MSE} = \mathrm{Bias}^2 + \mathrm{Var}\)</span> 对 <span class="math inline">\(h\)</span> 的权衡
+在每处都不同，最优窗宽 <span class="math inline">\(h^*(u_i)\)</span> 是位置的函数。</p>
 </div>
-<div id="标准差椭圆空间分布的形状描述" class="section level3 hasAnchor" number="7.3.2">
-<h3><span class="header-section-number">7.3.2</span> 标准差椭圆：空间分布的形状描述<a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E7%A9%BA%E9%97%B4%E5%88%86%E5%B8%83%E7%9A%84%E5%BD%A2%E7%8A%B6%E6%8F%8F%E8%BF%B0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="标准差椭圆" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> 标准差椭圆<a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>标准差椭圆（standard deviational ellipse）是描述点集空间分布的
-经典工具（地理学/犯罪学常用）。给定 <span class="math inline">\(n\)</span> 个位置
-<span class="math inline">\((u_i, v_i)\)</span>，计算步骤：</p>
+经典工具。给定 <span class="math inline">\(n\)</span> 个位置 <span class="math inline">\((u_i, v_i)\)</span>，计算分三步：</p>
 <ol style="list-style-type: decimal">
-<li><strong>均值中心</strong>：<span class="math inline">\(\bar u = \frac1n\sum u_i\)</span>，<span class="math inline">\(\bar v = \frac1n\sum v_i\)</span>；</li>
-<li><strong>方向角 <span class="math inline">\(\theta\)</span></strong>：使坐标旋转后 <span class="math inline">\(u&#39;v&#39;\)</span> 协方差为零的角度，</li>
+<li>均值中心 <span class="math inline">\(\bar u = \frac1n\sum u_i\)</span>，<span class="math inline">\(\bar v = \frac1n\sum v_i\)</span>；</li>
+<li>方向角 <span class="math inline">\(\theta\)</span> 使坐标旋转后 <span class="math inline">\(u&#39;v&#39;\)</span> 协方差为零：</li>
 </ol>
 <p><span class="math display">\[
 \tan 2\theta = \frac{2\sum_i (u_i - \bar u)(v_i - \bar v)}
 {\sum_i (u_i - \bar u)^2 - \sum_i (v_i - \bar v)^2};
 \]</span></p>
 <ol start="3" style="list-style-type: decimal">
-<li><strong>长短轴标准差</strong>：在旋转坐标系下计算
+<li>长短轴标准差在旋转坐标系下计算：
 <span class="math inline">\(\sigma_{u&#39;} = \sqrt{\frac{2}{n}\sum_i (u&#39;_i - \bar u&#39;)^2}\)</span>，
 <span class="math inline">\(\sigma_{v&#39;} = \sqrt{\frac{2}{n}\sum_i (v&#39;_i - \bar v&#39;)^2}\)</span>
-（系数 2 使椭圆覆盖约 98% 的点，若取 1 则约 68%）。</li>
+（系数取 2 使椭圆覆盖约 98% 的点，取 1 则约 68%）。</li>
 </ol>
-<p>椭圆的三个量各有含义：<strong>扁率</strong> <span class="math inline">\(1 - \sigma_{v&#39;}/\sigma_{u&#39;}\)</span> 描述
-方向的各向异性（=1 圆形，&gt;0 拉长），<strong>方向角</strong>描述主导方向，
-<strong>面积</strong> <span class="math inline">\(\pi \sigma_{u&#39;} \sigma_{v&#39;}\)</span> 描述离散程度。论文的分类
-算法正是依据这些量：两个子区域的标准差椭圆若在形态与朝向上
-差异显著，则说明它们的空间影响结构不同，应使用不同窗宽。</p>
+<p>椭圆三个量各有含义：扁率 <span class="math inline">\(1 - \sigma_{v&#39;}/\sigma_{u&#39;}\)</span> 描述方向的
+各向异性（0 为圆，大于 0 为拉长），方向角描述主导方向，面积
+<span class="math inline">\(\pi \sigma_{u&#39;} \sigma_{v&#39;}\)</span> 描述离散程度。分类算法依据这些量：
+若两个子区域的标准差椭圆在形态与朝向上差异显著，则说明其空间影响
+结构不同，应使用不同的窗宽。</p>
+<p>之所以用椭圆而非简单的经纬度网格，是因为网格边界与真实的空间影响
+结构无关——斜向延伸的城市走廊会被网格切成碎片。标准差椭圆是数据
+驱动的形状，捕捉点集的真实各向异性，分类依据的是空间影响结构的
+相似性而非地理位置的邻近性。</p>
 </div>
-<div id="为什么用椭圆而非简单的空间网格" class="section level3 hasAnchor" number="7.3.3">
-<h3><span class="header-section-number">7.3.3</span> 为什么用椭圆而非简单的空间网格<a href="gtwr.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%A4%AD%E5%9C%86%E8%80%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E7%9A%84%E7%A9%BA%E9%97%B4%E7%BD%91%E6%A0%BC" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>按经纬度网格划分区域看似自然，但网格边界与真实的空间影响结构
-无关：一个斜向延伸的城市走廊会被网格切成碎片。标准差椭圆是
-<strong>数据驱动的形状</strong>——它捕捉点集的真实各向异性，分类依据的是
-“空间影响结构的相似性”而非”地理位置的邻近性”。</p>
-</div>
-</div>
-<div id="论文未展示的详细推导-5" class="section level2 hasAnchor" number="7.4">
-<h2><span class="header-section-number">7.4</span> 论文未展示的详细推导<a href="gtwr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="异窗宽估计是逐区域加权最小二乘" class="section level3 hasAnchor" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> 异窗宽估计是逐区域加权最小二乘<a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E4%BC%B0%E8%AE%A1%E6%98%AF%E9%80%90%E5%8C%BA%E5%9F%9F%E5%8A%A0%E6%9D%83%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>论文的异窗宽模型把样本划分为 <span class="math inline">\(m\)</span> 个子区域，权重矩阵
+<div id="异窗宽估计" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> 异窗宽估计<a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E4%BC%B0%E8%AE%A1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>异窗宽模型把样本划分为 <span class="math inline">\(m\)</span> 个子区域，权重矩阵
 <span class="math inline">\(W_D = \mathrm{diag}(W_1, \dots, W_m)\)</span>，其中 <span class="math inline">\(W_k\)</span> 用窗宽 <span class="math inline">\(h_k\)</span>
-构造。第 <span class="math inline">\(k\)</span> 区域的系数估计为</p>
+构造。第 <span class="math inline">\(k\)</span> 个区域的系数估计为</p>
 <p><span class="math display">\[
 \hat\beta_{Dk} = \arg\min_\beta \bigl\| \sqrt{W_k}\,(Y_k - X_k \beta)\bigr\|_2^2
 = \bigl(X_k^\top W_k X_k\bigr)^{-1} X_k^\top W_k Y_k,
 \]</span></p>
-<p>即<strong>在子区域 <span class="math inline">\(k\)</span> 内做一次带权重的普通最小二乘</strong>。推导与第
-<a href="mgtwr.html#mgtwr">6</a> 章的加权最小二乘完全相同（展开平方、求导置零）。
-结构上的要点：各区域的估计互不影响（<span class="math inline">\(W_D\)</span> 块对角），因此异窗宽
-模型的<strong>计算复杂度与同窗宽相同</strong>——只是把一次 <span class="math inline">\(n \times n\)</span>
-加权拟合换成 <span class="math inline">\(m\)</span> 次较小的加权拟合，总成本更低。</p>
+<p>即在子区域 <span class="math inline">\(k\)</span> 内做一次带权重的普通最小二乘（推导与第
+<a href="mgtwr.html#mgtwr">6</a> 章的加权最小二乘相同：展开平方、求导置零）。各区域
+的估计互不影响（<span class="math inline">\(W_D\)</span> 块对角），因此异窗宽模型的计算复杂度与同
+窗宽相当——只是把一次 <span class="math inline">\(n \times n\)</span> 加权拟合换成 <span class="math inline">\(m\)</span> 次较小的加权
+拟合。</p>
 </div>
-<div id="异窗宽的有效自由度" class="section level3 hasAnchor" number="7.4.2">
-<h3><span class="header-section-number">7.4.2</span> 异窗宽的有效自由度<a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E6%9C%89%E6%95%88%E8%87%AA%E7%94%B1%E5%BA%A6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="有效自由度" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> 有效自由度<a href="gtwr.html#%E6%9C%89%E6%95%88%E8%87%AA%E7%94%B1%E5%BA%A6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>同窗宽 GTWR 的有效参数个数为 <span class="math inline">\(\mathrm{tr}(S)\)</span>（<span class="math inline">\(S\)</span> 为帽子矩阵，
-见第 <a href="mgtwr.html#mgtwr">6</a> 章）。异窗宽的帽子矩阵 <span class="math inline">\(S_D = \mathrm{diag}(S_1,
-\dots, S_m)\)</span>（各子区域帽子矩阵的块对角拼接），有效自由度
-<span class="math inline">\(\mathrm{tr}(S_D) = \sum_k \mathrm{tr}(S_k)\)</span>——<strong>各区域自由度的
-加和</strong>。这意味着异窗宽模型的自由度自动反映各区域的实际复杂度，
-AICc 型准则可以公平比较同窗宽与异窗宽设定。</p>
+见第 <a href="mgtwr.html#mgtwr">6</a> 章）。异窗宽的帽子矩阵为
+<span class="math inline">\(S_D = \mathrm{diag}(S_1, \dots, S_m)\)</span>，有效自由度
+<span class="math inline">\(\mathrm{tr}(S_D) = \sum_k \mathrm{tr}(S_k)\)</span>，即各区域自由度的加和。
+因此异窗宽模型的自由度自动反映各区域的实际复杂度，AICc 型准则
+可以公平地比较同窗宽与异窗宽。</p>
 </div>
-<div id="标准差椭圆分类算法的步骤" class="section level3 hasAnchor" number="7.4.3">
-<h3><span class="header-section-number">7.4.3</span> 标准差椭圆分类算法的步骤<a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A5%E9%AA%A4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>论文算法的实现步骤（补充细节）：</p>
+<div id="标准差椭圆分类算法" class="section level3 hasAnchor" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> 标准差椭圆分类算法<a href="gtwr.html#%E6%A0%87%E5%87%86%E5%B7%AE%E6%A4%AD%E5%9C%86%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>算法步骤为：</p>
 <ol style="list-style-type: decimal">
 <li>对每个回归指标 <span class="math inline">\(j\)</span>，计算其系数空间分布（各位置估计
 <span class="math inline">\(\hat\beta_j(u_i)\)</span> 的加权位置）的标准差椭圆参数；</li>
-<li>以椭圆的<strong>面积、扁率、方向角</strong>为特征，对指标做聚类（论文用
-层次聚类或 <span class="math inline">\(k\)</span>-means），得到指标分组；</li>
-<li>同一组的指标共享区域划分与窗宽结构；不同组独立确定窗宽；</li>
-<li>对每组做交叉验证选择 <span class="math inline">\(h_k\)</span>，若某组的 <span class="math inline">\(h_k\)</span> 与全局最优 <span class="math inline">\(h\)</span>
-差异小于阈值，则合并该组（避免过拟合）。</li>
+<li>以椭圆的面积、扁率、方向角为特征，对指标做聚类（层次聚类或
+<span class="math inline">\(k\)</span>-means），得到指标分组；</li>
+<li>同一组的指标共享区域划分与窗宽结构，不同组独立确定窗宽；</li>
+<li>对每组做交叉验证选择 <span class="math inline">\(h_k\)</span>；若某组的 <span class="math inline">\(h_k\)</span> 与全局最优 <span class="math inline">\(h\)</span>
+差异小于阈值，则合并该组，以避免过拟合。</li>
 </ol>
 </div>
 </div>
-<div id="实现细节与数值注意-5" class="section level2 hasAnchor" number="7.5">
-<h2><span class="header-section-number">7.5</span> 实现细节与数值注意<a href="gtwr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="实现与计算-5" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> 实现与计算<a href="gtwr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li><strong>区域数 <span class="math inline">\(m\)</span> 的选择</strong>：<span class="math inline">\(m\)</span> 太大则每区域样本过少（方差失控），
-<span class="math inline">\(m\)</span> 太小退化为同窗宽。论文的经验：<span class="math inline">\(m = 2 \sim 4\)</span> 在房价数据
-上表现稳定；用 BIC 型准则或肘部法则辅助选择。</li>
-<li><strong>椭圆参数的稳健性</strong>：均值中心与标准差对离群位置敏感；实现
-时可用中位数中心与 MAD 尺度替代（论文未提，但数据含离群
-楼盘时建议）。</li>
-<li><strong><span class="math inline">\(h_k\)</span> 的搜索范围</strong>：每区域 <span class="math inline">\(h_k\)</span> 用该区域的距离分位数确定
-网格（如 <span class="math inline">\([10\%, 90\%]\)</span> 分位数之间取 10 个候选），避免跨区域
-比较时量纲不一致。</li>
-<li><strong>同窗宽与异窗宽的比较</strong>：比较应在同一准则下进行（AICc 或
-交叉验证 MSE）；论文的结果显示异窗宽在拟合优度上占优，但
-参数解释上更复杂——报告时应同时给出两套结果。</li>
+<span class="math inline">\(m\)</span> 太小退化为同窗宽。经验上 <span class="math inline">\(m = 2 \sim 4\)</span> 在房价数据上表现
+稳定，可用 BIC 型准则或肘部法则辅助选择。</li>
+<li><strong>椭圆参数的稳健性</strong>：均值中心与标准差对离群位置敏感；若数据
+含离群楼盘，可用中位数中心与 MAD 尺度替代。</li>
+<li><strong><span class="math inline">\(h_k\)</span> 的搜索范围</strong>：每个区域的 <span class="math inline">\(h_k\)</span> 用该区域的距离分位数
+确定网格（如在 <span class="math inline">\(10\%\)</span> 到 <span class="math inline">\(90\%\)</span> 分位数之间取 10 个候选），避免
+跨区域比较时量纲不一致。</li>
+<li><strong>同窗宽与异窗宽的比较</strong>：应在同一准则下进行（AICc 或交叉验证
+MSE）。异窗宽通常在拟合优度上占优，但解释上更复杂——报告时应
+同时给出两套结果。</li>
 </ol>
 </div>
-<div id="数值演示-5" class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">7.6</span> 数值演示<a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>演示：单一窗宽无法同时适应两个异质性不同的区域。</strong> 构造两个
-子区域（效应平缓 vs 剧烈），比较小窗宽、大窗宽与”异窗宽（各自
-最优）“的拟合误差。</p>
+<div id="数值例-5" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> 数值例<a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>例：单一窗宽无法同时适应两个异质性不同的区域。</strong> 构造两个子
+区域（效应平缓 vs 剧烈），比较小窗宽、大窗宽与”各自最优”（异窗宽）
+的拟合误差。</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="gtwr.html#cb24-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
 <span id="cb24-2"><a href="gtwr.html#cb24-2" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">100</span>; nB <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb24-3"><a href="gtwr.html#cb24-3" tabindex="-1"></a>uA <span class="ot">&lt;-</span> <span class="fu">runif</span>(nA); uB <span class="ot">&lt;-</span> <span class="fu">runif</span>(nB)</span>
@@ -496,26 +451,25 @@ AICc 型准则可以公平比较同窗宽与异窗宽设定。</p>
 图 7.1: 三种窗宽策略在两个区域上的拟合 RMSE
 </p>
 </div>
-<p>结果解读：小窗宽在平缓区域 A 过拟合（RMSE 高于大窗宽），大窗宽
-在剧烈区域 B 严重欠拟合；“各自最优”（异窗宽）在每个区域都达到
-最低 RMSE。这就是论文异窗宽设定优于同窗宽的机制，也是第
-<a href="mgtwr.html#mgtwr">6</a> 章”区域差异”主题的数值落点。</p>
+<p>结果解读：小窗宽在平缓区域 A 过拟合（RMSE 高于大窗宽），大窗宽在
+剧烈区域 B 严重欠拟合；“各自最优”（异窗宽）在每个区域都达到最低
+RMSE。这正是异窗宽设定优于同窗宽的机制，也是第 <a href="mgtwr.html#mgtwr">6</a> 章
+区域差异主题的数值落点。</p>
 </div>
-<div id="延伸阅读-5" class="section level2 hasAnchor" number="7.7">
-<h2><span class="header-section-number">7.7</span> 延伸阅读<a href="gtwr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="注记-5" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> 注记<a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><strong>Huang, Wu &amp; Barry (2010)</strong> <span class="citation">(<a href="#ref-huang2010geographically">Huang et al. 2010</a>)</span>：GTWR
-原始论文，同窗宽设定下的时空核与带宽选择；</li>
-<li><strong>Fotheringham, Brunsdon &amp; Charlton (2002)</strong>: <em>Geographically
-Weighted Regression</em>：核、带宽与 GWR 推断的标准参考；</li>
-<li><strong>Wang, Du, Ge &amp; Wang (2019)</strong>, <em>International Journal of
-Geographical Information Science</em>：多带宽 GWR（MGWR）的后续
-发展——异窗宽思想的”每指标独立窗宽”版本；</li>
-<li>标准差椭圆的经典文献：Lefever (1926), <em>Measuring Geographic
-Concentration by Means of the Standard Deviational Ellipse</em>；</li>
-<li>与本笔记第 <a href="mgtwr.html#mgtwr">6</a> 章的关联：变量选择回答”哪些指标固定”，
-异窗宽回答”固定指标的平滑尺度是否随区域变化”——同一问题的
-两个层次。</li>
+<li>GTWR 的原始论文及其同窗宽设定下的时空核与带宽选择见 Huang, Wu
+&amp; Barry (2010) <span class="citation">(<a href="#ref-huang2010geographically">Huang et al. 2010</a>)</span>。</li>
+<li>GWR 的核、带宽与推断的标准参考为 Fotheringham, Brunsdon &amp;
+Charlton (2002), <em>Geographically Weighted Regression</em>。</li>
+<li>多带宽 GWR（MGWR）——异窗宽思想”每指标独立窗宽”的后续发展——
+见 Wang, Du, Ge &amp; Wang (2019), <em>International Journal of
+Geographical Information Science</em>。</li>
+<li>标准差椭圆的经典文献为 Lefever (1926), <em>Measuring Geographic
+Concentration by Means of the Standard Deviational Ellipse</em>。</li>
+<li>与第 <a href="mgtwr.html#mgtwr">6</a> 章的关联：变量选择回答”哪些指标固定”，异窗宽
+回答”固定指标的平滑尺度是否随区域变化”，是同一问题的两个层次。</li>
 </ul>
 
 <div id="refs" class="references csl-bib-body hanging-indent">
@@ -575,6 +529,9 @@ Zou, Hui, and Ming Yuan. 2008. <span>“Composite Quantile Regression and the Or
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fotheringham1996geographically" class="csl-entry">
+Fotheringham, A Stewart, Martin Charlton, and Chris Brunsdon. 1996. <span>“The Geography of Parameter Space: An Investigation of Spatial Non-Stationarity.”</span> <em>International Journal of Geographical Information Systems</em> 10 (5): 605–27.
+</div>
 <div id="ref-huang2010geographically" class="csl-entry">
 Huang, Bo, Bo Wu, and Michael Barry. 2010. <span>“Geographically and Temporally Weighted Regression for Modeling Spatio-Temporal Variation in House Prices.”</span> <em>International Journal of Geographical Information Science</em> 24 (3): 383–401.
 </div>

@@ -1,50 +1,26 @@
 # 鞍点逼近：从拉普拉斯积分到相对风险置信区间 {#poisson-rr}
 
-对应论文：侯健, 刘硕, 田茂再. 泊松分布下基于鞍点逼近的相对风险置信
-区间构造. *统计与信息论坛*, 2025, 40(08): 3-13 [@hou2025poissonrr]。
-本章是论文的补充材料：论文以"由鞍点逼近可得"带过的数学工具与
-推导步骤，在这里补齐。
+相对风险（relative risk, RR）是比较暴露组与对照组事件发生率的常用
+指标。在随机对照试验中，两组观察期间的发病数通常以泊松分布建模，
+关注的参数为两组发病率之比
+$\mathrm{RR} = \lambda_1/\lambda_0$。对该比率的区间估计，经典做法
+利用 $\hat{R}$ 的渐近正态性，并通过 Delta 方法估计其方差。然而
+$\hat{R}$ 是两个泊松计数之比，分布右偏、支撑非负：正态近似在小
+样本下偏差明显，区间下限还可能取负值。鞍点逼近（Daniels 1954
+[@daniels1954saddlepoint]）以 $O(n^{-3/2})$ 的尾概率相对误差替代
+正态近似的 $O(n^{-1/2})$，比 Edgeworth 展开稳定、比 bootstrap 高效
+[@davison1997bootstrap]，为小样本区间构造提供了合适的工具。本章在
+泊松框架下展开这一方法所需的数学准备与置信区间的完整构造，相关
+应用的细节见 侯健等 (2025) [@hou2025poissonrr]。
 
-## 背景与动机
+## 数学准备
 
-**问题起源。** 流行病学的随机对照试验中，暴露组与对照组的发病数
-$Y_1, Y_0$ 通常视为泊松计数，关注的指标是相对风险
-$\mathrm{RR} = \lambda_1/\lambda_0$（发病率之比）。区间估计的经典路线
-是正态近似：$\hat{R}$ 渐近正态，用 Delta 方法估计方差。但正态近似
-有两个已知缺陷：
+本节给出构造中使用的五件工具：Delta 方法、拉普拉斯积分、累积量
+生成函数、逆转公式，以及鞍点方程的数值求解。
 
-1. **偏差与覆盖不足**：$\hat{R}$ 是**两个计数之比**，其分布右偏，
-   正态近似在小样本下偏差明显（论文表 1--9 中 Wald 区间覆盖率
-   系统性偏离 95%）；
-2. **区间不合理**：正态区间的下限可能为负（概率不可能为负），
-   需截断处理。
+### Delta 方法
 
-**鞍点逼近在文献中的位置。** 鞍点逼近（saddlepoint approximation）
-源于 Daniels (1954) [@daniels1954saddlepoint]，是"用小样本高阶精度
-替代大样本正态近似"家族的一员，与 Edgeworth 展开、经验似然
-[@owen1988empirical]、bootstrap [@davison1997bootstrap] 并列。
-它比 Edgeworth 更稳定（相对误差 $O(n^{-3/2})$ 且密度非负），比
-bootstrap 快几个数量级。论文的工作是把鞍点逼近从"单变量样本均值"
-推广到"两个泊松计数之比"这一具体泛函，并给出完整的区间构造流程。
-
-## 论文工作概览
-
-论文做了三件事：（i）在泊松设定下写出 $\hat{R}$ 的分布变换，把
-$\mathrm{P}(\hat{R} \le r)$ 化为 $\mathrm{P}(Z \le 0)$，其中
-$Z = N_1 Y_0 - r N_0 Y_1$；（ii）对 $Z$ 的累积量生成函数做鞍点展开，
-用 Jensen 型公式逼近尾概率；（iii）反转尾概率得到置信区间，并用
-蒙特卡洛模拟与多种传统方法比较。本章补充 (i)(ii) 背后的工具与推导。
-
-## 数学工具详解
-
-论文直接使用、但没有展开的数学工具共五件：Delta 方法、Laplace
-逼近、累积量生成函数、逆转公式、鞍点方程的数值求解。下面逐一
-补齐定义与推导。
-
-### Delta 方法：为什么 Var(λ̂₁/λ̂₀) 长成那个样子
-
-论文式 (6) 直接给出了 $\mathrm{Var}(\hat R)$ 的 Delta 近似。其来源
-是如下定理：
+方差公式 (6) 源于 Delta 方法：
 
 ::: {.theorem #delta name="Delta 方法"}
 设 $\sqrt{n}(\boldsymbol{X}_n - \boldsymbol{\mu}) \xrightarrow{d}
@@ -65,7 +41,7 @@ N\!\bigl(0,\ \nabla g(\boldsymbol{\mu})^\top \boldsymbol{\Sigma}
 (\#eq:delta)
 \end{equation}
 
-**证明（一维情形）。** 对 $g(\bar X)$ 在 $\mu$ 处做一阶泰勒展开：
+一维情形的证明：在 $\mu$ 处对 $g(\bar X)$ 做一阶 Taylor 展开，
 
 $$
 g(\bar X) = g(\mu) + g'(\mu^*)(\bar X - \mu),
@@ -73,33 +49,32 @@ $$
 
 其中 $\mu^*$ 介于 $\bar X$ 与 $\mu$ 之间。由 $g'$ 的连续性，
 $g'(\mu^*) \xrightarrow{p} g'(\mu)$；由假设
-$\sqrt{n}(\bar X - \mu) \xrightarrow{d} N(0, \sigma^2)$。Slutsky
-引理给出 $\sqrt{n}(g(\bar X) - g(\mu)) \xrightarrow{d}
+$\sqrt{n}(\bar X - \mu) \xrightarrow{d} N(0, \sigma^2)$，Slutsky
+引理即得 $\sqrt{n}(g(\bar X) - g(\mu)) \xrightarrow{d}
 N(0, g'(\mu)^2 \sigma^2)$。
 
-**应用到 $\hat R = \hat\lambda_1 / \hat\lambda_0$。** 取
-$g(x, y) = x/y$，则 $\partial g/\partial x = 1/y$，
-$\partial g/\partial y = -x/y^2$，于是
+取 $g(x, y) = x/y$ 以处理 $\hat R = \hat\lambda_1 / \hat\lambda_0$。
+偏导数为 $\partial g/\partial x = 1/y$、$\partial g/\partial y =
+-x/y^2$，代入即得
 
 $$
 \mathrm{Var}(\hat R) \approx
 \frac{\mathrm{Var}(\hat\lambda_1)}{\lambda_0^2}
 + \frac{\lambda_1^2\,\mathrm{Var}(\hat\lambda_0)}{\lambda_0^4}
-- \frac{2\lambda_1\,\mathrm{Cov}(\hat\lambda_0, \hat\lambda_1)}{\lambda_0^3},
+- \frac{2\lambda_1\,\mathrm{Cov}(\hat\lambda_0, \hat\lambda_1)}{\lambda_0^3}.
 $$
 
-即论文式 (6)。注意这是**一阶近似**：它忽略了 $g$ 的二阶项，而
-$\hat R$ 分布的非对称性恰恰来自二阶项——这正是论文转向鞍点逼近
-的动机。Delta 方法的"方差近似 + 正态分位数"组合在小样本下既偏
-又窄。
+注意这是一阶近似：它舍弃了 $g$ 的二阶项，而 $\hat R$ 分布的非对称性
+恰恰由二阶项决定。以"Delta 方差 + 正态分位数"构造区间，在小样本下
+既偏又窄——这正是需要高阶工具（下文的鞍点逼近）的原因。
 
-### Laplace 逼近：鞍点方法的地基
+### 拉普拉斯积分
 
-鞍点方法的地基是拉普拉斯积分近似。考虑积分
+鞍点方法的地基是拉普拉斯积分的近似。考虑
 $I_n = \int e^{n h(x)}\, dx$，其中 $h$ 在 $x_0$ 处取最大值
 （$h'(x_0) = 0$, $h''(x_0) < 0$）。当 $n$ 增大时，被积函数在
-$x_0$ 附近形成一个越来越尖的峰，积分主要由峰附近贡献。对
-$h$ 做二阶泰勒展开并利用高斯积分
+$x_0$ 附近形成越来越尖的峰，积分几乎完全由峰的邻域贡献。对 $h$
+做二阶 Taylor 展开，并利用高斯积分
 $\int_{-\infty}^{+\infty} e^{-a u^2/2}\, du = \sqrt{2\pi/a}$：
 
 \begin{align}
@@ -109,37 +84,35 @@ I_n &\approx \int \exp\Bigl\{n\Bigl[h(x_0) + \tfrac12 h''(x_0)(x-x_0)^2\Bigr]\Bi
 (\#eq:laplace)
 \end{align}
 
-把 $h$ 展开到四阶并保留高斯积分的前几个矩，可证上式具有
-$O(n^{-1})$ 量级的**相对**误差——比中心极限定理的 $O(n^{-1/2})$
-快得多。
+将 $h$ 展开到四阶并保留高斯积分的前几个矩，可验证上式具有
+$O(n^{-1})$ 量级的相对误差，远优于中心极限定理的 $O(n^{-1/2})$。
 
-论文式 (21)--(24) 的"泰勒展开 + 积分"正是这个套路：把密度写为
-$f(x) = \exp\{h(x)\}$，对 $h$ 展开；把密度写为边际
-$f(x) = \int m(x, t)\, dt$ 时，再对 $\kappa(x, t) = \log m(x, t)$
-关于 $t$ 做一次 Laplace 逼近，得到论文式 (24) 的鞍点公式。
+把密度写成 $f(x) = \exp\{h(x)\}$ 并对 $h$ 展开，或把密度写成边际
+$f(x) = \int m(x,t)\, dt$ 再对 $\kappa(x,t) = \log m(x,t)$ 关于
+$t$ 做拉普拉斯近似，即得到 $f$ 的鞍点公式。
 
-### 累积量生成函数：为什么是"对数"矩生成函数
+### 累积量生成函数
 
 设 $M(t) = \mathrm{E}[e^{tX}]$ 为矩生成函数，
-$K(t) = \log M(t)$ 为累积量生成函数。对数的作用是**把矩的乘积
-结构变成加法**：独立变量和的 MGF 是乘积 $M_{X+Y}(t) = M_X(t) M_Y(t)$，
-而 CGF 是求和 $K_{X+Y}(t) = K_X(t) + K_Y(t)$。更重要的是，$K$
-的各阶导数在 $t=0$ 处给出累积量：
+$K(t) = \log M(t)$ 为累积量生成函数。对数的作用在于把矩的乘法结构
+转化为加法：独立变量和的矩生成函数是乘积
+$M_{X+Y}(t) = M_X(t) M_Y(t)$，而其累积量生成函数是求和
+$K_{X+Y}(t) = K_X(t) + K_Y(t)$。$K$ 的各阶导数在 $t=0$ 处给出相应
+的累积量：
 
 $$
 K'(0) = \mathrm{E}[X], \qquad K''(0) = \mathrm{Var}(X),
 \qquad K'''(0) = \mathrm{E}[(X - \mathrm{E}X)^3], \dots
 $$
 
-且 $K$ 是凸函数（$K''(t) = \mathrm{Var}_{\theta_t}(X) \ge 0$，
-其中 $\theta_t$ 为指数倾斜分布）。鞍点方法反复使用这三条性质：
-求和性（论文式 (26) 中 $Z$ 的 MGF 是两个独立泊松 MGF 之积）、
-导数即累积量（论文式 (28) 中的 $\zeta_3, \zeta_4$ 是标准化偏度与
-峰度）、凸性（保证鞍点方程 $K'(\theta) = x$ 有唯一解）。
+且 $K$ 是凸函数：$K''(t) = \mathrm{Var}_{\theta_t}(X) \ge 0$，其中
+$\theta_t$ 为指数倾斜分布。这三条性质在鞍点方法中反复使用：求和性
+使两个独立泊松变量的累积量生成函数成为两项之和；导数给出标准差、
+偏度、峰度等量；凸性保证鞍点方程 $K'(\theta) = x$ 有唯一解。
 
-### 逆转公式：密度与特征函数的对偶
+### 逆转公式
 
-论文式 (24) 从矩生成函数出发的写法基于逆转公式：
+以矩生成函数出发表述密度，依据的是逆转公式
 
 $$
 f(x) = \frac{1}{2\pi} \int_{-\infty}^{+\infty}
@@ -147,34 +120,31 @@ f(x) = \frac{1}{2\pi} \int_{-\infty}^{+\infty}
 \qquad \varphi_X(t) = \mathrm{E}[e^{itX}],
 $$
 
-即密度是特征函数的 Fourier 逆变换。把积分路径从实轴搬到复平面
-（$\hat t = it$ 的替换），得到论文式 (24) 的复数积分形式；被积
-函数 $\exp\{K_X(\hat t) - \hat t x\}$ 在鞍点处被 Laplace 逼近。
-**鞍点**（saddle point）这个名字来自复分析：$K_X(\hat t) - \hat t x$
-作为 $\hat t$ 的函数在 $\hat t(x)$ 处既非极大也非极小，而是
-"马鞍形"的驻点。
+即密度是特征函数的 Fourier 逆变换。把积分路径从实轴搬至复平面
+（替换 $\hat t = it$），得到复数积分形式；被积函数
+$\exp\{K_X(\hat t) - \hat t x\}$ 在鞍点处做拉普拉斯逼近即得鞍点
+公式。**鞍点**（saddle point）一名来自复分析：$K_X(\hat t) - \hat t x$
+作为 $\hat t$ 的函数在 $\hat t(x)$ 处既非极大也非极小，而是马鞍形
+驻点。
 
 ### 鞍点方程的数值求解
 
-鞍点方程 $K'_Z(\theta) = 0$ 通常没有闭式解，论文只说"数值方法
-求解"。由于 $K$ 凸，最自然的选择是**牛顿法**：
+鞍点方程 $K'_Z(\theta) = 0$ 一般没有闭式解。由于 $K$ 凸，最自然的
+选择是牛顿法：
 
 $$
 \theta_{k+1} = \theta_k - \frac{K'_Z(\theta_k)}{K''_Z(\theta_k)},
 $$
 
-从 $\theta_0 = 0$ 出发（$K'(0) = \mathrm{E}[Z]$ 的符号决定了解在
-$0$ 的哪一侧）。论文的 $Z = N_1 Y_0 - r N_0 Y_1$ 的 CGF 及其导数
-（论文式 (27) 及之后三行）都是 $\theta$ 的指数函数，牛顿法的每
-一步都是闭式计算，收敛极快。
+从 $\theta_0 = 0$ 出发，$K'(0) = \mathrm{E}[Z]$ 的符号决定了解在
+$0$ 的哪一侧。在泊松设定下，$Z$ 的累积量生成函数及其导数都是
+$\theta$ 的指数函数，牛顿法每一步都是闭式计算，收敛极快。
 
-## 论文未展示的详细推导
+## 相对风险的鞍点置信区间
 
-### 从 $\mathrm{P}(\hat R \le r)$ 到 $\mathrm{P}(Z \le 0)$
-
-论文式 (25) 的变换是全文最关键的一步，其细节如下。记
-$N_i^*$ 为第 $i$ 组的平均观察人数（论文中简记为 $N_i$），
-$\hat\lambda_i = Y_i / N_i$。则
+构造的第一步是把 $\hat{R}$ 的累积分布函数改写为两个泊松变量线性
+组合的分布。记 $N_i^*$ 为第 $i$ 组的平均观察人数，$\hat\lambda_i =
+Y_i / N_i$，则
 
 $$
 \hat R \le r
@@ -183,37 +153,39 @@ $$
 \iff \underbrace{N_1 Y_0 - r N_0 Y_1}_{Z} \ge 0.
 $$
 
-注意两个细节：（i）$Z$ 是**离散变量**（泊松计数的线性组合），
-所以 $\mathrm{P}(\hat R \le r) = \mathrm{P}(Z \ge 0)$ 的严格不等号
-处理（$\le$ vs $<$）在高阶逼近中会产生 $O(n^{-1})$ 量级的差异，
-论文用连续性修正系数 $1 - e^{-|\hat\theta|}$（式 (28) 花括号内
-第一项）吸收；（ii）$Z$ 的符号约定：论文定义 $Z = N_1 Y_0 - r N_0 Y_1$
-并考察 $\mathrm{P}(Z \le 0)$，与这里 $\ge 0$ 的写法差一个符号，
-对应 $B_0(\lambda)$ 前系数的正负——使用时需与论文式 (25) 的
-约定保持一致。
+这里有两个需要注意的细节。其一，$Z$ 是离散变量（泊松计数的线性
+组合），因此 $\mathrm{P}(\hat R \le r) = \mathrm{P}(Z \ge 0)$ 中
+严格不等号的处理在高阶逼近中会产生 $O(n^{-1})$ 量级的差异，须用
+连续性修正吸收；下文式 (28) 中花括号内的
+$1 - e^{-|\hat\theta|}$ 即承担此角色。其二，$Z$ 的符号约定需前后
+一致：以 $Z = N_1 Y_0 - r N_0 Y_1$ 且考察 $\mathrm{P}(Z \le 0)$
+为基准，若采用相反的符号则 $B_0(\lambda)$ 前的正负号相应反转。
 
-### $Z$ 的矩生成函数：两步推导
-
-论文式 (26) 直接给出 $\varphi_Z(\theta)$，推导如下。泊松变量
-$Y \sim \mathrm{Poisson}(\mu)$ 的 MGF 为
-$\mathrm{E}[e^{\theta Y}] = \exp\{\mu(e^\theta - 1)\}$。由 $Y_0, Y_1$
-独立：
+$Z$ 的矩生成函数由两个独立泊松变量的矩生成函数相乘得到。泊松变量
+$Y \sim \mathrm{Poisson}(\mu)$ 的矩生成函数为
+$\mathrm{E}[e^{\theta Y}] = \exp\{\mu(e^\theta - 1)\}$，故
 
 $$
 \varphi_Z(\theta) = \mathrm{E}\bigl[e^{\theta N_1 Y_0}\bigr]
 \cdot \mathrm{E}\bigl[e^{-\theta N_0 r\, Y_1}\bigr]
 = e^{N_0 \lambda_0 (e^{\theta N_1} - 1)}
-\cdot e^{N_1 \lambda_1 (e^{-\theta N_0 r} - 1)},
+\cdot e^{N_1 \lambda_1 (e^{-\theta N_0 r} - 1)}.
 $$
 
-取对数即论文式 (27)。求导得到 $\mu_Z(\theta), \sigma^2_Z(\theta)$
-等（论文式 (28) 上方三行）：每一步都是链式法则，
-$e^{\theta N_1}$ 每求一次导就乘一个 $N_1$，这解释了为什么
-$\sigma_Z^2(\theta)$ 中 $N_1^2 N_0$ 与 $N_1 N_0^2$ 的幂次结构。
+取对数得 $K_Z(\theta)$，逐次求导得到 $\mu_Z(\theta)$ 与
+$\sigma^2_Z(\theta)$。求导过程只是链式法则：$e^{\theta N_1}$ 每求一
+次导就多出一个因子 $N_1$，这解释了 $\sigma^2_Z(\theta)$ 中
+$N_1^2 N_0$ 与 $N_1 N_0^2$ 的幂次结构。
 
-### 鞍点方程与 Jensen 公式各项的含义
+令 $K'_Z(\theta) = 0$ 得鞍点方程
 
-论文式 (28) 的 Jensen 型公式初看吓人，其实结构是：
+\begin{equation}
+N_1 N_0 \lambda_0 e^{\theta N_1} - N_1 N_0 \lambda_1 r e^{-\theta N_0 r} = 0,
+(\#eq:saddle-eq)
+\end{equation}
+
+用牛顿法数值求解后，尾概率由 Jensen 型公式给出。该公式的结构可
+分解为
 
 $$
 \mathrm{P}(\hat R' \ge r) \approx
@@ -221,41 +193,58 @@ $$
 {\sigma_Z(\hat\theta)}}_{\text{鞍点密度的尾面积（一阶）}}
 \cdot \underbrace{\bigl\{1 - e^{-|\hat\theta|}\bigr\}}_{\text{离散修正}}
 \cdot \Bigl[\underbrace{B_0(\lambda)}_{\text{正态尾（Mills 比）}}
-+ \underbrace{\cdots}_{\text{高阶修正}}\Bigr].
++ \underbrace{\cdots}_{\text{高阶修正}}\Bigr],
 $$
 
-其中 $\lambda = |\hat\theta| \sigma_Z(\hat\theta)$ 是"倾斜后"的标准化
+其中 $\lambda = |\hat\theta| \sigma_Z(\hat\theta)$ 是倾斜后的标准化
 偏差，$B_0(\lambda) = \lambda e^{\lambda^2/2}\{1 - \Phi(\lambda)\}$
-是标准正态的 **Mills 比**变体：当 $\lambda$ 大（尾端）时
-$B_0(\lambda) \approx \lambda e^{\lambda^2/2} \cdot
-\varphi(\lambda)/\lambda = 1$，退化为正态近似；当 $\lambda$ 小
-（中心）时 $B_0(\lambda) \approx \lambda \cdot
-(1/\sqrt{2\pi} - \lambda/2 + \cdots)$ 提供一阶修正。$B_1$--$B_6$
-是 $B_0$ 的高阶导数组合（论文式 (28) 后的定义），对应 Edgeworth
-型展开中偏度 $\zeta_3$、峰度 $\zeta_4$ 的贡献。
+是标准正态的 Mills 比变体。当 $\lambda$ 较大（尾端）时
+$B_0(\lambda) \to 1$，公式退化为正态近似；当 $\lambda$ 较小时
+$B_0(\lambda) \approx \lambda \cdot (1/\sqrt{2\pi} - \lambda/2 + \cdots)$
+提供一阶修正。$B_1, \dots, B_6$ 是 $B_0$ 的各阶组合，对应 Edgeworth
+型展开中偏度 $\zeta_3$ 与峰度 $\zeta_4$ 的贡献。
 
-## 实现细节与数值注意
+于是 $\hat{R}$ 的近似分布函数为 $\hat F_{\hat R}(r) \approx
+1 - \mathrm{P}(\hat R' \ge r)$，置信水平 $1-\alpha$ 的下限与上限
+分别由
 
-1. **鞍点求解的初值与区间**：牛顿法从 $\theta_0 = 0$ 出发；
-   用 `uniroot` 时，因为 $K'$ 单调递增（$K'' \ge 0$），解唯一，
-   区间可取 $[-20, 20]$ 并设 `extendInt = "yes"` 防止边界外解。
-2. **$\lambda$ 与 $B_0$ 的数值稳定性**：$\lambda$ 大时
-   $\lambda e^{\lambda^2/2}$ 溢出，应改用
+\begin{equation}
+\hat F_{\hat R}(r \mid \hat R_L) = \frac{\alpha}{2},
+\qquad
+\hat F_{\hat R}(r \mid \hat R_U) = 1 - \frac{\alpha}{2}
+(\#eq:ci-equations)
+\end{equation}
+
+解出，得到区间 $(\max\{\hat R_L, 0\}, \hat R_U]$。
+
+::: {.theorem #saddle-approx name="鞍点逼近的区间精度"}
+Jensen 型尾概率公式具有 $O(n^{-3/2})$ 量级的相对误差（正态近视为
+$O(n^{-1/2})$），由其反转得到的置信区间覆盖率更接近名义水平，且
+在小样本下区间长度通常更短。
+:::
+
+## 实现与计算
+
+1. **鞍点求解的初值与区间**：牛顿法从 $\theta_0 = 0$ 出发；用
+   `uniroot` 时，因 $K'$ 单调递增（$K'' \ge 0$）解唯一，区间可取
+   $[-20, 20]$ 并设 `extendInt = "yes"` 防止边界外的解。
+2. **$\lambda$ 与 $B_0$ 的数值稳定性**：$\lambda$ 较大时
+   $\lambda e^{\lambda^2/2}$ 会溢出。应改用等价且稳定的形式
    $\lambda e^{\lambda^2/2}\{1-\Phi(\lambda)\} = \lambda \cdot
-   \mathrm{Mills}(-\lambda)$ 的稳定形式（用 `pnorm(..., lower.tail = FALSE)`
-   直接计算尾部）。
-3. **覆盖率模拟的规模**：论文每组实验重复 2000 次。演示代码用
-   200 次以保证渲染速度；若复现论文表格，应恢复 2000 次并固定
-   种子（`set.seed`），否则不同机器间小数位会有差异。
-4. **区间端点**：$\hat R$ 的支撑是 $(0, \infty)$，反转方程
-   $\hat F_{\hat R}(r) = \alpha/2$ 的下限可能接近 0，论文统一用
-   $\max\{\hat R_L, 0\}$ 截断；数值上对下限的求根区间从
-   $10^{-6}$ 开始，避免在 0 处取对数/指数。
+   \mathrm{Mills}(-\lambda)$，直接用 `pnorm(..., lower.tail = FALSE)`
+   计算尾部。
+3. **覆盖率的蒙特卡洛规模**：本文的数值例为控制渲染时间取 200 次
+   重复。若要精确复现，应增加至数千次并固定随机种子
+   （`set.seed`），否则机器间的小数位会有出入。
+4. **区间端点**：$\hat R$ 的支撑为 $(0, +\infty)$，反转方程
+   $\hat F_{\hat R}(r) = \alpha/2$ 的下限可能接近 0，统一取
+   $\max\{\hat R_L, 0\}$；对下限求根时区间应从 $10^{-6}$ 开始，
+   避免在 0 处计算对数或指数。
 
-## 数值演示
+## 数值例
 
-**演示 1：Delta 方差近似 vs 蒙特卡洛方差。** 验证式 (6) 的精度，
-并直观看到 Delta 近似在小样本下的偏差。
+**例 1：Delta 方差近似与蒙特卡洛方差的比较。** 检验式 (6) 的精度，
+观察 Delta 近似在中等样本下的偏差。
 
 ```{r delta-demo}
 set.seed(2026)
@@ -265,17 +254,15 @@ Rhat <- replicate(mc, {
   y0 <- rpois(1, lam0 * n0); y1 <- rpois(1, lam1 * n1)
   (y1 / n1) / (y0 / n0)
 })
-# Delta 方法近似方差（式 6，独立情形 Cov=0）
+# Delta 方法近似方差（独立情形 Cov=0）
 var_delta <- lam1^2 / lam0^2 * (1 / (lam0 * n0) + 1 / (lam1 * n1))
 c(MC_var = var(Rhat), Delta_var = var_delta,
   MC_mean = mean(Rhat), ratio_mean = lam1 / lam0)
 ```
 
-**演示 2：SPA 区间 vs Wald 区间。** 复现论文的核心比较（覆盖率与
-平均长度）。本演示的 SPA 实现采用一阶 Lugannani–Rice 公式，与
-论文的 Jensen 高阶公式数值上非常接近，但代码量小一个量级——
-这也是实现细节第 2 条的体现：高阶项在 $\lambda$ 不极端时贡献
-甚微。
+**例 2：鞍点区间与 Wald 区间的比较。** 采用一阶 Lugannani–Rice
+公式（与高阶修正形式在 $\lambda$ 不极端时数值非常接近，但实现
+简洁得多）比较覆盖率与平均长度。
 
 ```{r spa-demo}
 spa_ci <- function(y0, y1, n0, n1, alpha = 0.05) {
@@ -290,7 +277,7 @@ spa_ci <- function(y0, y1, n0, n1, alpha = 0.05) {
     K <- n0 * lam0 * (exp(th0 * n1) - 1) + n1 * lam1 * (exp(-th0 * n0 * r) - 1)
     s2 <- n1^2 * n0 * lam0 * exp(th0 * n1) + n1 * n0^2 * lam1 * r^2 * exp(-th0 * n0 * r)
     w <- sign(th0) * sqrt(-2 * K)           # Lugannani-Rice 的 w
-    u <- th0 * sqrt(s2)                     # 与 u = th * sigma
+    u <- th0 * sqrt(s2)                     # u = th * sigma
     if (u == 0 || is.nan(w)) return(NA)
     pnorm(w) + dnorm(w) * (1 / w - 1 / u)
   }
@@ -319,19 +306,21 @@ colnames(tab) <- c("Coverage", "Avg length")
 tab
 ```
 
-```{r spa-plot, echo=FALSE, fig.cap="SPA 与 Wald 区间覆盖率（名义 95%，R=2，N=100）"}
+```{r spa-plot, echo=FALSE, fig.cap="鞍点与 Wald 区间的覆盖率与平均长度（R=2，N=100，名义水平 95%）"}
 barplot(tab[, 1], beside = TRUE, col = c("#0955a4", "#9db8d9"),
         ylim = c(0, 1), main = "Coverage (nominal 95%)", ylab = "Coverage",
         names.arg = rownames(tab))
 abline(h = 0.95, lty = 2, col = "#c0392b")
 ```
 
-## 延伸阅读
+## 注记
 
-- **Lugannani & Rice (1980)**：尾概率逼近的标准形式，本演示的
-  一阶公式即其鞍点版本；论文的 Jensen 公式是其高阶推广。
-- **Daniels (1987)**：鞍点逼近的尾部指数精度与 Edgeworth 的对比。
-- **Davison & Hinkley (1988)**：bootstrap 鞍点逼近（用模拟估计
-  鞍点方程），与本文"解析 CGF"路线互补。
-- 与本笔记第 \@ref(snqesa) 章的关联：经验鞍点逼近把 CGF 换成
-  经验 CGF，是"解析不可得时"的自然推广。
+- Lugannani & Rice (1980) [@lugannani1980saddle] 给出尾概率逼近的
+  标准形式；本文的一阶公式即其鞍点版本，Jensen 公式为其高阶推广。
+- Daniels (1987) 讨论了鞍点逼近的尾部指数精度及其与 Edgeworth
+  展开的对比。
+- Davison & Hinkley (1997) [@davison1997bootstrap] 提出 bootstrap
+  鞍点逼近——以模拟估计鞍点方程，是解析累积量生成函数不可得时的
+  替代方案。
+- 第 \@ref(snqesa) 章讨论的经验鞍点逼近把累积量生成函数换成经验
+  版本，是"解析不可得"情形下的自然推广。
