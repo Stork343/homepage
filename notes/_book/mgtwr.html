@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 6 混合时空地理加权回归的变量选择 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 6 混合时空地理加权回归的变量选择 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta property="og:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 6 混合时空地理加权回归的变量选择 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：对自己已发表论文中的模型、估计方法与理论性质的系统整理。" />
+  <meta name="twitter:description" content="侯健个人主页配套笔记：作为已发表论文的补充材料，系统整理论文未展示的详细推导、直接使用的数学工具与方法背景。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-20" />
+<meta name="date" content="2026-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,13 +167,27 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><i class="fa fa-check"></i><b>1.1</b> 使用说明</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 泊松相对风险的鞍点逼近置信区间</a>
+<li class="chapter" data-level="2" data-path="poisson-rr.html"><a href="poisson-rr.html"><i class="fa fa-check"></i><b>2</b> 鞍点逼近：从拉普拉斯积分到相对风险置信区间</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%97%AE%E9%A2%98"><i class="fa fa-check"></i><b>2.1</b> 模型与问题</a></li>
-<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><i class="fa fa-check"></i><b>2.2</b> 鞍点逼近的基本原理</a></li>
-<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%9B%B8%E5%AF%B9%E9%A3%8E%E9%99%A9%E7%9A%84%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91%E5%8C%BA%E9%97%B4"><i class="fa fa-check"></i><b>2.3</b> 相对风险的鞍点逼近区间</a></li>
-<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.4</b> 数值演示</a></li>
-<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>2.5</b> 要点小结</a></li>
+<li class="chapter" data-level="2.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>2.1</b> 背景与动机</a></li>
+<li class="chapter" data-level="2.2" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C%E6%A6%82%E8%A7%88"><i class="fa fa-check"></i><b>2.2</b> 论文工作概览</a></li>
+<li class="chapter" data-level="2.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><i class="fa fa-check"></i><b>2.3</b> 数学工具详解</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="poisson-rr.html"><a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88-var%CE%BB%E2%82%81%CE%BB%E2%82%80-%E9%95%BF%E6%88%90%E9%82%A3%E4%B8%AA%E6%A0%B7%E5%AD%90"><i class="fa fa-check"></i><b>2.3.1</b> Delta 方法：为什么 Var(λ̂₁/λ̂₀) 长成那个样子</a></li>
+<li class="chapter" data-level="2.3.2" data-path="poisson-rr.html"><a href="poisson-rr.html#laplace-%E9%80%BC%E8%BF%91%E9%9E%8D%E7%82%B9%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%B0%E5%9F%BA"><i class="fa fa-check"></i><b>2.3.2</b> Laplace 逼近：鞍点方法的地基</a></li>
+<li class="chapter" data-level="2.3.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E7%B4%AF%E7%A7%AF%E9%87%8F%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E6%95%B0%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><i class="fa fa-check"></i><b>2.3.3</b> 累积量生成函数：为什么是”对数”矩生成函数</a></li>
+<li class="chapter" data-level="2.3.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%80%86%E8%BD%AC%E5%85%AC%E5%BC%8F%E5%AF%86%E5%BA%A6%E4%B8%8E%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%B9%E5%81%B6"><i class="fa fa-check"></i><b>2.3.4</b> 逆转公式：密度与特征函数的对偶</a></li>
+<li class="chapter" data-level="2.3.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3"><i class="fa fa-check"></i><b>2.3.5</b> 鞍点方程的数值求解</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="poisson-rr.html"><a href="poisson-rr.html#%E8%AE%BA%E6%96%87%E6%9C%AA%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4</b> 论文未展示的详细推导</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="poisson-rr.html"><a href="poisson-rr.html#%E4%BB%8E-mathrmphat-r-le-r-%E5%88%B0-mathrmpz-le-0"><i class="fa fa-check"></i><b>2.4.1</b> 从 <span class="math inline">\(\mathrm{P}(\hat R \le r)\)</span> 到 <span class="math inline">\(\mathrm{P}(Z \le 0)\)</span></a></li>
+<li class="chapter" data-level="2.4.2" data-path="poisson-rr.html"><a href="poisson-rr.html#z-%E7%9A%84%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E4%B8%A4%E6%AD%A5%E6%8E%A8%E5%AF%BC"><i class="fa fa-check"></i><b>2.4.2</b> <span class="math inline">\(Z\)</span> 的矩生成函数：两步推导</a></li>
+<li class="chapter" data-level="2.4.3" data-path="poisson-rr.html"><a href="poisson-rr.html#%E9%9E%8D%E7%82%B9%E6%96%B9%E7%A8%8B%E4%B8%8E-jensen-%E5%85%AC%E5%BC%8F%E5%90%84%E9%A1%B9%E7%9A%84%E5%90%AB%E4%B9%89"><i class="fa fa-check"></i><b>2.4.3</b> 鞍点方程与 Jensen 公式各项的含义</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E4%B8%8E%E6%95%B0%E5%80%BC%E6%B3%A8%E6%84%8F"><i class="fa fa-check"></i><b>2.5</b> 实现细节与数值注意</a></li>
+<li class="chapter" data-level="2.6" data-path="poisson-rr.html"><a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA"><i class="fa fa-check"></i><b>2.6</b> 数值演示</a></li>
+<li class="chapter" data-level="2.7" data-path="poisson-rr.html"><a href="poisson-rr.html#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><i class="fa fa-check"></i><b>2.7</b> 延伸阅读</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="snqesa.html"><a href="snqesa.html"><i class="fa fa-check"></i><b>3</b> 自标准化分位经验鞍点逼近</a>
 <ul>
@@ -181,7 +195,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="snqesa.html"><a href="snqesa.html#%E7%BB%8F%E9%AA%8C%E9%9E%8D%E7%82%B9%E9%80%BC%E8%BF%91"><i class="fa fa-check"></i><b>3.2</b> 经验鞍点逼近</a></li>
 <li class="chapter" data-level="3.3" data-path="snqesa.html"><a href="snqesa.html#snqesa-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><i class="fa fa-check"></i><b>3.3</b> SNQESA 的核心思想</a></li>
 <li class="chapter" data-level="3.4" data-path="snqesa.html"><a href="snqesa.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-1"><i class="fa fa-check"></i><b>3.4</b> 数值演示</a></li>
-<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
+<li class="chapter" data-level="3.5" data-path="snqesa.html"><a href="snqesa.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93"><i class="fa fa-check"></i><b>3.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="svcqr.html"><a href="svcqr.html"><i class="fa fa-check"></i><b>4</b> 稀疏-平滑空间变系数分位回归</a>
 <ul>
@@ -189,7 +203,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="svcqr.html"><a href="svcqr.html#%E5%9B%BE%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%AD%A3%E5%88%99%E5%8C%96"><i class="fa fa-check"></i><b>4.2</b> 图拉普拉斯正则化</a></li>
 <li class="chapter" data-level="4.3" data-path="svcqr.html"><a href="svcqr.html#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>4.3</b> 目标函数与估计</a></li>
 <li class="chapter" data-level="4.4" data-path="svcqr.html"><a href="svcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-2"><i class="fa fa-check"></i><b>4.4</b> 数值演示</a></li>
-<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
+<li class="chapter" data-level="4.5" data-path="svcqr.html"><a href="svcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-1"><i class="fa fa-check"></i><b>4.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="hcqr.html"><a href="hcqr.html"><i class="fa fa-check"></i><b>5</b> 分层复合分位回归与自适应 Lasso</a>
 <ul>
@@ -197,7 +211,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="hcqr.html"><a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E5%9B%9E%E5%BD%92%E7%9B%AE%E6%A0%87"><i class="fa fa-check"></i><b>5.2</b> 复合分位回归目标</a></li>
 <li class="chapter" data-level="5.3" data-path="hcqr.html"><a href="hcqr.html#%E4%BC%B0%E8%AE%A1em-%E7%AE%97%E6%B3%95%E4%B8%8E-ald-%E7%9A%84%E8%81%94%E7%B3%BB"><i class="fa fa-check"></i><b>5.3</b> 估计：EM 算法与 ALD 的联系</a></li>
 <li class="chapter" data-level="5.4" data-path="hcqr.html"><a href="hcqr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-3"><i class="fa fa-check"></i><b>5.4</b> 数值演示</a></li>
-<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
+<li class="chapter" data-level="5.5" data-path="hcqr.html"><a href="hcqr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-2"><i class="fa fa-check"></i><b>5.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mgtwr.html"><a href="mgtwr.html"><i class="fa fa-check"></i><b>6</b> 混合时空地理加权回归的变量选择</a>
 <ul>
@@ -205,14 +219,14 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="mgtwr.html"><a href="mgtwr.html#%E4%B8%A4%E6%AD%A5%E4%BC%B0%E8%AE%A1%E6%B3%95"><i class="fa fa-check"></i><b>6.2</b> 两步估计法</a></li>
 <li class="chapter" data-level="6.3" data-path="mgtwr.html"><a href="mgtwr.html#%E5%8F%98%E9%87%8F%E9%80%89%E6%8B%A9%E7%9A%84%E5%8A%A8%E6%9C%BA"><i class="fa fa-check"></i><b>6.3</b> 变量选择的动机</a></li>
 <li class="chapter" data-level="6.4" data-path="mgtwr.html"><a href="mgtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-4"><i class="fa fa-check"></i><b>6.4</b> 数值演示</a></li>
-<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
+<li class="chapter" data-level="6.5" data-path="mgtwr.html"><a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3"><i class="fa fa-check"></i><b>6.5</b> 要点小结</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="gtwr.html"><a href="gtwr.html"><i class="fa fa-check"></i><b>7</b> 异窗宽 GTWR 模型</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="gtwr.html"><a href="gtwr.html#gtwr-%E6%A8%A1%E5%9E%8B"><i class="fa fa-check"></i><b>7.1</b> GTWR 模型</a></li>
 <li class="chapter" data-level="7.2" data-path="gtwr.html"><a href="gtwr.html#%E5%BC%82%E7%AA%97%E5%AE%BD%E7%9A%84%E5%8A%A8%E6%9C%BA%E4%B8%8E%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>7.2</b> 异窗宽的动机与定义</a></li>
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E6%BC%94%E7%A4%BA-5"><i class="fa fa-check"></i><b>7.3</b> 数值演示</a></li>
-<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-5"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
+<li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4"><i class="fa fa-check"></i><b>7.4</b> 要点小结</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
@@ -296,38 +310,35 @@ A^{(c)\top} W\)</span>。</p>
 <span class="math inline">\(b(u, v, t) = 2 + u\)</span>。演示两步估计：用局部（核加权）估计变系数，
 再对固定系数做加权最小二乘；并对比”包含无关变量”与”剔除无关
 变量”两种设定下固定系数估计的稳定性。</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="mgtwr.html#cb150-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb150-2"><a href="mgtwr.html#cb150-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb150-3"><a href="mgtwr.html#cb150-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); v <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); tt <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
-<span id="cb150-4"><a href="mgtwr.html#cb150-4" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x3 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb150-5"><a href="mgtwr.html#cb150-5" tabindex="-1"></a>a_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>)              <span class="co"># 第三个固定系数为 0（无关变量）</span></span>
-<span id="cb150-6"><a href="mgtwr.html#cb150-6" tabindex="-1"></a>b_true <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> u                       <span class="co"># 变系数（空间函数）</span></span>
-<span id="cb150-7"><a href="mgtwr.html#cb150-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">+</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2 <span class="sc">+</span> a_true[<span class="dv">3</span>] <span class="sc">*</span> x3 <span class="sc">+</span> b_true <span class="sc">*</span> x3 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb150-8"><a href="mgtwr.html#cb150-8" tabindex="-1"></a></span>
-<span id="cb150-9"><a href="mgtwr.html#cb150-9" tabindex="-1"></a><span class="co"># 时空距离与 Gauss 核权重（固定窗宽）</span></span>
-<span id="cb150-10"><a href="mgtwr.html#cb150-10" tabindex="-1"></a>st_dist <span class="ot">&lt;-</span> <span class="cf">function</span>(i, j) <span class="fu">sqrt</span>(<span class="fl">1.0</span> <span class="sc">*</span> (u[i] <span class="sc">-</span> u[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">1.0</span> <span class="sc">*</span> (v[i] <span class="sc">-</span> v[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> (tt[i] <span class="sc">-</span> tt[j])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb150-11"><a href="mgtwr.html#cb150-11" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb150-12"><a href="mgtwr.html#cb150-12" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
-<span id="cb150-13"><a href="mgtwr.html#cb150-13" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) W[, j] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">st_dist</span>(i, j)))<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> h<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb150-14"><a href="mgtwr.html#cb150-14" tabindex="-1"></a></span>
-<span id="cb150-15"><a href="mgtwr.html#cb150-15" tabindex="-1"></a><span class="co"># 两步估计：① 局部加权估计变系数 b(u_j)（一阶局部常数拟合）</span></span>
-<span id="cb150-16"><a href="mgtwr.html#cb150-16" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(j) {</span>
-<span id="cb150-17"><a href="mgtwr.html#cb150-17" tabindex="-1"></a>  w <span class="ot">&lt;-</span> W[, j]</span>
-<span id="cb150-18"><a href="mgtwr.html#cb150-18" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> x3 <span class="sc">*</span> (y <span class="sc">-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">-</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2)) <span class="sc">/</span> <span class="fu">sum</span>(w <span class="sc">*</span> x3<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb150-19"><a href="mgtwr.html#cb150-19" tabindex="-1"></a>})</span>
-<span id="cb150-20"><a href="mgtwr.html#cb150-20" tabindex="-1"></a><span class="co"># ② 固定系数加权最小二乘（全模型：含无关变量）</span></span>
-<span id="cb150-21"><a href="mgtwr.html#cb150-21" tabindex="-1"></a>yt <span class="ot">&lt;-</span> y <span class="sc">-</span> b_hat <span class="sc">*</span> x3</span>
-<span id="cb150-22"><a href="mgtwr.html#cb150-22" tabindex="-1"></a>Xf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2, x3)</span>
-<span id="cb150-23"><a href="mgtwr.html#cb150-23" tabindex="-1"></a>a_hat_full <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf) <span class="sc">%*%</span> Xf, <span class="fu">t</span>(Xf) <span class="sc">%*%</span> yt)</span>
-<span id="cb150-24"><a href="mgtwr.html#cb150-24" tabindex="-1"></a><span class="co"># ③ 剔除无关变量后的估计</span></span>
-<span id="cb150-25"><a href="mgtwr.html#cb150-25" tabindex="-1"></a>Xf2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2)</span>
-<span id="cb150-26"><a href="mgtwr.html#cb150-26" tabindex="-1"></a>a_hat_sel <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf2) <span class="sc">%*%</span> Xf2, <span class="fu">t</span>(Xf2) <span class="sc">%*%</span> yt)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="mgtwr.html#cb13-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb13-2"><a href="mgtwr.html#cb13-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb13-3"><a href="mgtwr.html#cb13-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); v <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); tt <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb13-4"><a href="mgtwr.html#cb13-4" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x3 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb13-5"><a href="mgtwr.html#cb13-5" tabindex="-1"></a>a_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>)              <span class="co"># 第三个固定系数为 0（无关变量）</span></span>
+<span id="cb13-6"><a href="mgtwr.html#cb13-6" tabindex="-1"></a>b_true <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> u                       <span class="co"># 变系数（空间函数）</span></span>
+<span id="cb13-7"><a href="mgtwr.html#cb13-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">+</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2 <span class="sc">+</span> a_true[<span class="dv">3</span>] <span class="sc">*</span> x3 <span class="sc">+</span> b_true <span class="sc">*</span> x3 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb13-8"><a href="mgtwr.html#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="mgtwr.html#cb13-9" tabindex="-1"></a><span class="co"># 时空距离与 Gauss 核权重（固定窗宽）</span></span>
+<span id="cb13-10"><a href="mgtwr.html#cb13-10" tabindex="-1"></a>st_dist <span class="ot">&lt;-</span> <span class="cf">function</span>(i, j) <span class="fu">sqrt</span>(<span class="fl">1.0</span> <span class="sc">*</span> (u[i] <span class="sc">-</span> u[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">1.0</span> <span class="sc">*</span> (v[i] <span class="sc">-</span> v[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> (tt[i] <span class="sc">-</span> tt[j])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb13-11"><a href="mgtwr.html#cb13-11" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb13-12"><a href="mgtwr.html#cb13-12" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
+<span id="cb13-13"><a href="mgtwr.html#cb13-13" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) W[, j] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">st_dist</span>(i, j)))<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> h<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb13-14"><a href="mgtwr.html#cb13-14" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="mgtwr.html#cb13-15" tabindex="-1"></a><span class="co"># 两步估计：① 局部加权估计变系数 b(u_j)（一阶局部常数拟合）</span></span>
+<span id="cb13-16"><a href="mgtwr.html#cb13-16" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(j) {</span>
+<span id="cb13-17"><a href="mgtwr.html#cb13-17" tabindex="-1"></a>  w <span class="ot">&lt;-</span> W[, j]</span>
+<span id="cb13-18"><a href="mgtwr.html#cb13-18" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> x3 <span class="sc">*</span> (y <span class="sc">-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">-</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2)) <span class="sc">/</span> <span class="fu">sum</span>(w <span class="sc">*</span> x3<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb13-19"><a href="mgtwr.html#cb13-19" tabindex="-1"></a>})</span>
+<span id="cb13-20"><a href="mgtwr.html#cb13-20" tabindex="-1"></a><span class="co"># ② 固定系数加权最小二乘（全模型：含无关变量）</span></span>
+<span id="cb13-21"><a href="mgtwr.html#cb13-21" tabindex="-1"></a>yt <span class="ot">&lt;-</span> y <span class="sc">-</span> b_hat <span class="sc">*</span> x3</span>
+<span id="cb13-22"><a href="mgtwr.html#cb13-22" tabindex="-1"></a>Xf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2, x3)</span>
+<span id="cb13-23"><a href="mgtwr.html#cb13-23" tabindex="-1"></a>a_hat_full <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf) <span class="sc">%*%</span> Xf, <span class="fu">t</span>(Xf) <span class="sc">%*%</span> yt)</span>
+<span id="cb13-24"><a href="mgtwr.html#cb13-24" tabindex="-1"></a><span class="co"># ③ 剔除无关变量后的估计</span></span>
+<span id="cb13-25"><a href="mgtwr.html#cb13-25" tabindex="-1"></a>Xf2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2)</span>
+<span id="cb13-26"><a href="mgtwr.html#cb13-26" tabindex="-1"></a>a_hat_sel <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf2) <span class="sc">%*%</span> Xf2, <span class="fu">t</span>(Xf2) <span class="sc">%*%</span> yt)</span></code></pre></div>
 <pre><code>## true a = 1 -0.5</code></pre>
 <pre><code>## full model a = 0.98 -0.511   RMSE = 0.016</code></pre>
 <pre><code>## after selection a = 0.981 -0.51   RMSE = 0.015</code></pre>
-<pre><code>## Warning in rbind(Full = abs(a_hat_full[1:2] - a_true[1:2]), Selected =
-## abs(a_hat_sel - : number of columns of result is not a multiple of vector
-## length (arg 1)</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:mgtwr-summary"></span>
 <img src="notes-book_files/figure-html/mgtwr-summary-1.png" alt="固定系数估计对比：全模型（含无关变量）与变量选择后" width="672" />
 <p class="caption">
@@ -339,8 +350,8 @@ A^{(c)\top} W\)</span>。</p>
 误差更小——这与论文在乌鲁木齐商品住宅数据上的实证结论一致：
 变量选择后的 MGTWR 模型性能与拟合效果提升，固定回归系数估计更稳定。</p>
 </div>
-<div id="要点小结-4" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> 要点小结<a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="要点小结-3" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> 要点小结<a href="mgtwr.html#%E8%A6%81%E7%82%B9%E5%B0%8F%E7%BB%93-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>式 <a href="mgtwr.html#eq:mgtwr-model">(6.1)</a> 的”固定 + 变系数”混合结构是 MGTWR 的
 核心，OLR/GWR/MGWR/GTWR 均为其特例；</li>
