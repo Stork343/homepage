@@ -121,27 +121,32 @@ $\mathrm{Var}_i(\hat b_k(u_i, t_i))$ 是否显著大于纯噪声水平；或者�
 
 ```{r mgtwr-demo}
 set.seed(2026)
-n <- 200
+n <- 300
 u <- runif(n); v <- runif(n); tt <- runif(n)
-x1 <- rnorm(n); x2 <- rnorm(n); x3 <- rnorm(n)
+x1 <- u + rnorm(n, sd = 0.2)     # 与空间坐标相关：遗漏效应将污染其系数
+x2 <- rnorm(n)
+x3 <- 0.7 * x1 + 0.7 * rnorm(n)  # 与 x1 相关
 a_true <- c(1, -0.5)
-b_true <- 2 + u                       # x3 的真实效应是时空函数（伪固定指标）
-y <- a_true[1] * x1 + a_true[2] * x2 + b_true * x3 + rnorm(n, sd = 0.5)
+b_true <- 2 + 5 * u              # x3 的真实效应随空间变化（伪固定指标）
+y <- a_true[1] * x1 + a_true[2] * x2 + b_true * x3 + rnorm(n, sd = 0.3)
 
 st_dist <- function(i, j) sqrt((u[i] - u[j])^2 + (v[i] - v[j])^2 + (tt[i] - tt[j])^2)
 h <- 0.4
 W <- matrix(0, n, n)
 for (j in 1:n) W[, j] <- exp(-(sapply(1:n, function(i) st_dist(i, j)))^2 / h^2)
 
-# 两步估计：① 局部估计 x3 的变系数；② 加权最小二乘估计固定系数
+# 错误设定：x3 被当作固定指标，直接做全局回归
+Xf <- cbind(x1, x2, x3)
+a_full <- solve(t(Xf) %*% Xf, t(Xf) %*% y)
+
+# 变量选择后：x3 进入变系数部分（两步法第 1 步以真值代入，隔离偏差
+# 机制；实际估计中固定系数由迭代提供）
 b_hat <- sapply(1:n, function(j) {
   w <- W[, j]
   sum(w * x3 * (y - a_true[1] * x1 - a_true[2] * x2)) / sum(w * x3^2)
 })
 yt <- y - b_hat * x3
-Xf <- cbind(x1, x2, x3)               # 全模型：x3 误当固定指标
-a_full <- solve(t(Xf) %*% Xf, t(Xf) %*% yt)
-Xf2 <- cbind(x1, x2)                  # 变量选择后：剔除 x3
+Xf2 <- cbind(x1, x2)
 a_sel <- solve(t(Xf2) %*% Xf2, t(Xf2) %*% yt)
 cat("full model a:", round(a_full[1:2], 3),
     " RMSE:", round(sqrt(mean((a_full[1:2] - a_true)^2)), 3), "\n")
@@ -158,9 +163,12 @@ barplot(rbind(Full = abs(a_full[1:2] - a_true),
         args.legend = list(bty = "n", cex = 0.8))
 ```
 
-全模型把 $x_3$ 的时空效应错误地压入固定系数，估计偏差明显；剔除后
-$x_3$ 的效应由变系数部分吸收，固定系数估计接近真值 $(1, -0.5)$，
-这正是偏差分析中污染项被消除的数值体现。
+全模型把 $x_3$ 的时空效应错误地压入固定系数：$a_1$ 的估计为
+$1.879$（真值 $1$），固定系数 RMSE 为 $0.624$。变量选择后 $x_3$ 的
+效应由变系数部分吸收，$a_1$ 的估计为 $1.231$，RMSE 降至 $0.164$
+（约为全模型的四分之一）。残余偏差来自局部核光滑的有限样本方差
+与边界效应——变系数部分不能完全剥离 $b_{\mathrm{true}}(u)$ 的高频
+变化，这正是偏差公式中噪声项与平滑误差的体现。
 
 ## 注记
 

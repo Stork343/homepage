@@ -11,6 +11,7 @@ eq:cond-normal
 fig:hcqr-plot
 fig:mgtwr-plot
 fig:gtwr-plot
+fig:plgwqr-plot
 intro
 poisson-rr
 数学准备
@@ -83,3 +84,14 @@ gtwr
 实现与计算-5
 数值例-5
 注记-5
+plgwqr
+数学准备-6
+模型设定
+分位损失与地理加权
+窗宽与偏差-方差权衡
+详细推导-4
+剖面估计
+与两步法的关系
+实现与计算-6
+数值例-6
+注记-6

@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -420,7 +437,7 @@ v_j^* = \sigma^{-2} T^* X_j^\top\bigl(Y_j - X_j Z_j \gamma\bigr).
 </div>
 <div id="复合分位目标的梯度结构" class="section level3 hasAnchor" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> 复合分位目标的梯度结构<a href="hcqr.html#%E5%A4%8D%E5%90%88%E5%88%86%E4%BD%8D%E7%9B%AE%E6%A0%87%E7%9A%84%E6%A2%AF%E5%BA%A6%E7%BB%93%E6%9E%84" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>复合分位目标 (7) 对 <span class="math inline">\(\gamma\)</span> 的次梯度是各分位次梯度之和：</p>
+<p>复合分位目标对 <span class="math inline">\(\gamma\)</span> 的次梯度是各分位次梯度之和：</p>
 <p><span class="math display">\[
 \partial_\gamma = -\sum_{k=1}^{K} \sum_{j=1}^{J} X_{ij}Z_j \cdot
 \bigl[\tau_k - \mathbf 1\{r_{ijk} &lt; 0\}\bigr],
@@ -454,56 +471,70 @@ v_j^* = \sigma^{-2} T^* X_j^\top\bigl(Y_j - X_j Z_j \gamma\bigr).
 </div>
 <div id="数值例-3" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> 数值例<a href="hcqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>例 1：CQR、LAD 与 OLS 在重尾误差下的比较。</strong> 检验”多分位聚合
-提升效率”的机制。</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="hcqr.html#cb17-1" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="cf">function</span>(u, tau) u <span class="sc">*</span> (tau <span class="sc">-</span> (u <span class="sc">&lt;</span> <span class="dv">0</span>))</span>
-<span id="cb17-2"><a href="hcqr.html#cb17-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb17-3"><a href="hcqr.html#cb17-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">400</span>; p <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb17-4"><a href="hcqr.html#cb17-4" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> p), n, p))</span>
-<span id="cb17-5"><a href="hcqr.html#cb17-5" tabindex="-1"></a>beta_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>)</span>
-<span id="cb17-6"><a href="hcqr.html#cb17-6" tabindex="-1"></a>y <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta_true <span class="sc">+</span> <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>) <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb17-7"><a href="hcqr.html#cb17-7" tabindex="-1"></a>tau_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
-<span id="cb17-8"><a href="hcqr.html#cb17-8" tabindex="-1"></a>cq_obj <span class="ot">&lt;-</span> <span class="cf">function</span>(par) {</span>
-<span id="cb17-9"><a href="hcqr.html#cb17-9" tabindex="-1"></a>  b <span class="ot">&lt;-</span> par[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(tau_vec)]</span>
-<span id="cb17-10"><a href="hcqr.html#cb17-10" tabindex="-1"></a>  g <span class="ot">&lt;-</span> par[(<span class="fu">length</span>(tau_vec) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(par)]</span>
-<span id="cb17-11"><a href="hcqr.html#cb17-11" tabindex="-1"></a>  Xg <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(X <span class="sc">%*%</span> g)</span>
-<span id="cb17-12"><a href="hcqr.html#cb17-12" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">outer</span>(<span class="fu">as.numeric</span>(y), b, <span class="st">&quot;-&quot;</span>) <span class="sc">-</span> <span class="fu">matrix</span>(Xg, <span class="at">nrow =</span> <span class="fu">length</span>(y), <span class="at">ncol =</span> <span class="fu">length</span>(b))</span>
-<span id="cb17-13"><a href="hcqr.html#cb17-13" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">sapply</span>(<span class="fu">seq_along</span>(tau_vec), <span class="cf">function</span>(k) <span class="fu">sum</span>(<span class="fu">rho</span>(r[, k], tau_vec[k]))))</span>
-<span id="cb17-14"><a href="hcqr.html#cb17-14" tabindex="-1"></a>}</span>
-<span id="cb17-15"><a href="hcqr.html#cb17-15" tabindex="-1"></a>fit_cqr <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">median</span>(y), <span class="fu">length</span>(tau_vec)), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">ncol</span>(X))),</span>
-<span id="cb17-16"><a href="hcqr.html#cb17-16" tabindex="-1"></a>                 cq_obj, <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>)</span>
-<span id="cb17-17"><a href="hcqr.html#cb17-17" tabindex="-1"></a>gamma_cqr <span class="ot">&lt;-</span> fit_cqr<span class="sc">$</span>par[(<span class="fu">length</span>(tau_vec) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(fit_cqr<span class="sc">$</span>par)]</span>
-<span id="cb17-18"><a href="hcqr.html#cb17-18" tabindex="-1"></a>fit_lad <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">ncol</span>(X)),</span>
-<span id="cb17-19"><a href="hcqr.html#cb17-19" tabindex="-1"></a>                 <span class="cf">function</span>(par) <span class="fu">sum</span>(<span class="fu">rho</span>(<span class="fu">as.numeric</span>(y) <span class="sc">-</span> X <span class="sc">%*%</span> par, <span class="fl">0.5</span>)),</span>
-<span id="cb17-20"><a href="hcqr.html#cb17-20" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>)<span class="sc">$</span>par</span>
-<span id="cb17-21"><a href="hcqr.html#cb17-21" tabindex="-1"></a>fit_ols <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X <span class="sc">-</span> <span class="dv">1</span>))</span>
-<span id="cb17-22"><a href="hcqr.html#cb17-22" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">CQR =</span> gamma_cqr, <span class="at">LAD =</span> fit_lad, <span class="at">OLS =</span> fit_ols)</span>
-<span id="cb17-23"><a href="hcqr.html#cb17-23" tabindex="-1"></a><span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">0</span><span class="sc">:</span>p)</span>
-<span id="cb17-24"><a href="hcqr.html#cb17-24" tabindex="-1"></a>rmse <span class="ot">&lt;-</span> <span class="fu">apply</span>(tab, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="fu">sqrt</span>(<span class="fu">mean</span>((v <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)))</span>
-<span id="cb17-25"><a href="hcqr.html#cb17-25" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">RMSE =</span> <span class="fu">round</span>(rmse, <span class="dv">4</span>), tab)</span></code></pre></div>
-<pre><code>##       RMSE          b0       b1         b2        b3
-## CQR 0.5319 -0.02274794 2.138366 -0.7471819 0.5498610
-## LAD 0.1399  1.06282889 2.160439 -0.7838267 0.5436222
-## OLS 0.1404  0.99999714 2.151665 -0.7740400 0.5688560</code></pre>
+<p><strong>例 1：CQR、LAD 与 OLS 在轻尾与重尾误差下的比较。</strong> 斜率设计矩阵
+不含截距列（截距由各分位的 <span class="math inline">\(b_{\tau_k}\)</span> 吸收，避免与公共斜率共线），
+斜率真值 <span class="math inline">\(\beta = (2, -1, 0.5)\)</span>。轻尾误差 <span class="math inline">\(N(0, 4)\)</span> 与重尾误差
+<span class="math inline">\(2\,t_3\)</span> 各运行一次，比较三种估计的 RMSE。</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="hcqr.html#cb21-1" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="cf">function</span>(u, tau) u <span class="sc">*</span> (tau <span class="sc">-</span> (u <span class="sc">&lt;</span> <span class="dv">0</span>))</span>
+<span id="cb21-2"><a href="hcqr.html#cb21-2" tabindex="-1"></a>run_case <span class="ot">&lt;-</span> <span class="cf">function</span>(err_fun) {</span>
+<span id="cb21-3"><a href="hcqr.html#cb21-3" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb21-4"><a href="hcqr.html#cb21-4" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="dv">400</span>; p <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb21-5"><a href="hcqr.html#cb21-5" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> p), n, p)</span>
+<span id="cb21-6"><a href="hcqr.html#cb21-6" tabindex="-1"></a>  beta_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb21-7"><a href="hcqr.html#cb21-7" tabindex="-1"></a>  y <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta_true <span class="sc">+</span> <span class="fu">err_fun</span>(n)</span>
+<span id="cb21-8"><a href="hcqr.html#cb21-8" tabindex="-1"></a>  tau_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb21-9"><a href="hcqr.html#cb21-9" tabindex="-1"></a>  cq_obj <span class="ot">&lt;-</span> <span class="cf">function</span>(par) {</span>
+<span id="cb21-10"><a href="hcqr.html#cb21-10" tabindex="-1"></a>    b <span class="ot">&lt;-</span> par[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(tau_vec)]</span>
+<span id="cb21-11"><a href="hcqr.html#cb21-11" tabindex="-1"></a>    g <span class="ot">&lt;-</span> par[(<span class="fu">length</span>(tau_vec) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(par)]</span>
+<span id="cb21-12"><a href="hcqr.html#cb21-12" tabindex="-1"></a>    Xg <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(X <span class="sc">%*%</span> g)</span>
+<span id="cb21-13"><a href="hcqr.html#cb21-13" tabindex="-1"></a>    r <span class="ot">&lt;-</span> <span class="fu">outer</span>(<span class="fu">as.numeric</span>(y), b, <span class="st">&quot;-&quot;</span>) <span class="sc">-</span> <span class="fu">matrix</span>(Xg, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="fu">length</span>(b))</span>
+<span id="cb21-14"><a href="hcqr.html#cb21-14" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="fu">sapply</span>(<span class="fu">seq_along</span>(tau_vec), <span class="cf">function</span>(k) <span class="fu">sum</span>(<span class="fu">rho</span>(r[, k], tau_vec[k]))))</span>
+<span id="cb21-15"><a href="hcqr.html#cb21-15" tabindex="-1"></a>  }</span>
+<span id="cb21-16"><a href="hcqr.html#cb21-16" tabindex="-1"></a>  fit_cqr <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="fu">quantile</span>(y, tau_vec), <span class="fu">rep</span>(<span class="dv">0</span>, p)), cq_obj,</span>
+<span id="cb21-17"><a href="hcqr.html#cb21-17" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">maxit =</span> <span class="dv">2000</span>, <span class="at">reltol =</span> <span class="fl">1e-12</span>))</span>
+<span id="cb21-18"><a href="hcqr.html#cb21-18" tabindex="-1"></a>  gamma_cqr <span class="ot">&lt;-</span> fit_cqr<span class="sc">$</span>par[(<span class="fu">length</span>(tau_vec) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(fit_cqr<span class="sc">$</span>par)]</span>
+<span id="cb21-19"><a href="hcqr.html#cb21-19" tabindex="-1"></a>  fit_lad <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="fu">median</span>(y), <span class="fu">rep</span>(<span class="dv">0</span>, p)),</span>
+<span id="cb21-20"><a href="hcqr.html#cb21-20" tabindex="-1"></a>                   <span class="cf">function</span>(par) <span class="fu">sum</span>(<span class="fu">rho</span>(<span class="fu">as.numeric</span>(y) <span class="sc">-</span> par[<span class="dv">1</span>] <span class="sc">-</span> X <span class="sc">%*%</span> par[<span class="sc">-</span><span class="dv">1</span>], <span class="fl">0.5</span>)),</span>
+<span id="cb21-21"><a href="hcqr.html#cb21-21" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">&quot;BFGS&quot;</span>)<span class="sc">$</span>par[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb21-22"><a href="hcqr.html#cb21-22" tabindex="-1"></a>  fit_ols <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X))[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb21-23"><a href="hcqr.html#cb21-23" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">CQR =</span> gamma_cqr, <span class="at">LAD =</span> fit_lad, <span class="at">OLS =</span> fit_ols)</span>
+<span id="cb21-24"><a href="hcqr.html#cb21-24" tabindex="-1"></a>  <span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb21-25"><a href="hcqr.html#cb21-25" tabindex="-1"></a>  rmse <span class="ot">&lt;-</span> <span class="fu">apply</span>(tab, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="fu">sqrt</span>(<span class="fu">mean</span>((v <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb21-26"><a href="hcqr.html#cb21-26" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">rmse =</span> rmse, <span class="at">tab =</span> tab)</span>
+<span id="cb21-27"><a href="hcqr.html#cb21-27" tabindex="-1"></a>}</span>
+<span id="cb21-28"><a href="hcqr.html#cb21-28" tabindex="-1"></a>res_light <span class="ot">&lt;-</span> <span class="fu">run_case</span>(<span class="cf">function</span>(n) <span class="fu">rnorm</span>(n) <span class="sc">*</span> <span class="dv">2</span>)</span>
+<span id="cb21-29"><a href="hcqr.html#cb21-29" tabindex="-1"></a>res_heavy <span class="ot">&lt;-</span> <span class="fu">run_case</span>(<span class="cf">function</span>(n) <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>) <span class="sc">*</span> <span class="dv">2</span>)</span>
+<span id="cb21-30"><a href="hcqr.html#cb21-30" tabindex="-1"></a>rmse_mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">light_tail =</span> res_light<span class="sc">$</span>rmse, <span class="at">heavy_tail =</span> res_heavy<span class="sc">$</span>rmse)</span>
+<span id="cb21-31"><a href="hcqr.html#cb21-31" tabindex="-1"></a><span class="fu">round</span>(rmse_mat, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##     light_tail heavy_tail
+## CQR     0.0852     0.1670
+## LAD     0.1231     0.1580
+## OLS     0.0944     0.1621</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hcqr-plot"></span>
-<img src="notes-book_files/figure-html/hcqr-plot-1.png" alt="t3 重尾误差下三种估计的 RMSE" width="672" />
+<img src="notes-book_files/figure-html/hcqr-plot-1.png" alt="轻尾与重尾误差下三种估计的 RMSE" width="672" />
 <p class="caption">
-图 5.1: t3 重尾误差下三种估计的 RMSE
+图 5.1: 轻尾与重尾误差下三种估计的 RMSE
 </p>
 </div>
+<p>轻尾误差下，CQR 的 RMSE（0.085）低于单分位的 LAD（0.123），与 OLS
+（0.094）同阶：多个分位的信息聚合提升了斜率估计的效率。重尾误差
+下，LAD（中位数回归）最优（0.158），CQR（0.167）与 OLS（0.162）
+相当——重尾分布下中位数天然最稳健，聚合分位的收益主要体现在轻尾
+与中尾情形。两种情形与第 3 节的机制讨论一致：CQR 的渐近方差是
+各分位信息矩阵的加权和，其优势的显现依赖误差分布的尾部形态。</p>
 <p><strong>例 2：ALD 密度与 Check 损失。</strong> 可视化 ALD 密度的不对称尖峰，
 直观理解其极大似然估计为何给出分位回归。</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="hcqr.html#cb19-1" tabindex="-1"></a>ald_density <span class="ot">&lt;-</span> <span class="cf">function</span>(z, tau, <span class="at">sigma =</span> <span class="dv">1</span>) {</span>
-<span id="cb19-2"><a href="hcqr.html#cb19-2" tabindex="-1"></a>  tau <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> tau) <span class="sc">/</span> sigma <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">rho</span>(z, tau) <span class="sc">/</span> sigma)</span>
-<span id="cb19-3"><a href="hcqr.html#cb19-3" tabindex="-1"></a>}</span>
-<span id="cb19-4"><a href="hcqr.html#cb19-4" tabindex="-1"></a>zgrid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">201</span>)</span>
-<span id="cb19-5"><a href="hcqr.html#cb19-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb19-6"><a href="hcqr.html#cb19-6" tabindex="-1"></a><span class="cf">for</span> (tau <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)) {</span>
-<span id="cb19-7"><a href="hcqr.html#cb19-7" tabindex="-1"></a>  <span class="fu">plot</span>(zgrid, <span class="fu">ald_density</span>(zgrid, tau), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb19-8"><a href="hcqr.html#cb19-8" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;#0955a4&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
-<span id="cb19-9"><a href="hcqr.html#cb19-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;ALD density, tau = &quot;</span>, tau))</span>
-<span id="cb19-10"><a href="hcqr.html#cb19-10" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#c0392b&quot;</span>)</span>
-<span id="cb19-11"><a href="hcqr.html#cb19-11" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="hcqr.html#cb23-1" tabindex="-1"></a>ald_density <span class="ot">&lt;-</span> <span class="cf">function</span>(z, tau, <span class="at">sigma =</span> <span class="dv">1</span>) {</span>
+<span id="cb23-2"><a href="hcqr.html#cb23-2" tabindex="-1"></a>  tau <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> tau) <span class="sc">/</span> sigma <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">rho</span>(z, tau) <span class="sc">/</span> sigma)</span>
+<span id="cb23-3"><a href="hcqr.html#cb23-3" tabindex="-1"></a>}</span>
+<span id="cb23-4"><a href="hcqr.html#cb23-4" tabindex="-1"></a>zgrid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">201</span>)</span>
+<span id="cb23-5"><a href="hcqr.html#cb23-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb23-6"><a href="hcqr.html#cb23-6" tabindex="-1"></a><span class="cf">for</span> (tau <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)) {</span>
+<span id="cb23-7"><a href="hcqr.html#cb23-7" tabindex="-1"></a>  <span class="fu">plot</span>(zgrid, <span class="fu">ald_density</span>(zgrid, tau), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb23-8"><a href="hcqr.html#cb23-8" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;#0955a4&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
+<span id="cb23-9"><a href="hcqr.html#cb23-9" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;ALD density, tau = &quot;</span>, tau))</span>
+<span id="cb23-10"><a href="hcqr.html#cb23-10" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#c0392b&quot;</span>)</span>
+<span id="cb23-11"><a href="hcqr.html#cb23-11" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="notes-book_files/figure-html/ald-demo-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="注记-3" class="section level2 hasAnchor" number="5.5">

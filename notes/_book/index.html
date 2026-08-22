@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -291,26 +308,24 @@ div.csl-indent {
 <h1 class="title">统计方法笔记</h1>
 <h2 class="subtitle"><em>推导、工具与数值实现</em></h2>
 <p class="author"><em>侯健</em></p>
-<p class="date"><em>2026-08-21</em></p>
+<p class="date"><em>2026-08-22</em></p>
 </div>
 <div id="intro" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">第 1</span> 前言<a href="index.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>本书整理著者在分位回归、鞍点逼近与时空地理加权回归方向上若干
-工作中的技术细节，重点是那些在原文中因篇幅所限而从简处理的部分：
-方法所依赖的数学工具、由模型到估计量的完整推导，以及计算实现中
-的要点。各章自成体系，亦可独立阅读；公式编号与交叉引用遵循统一
-约定。</p>
-<p>全书共六章。前两章围绕鞍点逼近展开。第 <a href="poisson-rr.html#poisson-rr">2</a> 章讨论
-拉普拉斯积分、累积量生成函数等基础工具，并应用于泊松分布下相对
-风险的区间构造。第 <a href="snqesa.html#snqesa">3</a> 章讨论分布自由的路线，通过经验
-鞍点与自标准化枢轴处理分位数推断。中间两章讨论分位回归的模型
-扩展：第 <a href="svcqr.html#svcqr">4</a> 章讨论空间变系数建模中的图正则化，第
-<a href="hcqr.html#hcqr">5</a> 章讨论分层数据下的复合分位回归及其 EM 实现。最后两章
-讨论时空地理加权回归：第 <a href="mgtwr.html#mgtwr">6</a> 章讨论混合设定下的变量选择，
-第 <a href="gtwr.html#gtwr">7</a> 章讨论局部回归的窗宽设定。</p>
-<p>书中的数值示例以 R 实现，仅依赖 R 基础包即可运行。为保持行文紧凑，
-代码运行产生的提示与警告默认隐藏；所有结果均可通过固定随机种子
-复现。</p>
+<p>本书整理著者在分位回归、鞍点逼近与时空地理加权回归等方向上的
+若干工作，内容包括方法所依赖的数学工具、由模型到估计量的推导，
+以及数值实现中的关键环节。各章自成体系，可独立阅读。</p>
+<p>前两章围绕鞍点逼近展开。第 <a href="poisson-rr.html#poisson-rr">2</a> 章讨论拉普拉斯积分与
+累积量生成函数等基础工具，并应用于泊松分布下相对风险的置信区间
+构造；第 <a href="snqesa.html#snqesa">3</a> 章讨论分布自由的路线，以经验鞍点与自标准化
+枢轴处理分位数推断。其后两章讨论分位回归的模型扩展：第
+<a href="svcqr.html#svcqr">4</a> 章讨论空间变系数建模中的图正则化，第 <a href="hcqr.html#hcqr">5</a> 章
+讨论分层数据下的复合分位回归及其 EM 实现。最后三章讨论时空地理
+加权回归：第 <a href="mgtwr.html#mgtwr">6</a> 章讨论混合设定下的变量选择，第
+<a href="gtwr.html#gtwr">7</a> 章讨论局部回归的窗宽设定，第 <a href="plgwqr.html#plgwqr">8</a> 章讨论部分
+线性地理加权分位回归模型。</p>
+<p>各章的数值例均给出实现代码与运行结果，推导中省略的细节以注记
+形式补充。</p>
 
 </div>
             </section>

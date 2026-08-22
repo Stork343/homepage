@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 6 时空回归的混合设定与变量选择 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="第 6 时空回归的混合设定与变量选择 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 6 时空回归的混合设定与变量选择 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="第 6 时空回归的混合设定与变量选择 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 6 时空回归的混合设定与变量选择 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="第 6 时空回归的混合设定与变量选择 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -427,44 +444,52 @@ X^{(f)\top} W \cdot X^{(i)} \delta_0^{(i)} + \text{噪声项}.
 <h2><span class="header-section-number">6.4</span> 数值例<a href="mgtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>例：两步估计与变量选择的对比。</strong> 构造携带时空效应的”伪固定指标”，
 比较全模型与剔除后的固定系数估计误差。</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="mgtwr.html#cb20-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb20-2"><a href="mgtwr.html#cb20-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb20-3"><a href="mgtwr.html#cb20-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); v <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); tt <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
-<span id="cb20-4"><a href="mgtwr.html#cb20-4" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x3 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb20-5"><a href="mgtwr.html#cb20-5" tabindex="-1"></a>a_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
-<span id="cb20-6"><a href="mgtwr.html#cb20-6" tabindex="-1"></a>b_true <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> u                       <span class="co"># x3 的真实效应是时空函数（伪固定指标）</span></span>
-<span id="cb20-7"><a href="mgtwr.html#cb20-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">+</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2 <span class="sc">+</span> b_true <span class="sc">*</span> x3 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb20-8"><a href="mgtwr.html#cb20-8" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="mgtwr.html#cb20-9" tabindex="-1"></a>st_dist <span class="ot">&lt;-</span> <span class="cf">function</span>(i, j) <span class="fu">sqrt</span>((u[i] <span class="sc">-</span> u[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (v[i] <span class="sc">-</span> v[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (tt[i] <span class="sc">-</span> tt[j])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb20-10"><a href="mgtwr.html#cb20-10" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb20-11"><a href="mgtwr.html#cb20-11" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
-<span id="cb20-12"><a href="mgtwr.html#cb20-12" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) W[, j] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">st_dist</span>(i, j)))<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> h<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb20-13"><a href="mgtwr.html#cb20-13" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="mgtwr.html#cb20-14" tabindex="-1"></a><span class="co"># 两步估计：① 局部估计 x3 的变系数；② 加权最小二乘估计固定系数</span></span>
-<span id="cb20-15"><a href="mgtwr.html#cb20-15" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(j) {</span>
-<span id="cb20-16"><a href="mgtwr.html#cb20-16" tabindex="-1"></a>  w <span class="ot">&lt;-</span> W[, j]</span>
-<span id="cb20-17"><a href="mgtwr.html#cb20-17" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> x3 <span class="sc">*</span> (y <span class="sc">-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">-</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2)) <span class="sc">/</span> <span class="fu">sum</span>(w <span class="sc">*</span> x3<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb20-18"><a href="mgtwr.html#cb20-18" tabindex="-1"></a>})</span>
-<span id="cb20-19"><a href="mgtwr.html#cb20-19" tabindex="-1"></a>yt <span class="ot">&lt;-</span> y <span class="sc">-</span> b_hat <span class="sc">*</span> x3</span>
-<span id="cb20-20"><a href="mgtwr.html#cb20-20" tabindex="-1"></a>Xf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2, x3)               <span class="co"># 全模型：x3 误当固定指标</span></span>
-<span id="cb20-21"><a href="mgtwr.html#cb20-21" tabindex="-1"></a>a_full <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf) <span class="sc">%*%</span> Xf, <span class="fu">t</span>(Xf) <span class="sc">%*%</span> yt)</span>
-<span id="cb20-22"><a href="mgtwr.html#cb20-22" tabindex="-1"></a>Xf2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2)                  <span class="co"># 变量选择后：剔除 x3</span></span>
-<span id="cb20-23"><a href="mgtwr.html#cb20-23" tabindex="-1"></a>a_sel <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf2) <span class="sc">%*%</span> Xf2, <span class="fu">t</span>(Xf2) <span class="sc">%*%</span> yt)</span>
-<span id="cb20-24"><a href="mgtwr.html#cb20-24" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;full model a:&quot;</span>, <span class="fu">round</span>(a_full[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">3</span>),</span>
-<span id="cb20-25"><a href="mgtwr.html#cb20-25" tabindex="-1"></a>    <span class="st">&quot; RMSE:&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((a_full[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">-</span> a_true)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## full model a: 0.979 -0.512  RMSE: 0.017</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="mgtwr.html#cb22-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;after selection a:&quot;</span>, <span class="fu">round</span>(a_sel, <span class="dv">3</span>),</span>
-<span id="cb22-2"><a href="mgtwr.html#cb22-2" tabindex="-1"></a>    <span class="st">&quot; RMSE:&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((a_sel <span class="sc">-</span> a_true)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## after selection a: 0.98 -0.511  RMSE: 0.016</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="mgtwr.html#cb24-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb24-2"><a href="mgtwr.html#cb24-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb24-3"><a href="mgtwr.html#cb24-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); v <span class="ot">&lt;-</span> <span class="fu">runif</span>(n); tt <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb24-4"><a href="mgtwr.html#cb24-4" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> u <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.2</span>)     <span class="co"># 与空间坐标相关：遗漏效应将污染其系数</span></span>
+<span id="cb24-5"><a href="mgtwr.html#cb24-5" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb24-6"><a href="mgtwr.html#cb24-6" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fl">0.7</span> <span class="sc">*</span> x1 <span class="sc">+</span> <span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">rnorm</span>(n)  <span class="co"># 与 x1 相关</span></span>
+<span id="cb24-7"><a href="mgtwr.html#cb24-7" tabindex="-1"></a>a_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb24-8"><a href="mgtwr.html#cb24-8" tabindex="-1"></a>b_true <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> u              <span class="co"># x3 的真实效应随空间变化（伪固定指标）</span></span>
+<span id="cb24-9"><a href="mgtwr.html#cb24-9" tabindex="-1"></a>y <span class="ot">&lt;-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">+</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2 <span class="sc">+</span> b_true <span class="sc">*</span> x3 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
+<span id="cb24-10"><a href="mgtwr.html#cb24-10" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="mgtwr.html#cb24-11" tabindex="-1"></a>st_dist <span class="ot">&lt;-</span> <span class="cf">function</span>(i, j) <span class="fu">sqrt</span>((u[i] <span class="sc">-</span> u[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (v[i] <span class="sc">-</span> v[j])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (tt[i] <span class="sc">-</span> tt[j])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb24-12"><a href="mgtwr.html#cb24-12" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb24-13"><a href="mgtwr.html#cb24-13" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
+<span id="cb24-14"><a href="mgtwr.html#cb24-14" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) W[, j] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(i) <span class="fu">st_dist</span>(i, j)))<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> h<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb24-15"><a href="mgtwr.html#cb24-15" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="mgtwr.html#cb24-16" tabindex="-1"></a><span class="co"># 错误设定：x3 被当作固定指标，直接做全局回归</span></span>
+<span id="cb24-17"><a href="mgtwr.html#cb24-17" tabindex="-1"></a>Xf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2, x3)</span>
+<span id="cb24-18"><a href="mgtwr.html#cb24-18" tabindex="-1"></a>a_full <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf) <span class="sc">%*%</span> Xf, <span class="fu">t</span>(Xf) <span class="sc">%*%</span> y)</span>
+<span id="cb24-19"><a href="mgtwr.html#cb24-19" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="mgtwr.html#cb24-20" tabindex="-1"></a><span class="co"># 变量选择后：x3 进入变系数部分（两步法第 1 步以真值代入，隔离偏差</span></span>
+<span id="cb24-21"><a href="mgtwr.html#cb24-21" tabindex="-1"></a><span class="co"># 机制；实际估计中固定系数由迭代提供）</span></span>
+<span id="cb24-22"><a href="mgtwr.html#cb24-22" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(j) {</span>
+<span id="cb24-23"><a href="mgtwr.html#cb24-23" tabindex="-1"></a>  w <span class="ot">&lt;-</span> W[, j]</span>
+<span id="cb24-24"><a href="mgtwr.html#cb24-24" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> x3 <span class="sc">*</span> (y <span class="sc">-</span> a_true[<span class="dv">1</span>] <span class="sc">*</span> x1 <span class="sc">-</span> a_true[<span class="dv">2</span>] <span class="sc">*</span> x2)) <span class="sc">/</span> <span class="fu">sum</span>(w <span class="sc">*</span> x3<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb24-25"><a href="mgtwr.html#cb24-25" tabindex="-1"></a>})</span>
+<span id="cb24-26"><a href="mgtwr.html#cb24-26" tabindex="-1"></a>yt <span class="ot">&lt;-</span> y <span class="sc">-</span> b_hat <span class="sc">*</span> x3</span>
+<span id="cb24-27"><a href="mgtwr.html#cb24-27" tabindex="-1"></a>Xf2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2)</span>
+<span id="cb24-28"><a href="mgtwr.html#cb24-28" tabindex="-1"></a>a_sel <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xf2) <span class="sc">%*%</span> Xf2, <span class="fu">t</span>(Xf2) <span class="sc">%*%</span> yt)</span>
+<span id="cb24-29"><a href="mgtwr.html#cb24-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;full model a:&quot;</span>, <span class="fu">round</span>(a_full[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">3</span>),</span>
+<span id="cb24-30"><a href="mgtwr.html#cb24-30" tabindex="-1"></a>    <span class="st">&quot; RMSE:&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((a_full[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">-</span> a_true)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## full model a: 1.879 -0.575  RMSE: 0.624</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="mgtwr.html#cb26-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;after selection a:&quot;</span>, <span class="fu">round</span>(a_sel, <span class="dv">3</span>),</span>
+<span id="cb26-2"><a href="mgtwr.html#cb26-2" tabindex="-1"></a>    <span class="st">&quot; RMSE:&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((a_sel <span class="sc">-</span> a_true)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## after selection a: 1.231 -0.515  RMSE: 0.164</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:mgtwr-plot"></span>
 <img src="notes-book_files/figure-html/mgtwr-plot-1.png" alt="固定系数估计误差：全模型（含伪固定指标）与变量选择后" width="672" />
 <p class="caption">
 图 6.1: 固定系数估计误差：全模型（含伪固定指标）与变量选择后
 </p>
 </div>
-<p>全模型把 <span class="math inline">\(x_3\)</span> 的时空效应错误地压入固定系数，估计偏差明显；剔除后
-<span class="math inline">\(x_3\)</span> 的效应由变系数部分吸收，固定系数估计接近真值 <span class="math inline">\((1, -0.5)\)</span>，
-这正是偏差分析中污染项被消除的数值体现。</p>
+<p>全模型把 <span class="math inline">\(x_3\)</span> 的时空效应错误地压入固定系数：<span class="math inline">\(a_1\)</span> 的估计为
+<span class="math inline">\(1.879\)</span>（真值 <span class="math inline">\(1\)</span>），固定系数 RMSE 为 <span class="math inline">\(0.624\)</span>。变量选择后 <span class="math inline">\(x_3\)</span> 的
+效应由变系数部分吸收，<span class="math inline">\(a_1\)</span> 的估计为 <span class="math inline">\(1.231\)</span>，RMSE 降至 <span class="math inline">\(0.164\)</span>
+（约为全模型的四分之一）。残余偏差来自局部核光滑的有限样本方差
+与边界效应——变系数部分不能完全剥离 <span class="math inline">\(b_{\mathrm{true}}(u)\)</span> 的高频
+变化，这正是偏差公式中噪声项与平滑误差的体现。</p>
 </div>
 <div id="注记-4" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> 注记<a href="mgtwr.html#%E6%B3%A8%E8%AE%B0-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>

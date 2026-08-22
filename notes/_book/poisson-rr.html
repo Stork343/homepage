@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 2 鞍点逼近：从拉普拉斯积分到相对风险置信区间 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="第 2 鞍点逼近：从拉普拉斯积分到相对风险置信区间 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 2 鞍点逼近：从拉普拉斯积分到相对风险置信区间 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="第 2 鞍点逼近：从拉普拉斯积分到相对风险置信区间 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 2 鞍点逼近：从拉普拉斯积分到相对风险置信区间 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="第 2 鞍点逼近：从拉普拉斯积分到相对风险置信区间 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -307,7 +324,7 @@ div.csl-indent {
 生成函数、逆转公式，以及鞍点方程的数值求解。</p>
 <div id="delta-方法" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Delta 方法<a href="poisson-rr.html#delta-%E6%96%B9%E6%B3%95" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>方差公式 (6) 源于 Delta 方法：</p>
+<p>方差公式源于 Delta 方法：</p>
 <div class="theorem">
 <p><span id="thm:delta" class="theorem"><strong>定理 2.1  (Delta 方法) </strong></span>设 <span class="math inline">\(\sqrt{n}(\boldsymbol{X}_n - \boldsymbol{\mu}) \xrightarrow{d}
 N(\boldsymbol{0}, \boldsymbol{\Sigma})\)</span>，<span class="math inline">\(g: \mathbb{R}^d \to
@@ -425,7 +442,7 @@ Y_i / N_i\)</span>，则</p>
 <p>这里有两个需要注意的细节。其一，<span class="math inline">\(Z\)</span> 是离散变量（泊松计数的线性
 组合），因此 <span class="math inline">\(\mathrm{P}(\hat R \le r) = \mathrm{P}(Z \ge 0)\)</span> 中
 严格不等号的处理在高阶逼近中会产生 <span class="math inline">\(O(n^{-1})\)</span> 量级的差异，须用
-连续性修正吸收；下文式 (28) 中花括号内的
+连续性修正吸收；下文尾概率公式中花括号内的
 <span class="math inline">\(1 - e^{-|\hat\theta|}\)</span> 即承担此角色。其二，<span class="math inline">\(Z\)</span> 的符号约定需前后
 一致：以 <span class="math inline">\(Z = N_1 Y_0 - r N_0 Y_1\)</span> 且考察 <span class="math inline">\(\mathrm{P}(Z \le 0)\)</span>
 为基准，若采用相反的符号则 <span class="math inline">\(B_0(\lambda)\)</span> 前的正负号相应反转。</p>
@@ -503,8 +520,8 @@ N_1 N_0 \lambda_0 e^{\theta N_1} - N_1 N_0 \lambda_1 r e^{-\theta N_0 r} = 0,
 </div>
 <div id="数值例" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> 数值例<a href="poisson-rr.html#%E6%95%B0%E5%80%BC%E4%BE%8B" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>例 1：Delta 方差近似与蒙特卡洛方差的比较。</strong> 检验式 (6) 的精度，
-观察 Delta 近似在中等样本下的偏差。</p>
+<p><strong>例 1：Delta 方差近似与蒙特卡洛方差的比较。</strong> 检验上述 Delta 近似
+方差的精度，观察 Delta 近似在中等样本下的偏差。</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="poisson-rr.html#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
 <span id="cb1-2"><a href="poisson-rr.html#cb1-2" tabindex="-1"></a>n0 <span class="ot">&lt;-</span> n1 <span class="ot">&lt;-</span> <span class="dv">50</span>; lam0 <span class="ot">&lt;-</span> <span class="fl">0.8</span>; lam1 <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
 <span id="cb1-3"><a href="poisson-rr.html#cb1-3" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="dv">5000</span></span>

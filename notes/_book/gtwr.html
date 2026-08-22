@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="第 7 局部回归的窗宽设定：从同窗宽到异窗宽 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mgtwr.html"/>
-
+<link rel="next" href="plgwqr.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -416,31 +433,31 @@ MSE）。异窗宽通常在拟合优度上占优，但解释上更复杂——�
 <p><strong>例：单一窗宽无法同时适应两个异质性不同的区域。</strong> 构造两个子
 区域（效应平缓 vs 剧烈），比较小窗宽、大窗宽与”各自最优”（异窗宽）
 的拟合误差。</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="gtwr.html#cb24-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb24-2"><a href="gtwr.html#cb24-2" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">100</span>; nB <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb24-3"><a href="gtwr.html#cb24-3" tabindex="-1"></a>uA <span class="ot">&lt;-</span> <span class="fu">runif</span>(nA); uB <span class="ot">&lt;-</span> <span class="fu">runif</span>(nB)</span>
-<span id="cb24-4"><a href="gtwr.html#cb24-4" tabindex="-1"></a>xA <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nA); xB <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nB)</span>
-<span id="cb24-5"><a href="gtwr.html#cb24-5" tabindex="-1"></a>bA <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> uA; bB <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> uB</span>
-<span id="cb24-6"><a href="gtwr.html#cb24-6" tabindex="-1"></a>yA <span class="ot">&lt;-</span> bA <span class="sc">*</span> xA <span class="sc">+</span> <span class="fu">rnorm</span>(nA, <span class="at">sd =</span> <span class="fl">0.3</span>); yB <span class="ot">&lt;-</span> bB <span class="sc">*</span> xB <span class="sc">+</span> <span class="fu">rnorm</span>(nB, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
-<span id="cb24-7"><a href="gtwr.html#cb24-7" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="gtwr.html#cb24-8" tabindex="-1"></a>gauss_w <span class="ot">&lt;-</span> <span class="cf">function</span>(d, h) <span class="fu">exp</span>(<span class="sc">-</span>(d <span class="sc">/</span> h)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb24-9"><a href="gtwr.html#cb24-9" tabindex="-1"></a>local_fit <span class="ot">&lt;-</span> <span class="cf">function</span>(u, x, y, u0, h) {</span>
-<span id="cb24-10"><a href="gtwr.html#cb24-10" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">gauss_w</span>(<span class="fu">abs</span>(u <span class="sc">-</span> u0), h)</span>
-<span id="cb24-11"><a href="gtwr.html#cb24-11" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> x <span class="sc">*</span> y) <span class="sc">/</span> <span class="fu">sum</span>(w <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb24-12"><a href="gtwr.html#cb24-12" tabindex="-1"></a>}</span>
-<span id="cb24-13"><a href="gtwr.html#cb24-13" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">40</span>)</span>
-<span id="cb24-14"><a href="gtwr.html#cb24-14" tabindex="-1"></a>rmse_h <span class="ot">&lt;-</span> <span class="cf">function</span>(h) {</span>
-<span id="cb24-15"><a href="gtwr.html#cb24-15" tabindex="-1"></a>  predA <span class="ot">&lt;-</span> <span class="fu">sapply</span>(grid, <span class="cf">function</span>(u0) <span class="fu">local_fit</span>(uA, xA, yA, u0, h))</span>
-<span id="cb24-16"><a href="gtwr.html#cb24-16" tabindex="-1"></a>  predB <span class="ot">&lt;-</span> <span class="fu">sapply</span>(grid, <span class="cf">function</span>(u0) <span class="fu">local_fit</span>(uB, xB, yB, u0, h))</span>
-<span id="cb24-17"><a href="gtwr.html#cb24-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">A =</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((predA <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> grid))<span class="sc">^</span><span class="dv">2</span>)),</span>
-<span id="cb24-18"><a href="gtwr.html#cb24-18" tabindex="-1"></a>    <span class="at">B =</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((predB <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> grid))<span class="sc">^</span><span class="dv">2</span>)))</span>
-<span id="cb24-19"><a href="gtwr.html#cb24-19" tabindex="-1"></a>}</span>
-<span id="cb24-20"><a href="gtwr.html#cb24-20" tabindex="-1"></a>h_small <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.08</span>); h_large <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.35</span>)</span>
-<span id="cb24-21"><a href="gtwr.html#cb24-21" tabindex="-1"></a>h_bestA <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.35</span>)[<span class="st">&quot;A&quot;</span>]; h_bestB <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.08</span>)[<span class="st">&quot;B&quot;</span>]   <span class="co"># 各自最优</span></span>
-<span id="cb24-22"><a href="gtwr.html#cb24-22" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">small_h =</span> h_small, <span class="at">large_h =</span> h_large,</span>
-<span id="cb24-23"><a href="gtwr.html#cb24-23" tabindex="-1"></a>             <span class="at">best_each =</span> <span class="fu">c</span>(h_bestA, h_bestB))</span>
-<span id="cb24-24"><a href="gtwr.html#cb24-24" tabindex="-1"></a><span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;region A (smooth)&quot;</span>, <span class="st">&quot;region B (steep)&quot;</span>)</span>
-<span id="cb24-25"><a href="gtwr.html#cb24-25" tabindex="-1"></a><span class="fu">round</span>(tab, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="gtwr.html#cb28-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb28-2"><a href="gtwr.html#cb28-2" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">100</span>; nB <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb28-3"><a href="gtwr.html#cb28-3" tabindex="-1"></a>uA <span class="ot">&lt;-</span> <span class="fu">runif</span>(nA); uB <span class="ot">&lt;-</span> <span class="fu">runif</span>(nB)</span>
+<span id="cb28-4"><a href="gtwr.html#cb28-4" tabindex="-1"></a>xA <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nA); xB <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nB)</span>
+<span id="cb28-5"><a href="gtwr.html#cb28-5" tabindex="-1"></a>bA <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> uA; bB <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> uB</span>
+<span id="cb28-6"><a href="gtwr.html#cb28-6" tabindex="-1"></a>yA <span class="ot">&lt;-</span> bA <span class="sc">*</span> xA <span class="sc">+</span> <span class="fu">rnorm</span>(nA, <span class="at">sd =</span> <span class="fl">0.3</span>); yB <span class="ot">&lt;-</span> bB <span class="sc">*</span> xB <span class="sc">+</span> <span class="fu">rnorm</span>(nB, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
+<span id="cb28-7"><a href="gtwr.html#cb28-7" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="gtwr.html#cb28-8" tabindex="-1"></a>gauss_w <span class="ot">&lt;-</span> <span class="cf">function</span>(d, h) <span class="fu">exp</span>(<span class="sc">-</span>(d <span class="sc">/</span> h)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb28-9"><a href="gtwr.html#cb28-9" tabindex="-1"></a>local_fit <span class="ot">&lt;-</span> <span class="cf">function</span>(u, x, y, u0, h) {</span>
+<span id="cb28-10"><a href="gtwr.html#cb28-10" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">gauss_w</span>(<span class="fu">abs</span>(u <span class="sc">-</span> u0), h)</span>
+<span id="cb28-11"><a href="gtwr.html#cb28-11" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> x <span class="sc">*</span> y) <span class="sc">/</span> <span class="fu">sum</span>(w <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb28-12"><a href="gtwr.html#cb28-12" tabindex="-1"></a>}</span>
+<span id="cb28-13"><a href="gtwr.html#cb28-13" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">40</span>)</span>
+<span id="cb28-14"><a href="gtwr.html#cb28-14" tabindex="-1"></a>rmse_h <span class="ot">&lt;-</span> <span class="cf">function</span>(h) {</span>
+<span id="cb28-15"><a href="gtwr.html#cb28-15" tabindex="-1"></a>  predA <span class="ot">&lt;-</span> <span class="fu">sapply</span>(grid, <span class="cf">function</span>(u0) <span class="fu">local_fit</span>(uA, xA, yA, u0, h))</span>
+<span id="cb28-16"><a href="gtwr.html#cb28-16" tabindex="-1"></a>  predB <span class="ot">&lt;-</span> <span class="fu">sapply</span>(grid, <span class="cf">function</span>(u0) <span class="fu">local_fit</span>(uB, xB, yB, u0, h))</span>
+<span id="cb28-17"><a href="gtwr.html#cb28-17" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">A =</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((predA <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> grid))<span class="sc">^</span><span class="dv">2</span>)),</span>
+<span id="cb28-18"><a href="gtwr.html#cb28-18" tabindex="-1"></a>    <span class="at">B =</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((predB <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> grid))<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb28-19"><a href="gtwr.html#cb28-19" tabindex="-1"></a>}</span>
+<span id="cb28-20"><a href="gtwr.html#cb28-20" tabindex="-1"></a>h_small <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.08</span>); h_large <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.35</span>)</span>
+<span id="cb28-21"><a href="gtwr.html#cb28-21" tabindex="-1"></a>h_bestA <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.35</span>)[<span class="st">&quot;A&quot;</span>]; h_bestB <span class="ot">&lt;-</span> <span class="fu">rmse_h</span>(<span class="fl">0.08</span>)[<span class="st">&quot;B&quot;</span>]   <span class="co"># 各自最优</span></span>
+<span id="cb28-22"><a href="gtwr.html#cb28-22" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">small_h =</span> h_small, <span class="at">large_h =</span> h_large,</span>
+<span id="cb28-23"><a href="gtwr.html#cb28-23" tabindex="-1"></a>             <span class="at">best_each =</span> <span class="fu">c</span>(h_bestA, h_bestB))</span>
+<span id="cb28-24"><a href="gtwr.html#cb28-24" tabindex="-1"></a><span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;region A (smooth)&quot;</span>, <span class="st">&quot;region B (steep)&quot;</span>)</span>
+<span id="cb28-25"><a href="gtwr.html#cb28-25" tabindex="-1"></a><span class="fu">round</span>(tab, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##           region A (smooth) region B (steep)
 ## small_h               0.080            0.127
 ## large_h               0.074            0.422
@@ -472,59 +489,6 @@ Concentration by Means of the Standard Deviational Ellipse</em>。</li>
 回答”固定指标的平滑尺度是否随区域变化”，是同一问题的两个层次。</li>
 </ul>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Daniels, Henry E. 1954. <span>“Saddlepoint Approximations in Statistics.”</span> <em>The Annals of Mathematical Statistics</em> 25 (4): 631–50.
-</div>
-<div class="csl-entry">
-Davison, Anthony C, and David V Hinkley. 1997. <em>Bootstrap Methods and Their Application</em>. Cambridge University Press.
-</div>
-<div class="csl-entry">
-Fotheringham, A Stewart, Martin Charlton, and Chris Brunsdon. 1996. <span>“The Geography of Parameter Space: An Investigation of Spatial Non-Stationarity.”</span> <em>International Journal of Geographical Information Systems</em> 10 (5): 605–27.
-</div>
-<div class="csl-entry">
-Hall, Peter, and Simon J Sheather. 1988. <span>“On the Distribution of a Studentized Quantile.”</span> <em>Journal of the Royal Statistical Society: Series B</em> 50 (3): 381–91.
-</div>
-<div class="csl-entry">
-Hou, Jian, Tan Meng, and Maozai Tian. 2026a. <span>“Hierarchical Composite Quantile Regression with Adaptive <span>L</span>asso.”</span> <em>Journal of Statistical Planning and Inference</em> 245: 106390. <a href="https://doi.org/10.1016/j.jspi.2026.106390">https://doi.org/10.1016/j.jspi.2026.106390</a>.
-</div>
-<div class="csl-entry">
-Hou, Jian, Tan Meng, and Maozai Tian. 2026b. <span>“Self-Normalized Quantile Empirical Saddlepoint Approximation.”</span> <em>Statistical Papers</em> 67 (5): 106. <a href="https://doi.org/10.1007/s00362-026-01882-3">https://doi.org/10.1007/s00362-026-01882-3</a>.
-</div>
-<div class="csl-entry">
-Hou, Jian, Tan Meng, Maozai Tian, Jianxin Pan, and Wolfgang Karl Härdle. 2026. <span>“Sparse–Smooth Spatially Varying Coefficient Quantile Regression.”</span> <em>Spatial Statistics</em> 74: 100983. <a href="https://doi.org/10.1016/j.spasta.2026.100983">https://doi.org/10.1016/j.spasta.2026.100983</a>.
-</div>
-<div class="csl-entry">
-Huang, Bo, Bo Wu, and Michael Barry. 2010. <span>“Geographically and Temporally Weighted Regression for Modeling Spatio-Temporal Variation in House Prices.”</span> <em>International Journal of Geographical Information Science</em> 24 (3): 383–401.
-</div>
-<div class="csl-entry">
-Koenker, Roger. 2001. <span>“Quantile Regression.”</span> <em>Journal of Economic Perspectives</em> 15 (4): 143–56.
-</div>
-<div class="csl-entry">
-Lugannani, Robert, and Stephen Rice. 1980. <span>“Saddle Point Approximation for the Distribution Function of the Sum of Independent Random Variables.”</span> <em>The Annals of Probability</em> 8 (3): 475–90.
-</div>
-<div class="csl-entry">
-Owen, Art B. 1988. <span>“Empirical Likelihood Ratio Confidence Intervals for a Single Functional.”</span> <em>Biometrika</em> 75 (2): 237–49.
-</div>
-<div class="csl-entry">
-Yu, Keming, and Rana A Moyeed. 2001. <span>“Bayesian Quantile Regression.”</span> <em>Statistics &amp; Probability Letters</em> 54 (4): 437–47.
-</div>
-<div class="csl-entry">
-Zou, Hui. 2006. <span>“The Adaptive Lasso and Its Oracle Properties.”</span> <em>Journal of the American Statistical Association</em> 101 (476): 1418–29.
-</div>
-<div class="csl-entry">
-Zou, Hui, and Ming Yuan. 2008. <span>“Composite Quantile Regression and the Oracle Model Selection Theory.”</span> <em>The Annals of Statistics</em> 36 (3): 1108–26.
-</div>
-<div class="csl-entry">
-侯健, 刘硕, and 田茂再. 2025. <span>“泊松分布下基于鞍点逼近的相对风险置信区间构造.”</span> <em>统计与信息论坛</em> 40 (8): 3–13.
-</div>
-<div class="csl-entry">
-侯健, 王芝皓, 田茂再, and 窦燕. 2022. <span>“基于异窗宽<span>GTWR</span>模型的商品住宅价格影响因素研究.”</span> <em>数理统计与管理</em> 41 (6): 1003–14. <a href="https://doi.org/10.13860/j.cnki.sltj.20210722-025">https://doi.org/10.13860/j.cnki.sltj.20210722-025</a>.
-</div>
-<div class="csl-entry">
-侯健, and 田茂再. 2021. <span>“基于变量选择的混合时空地理加权回归参数估计.”</span> <em>数学的实践与认识</em> 51 (7): 110–18.
-</div>
-</div>
 </div>
 </div>
 <h3>References</h3>
@@ -544,8 +508,8 @@ Huang, Bo, Bo Wu, and Michael Barry. 2010. <span>“Geographically and Temporall
           </div>
         </div>
       </div>
-<a href="mgtwr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="mgtwr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="plgwqr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

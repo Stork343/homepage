@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 4 空间变系数建模的图正则化路线 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="第 4 空间变系数建模的图正则化路线 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 4 空间变系数建模的图正则化路线 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="第 4 空间变系数建模的图正则化路线 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 4 空间变系数建模的图正则化路线 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="第 4 空间变系数建模的图正则化路线 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -434,7 +451,7 @@ v + \gamma(1-\tau), &amp; v &lt; -\gamma(1-\tau),
 <div id="admm" class="section level3 hasAnchor" number="4.1.5">
 <h3><span class="header-section-number">4.1.5</span> ADMM<a href="svcqr.html#admm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>ADMM 把原问题拆成光滑二次部分与可分离的非光滑部分，用对偶变量
-耦合。以目标函数（12）为例，三个模块均为闭式更新：</p>
+耦合。以本章的目标函数为例，三个模块均为闭式更新：</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\((\alpha, \beta_G)\)</span> 更新：二次型最小化归结为线性方程组，设计
 矩阵 <span class="math inline">\([Z\ X]\)</span> 固定，可预分解一次（Cholesky），每轮只做回代；</li>
@@ -501,44 +518,44 @@ v + \gamma(1-\tau), &amp; v &lt; -\gamma(1-\tau),
 <h2><span class="header-section-number">4.4</span> 数值例<a href="svcqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>例 1：kNN 图与归一化拉普拉斯的粗糙度。</strong> 验证谱界 <span class="math inline">\([0, 2]\)</span>
 与粗糙度的归一化偏差形式，并比较平滑场与噪声场的粗糙度。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="svcqr.html#cb7-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb7-2"><a href="svcqr.html#cb7-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">80</span></span>
-<span id="cb7-3"><a href="svcqr.html#cb7-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">runif</span>(n), <span class="fu">runif</span>(n))</span>
-<span id="cb7-4"><a href="svcqr.html#cb7-4" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(u))</span>
-<span id="cb7-5"><a href="svcqr.html#cb7-5" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb7-6"><a href="svcqr.html#cb7-6" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
-<span id="cb7-7"><a href="svcqr.html#cb7-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb7-8"><a href="svcqr.html#cb7-8" tabindex="-1"></a>  nn <span class="ot">&lt;-</span> <span class="fu">order</span>(dist_mat[i, ])[<span class="dv">2</span><span class="sc">:</span>(k <span class="sc">+</span> <span class="dv">1</span>)]</span>
-<span id="cb7-9"><a href="svcqr.html#cb7-9" tabindex="-1"></a>  A[i, nn] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dist_mat[i, nn]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.15</span><span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb7-10"><a href="svcqr.html#cb7-10" tabindex="-1"></a>}</span>
-<span id="cb7-11"><a href="svcqr.html#cb7-11" tabindex="-1"></a>A <span class="ot">&lt;-</span> (A <span class="sc">+</span> <span class="fu">t</span>(A)) <span class="sc">/</span> <span class="dv">2</span>; A[A <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb7-12"><a href="svcqr.html#cb7-12" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(A)</span>
-<span id="cb7-13"><a href="svcqr.html#cb7-13" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d)) <span class="sc">%*%</span> A <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d))</span>
-<span id="cb7-14"><a href="svcqr.html#cb7-14" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">eigen</span>(L, <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values</span>
-<span id="cb7-15"><a href="svcqr.html#cb7-15" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;eigenvalue range of Lsym:&quot;</span>, <span class="fu">round</span>(<span class="fu">min</span>(ev), <span class="dv">3</span>), <span class="st">&quot;to&quot;</span>, <span class="fu">round</span>(<span class="fu">max</span>(ev), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="svcqr.html#cb11-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb11-2"><a href="svcqr.html#cb11-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">80</span></span>
+<span id="cb11-3"><a href="svcqr.html#cb11-3" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">runif</span>(n), <span class="fu">runif</span>(n))</span>
+<span id="cb11-4"><a href="svcqr.html#cb11-4" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(u))</span>
+<span id="cb11-5"><a href="svcqr.html#cb11-5" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb11-6"><a href="svcqr.html#cb11-6" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
+<span id="cb11-7"><a href="svcqr.html#cb11-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb11-8"><a href="svcqr.html#cb11-8" tabindex="-1"></a>  nn <span class="ot">&lt;-</span> <span class="fu">order</span>(dist_mat[i, ])[<span class="dv">2</span><span class="sc">:</span>(k <span class="sc">+</span> <span class="dv">1</span>)]</span>
+<span id="cb11-9"><a href="svcqr.html#cb11-9" tabindex="-1"></a>  A[i, nn] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dist_mat[i, nn]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.15</span><span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb11-10"><a href="svcqr.html#cb11-10" tabindex="-1"></a>}</span>
+<span id="cb11-11"><a href="svcqr.html#cb11-11" tabindex="-1"></a>A <span class="ot">&lt;-</span> (A <span class="sc">+</span> <span class="fu">t</span>(A)) <span class="sc">/</span> <span class="dv">2</span>; A[A <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-12"><a href="svcqr.html#cb11-12" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(A)</span>
+<span id="cb11-13"><a href="svcqr.html#cb11-13" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d)) <span class="sc">%*%</span> A <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(d))</span>
+<span id="cb11-14"><a href="svcqr.html#cb11-14" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">eigen</span>(L, <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values</span>
+<span id="cb11-15"><a href="svcqr.html#cb11-15" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;eigenvalue range of Lsym:&quot;</span>, <span class="fu">round</span>(<span class="fu">min</span>(ev), <span class="dv">3</span>), <span class="st">&quot;to&quot;</span>, <span class="fu">round</span>(<span class="fu">max</span>(ev), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## eigenvalue range of Lsym: 0 to 1.362</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="svcqr.html#cb9-1" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> u[, <span class="dv">1</span>])            <span class="co"># 平滑场</span></span>
-<span id="cb9-2"><a href="svcqr.html#cb9-2" tabindex="-1"></a>noise <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)                        <span class="co"># 粗糙场</span></span>
-<span id="cb9-3"><a href="svcqr.html#cb9-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;roughness(smooth)/||d||2:&quot;</span>, <span class="fu">round</span>(<span class="fu">sum</span>(delta <span class="sc">*</span> (L <span class="sc">%*%</span> delta)) <span class="sc">/</span> <span class="fu">sum</span>(delta<span class="sc">^</span><span class="dv">2</span>), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="svcqr.html#cb13-1" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> u[, <span class="dv">1</span>])            <span class="co"># 平滑场</span></span>
+<span id="cb13-2"><a href="svcqr.html#cb13-2" tabindex="-1"></a>noise <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)                        <span class="co"># 粗糙场</span></span>
+<span id="cb13-3"><a href="svcqr.html#cb13-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;roughness(smooth)/||d||2:&quot;</span>, <span class="fu">round</span>(<span class="fu">sum</span>(delta <span class="sc">*</span> (L <span class="sc">%*%</span> delta)) <span class="sc">/</span> <span class="fu">sum</span>(delta<span class="sc">^</span><span class="dv">2</span>), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## roughness(smooth)/||d||2: 0.223</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="svcqr.html#cb11-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;roughness(noise)/||d||2:&quot;</span>, <span class="fu">round</span>(<span class="fu">sum</span>(noise <span class="sc">*</span> (L <span class="sc">%*%</span> noise)) <span class="sc">/</span> <span class="fu">sum</span>(noise<span class="sc">^</span><span class="dv">2</span>), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="svcqr.html#cb15-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;roughness(noise)/||d||2:&quot;</span>, <span class="fu">round</span>(<span class="fu">sum</span>(noise <span class="sc">*</span> (L <span class="sc">%*%</span> noise)) <span class="sc">/</span> <span class="fu">sum</span>(noise<span class="sc">^</span><span class="dv">2</span>), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## roughness(noise)/||d||2: 0.978</code></pre>
 <p>平滑场的粗糙度远小于噪声场：在相同的 <span class="math inline">\(\lambda_2\)</span> 下，平滑的
 <span class="math inline">\(\delta\)</span> 付出的正则化代价低、粗糙的 <span class="math inline">\(\delta\)</span> 代价高，这正是
 “<span class="math inline">\(L\)</span> 惩罚平滑偏差”的机制。</p>
 <p><strong>例 2：组软阈值的整组收缩。</strong> 比较组惩罚对零组与非零组的差别
 处理。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="svcqr.html#cb13-1" tabindex="-1"></a>prox_group <span class="ot">&lt;-</span> <span class="cf">function</span>(v, lam) {</span>
-<span id="cb13-2"><a href="svcqr.html#cb13-2" tabindex="-1"></a>  nrm <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(v<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb13-3"><a href="svcqr.html#cb13-3" tabindex="-1"></a>  <span class="cf">if</span> (nrm <span class="sc">&lt;=</span> lam) <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(v)) <span class="cf">else</span> v <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> lam <span class="sc">/</span> nrm)</span>
-<span id="cb13-4"><a href="svcqr.html#cb13-4" tabindex="-1"></a>}</span>
-<span id="cb13-5"><a href="svcqr.html#cb13-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb13-6"><a href="svcqr.html#cb13-6" tabindex="-1"></a>v_zero <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)     <span class="co"># 应收缩为零的组</span></span>
-<span id="cb13-7"><a href="svcqr.html#cb13-7" tabindex="-1"></a>v_real <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">3</span>, <span class="fl">0.5</span>)     <span class="co"># 应保留的组</span></span>
-<span id="cb13-8"><a href="svcqr.html#cb13-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;||prox(v_zero, 2)||2 =&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">prox_group</span>(v_zero, <span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="svcqr.html#cb17-1" tabindex="-1"></a>prox_group <span class="ot">&lt;-</span> <span class="cf">function</span>(v, lam) {</span>
+<span id="cb17-2"><a href="svcqr.html#cb17-2" tabindex="-1"></a>  nrm <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(v<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb17-3"><a href="svcqr.html#cb17-3" tabindex="-1"></a>  <span class="cf">if</span> (nrm <span class="sc">&lt;=</span> lam) <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(v)) <span class="cf">else</span> v <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> lam <span class="sc">/</span> nrm)</span>
+<span id="cb17-4"><a href="svcqr.html#cb17-4" tabindex="-1"></a>}</span>
+<span id="cb17-5"><a href="svcqr.html#cb17-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb17-6"><a href="svcqr.html#cb17-6" tabindex="-1"></a>v_zero <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)     <span class="co"># 应收缩为零的组</span></span>
+<span id="cb17-7"><a href="svcqr.html#cb17-7" tabindex="-1"></a>v_real <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">3</span>, <span class="fl">0.5</span>)     <span class="co"># 应保留的组</span></span>
+<span id="cb17-8"><a href="svcqr.html#cb17-8" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;||prox(v_zero, 2)||2 =&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">prox_group</span>(v_zero, <span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## ||prox(v_zero, 2)||2 = 0</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="svcqr.html#cb15-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;||prox(v_real, 2)||2 =&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">prox_group</span>(v_real, <span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>),</span>
-<span id="cb15-2"><a href="svcqr.html#cb15-2" tabindex="-1"></a>    <span class="st">&quot; (before:&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">sum</span>(v_real<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;)</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="svcqr.html#cb19-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;||prox(v_real, 2)||2 =&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">prox_group</span>(v_real, <span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>),</span>
+<span id="cb19-2"><a href="svcqr.html#cb19-2" tabindex="-1"></a>    <span class="st">&quot; (before:&quot;</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">sum</span>(v_real<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>), <span class="st">&quot;)</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## ||prox(v_real, 2)||2 = 7.299  (before: 9.299 )</code></pre>
 </div>
 <div id="注记-2" class="section level2 hasAnchor" number="4.5">
