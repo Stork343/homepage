@@ -181,4 +181,4 @@ RMSE 为 $0.535$，远小于把 $\beta$ 误设为常数时的拟合误差 $1.411
 - 分位回归的稳健性与推断见 Koenker (2005) [@koenker2001quantreg]。
 - 模型设定、估计算法与实证分析见侯健, 刘硕 & 田茂再 (2026)
   [@hou2026plgwqr]，网络首发于《应用数学学报》，
-  \url{https://doi.org/10.20142/j.cnki.amas.202600069}。
+  <https://doi.org/10.20142/j.cnki.amas.202600069>。
