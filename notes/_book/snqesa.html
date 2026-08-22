@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记</title>
-  <meta name="description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="description" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta property="og:description" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   <meta name="github-repo" content="Stork343/homepage" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记" />
   
-  <meta name="twitter:description" content="侯健个人主页配套笔记：整理论文工作中依赖的数学工具、完整推导与数值实现。" />
+  <meta name="twitter:description" content="第 3 分位推断的分布自由路线：自标准化与经验鞍点 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
   
 
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-21" />
+<meta name="date" content="2026-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,6 +267,23 @@ div.csl-indent {
 <li class="chapter" data-level="7.3" data-path="gtwr.html"><a href="gtwr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-5"><i class="fa fa-check"></i><b>7.3</b> 数值例</a></li>
 <li class="chapter" data-level="7.4" data-path="gtwr.html"><a href="gtwr.html#%E6%B3%A8%E8%AE%B0-5"><i class="fa fa-check"></i><b>7.4</b> 注记</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="plgwqr.html"><a href="plgwqr.html"><i class="fa fa-check"></i><b>8</b> 部分线性地理加权分位回归模型</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%AD%A6%E5%87%86%E5%A4%87-6"><i class="fa fa-check"></i><b>8.1</b> 数学准备</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="plgwqr.html"><a href="plgwqr.html#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> 模型设定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="plgwqr.html"><a href="plgwqr.html#%E5%88%86%E4%BD%8D%E6%8D%9F%E5%A4%B1%E4%B8%8E%E5%9C%B0%E7%90%86%E5%8A%A0%E6%9D%83"><i class="fa fa-check"></i><b>8.1.2</b> 分位损失与地理加权</a></li>
+<li class="chapter" data-level="8.1.3" data-path="plgwqr.html"><a href="plgwqr.html#%E7%AA%97%E5%AE%BD%E4%B8%8E%E5%81%8F%E5%B7%AE-%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1"><i class="fa fa-check"></i><b>8.1.3</b> 窗宽与偏差-方差权衡</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="plgwqr.html"><a href="plgwqr.html#%E8%AF%A6%E7%BB%86%E6%8E%A8%E5%AF%BC-4"><i class="fa fa-check"></i><b>8.2</b> 详细推导</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="plgwqr.html"><a href="plgwqr.html#%E5%89%96%E9%9D%A2%E4%BC%B0%E8%AE%A1"><i class="fa fa-check"></i><b>8.2.1</b> 剖面估计</a></li>
+<li class="chapter" data-level="8.2.2" data-path="plgwqr.html"><a href="plgwqr.html#%E4%B8%8E%E4%B8%A4%E6%AD%A5%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><i class="fa fa-check"></i><b>8.2.2</b> 与两步法的关系</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="plgwqr.html"><a href="plgwqr.html#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%AE%A1%E7%AE%97-6"><i class="fa fa-check"></i><b>8.3</b> 实现与计算</a></li>
+<li class="chapter" data-level="8.4" data-path="plgwqr.html"><a href="plgwqr.html#%E6%95%B0%E5%80%BC%E4%BE%8B-6"><i class="fa fa-check"></i><b>8.4</b> 数值例</a></li>
+<li class="chapter" data-level="8.5" data-path="plgwqr.html"><a href="plgwqr.html#%E6%B3%A8%E8%AE%B0-6"><i class="fa fa-check"></i><b>8.5</b> 注记</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="../../" class="toc-home">← 返回个人主页</a></li>
 
@@ -354,8 +371,9 @@ T_n(q) = \frac{\sum_i (U_i(q) - \tau)}
 时取等号），因此鞍点方程 <span class="math inline">\(\hat K&#39;(t) = x\)</span> 的解存在且唯一，
 当且仅当 <span class="math inline">\(x\)</span> 落在样本值的最小值与最大值之间；</li>
 <li><span class="math inline">\(\hat M(t)\)</span> 是有限和，处处有限，无矩条件限制；</li>
-<li>由大数定律 <span class="math inline">\(\hat K(t) \to K(t)\)</span> 逐点成立，经验鞍点带来的估计
-误差传播为尾概率的 <span class="math inline">\(O(n^{-3/2})\)</span> 相对误差，与解析鞍点同阶。</li>
+<li>由大数定律 <span class="math inline">\(\hat K(t) \to K(t)\)</span> 逐点成立；在原文的约束鞍点
+构造下，经验鞍点带来的估计误差传播为尾概率的 <span class="math inline">\(O(n^{-3/2})\)</span>
+相对误差，与解析鞍点同阶 <span class="citation">(<a href="#ref-hou2026snqesa">Hou, Meng, and Tian 2026b</a>)</span>。</li>
 </ol>
 </div>
 <div id="经验鞍点的尾概率公式" class="section level3 hasAnchor" number="3.1.5">
@@ -436,55 +454,74 @@ T_n(q) \approx \frac{\sum_i (U_i(q) - \tau)}
 </div>
 <div id="数值例-1" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> 数值例<a href="snqesa.html#%E6%95%B0%E5%80%BC%E4%BE%8B-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>例：重尾样本下经验鞍点与正态近似的分歧。</strong> 用 <span class="math inline">\(n = 60\)</span> 的
-<span class="math inline">\(t_3\)</span> 样本比较均值型枢轴的经验鞍点尾概率与 <span class="math inline">\(t\)</span> 近似。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="snqesa.html#cb5-1" tabindex="-1"></a><span class="co"># Lugannani-Rice 型经验鞍点尾概率：P(xbar &gt;= x0)</span></span>
-<span id="cb5-2"><a href="snqesa.html#cb5-2" tabindex="-1"></a>esa_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x, x0) {</span>
-<span id="cb5-3"><a href="snqesa.html#cb5-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb5-4"><a href="snqesa.html#cb5-4" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">-</span> x0</span>
-<span id="cb5-5"><a href="snqesa.html#cb5-5" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th <span class="sc">*</span> y))</span>
-<span id="cb5-6"><a href="snqesa.html#cb5-6" tabindex="-1"></a>  th0 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">extendInt =</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">$</span>root,</span>
-<span id="cb5-7"><a href="snqesa.html#cb5-7" tabindex="-1"></a>                  <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
-<span id="cb5-8"><a href="snqesa.html#cb5-8" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(th0)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb5-9"><a href="snqesa.html#cb5-9" tabindex="-1"></a>  K <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">mean</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y)))</span>
-<span id="cb5-10"><a href="snqesa.html#cb5-10" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
-<span id="cb5-11"><a href="snqesa.html#cb5-11" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
-<span id="cb5-12"><a href="snqesa.html#cb5-12" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th0) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">max</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> K, <span class="dv">0</span>))</span>
-<span id="cb5-13"><a href="snqesa.html#cb5-13" tabindex="-1"></a>  u <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">*</span> (m2 <span class="sc">-</span> m1<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb5-14"><a href="snqesa.html#cb5-14" tabindex="-1"></a>  <span class="cf">if</span> (u <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb5-15"><a href="snqesa.html#cb5-15" tabindex="-1"></a>  <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> u)</span>
-<span id="cb5-16"><a href="snqesa.html#cb5-16" tabindex="-1"></a>}</span>
-<span id="cb5-17"><a href="snqesa.html#cb5-17" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb5-18"><a href="snqesa.html#cb5-18" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb5-19"><a href="snqesa.html#cb5-19" tabindex="-1"></a>x_norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n); x_t3 <span class="ot">&lt;-</span> <span class="fu">rt</span>(n, <span class="at">df =</span> <span class="dv">3</span>)</span>
-<span id="cb5-20"><a href="snqesa.html#cb5-20" tabindex="-1"></a>tgrid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.2</span>, <span class="fl">3.2</span>, <span class="at">by =</span> <span class="fl">0.25</span>)</span>
-<span id="cb5-21"><a href="snqesa.html#cb5-21" tabindex="-1"></a>esa_norm <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_norm, <span class="fu">mean</span>(x_norm) <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_norm) <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
-<span id="cb5-22"><a href="snqesa.html#cb5-22" tabindex="-1"></a>esa_t3   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(tgrid, <span class="cf">function</span>(t) <span class="fu">esa_tail</span>(x_t3,   <span class="fu">mean</span>(x_t3)   <span class="sc">+</span> t <span class="sc">*</span> <span class="fu">sd</span>(x_t3)   <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
-<span id="cb5-23"><a href="snqesa.html#cb5-23" tabindex="-1"></a>tn <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(tgrid, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># 正态近似（t 分布形式）</span></span>
-<span id="cb5-24"><a href="snqesa.html#cb5-24" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">t =</span> tgrid, <span class="at">normal_approx =</span> <span class="fu">round</span>(tn, <span class="dv">4</span>),</span>
-<span id="cb5-25"><a href="snqesa.html#cb5-25" tabindex="-1"></a>      <span class="at">ESA_normal_sample =</span> <span class="fu">round</span>(esa_norm, <span class="dv">4</span>),</span>
-<span id="cb5-26"><a href="snqesa.html#cb5-26" tabindex="-1"></a>      <span class="at">ESA_t3_sample =</span> <span class="fu">round</span>(esa_t3, <span class="dv">4</span>))</span></code></pre></div>
-<pre><code>##          t normal_approx ESA_normal_sample ESA_t3_sample
-##  [1,] 1.20        0.1175            2.7547        2.7411
-##  [2,] 1.45        0.0762            2.3785        2.3661
-##  [3,] 1.70        0.0472            2.1152        2.1039
-##  [4,] 1.95        0.0280            1.9212        1.9110
-##  [5,] 2.20        0.0159            1.7728        1.7637
-##  [6,] 2.45        0.0086            1.6562        1.6481
-##  [7,] 2.70        0.0045            1.5624        1.5553
-##  [8,] 2.95        0.0023            1.4857        1.4795
-##  [9,] 3.20        0.0011            1.4220        1.4167</code></pre>
+<p><strong>例：鞍点公式的实现校验。</strong> 以指数均值为例：<span class="math inline">\(Y_1, \dots, Y_n
+\overset{\text{i.i.d.}}{\sim} \mathrm{Exp}(1)\)</span> 时 <span class="math inline">\(\bar Y\)</span> 的分布
+精确已知（<span class="math inline">\(n\bar Y \sim \mathrm{Gamma}(n, 1)\)</span>），可作为基准。比较
+三种尾概率：精确值、鞍点公式与正态近似。鞍点公式使用指数分布的
+累积量生成函数 <span class="math inline">\(K(t) = -\log(1-t)\)</span>，<span class="math inline">\(w\)</span> 与 <span class="math inline">\(u\)</span> 按本章公式计算；
+经验鞍点函数以样本的 CGF 代替总体的 CGF。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="snqesa.html#cb5-1" tabindex="-1"></a>saddle_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, n) {    <span class="co"># 指数均值：参数化鞍点尾概率</span></span>
+<span id="cb5-2"><a href="snqesa.html#cb5-2" tabindex="-1"></a>  th <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> x0                  <span class="co"># K&#39;(th) = 1/(1-th) = x0</span></span>
+<span id="cb5-3"><a href="snqesa.html#cb5-3" tabindex="-1"></a>  K <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> th); K2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> th)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-4"><a href="snqesa.html#cb5-4" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">max</span>(<span class="dv">2</span> <span class="sc">*</span> n <span class="sc">*</span> (th <span class="sc">*</span> x0 <span class="sc">-</span> K), <span class="dv">0</span>))</span>
+<span id="cb5-5"><a href="snqesa.html#cb5-5" tabindex="-1"></a>  u <span class="ot">&lt;-</span> th <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">*</span> K2)</span>
+<span id="cb5-6"><a href="snqesa.html#cb5-6" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> u <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> w)</span>
+<span id="cb5-7"><a href="snqesa.html#cb5-7" tabindex="-1"></a>}</span>
+<span id="cb5-8"><a href="snqesa.html#cb5-8" tabindex="-1"></a>esa_tail <span class="ot">&lt;-</span> <span class="cf">function</span>(x, x0) {       <span class="co"># 经验鞍点：样本 CGF</span></span>
+<span id="cb5-9"><a href="snqesa.html#cb5-9" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb5-10"><a href="snqesa.html#cb5-10" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">-</span> x0</span>
+<span id="cb5-11"><a href="snqesa.html#cb5-11" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(th) <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th <span class="sc">*</span> y))</span>
+<span id="cb5-12"><a href="snqesa.html#cb5-12" tabindex="-1"></a>  th0 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">uniroot</span>(f, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>), <span class="at">extendInt =</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">$</span>root,</span>
+<span id="cb5-13"><a href="snqesa.html#cb5-13" tabindex="-1"></a>                  <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA</span>)</span>
+<span id="cb5-14"><a href="snqesa.html#cb5-14" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(th0)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb5-15"><a href="snqesa.html#cb5-15" tabindex="-1"></a>  K <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">mean</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y)))</span>
+<span id="cb5-16"><a href="snqesa.html#cb5-16" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
+<span id="cb5-17"><a href="snqesa.html#cb5-17" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">exp</span>(th0 <span class="sc">*</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(th0 <span class="sc">*</span> y))</span>
+<span id="cb5-18"><a href="snqesa.html#cb5-18" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">sign</span>(th0) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">max</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> n <span class="sc">*</span> K, <span class="dv">0</span>))</span>
+<span id="cb5-19"><a href="snqesa.html#cb5-19" tabindex="-1"></a>  u <span class="ot">&lt;-</span> th0 <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">*</span> (m2 <span class="sc">-</span> m1<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb5-20"><a href="snqesa.html#cb5-20" tabindex="-1"></a>  <span class="cf">if</span> (u <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> w <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb5-21"><a href="snqesa.html#cb5-21" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(w) <span class="sc">+</span> <span class="fu">dnorm</span>(w) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> u <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> w)</span>
+<span id="cb5-22"><a href="snqesa.html#cb5-22" tabindex="-1"></a>}</span>
+<span id="cb5-23"><a href="snqesa.html#cb5-23" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb5-24"><a href="snqesa.html#cb5-24" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb5-25"><a href="snqesa.html#cb5-25" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n)</span>
+<span id="cb5-26"><a href="snqesa.html#cb5-26" tabindex="-1"></a>x0s <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.02</span>, <span class="fl">1.3</span>, <span class="at">by =</span> <span class="fl">0.04</span>)</span>
+<span id="cb5-27"><a href="snqesa.html#cb5-27" tabindex="-1"></a>exact <span class="ot">&lt;-</span> <span class="fu">sapply</span>(x0s, <span class="cf">function</span>(x0) <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pgamma</span>(n <span class="sc">*</span> x0, <span class="at">shape =</span> n, <span class="at">rate =</span> <span class="dv">1</span>))</span>
+<span id="cb5-28"><a href="snqesa.html#cb5-28" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(x0s, <span class="cf">function</span>(x0) <span class="fu">saddle_tail</span>(x0, n))</span>
+<span id="cb5-29"><a href="snqesa.html#cb5-29" tabindex="-1"></a>normal <span class="ot">&lt;-</span> <span class="fu">sapply</span>(x0s, <span class="cf">function</span>(x0) <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>((x0 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">/</span> n)))</span>
+<span id="cb5-30"><a href="snqesa.html#cb5-30" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(<span class="at">x0 =</span> x0s, <span class="at">exact =</span> exact, <span class="at">saddlepoint =</span> sp, <span class="at">normal =</span> normal), <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##        x0   exact saddlepoint  normal
+## [1,] 1.02 0.42196     0.42196 0.43844
+## [2,] 1.06 0.30903     0.30903 0.32105
+## [3,] 1.10 0.21392     0.21392 0.21929
+## [4,] 1.14 0.14003     0.14003 0.13909
+## [5,] 1.18 0.08678     0.08678 0.08162
+## [6,] 1.22 0.05098     0.05098 0.04418
+## [7,] 1.26 0.02845     0.02845 0.02201
+## [8,] 1.30 0.01511     0.01511 0.01007</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="snqesa.html#cb7-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;sample mean:&quot;</span>, <span class="fu">round</span>(<span class="fu">mean</span>(x), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## sample mean: 1.204</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="snqesa.html#cb9-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;single-sample ESA at x0 = 1.10:&quot;</span>, <span class="fu">round</span>(<span class="fu">esa_tail</span>(x, <span class="fl">1.10</span>), <span class="dv">3</span>),</span>
+<span id="cb9-2"><a href="snqesa.html#cb9-2" tabindex="-1"></a>    <span class="st">&quot; (exact 0.214)</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## single-sample ESA at x0 = 1.10: 0.708  (exact 0.214)</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:esa-plot"></span>
-<img src="notes-book_files/figure-html/esa-plot-1.png" alt="t3 重尾样本下经验鞍点与正态近似的尾概率分歧" width="672" />
+<img src="notes-book_files/figure-html/esa-plot-1.png" alt="指数均值尾概率：鞍点公式、精确值与正态近似（对数尺度）" width="672" />
 <p class="caption">
-图 3.1: t3 重尾样本下经验鞍点与正态近似的尾概率分歧
+图 3.1: 指数均值尾概率：鞍点公式、精确值与正态近似（对数尺度）
 </p>
 </div>
-<p>正态样本下两条曲线几乎重合（此时正态近似正确）；<span class="math inline">\(t_3\)</span> 样本下明显
-分歧：<span class="math inline">\(t\)</span> 近似基于总体正态的假设，把尾部压得过低，而经验鞍点的
-尾概率完全由数据驱动。蒙特卡洛实验（涵盖轻尾、重尾与多峰分布）
-表明，把该机制用于分位数枢轴后，覆盖率在 <span class="math inline">\(n = 30\)</span> 到 <span class="math inline">\(n = 200\)</span>
-范围内稳定接近名义水平。</p>
+<p>鞍点公式与精确值在整个尾部分支上一致到小数点后五位，同时校验了
+<span class="math inline">\(w\)</span> 定义中 <span class="math inline">\(\sqrt{n}\)</span> 因子的正确性：若缺失该因子，尾概率将系统性
+偏离精确值。正态近似在中尾尚可，远尾处（<span class="math inline">\(x_0 = 1.3\)</span>）低估约三成。</p>
+<p><strong>经验版本的单样本噪声。</strong> 经验鞍点以样本的 CGF 代替总体的 CGF，
+其精度受样本质量限制。本例的样本均值为 <span class="math inline">\(1.204\)</span>，略高于总体均值
+<span class="math inline">\(1\)</span>；在 <span class="math inline">\(x_0 = 1.10\)</span> 处经验鞍点给出 <span class="math inline">\(0.708\)</span>，与精确值 <span class="math inline">\(0.214\)</span> 相距
+甚远——样本均值与阈值接近时鞍点方程的解移向原点，<span class="math inline">\(w \approx 0\)</span>，
+尾概率估计被样本均值的 <span class="math inline">\(O_p(n^{-1/2})\)</span> 波动主导。自标准化枢轴与
+约束鞍点（本章第 2 节的构造）正是为了抑制这一噪声；原文的蒙特卡洛
+实验（涵盖轻尾、重尾与多峰分布）表明，将其用于分位数枢轴后，区间
+覆盖率在 <span class="math inline">\(n = 30\)</span> 到 <span class="math inline">\(n = 200\)</span> 范围内稳定接近名义水平
+<span class="citation">(<a href="#ref-hou2026snqesa">Hou, Meng, and Tian 2026b</a>)</span>。</p>
 </div>
 <div id="注记-1" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> 注记<a href="snqesa.html#%E6%B3%A8%E8%AE%B0-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
