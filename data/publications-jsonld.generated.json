@@ -58,64 +58,6 @@
       "position": 3,
       "item": {
         "@type": "ScholarlyArticle",
-        "name": "Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China",
-        "author": [
-          {
-            "@type": "Person",
-            "name": "Jian Hou"
-          },
-          {
-            "@type": "Person",
-            "name": "Tan Meng"
-          },
-          {
-            "@type": "Person",
-            "name": "Maozai Tian"
-          }
-        ],
-        "datePublished": "2026",
-        "isPartOf": "Journal of the American Statistical Association",
-        "url": "https://stork343.github.io/homepage/#publication-qvsd-spatiotemporal-extremes"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "Tensor Partially Linear Additive Quantile Regression",
-        "author": [
-          {
-            "@type": "Person",
-            "name": "Shuo Liu"
-          },
-          {
-            "@type": "Person",
-            "name": "Jiancheng Jiang"
-          },
-          {
-            "@type": "Person",
-            "name": "Jian Hou"
-          },
-          {
-            "@type": "Person",
-            "name": "Zhihao Wang"
-          },
-          {
-            "@type": "Person",
-            "name": "Maozai Tian"
-          }
-        ],
-        "datePublished": "2026",
-        "isPartOf": "Journal of Multivariate Analysis",
-        "url": "https://stork343.github.io/homepage/#publication-tplaqr"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
-      "item": {
-        "@type": "ScholarlyArticle",
         "name": "Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma",
         "author": [
           {
@@ -146,6 +88,64 @@
         "datePublished": "2026",
         "isPartOf": "Statistics in Medicine",
         "url": "https://stork343.github.io/homepage/#publication-qtr-oc"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Scale-dependent contraction of spatial wet-bulb temperature contrasts in eastern China",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Jian Hou"
+          },
+          {
+            "@type": "Person",
+            "name": "Tan Meng"
+          },
+          {
+            "@type": "Person",
+            "name": "Maozai Tian"
+          }
+        ],
+        "datePublished": "2026",
+        "isPartOf": "Journal of the American Statistical Association",
+        "url": "https://stork343.github.io/homepage/#publication-qvsd-spatiotemporal-extremes"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": "Tensor Partially Linear Additive Quantile Regression",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Shuo Liu"
+          },
+          {
+            "@type": "Person",
+            "name": "Jiancheng Jiang"
+          },
+          {
+            "@type": "Person",
+            "name": "Jian Hou"
+          },
+          {
+            "@type": "Person",
+            "name": "Zhihao Wang"
+          },
+          {
+            "@type": "Person",
+            "name": "Maozai Tian"
+          }
+        ],
+        "datePublished": "2026",
+        "isPartOf": "Journal of Multivariate Analysis",
+        "url": "https://stork343.github.io/homepage/#publication-tplaqr"
       }
     },
     {

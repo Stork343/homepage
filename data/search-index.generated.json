@@ -85,6 +85,47 @@
       "paper_path": null
     },
     {
+      "id": "qtr-oc",
+      "year": 2026,
+      "title": {
+        "zh": "Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma",
+        "en": "Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma"
+      },
+      "authors": {
+        "zh": "Shuo Liu, Wolfgang Karl Härdle, Jianxin Pan, Jian Hou, Tan Meng, Maozai Tian",
+        "en": "Shuo Liu, Wolfgang Karl Härdle, Jianxin Pan, Jian Hou, Tan Meng, Maozai Tian"
+      },
+      "venue": {
+        "zh": "Statistics in Medicine",
+        "en": "Statistics in Medicine"
+      },
+      "status": {
+        "zh": "状态：录用",
+        "en": "Status: Accepted"
+      },
+      "keywords": {
+        "zh": [
+          "quantile regression",
+          "tensor regression",
+          "integrative genomic analysis",
+          "oesophageal carcinoma",
+          "omics data integration"
+        ],
+        "en": [
+          "quantile regression",
+          "tensor regression",
+          "integrative genomic analysis",
+          "oesophageal carcinoma",
+          "omics data integration"
+        ]
+      },
+      "links": {
+        "article": null,
+        "pdf": null
+      },
+      "paper_path": null
+    },
+    {
       "id": "qvsd-spatiotemporal-extremes",
       "year": 2026,
       "title": {
@@ -162,47 +203,6 @@
           "region selection",
           "asymptotic theory",
           "ADMM"
-        ]
-      },
-      "links": {
-        "article": null,
-        "pdf": null
-      },
-      "paper_path": null
-    },
-    {
-      "id": "qtr-oc",
-      "year": 2026,
-      "title": {
-        "zh": "Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma",
-        "en": "Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma"
-      },
-      "authors": {
-        "zh": "Shuo Liu, Wolfgang Karl Härdle, Jianxin Pan, Jian Hou, Tan Meng, Maozai Tian",
-        "en": "Shuo Liu, Wolfgang Karl Härdle, Jianxin Pan, Jian Hou, Tan Meng, Maozai Tian"
-      },
-      "venue": {
-        "zh": "Statistics in Medicine",
-        "en": "Statistics in Medicine"
-      },
-      "status": {
-        "zh": "状态：录用",
-        "en": "Status: Accepted"
-      },
-      "keywords": {
-        "zh": [
-          "quantile regression",
-          "tensor regression",
-          "integrative genomic analysis",
-          "oesophageal carcinoma",
-          "omics data integration"
-        ],
-        "en": [
-          "quantile regression",
-          "tensor regression",
-          "integrative genomic analysis",
-          "oesophageal carcinoma",
-          "omics data integration"
         ]
       },
       "links": {
