@@ -49,7 +49,7 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "chore: render bookdown notes"
             REMOTE="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-            git pull --rebase "$REMOTE" main || true
+            git pull --rebase "$REMOTE" main
             git push "$REMOTE" HEAD:main
           else
             echo "No rendered changes."

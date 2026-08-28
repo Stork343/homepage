@@ -19,8 +19,14 @@ const OUTPUT_FILES = {
   indexHtml: path.join(ROOT, "index.html")
 };
 
-function todayLocal() {
-  return new Date().toLocaleDateString("en-CA");
+function todayInSiteTimeZone() {
+  const timeZone = process.env.SITE_TIME_ZONE || "Asia/Shanghai";
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date());
 }
 
 function masterDataVersion(master) {
@@ -490,7 +496,7 @@ function main() {
     [OUTPUT_FILES.publicationsJsonLd, jsonText(publicationsJsonLd)],
     [OUTPUT_FILES.paperSeo, jsonText(paperSeo)],
     [OUTPUT_FILES.sitemap, sitemap],
-    [OUTPUT_FILES.siteUpdated, jsonText({ updated: todayLocal() })],
+    [OUTPUT_FILES.siteUpdated, jsonText({ updated: todayInSiteTimeZone() })],
     [OUTPUT_FILES.indexHtml, buildIndexHtml(ROOT)]
   ];
 
