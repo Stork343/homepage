@@ -47,7 +47,7 @@ jobs:
           if-no-files-found: error
 
       - name: Publish GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.event.inputs.tag }}
           body_path: release-artifacts/${{ github.event.inputs.tag }}/CHANGELOG.generated.md
