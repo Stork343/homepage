@@ -19,8 +19,8 @@
     "lighthouse": "node scripts/run-lighthouse-check.js"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.10.2",
-    "@playwright/test": "^1.52.0",
-    "lighthouse": "^12.8.2"
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
+    "lighthouse": "^13.4.1"
   }
 }
