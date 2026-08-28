@@ -158,6 +158,15 @@ jobs:
       - name: Run visual baseline tests
         run: npm run test:visual
 
+      - name: Upload visual regression diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-diagnostics
+          path: test-results/
+          if-no-files-found: error
+          retention-days: 3
+
   lighthouse-check:
     runs-on: ubuntu-latest
     steps:
