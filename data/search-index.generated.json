@@ -85,6 +85,47 @@
       "paper_path": null
     },
     {
+      "id": "salcdi-scarce-outcomes",
+      "year": 2026,
+      "title": {
+        "zh": "Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes",
+        "en": "Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes"
+      },
+      "authors": {
+        "zh": "Jian Hou, Tan Meng, Maozai Tian",
+        "en": "Jian Hou, Tan Meng, Maozai Tian"
+      },
+      "venue": {
+        "zh": "Journal of the American Statistical Association",
+        "en": "Journal of the American Statistical Association"
+      },
+      "status": {
+        "zh": "状态：已投稿",
+        "en": "Status: Submitted"
+      },
+      "keywords": {
+        "zh": [
+          "surrogate outcomes",
+          "conditional distribution inference",
+          "local inference",
+          "distributional inference",
+          "scarce reference data"
+        ],
+        "en": [
+          "surrogate outcomes",
+          "conditional distribution inference",
+          "local inference",
+          "distributional inference",
+          "scarce reference data"
+        ]
+      },
+      "links": {
+        "article": null,
+        "pdf": null
+      },
+      "paper_path": null
+    },
+    {
       "id": "qtr-oc",
       "year": 2026,
       "title": {
