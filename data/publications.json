@@ -261,8 +261,8 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg",
-      "webp": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.webp",
+      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg?v=jrssc-cover",
+      "webp": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.webp?v=jrssc-cover",
       "width": 400,
       "height": 521,
       "alt": {
