@@ -189,6 +189,62 @@
       }
     },
     {
+      "id": "salcdi-scarce-outcomes",
+      "year": 2026,
+      "title": {
+        "zh": "Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes",
+        "en": "Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes"
+      },
+      "authors": "Jian Hou, Tan Meng, Maozai Tian",
+      "venue": {
+        "zh": "Journal of the American Statistical Association",
+        "en": "Journal of the American Statistical Association"
+      },
+      "status": {
+        "zh": "状态：已投稿",
+        "en": "Status: Submitted"
+      },
+      "links": {
+        "pdf": null,
+        "code": null,
+        "doi": null,
+        "html": null,
+        "article": null
+      },
+      "image": {
+        "src": "./papers/2026/salcdi-scarce-outcomes/salcdi-scarce-outcomes-cover.jpg",
+        "webp": "./papers/2026/salcdi-scarce-outcomes/salcdi-scarce-outcomes-cover.webp",
+        "width": 200,
+        "height": 259,
+        "alt": {
+          "zh": "Journal of the American Statistical Association 期刊封面",
+          "en": "Journal of the American Statistical Association cover"
+        }
+      },
+      "citation": {
+        "zh": "Hou, J., Tan, M., & Tian, M. Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes. Journal of the American Statistical Association, 2026.",
+        "en": "Hou, J., Tan, M., & Tian, M. Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes. Journal of the American Statistical Association, 2026."
+      },
+      "bibtex": "@article{hou2026salcdi,\n  title={Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of the American Statistical Association},\n  year={2026},\n  note={Submitted}\n}",
+      "force_english_display": true,
+      "keywords": {
+        "zh": [
+          "surrogate outcomes",
+          "conditional distribution inference",
+          "local inference",
+          "distributional inference",
+          "scarce reference data"
+        ],
+        "en": [
+          "surrogate outcomes",
+          "conditional distribution inference",
+          "local inference",
+          "distributional inference",
+          "scarce reference data"
+        ]
+      }
+    },
+    {
       "id": "qtr-oc",
       "year": 2026,
       "title": {
