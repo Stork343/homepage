@@ -257,14 +257,14 @@
         "en": "Statistics in Medicine"
       },
       "status": {
-        "zh": "状态：录用",
-        "en": "Status: Accepted"
+        "zh": "",
+        "en": ""
       },
       "links": {
         "pdf": null,
         "code": null,
-        "doi": null,
-        "html": null,
+        "doi": "https://doi.org/10.1002/sim.70732",
+        "html": "https://onlinelibrary.wiley.com/doi/10.1002/sim.70732",
         "article": "https://onlinelibrary.wiley.com/doi/10.1002/sim.70732"
       },
       "image": {
@@ -278,10 +278,20 @@
         }
       },
       "citation": {
-        "zh": "Shuo Liu, Wolfgang Karl Härdle, Jianxin Pan, Jian Hou, Tan Meng, Maozai Tian. Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma. Statistics in Medicine, 2026.",
-        "en": "Liu, S., Härdle, W. K., Pan, J., Hou, J., Meng, T., & Tian, M. Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma. Statistics in Medicine, 2026."
+        "zh": "Liu, S., Härdle, W. K., Pan, J., Hou, J., Meng, T., & Tian, M. Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma. Statistics in Medicine, 45(20-22), e70732. https://doi.org/10.1002/sim.70732.",
+        "en": "Liu, S., Härdle, W. K., Pan, J., Hou, J., Meng, T., & Tian, M. Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma. Statistics in Medicine, 45(20-22), e70732. https://doi.org/10.1002/sim.70732."
       },
-      "bibtex": "@article{liu2026qtroc,\n  title={Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma},\n  author={Liu, Shuo and Härdle, Wolfgang Karl and Pan, Jianxin and Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Statistics in Medicine},\n  year={2026},\n  note={Accepted}\n}",
+      "publication_info": {
+        "display": {
+          "zh": "Volume 45, Issue 20-22, 2026, e70732",
+          "en": "Volume 45, Issue 20-22, 2026, e70732"
+        },
+        "date_published": "2026",
+        "volume": "45",
+        "issue": "20-22",
+        "article_number": "e70732"
+      },
+      "bibtex": "@article{liu2026qtroc,\n  title={Quantile Tensor Regression for Integrative Genomic Analysis of Oesophageal Carcinoma},\n  author={Liu, Shuo and Härdle, Wolfgang Karl and Pan, Jianxin and Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Statistics in Medicine},\n  volume={45},\n  number={20-22},\n  year={2026},\n  pages={e70732},\n  doi={10.1002/sim.70732}\n}",
       "force_english_display": true,
       "keywords": {
         "zh": [
