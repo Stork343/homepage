@@ -298,6 +298,7 @@
     ["spatial statistics", "https://www.sciencedirect.com/journal/spatial-statistics"],
     ["journal of statistical planning and inference", "https://www.sciencedirect.com/journal/journal-of-statistical-planning-and-inference"],
     ["journal of multivariate analysis", "https://www.sciencedirect.com/journal/journal-of-multivariate-analysis"],
+    ["annals of applied statistics", "https://projecteuclid.org/journals/annals-of-applied-statistics"],
     ["journal of the royal statistical society: series c (applied statistics)", "https://academic.oup.com/jrsssc"],
     ["statistical papers", "https://link.springer.com/journal/362"],
     ["arxiv preprint; statistical papers", "https://link.springer.com/journal/362"],
