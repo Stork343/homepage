@@ -324,15 +324,15 @@
       "en": "Journal of Multivariate Analysis"
     },
     "status": {
-      "zh": "状态：录用",
-      "en": "Status: Accepted"
+      "zh": "",
+      "en": ""
     },
     "links": {
       "pdf": null,
       "code": null,
-      "doi": null,
-      "html": null,
-      "article": null
+      "doi": "https://doi.org/10.1016/j.jmva.2026.105707",
+      "html": "https://www.sciencedirect.com/science/article/pii/S0047259X26001132",
+      "article": "https://www.sciencedirect.com/science/article/pii/S0047259X26001132"
     },
     "image": {
       "src": "./papers/2026/tplaqr/tplaqr-cover.jpg",
@@ -345,10 +345,18 @@
       }
     },
     "citation": {
-      "zh": "Shuo Liu, Jiancheng Jiang, Jian Hou, Zhihao Wang, Maozai Tian. Tensor Partially Linear Additive Quantile Regression. Journal of Multivariate Analysis, 2026.",
-      "en": "Liu, S., Jiang, J., Hou, J., Wang, Z., & Tian, M. Tensor Partially Linear Additive Quantile Regression. Journal of Multivariate Analysis, 2026."
+      "zh": "Shuo Liu, Jiancheng Jiang, Jian Hou, Zhihao Wang, Maozai Tian. Tensor partially linear additive quantile regression. Journal of Multivariate Analysis, 2026, 105707. https://doi.org/10.1016/j.jmva.2026.105707.",
+      "en": "Liu, S., Jiang, J., Hou, J., Wang, Z., & Tian, M. (2026). Tensor partially linear additive quantile regression. Journal of Multivariate Analysis, 105707. https://doi.org/10.1016/j.jmva.2026.105707."
     },
-    "bibtex": "@article{liu2026tplaqr,\n  title={Tensor Partially Linear Additive Quantile Regression},\n  author={Liu, Shuo and Jiang, Jiancheng and Hou, Jian and Wang, Zhihao and Tian, Maozai},\n  journal={Journal of Multivariate Analysis},\n  year={2026},\n  note={Accepted}\n}",
+    "bibtex": "@article{liu2026tplaqr,\n  title={Tensor partially linear additive quantile regression},\n  author={Liu, Shuo and Jiang, Jiancheng and Hou, Jian and Wang, Zhihao and Tian, Maozai},\n  journal={Journal of Multivariate Analysis},\n  year={2026},\n  pages={105707},\n  issn={0047-259X},\n  doi={10.1016/j.jmva.2026.105707},\n  url={https://www.sciencedirect.com/science/article/pii/S0047259X26001132}\n}",
+    "publication_info": {
+      "display": {
+        "zh": "Published online September 2026, 105707",
+        "en": "Published online September 2026, 105707"
+      },
+      "date_published": "2026-09",
+      "article_number": "105707"
+    },
     "force_english_display": true,
     "keywords": {
       "zh": [
