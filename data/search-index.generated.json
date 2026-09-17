@@ -225,8 +225,8 @@
         "en": "Journal of Multivariate Analysis"
       },
       "status": {
-        "zh": "状态：录用",
-        "en": "Status: Accepted"
+        "zh": "",
+        "en": ""
       },
       "keywords": {
         "zh": [
@@ -247,7 +247,7 @@
         ]
       },
       "links": {
-        "article": null,
+        "article": "https://www.sciencedirect.com/science/article/pii/S0047259X26001132",
         "pdf": null
       },
       "paper_path": null
