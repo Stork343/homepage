@@ -138,8 +138,8 @@
       "en": "Journal of the American Statistical Association"
     },
     "status": {
-      "zh": "状态：已投稿",
-      "en": "Status: Submitted"
+      "zh": "状态：外审",
+      "en": "Status: Under Review"
     },
     "links": {
       "pdf": null,
@@ -162,7 +162,7 @@
       "zh": "Hou, J., Tan, M., & Tian, M. Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes. Journal of the American Statistical Association, 2026.",
       "en": "Hou, J., Tan, M., & Tian, M. Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes. Journal of the American Statistical Association, 2026."
     },
-    "bibtex": "@article{hou2026salcdi,\n  title={Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of the American Statistical Association},\n  year={2026},\n  note={Submitted}\n}",
+    "bibtex": "@article{hou2026salcdi,\n  title={Surrogate-Assisted Local Conditional Distribution Inference with Scarce Reference Outcomes},\n  author={Hou, Jian and Meng, Tan and Tian, Maozai},\n  journal={Journal of the American Statistical Association},\n  year={2026},\n  note={Under review}\n}",
     "force_english_display": true,
     "keywords": {
       "zh": [
