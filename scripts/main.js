@@ -97,11 +97,9 @@
       export_file_all: "hou-jian-publications-all",
       export_file_filtered: "hou-jian-publications-filtered",
       cv_title: "简历",
-      cv_zh_title: "中文简历",
-      cv_zh_desc: "下载最新中文 CV（PDF）",
-      cv_en_title: "English CV",
-      cv_en_desc: "Download the latest English CV (PDF)",
-      cv_updated: "最近更新：2026-08-10",
+      cv_request_title: "索取简历",
+      cv_request_desc: "如需完整 CV，请发邮件索取。",
+      cv_updated: "最近更新：—",
       cv_updated_template: "最近更新：{date}",
       contact_title: "联系方式",
       contact_email_label: "邮箱",
@@ -113,7 +111,7 @@
       contact_collab_label: "研究合作",
       contact_collab_value: "欢迎学术合作与交流",
       contact_collab_people: "主要合作者：TIAN Maozai, MENG Tan, WANG Zhihao",
-      footer_text: "© 2026 HOU Jian. 最后更新：2026年8月10日",
+      footer_text: "© 2026 HOU Jian.",
       footer_text_template: "© {year} HOU Jian. 最后更新：{date}",
       footer_stats_label: "访问量统计",
       footer_stat_pv: "访问量",
@@ -201,11 +199,9 @@
       export_file_all: "hou-jian-publications-all",
       export_file_filtered: "hou-jian-publications-filtered",
       cv_title: "Curriculum Vitae",
-      cv_zh_title: "Chinese CV",
-      cv_zh_desc: "Download latest Chinese CV (PDF)",
-      cv_en_title: "English CV",
-      cv_en_desc: "Download latest English CV (PDF)",
-      cv_updated: "Last updated: 2026-08-10",
+      cv_request_title: "Request CV",
+      cv_request_desc: "Email me for the full CV.",
+      cv_updated: "Last updated: —",
       cv_updated_template: "Last updated: {date}",
       contact_title: "Contact",
       contact_email_label: "Email",
@@ -217,7 +213,7 @@
       contact_collab_label: "Collaboration",
       contact_collab_value: "Open to academic collaboration and discussion",
       contact_collab_people: "Main collaborators: TIAN Maozai, MENG Tan, WANG Zhihao",
-      footer_text: "© 2026 HOU Jian. Last updated: August 10, 2026",
+      footer_text: "© 2026 HOU Jian.",
       footer_text_template: "© {year} HOU Jian. Last updated: {date}",
       footer_stats_label: "Visitor statistics",
       footer_stat_pv: "Views",
@@ -325,7 +321,23 @@
   ].join(", ");
   let revealObserver = null;
 
+  // 站点生成物（data/site-updated.generated.json）里的"最后更新"日期。
+  // 不写死在 I18N 字典中：静态字面量会在每次自动同步后被超越，
+  // 而且语言切换走 applyI18nText() 时会把动态日期覆盖回旧值。
+  let siteUpdated = "";
+
   function t(key) {
+    if (siteUpdated) {
+      if (key === "cv_updated") {
+        return formatI18n("cv_updated_template", { date: siteUpdated });
+      }
+      if (key === "footer_text") {
+        return formatI18n("footer_text_template", {
+          year: siteUpdated.slice(0, 4),
+          date: siteUpdated
+        });
+      }
+    }
     return I18N[state.lang][key] || I18N.zh[key] || key;
   }
 
@@ -1431,13 +1443,10 @@
       if (!date) {
         return;
       }
-      const year = date.slice(0, 4);
-      document.querySelectorAll('[data-i18n="cv_updated"]').forEach((node) => {
-        node.textContent = formatI18n("cv_updated_template", { date });
-      });
-      document.querySelectorAll('[data-i18n="footer_text"]').forEach((node) => {
-        node.textContent = formatI18n("footer_text_template", { year, date });
-      });
+      siteUpdated = date;
+      // 记下日期后重跑一遍 i18n 渲染：cv_updated / footer_text 的日期由 t() 动态组装，
+      // 因此此后任何语言切换都会拿到正确日期，而不再回退到静态字面量。
+      applyI18nText();
     } catch (_) {
       // Keep the static fallback text in the HTML when the meta file is unavailable.
     }
