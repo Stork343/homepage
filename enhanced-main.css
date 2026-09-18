@@ -140,7 +140,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .cv-card:hover{transform:none; box-shadow:none; border-color:#bcc6d3; border-left-color:var(--tf-blue)}
 .cv-card-title{font-size:20px; margin-bottom:8px; font-family:'Source Serif 4', serif; color:var(--tf-ink)}
 .cv-card-desc{font-size:14px; color:var(--tf-slate)}
-.cv-updated{margin-top:14px; font-size:13px; color:var(--tf-muted)}
 .contact-content{max-width:760px}
 .contact-info{display:flex; flex-direction:column; gap:14px}
 .contact-item{transition:all .3s ease; position:relative; background:var(--tf-paper); border:1px solid var(--tf-border); border-radius:2px; padding:18px 20px; backdrop-filter:none; box-shadow:none}

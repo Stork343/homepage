@@ -99,8 +99,6 @@
       cv_title: "简历",
       cv_request_title: "索取简历",
       cv_request_desc: "如需完整 CV，请发邮件索取。",
-      cv_updated: "最近更新：—",
-      cv_updated_template: "最近更新：{date}",
       contact_title: "联系方式",
       contact_email_label: "邮箱",
       contact_affiliation_label: "机构",
@@ -201,8 +199,6 @@
       cv_title: "Curriculum Vitae",
       cv_request_title: "Request CV",
       cv_request_desc: "Email me for the full CV.",
-      cv_updated: "Last updated: —",
-      cv_updated_template: "Last updated: {date}",
       contact_title: "Contact",
       contact_email_label: "Email",
       contact_affiliation_label: "Affiliation",
@@ -328,9 +324,6 @@
 
   function t(key) {
     if (siteUpdated) {
-      if (key === "cv_updated") {
-        return formatI18n("cv_updated_template", { date: siteUpdated });
-      }
       if (key === "footer_text") {
         return formatI18n("footer_text_template", {
           year: siteUpdated.slice(0, 4),
@@ -1444,7 +1437,7 @@
         return;
       }
       siteUpdated = date;
-      // 记下日期后重跑一遍 i18n 渲染：cv_updated / footer_text 的日期由 t() 动态组装，
+      // 记下日期后重跑一遍 i18n 渲染：footer_text 的日期由 t() 动态组装，
       // 因此此后任何语言切换都会拿到正确日期，而不再回退到静态字面量。
       applyI18nText();
     } catch (_) {
