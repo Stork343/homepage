@@ -1,0 +1,57 @@
+# 主页项目 · 内网预览（Mac mini 本机 + 局域网，不对外网开放）
+#
+# 由 scripts/ops/macmini-bootstrap.sh 渲染：
+#   __REPO_DIR__  -> 仓库绝对路径（如 /Users/<user>/Sites/homepage）
+#   __PORT__      -> 监听端口（默认 8080）
+#
+# 设计要点:
+#   * 只在 http 上监听高位端口，不需要 root，也不申请证书（纯内网）。
+#   * 路径结构刻意与 GitHub Pages 一致（/homepage/ 子路径），这样预览时的
+#     相对链接、绝对路径资源、hash 深链行为都与线上相同。
+#   * 用 route{} 强制字面顺序执行，确保 .git/.dsh/node_modules 的 404 判断
+#     一定发生在 file_server 之前（Caddy 默认会重排指令顺序，不能依赖书写顺序）。
+#   * 注意：GitHub Pages 本身会公开仓库根下的所有非下划线/非点号文件，
+#     所以 scripts/、data/ 在这里可访问与线上暴露面一致；真正必须屏蔽的是
+#     .git（含历史与可能的敏感信息）和 .dsh。
+
+{
+	admin off
+	auto_https off
+}
+
+http://:__PORT__ {
+	encode zstd gzip
+
+	# 根路径跳到子路径，避免"预览首页正常、但相对链接行为不同"的假象
+	redir / /homepage/ 302
+
+	handle_path /homepage/* {
+		root * __REPO_DIR__
+
+		route {
+			# 屏蔽仓库内部目录（含 git 历史与 agent 运行目录）
+			@internal path_regexp internal ^/(\.git|\.dsh|\.vscode|node_modules)(/|$)
+			respond @internal 404
+
+			# 与 Pages 的等价行为：扩展名省略回退、目录回退到 index.html
+			try_files {path} {path}/index.html {path}.html
+
+			# 与 Pages 等价的缓存头：HTML 不缓存，静态资源短缓存
+			@static path *.css *.js *.webp *.jpg *.jpeg *.png *.woff *.woff2 *.ttf *.pdf
+			header @static Cache-Control "public, max-age=600"
+			header !@static Cache-Control "no-cache"
+
+			file_server
+		}
+	}
+
+	# 局域网内加一层口令（可选）：取消注释后生效
+	# basicauth {
+	# 	preview $2a$14$REPLACE_WITH_CADDY_HASH
+	# }
+
+	log {
+		output file __LOG_DIR__/caddy-access.log
+		format console
+	}
+}
