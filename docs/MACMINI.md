@@ -122,6 +122,10 @@ cd ~/Sites/homepage
 # 视觉基线与 macos-latest runner 打架时临时跳过
 ./scripts/ops/local-ci.sh --full --skip-visual
 
+# 视觉基线：首次生成、或重构首屏布局后重新生成（只能在 darwin 上做）
+# CI 的 macos-latest 会用同一套 darwin 基线；生成后需提交快照文件
+./scripts/ops/local-ci.sh --update-visual-baseline
+
 # 只更新生成物（门禁失败、确认需要重建时）
 node scripts/build-site-data.js --write
 node scripts/sync-paper-seo.js --write
@@ -147,7 +151,7 @@ open "http://$(hostname -s).local:8080/homepage/"
 | `link-check`（lychee） | `--full`（装了 lychee 才跑） | 需要外网，建议仍以 CI 结果为准 |
 | `ui-regression` | `--full` → `test:ui` | `testDir` 是 `tests/ui`，会跑全部三个 spec |
 | `a11y-check` | `--full` → `test:ui` 已覆盖 | ⚠️ CI 里被重复跑了一遍，见坑 2 |
-| `visual-regression` | `--full` → `test:ui`（darwin 才执行） | mini 原生可跑 |
+| `visual-regression` | `--full` → `test:ui`（darwin 才执行） | mini 原生可跑；首次基线用 `--update-visual-baseline` 生成 |
 | `lighthouse-check` | `--full` → `npm audit` + `lighthouse` | 依赖 `python3`（它的本地静态服务器用 `python3 -m http.server`） |
 
 ## 7. 已知坑（务必先读）
@@ -161,9 +165,17 @@ mini（darwin）与 CI 的 `macos-latest`（darwin）会用**同一套** darwin 
 一旦出现"mini 过、CI 挂"或反之，**不要两边都用 `--update-snapshots` 互相覆盖**，
 必须二选一：
 
-- **推荐：以 mini 为准**——删除 CI 里的 `visual-regression` job（顺带省下一个
-  昂贵的 macOS runner），视觉门禁只在 mini 跑。
+- **推荐：以 mini 为准**——把 CI 的 `visual-regression` job 改为只在 mini 跑。
+  （注意：公开仓库用 macOS runner **不额外计费**，删它省的是排队时间与 CI 时长，
+  不是钱。）
 - 或以 CI 为准——本地固定加 `--skip-visual`。
+
+补充（2026-09-18 起）：主页整页 `main` 的像素快照已废弃——它与内容长度耦合，
+每新增一条成果都会因截图高度变化而失败，曾导致 Site Checks 连续 15 次红。
+现在改为**视口尺寸**快照 `homepage-viewport-chromium-darwin.png`（只覆盖首屏
+1440x1024，与页面总高度无关），并且 `visual.spec.js` 会检测该基线是否存在：
+不存在就跳过断言。所以在 mini 上跑一次 `--update-visual-baseline` 生成并提交
+基线之前，CI 保持绿色、不会误报。
 
 **2. CI 里无障碍与视觉测试被跑了两遍**
 
