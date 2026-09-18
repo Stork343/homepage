@@ -4,7 +4,9 @@
 #
 # 等价于 .github/workflows/site-checks.yml，但跑在本地、不用排队、视觉基线在真实
 # darwin 环境生成。设计原则：
-#   - 只读：所有检查走 --check，不修改任何仓库文件（Playwright 产物已被 .gitignore 忽略）。
+#   - 只读：所有门禁都走 --check，不修改仓库文件；唯一例外是
+#     --update-visual-baseline 模式（它会写入视觉基线快照）。
+#     说明：Playwright 测试产物已被 .gitignore 忽略。
 #   - 全量报告：单个门禁失败不中断后续门禁，最后统一汇总并给出退出码。
 #
 # 用法:
@@ -13,6 +15,7 @@
 #   ./scripts/ops/local-ci.sh --full --pull        先 fast-forward 拉取 origin/main 再跑
 #   ./scripts/ops/local-ci.sh --quick --no-install 跳过 npm ci
 #   ./scripts/ops/local-ci.sh --full --skip-visual 跳过视觉基线（跨平台基线冲突时用）
+#   ./scripts/ops/local-ci.sh --update-visual-baseline   生成/更新视口视觉基线（仅 macOS）
 #
 # 退出码: 0=全部通过  1=存在失败门禁  2=环境不满足
 #
@@ -33,7 +36,7 @@ DO_PULL=0
 DO_INSTALL=1
 SKIP_VISUAL=0
 
-usage() { sed -n '4,20p' "${BASH_SOURCE[0]}" | sed 's/^#\{1,\} \{0,1\}//'; }
+usage() { sed -n '4,18p' "${BASH_SOURCE[0]}" | sed 's/^#\{1,\} \{0,1\}//'; }
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -42,6 +45,7 @@ while [ $# -gt 0 ]; do
     --pull) DO_PULL=1 ;;
     --no-install) DO_INSTALL=0 ;;
     --skip-visual) SKIP_VISUAL=1 ;;
+    --update-visual-baseline) MODE="baseline" ;;
     -h|--help) usage; exit 0 ;;
     *) printf '未知参数: %s\n\n' "$1" >&2; usage >&2; exit 2 ;;
   esac
@@ -121,6 +125,9 @@ if [ "$MODE" = "full" ]; then
   if ! command -v python3 >/dev/null 2>&1; then
     warn "未找到 python3，Lighthouse 步骤预计会失败（xcode-select --install 或 brew install python）"
   fi
+fi
+
+if [ "$MODE" = "full" ] || [ "$MODE" = "baseline" ]; then
   if ! ls "$HOME"/Library/Caches/ms-playwright/chromium-* >/dev/null 2>&1; then
     log "${C_DIM}未检测到 Playwright chromium，正在安装…${C_END}"
     npx playwright install chromium >>"$RUN_LOG" 2>&1 || warn "npx playwright install chromium 失败"
@@ -165,6 +172,26 @@ else
 fi
 
 # ---------------------------------------------------------------- 门禁
+
+if [ "$MODE" = "baseline" ]; then
+  # 基线模式：唯一目的是在真实 darwin 环境生成视口基线快照。
+  # 用 -g 只跑这一个用例，避免 --update-snapshots 顺带改写其它已通过的基线。
+  export UPDATE_MAIN_BASELINE=1
+  log "${C_DIM}基线模式：只生成视觉基线，不跑其它门禁${C_END}"
+  run_step "生成视口视觉基线（--update-snapshots）" npx playwright test tests/ui/visual.spec.js --update-snapshots -g "Homepage viewport baseline"
+
+  log ""
+  log "${C_B}═══ 汇总${C_END}  通过 ${PASS_N} / 失败 ${FAIL_N} / 警告 ${WARN_N}"
+  log "  日志: ${RUN_LOG}"
+  if [ "$FAIL_N" -gt 0 ]; then
+    log "${C_NO}基线生成失败，请查看日志。${C_END}"
+    exit 1
+  fi
+  log "${C_OK}视口基线已生成${C_END}。如快照文件有变化，请提交："
+  log "  git add tests/ui/visual.spec.js-snapshots"
+  log "  git commit -m \"test(visual): 生成 darwin 视口视觉基线\""
+  exit 0
+fi
 
 run_step "check:syntax（JS 语法）" npm --silent run check:syntax
 run_step "htmlhint（HTML 语法）" bash -c "npx --yes htmlhint index.html && find papers -name '*.html' -print0 | xargs -0 npx --yes htmlhint"

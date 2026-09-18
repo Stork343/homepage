@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const { test, expect } = require("@playwright/test");
 
 test.use({
@@ -16,14 +18,25 @@ test("Homepage visual baseline", async ({ page }) => {
   await expect(page.locator(".navbar")).toHaveScreenshot("homepage-navbar.png", {
     maxDiffPixelRatio: 0.02
   });
-  });
+});
 
-// 说明：整页 main 的像素快照与内容长度耦合——新增一条成果，截图高度就会变；
-// 而 toHaveScreenshot 的 maxDiffPixelRatio 只能容忍像素差、不能容忍尺寸变化，
-// 于是门禁结构性常红（Site Checks 88 次运行 86 次失败即由此而来：
+// 历史教训：此处原先是对整页 main 的像素快照，它与内容长度耦合——新增一条成果，
+// 截图高度就会变，而 maxDiffPixelRatio 只能容忍像素差、不能容忍尺寸变化，
+// 于是门禁结构性常红（Site Checks #74–#88 连续 15 次失败即由此而来：
 // 基线 1440x7776 vs 实测 1440x8181）。
-// 这里改为与内容长度解耦的布局不变量断言；像素快照只留给定高组件（.navbar）。
-// 待补：在 macOS 上用固定 clip 的截图重建 main 的像素基线（见 docs/MACMINI.md）。
+// 现在：像素覆盖改为「视口尺寸」快照（与页面总高度无关），另有布局不变量断言兜底。
+//
+// 基线首次生成只能在 macOS 上做（见 docs/MACMINI.md）：
+//   ./scripts/ops/local-ci.sh --update-visual-baseline
+// 基线文件存在时才断言，不存在则跳过——避免在基线落地前把 CI 卡红。
+const VIEWPORT_BASELINE = path.join(
+  __dirname,
+  "visual.spec.js-snapshots",
+  "homepage-viewport-chromium-darwin.png"
+);
+const VIEWPORT_BASELINE_READY =
+  fs.existsSync(VIEWPORT_BASELINE) || process.env.UPDATE_MAIN_BASELINE === "1";
+
 test("Homepage layout invariants", async ({ page }) => {
   await page.goto("/index.html");
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -37,6 +50,22 @@ test("Homepage layout invariants", async ({ page }) => {
   for (const id of anchors) {
     await expect(page.locator(`section[id="${id}"]`)).toHaveCount(1);
   }
+});
+
+// 视口尺寸快照：只覆盖首屏 1440x1024，与页面总高度无关，
+// 因此以后再新增成果也不会把它撑红。
+test("Homepage viewport baseline", async ({ page }) => {
+  test.skip(
+    !VIEWPORT_BASELINE_READY,
+    "视口基线尚未生成；请在 macOS 上运行 ./scripts/ops/local-ci.sh --update-visual-baseline"
+  );
+  await page.goto("/index.html");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("#publications-list .publication-card").first()).toBeVisible({ timeout: 45000 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect(page).toHaveScreenshot("homepage-viewport.png", {
+    maxDiffPixelRatio: 0.02
+  });
 });
 
 test("Paper reader visual baseline", async ({ page }) => {
