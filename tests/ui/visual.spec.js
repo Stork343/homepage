@@ -73,6 +73,11 @@ test("Paper reader visual baseline", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator(".topbar")).toBeVisible({ timeout: 60000 });
   await expect(page.locator(".side-panel")).toBeVisible({ timeout: 60000 });
+  // 必须等 buildReaderChrome() 真正重建完再截图：它用 innerHTML 依次重写顶栏、侧栏，
+  // 最后创建 .tf-side-rail（三者同一个同步函数），所以 rail 挂载即代表重建完成。
+  // 只等 .topbar 可见会截到静态标记，快照与运行时 UI 脱节 —— reader 控件回归因此测不出来。
+  await expect(page.locator(".tf-side-rail")).toBeAttached({ timeout: 60000 });
+  await expect(page.locator(".tf-topbar-actions #downloadLink")).toBeVisible({ timeout: 60000 });
   await expect(page.locator(".topbar")).toHaveScreenshot("paper-topbar.png", {
     maxDiffPixelRatio: 0.02
   });

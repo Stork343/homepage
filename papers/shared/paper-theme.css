@@ -937,6 +937,25 @@ body {
   font-weight: 600 !important;
 }
 
+/* 主题切换按钮：图标 + 文字标签，需要比 .tf-topbar-actions .btn 更高的源顺序
+   （同为 (0,2,0) 特异性，靠后置取胜），否则 padding/background 会被透明胶囊规则覆盖。 */
+.tf-topbar-actions .tf-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: auto !important;
+  padding: 0 10px !important;
+  border-radius: 14px !important;
+  background: #343947 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.tf-topbar-actions .tf-theme-btn #themeLabel {
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
 .tf-percent-btn::before {
   inset: 0 !important;
 }

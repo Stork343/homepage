@@ -184,6 +184,23 @@
           <path d="M12 4v10M8 10l4 4 4-4M5 18h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
       `,
+      theme: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
+          <path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"></path>
+        </svg>
+      `,
+      fitWidth: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 6v12M20 6v12M8.6 12h6.8M8.6 12 11 9.6M8.6 12 11 14.4M15.4 12 13 9.6M15.4 12 13 14.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      `,
+      fitPage: `
+        <svg class="tf-svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M8 4H5v3M16 4h3v3M8 20H5v-3M16 20h3v-3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path>
+          <rect x="8.6" y="7.2" width="6.8" height="9.6" rx="1.2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+        </svg>
+      `,
       handleOpen: `
         <svg class="tf-svg-icon tf-svg-icon-handle" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M14 7 9 12l5 5M19 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -296,11 +313,24 @@
               <span class="btn-icon">${iconMarkup.zoomIn}</span>
             </button>
             <button class="btn btn-ghost tf-icon-btn tf-percent-btn" id="resetZoomBtn" title="Reset zoom" type="button" aria-label="Reset zoom">100%</button>
+            <button class="btn btn-ghost tf-icon-btn" id="fitWidthBtn" title="Fit width" type="button" aria-label="Fit width">
+              <span class="btn-icon">${iconMarkup.fitWidth}</span>
+            </button>
+            <button class="btn btn-ghost tf-icon-btn" id="fitPageBtn" title="Fit page" type="button" aria-label="Fit page">
+              <span class="btn-icon">${iconMarkup.fitPage}</span>
+            </button>
             <button class="btn btn-ghost tf-icon-btn" id="findToggleBtn" title="Search document" type="button" aria-label="Search document">
               <span class="btn-icon">${iconMarkup.search}</span>
             </button>
             <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Print PDF" type="button" aria-label="Print PDF">
               <span class="btn-icon">${iconMarkup.print}</span>
+            </button>
+            <a class="btn btn-ghost tf-icon-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
+              <span class="btn-icon">${iconMarkup.download}</span>
+            </a>
+            <button class="btn btn-ghost tf-icon-btn tf-theme-btn" id="themeToggleBtn" type="button" title="切换到深色模式" aria-pressed="false" aria-label="切换深浅色模式">
+              <span class="btn-icon">${iconMarkup.theme}</span>
+              <span id="themeLabel">夜间</span>
             </button>
           </div>
         `;
