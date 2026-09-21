@@ -225,7 +225,26 @@ function run() {
 
     const pageDir = path.posix.dirname(relPath);
     const pdfUrl = extractLiteral(html, "__PAPER_PDF_URL__");
-    if (!pdfUrl) {
+    /* CNKI 四篇不再自存档出版社排版全文：这类页面必须显式声明降级标志、不得再引用
+       本地 PDF，并且必须由 SSOT 下发至少一条官方获取渠道（DOI / CNKI / 代码仓库）。 */
+    if (entry.no_local_fulltext) {
+      const declaredNoFulltext = /window\.__PAPER_NO_LOCAL_FULLTEXT__\s*=\s*true/.test(html);
+      if (!declaredNoFulltext) {
+        fail(`${label} no-local-fulltext contract`, "__PAPER_NO_LOCAL_FULLTEXT__ = true 未声明");
+      } else if (pdfUrl) {
+        fail(`${label} no-local-fulltext contract`, `仍引用本地 PDF：${pdfUrl}`);
+      } else {
+        pass(`${label} no-local-fulltext contract`, "已声明降级，且未引用本地 PDF");
+      }
+      const officialLinks = (Array.isArray(entry.fulltext_links) ? entry.fulltext_links : []).filter((link) =>
+        isHttpUrl(String((link && link.href) || ""))
+      );
+      if (officialLinks.length === 0) {
+        fail(`${label} official fulltext links`, "声明了 no_local_fulltext 却没有任何官方获取渠道");
+      } else {
+        pass(`${label} official fulltext links`, officialLinks.map((link) => link.kind).join(", "));
+      }
+    } else if (!pdfUrl) {
       fail(`${label} __PAPER_PDF_URL__`, "Not found");
     } else if (isHttpUrl(pdfUrl)) {
       warn(`${label} local PDF asset`, `Primary PDF is remote URL: ${pdfUrl}`);

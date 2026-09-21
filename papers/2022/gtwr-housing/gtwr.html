@@ -78,7 +78,7 @@
   <!-- PDF.js viewer 样式 -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.css"/>
-  <link rel="stylesheet" href="../../shared/paper-theme.css?v=2026031006"/>
+  <link rel="stylesheet" href="../../shared/paper-theme.css?v=2663c7f9a5"/>
 
   <style>
     :root{
@@ -680,10 +680,13 @@
     window.__PAPER_ID__ = "gtwr-housing";
     window.__PAPER_CONFIG_URL__ = "../../../data/paper-pages.json";
     window.__PAPER_TOC_URL__ = "../../../data/paper-toc.generated.json";
-    window.__PAPER_PDF_URL__ = "gtwr.pdf";
+    // 出版社（CNKI）排版全文不再自存档：本页保留作者自写的摘要/目录/元数据，
+    // 全文改由 data/paper-pages.json 下发的 DOI / CNKI 官方链接承载；
+    // paper-reader.js 据此渲染「本站未存档全文」降级面板，而不是抛异常。
+    window.__PAPER_NO_LOCAL_FULLTEXT__ = true;
   </script>
-  <script type="module" src="../../shared/paper-reader.js?v=2026031006"></script>
+  <script type="module" src="../../shared/paper-reader.js?v=9e9df9e3b1"></script>
 
-  <noscript>需要启用 JavaScript 才能预览 PDF. </noscript>
+  <noscript>需要启用 JavaScript 才能查看本页的论文详情与官方全文链接。 </noscript>
 </body>
 </html>

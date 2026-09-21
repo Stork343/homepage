@@ -355,8 +355,21 @@
       }
 
       const sections = Array.from(sideInnerEl.querySelectorAll(".side-panel-section"));
-      const abstractSection = sections.find((section) => /abstract/i.test(section.querySelector("h3")?.textContent || ""));
-      const tocSection = sections.find((section) => /content/i.test(section.querySelector("h3")?.textContent || ""));
+      const headingOf = (section) => (section.querySelector("h3")?.textContent || "").trim();
+      /* 按结构（并兼容中文标题）识别区块，而不是只认英文标题文字。
+         旧写法用 /abstract/i、/content/i 匹配 h3，中文阅读页的「摘要」「目录」匹配不上，
+         于是 tocSection / abstractSection 双双为 undefined：作者自写的摘要与目录被
+         buildReaderChrome 的 innerHTML 重写销毁后再也渲染不出来，侧栏只剩英文占位文案
+         "Abstract will appear here when available." 与
+         "Section links will appear after the PDF loads."（CNKI 四篇永远不会加载 PDF）。 */
+      const abstractSection =
+        sections.find((section) => /abstract|摘要/i.test(headingOf(section))) ||
+        sections.find((section) => section.querySelector(".meta-list"));
+      const tocSection =
+        sections.find((section) => section.querySelector(".toc-list")) ||
+        sections.find((section) => /content(s)?|目录/i.test(headingOf(section)));
+      const abstractHeading = (abstractSection ? headingOf(abstractSection) : "") || "Abstract";
+      const tocHeading = (tocSection ? headingOf(tocSection) : "") || "Content";
       const metaListEl = sideInnerEl.querySelector(".meta-list");
       const metaListClone = metaListEl ? metaListEl.cloneNode(true) : null;
       const tocListClone = tocSection && tocSection.querySelector(".toc-list") ? tocSection.querySelector(".toc-list").cloneNode(true) : null;
@@ -433,14 +446,14 @@
             }
 
             <div class="side-panel-section reader-abstract-section">
-              <h3>Abstract</h3>
+              <h3>${escapeHtml(abstractHeading)}</h3>
               <div class="tf-sidebar-abstract">${abstractHtml}</div>
             </div>
           </section>
 
           <section class="tf-sidebar-panel reader-relations-panel" data-panel="relations" role="tabpanel" hidden>
             <div class="side-panel-section reader-relations-section">
-              <h3>${escapeHtml((tocSection && tocSection.querySelector("h3")?.textContent) || "Content")}</h3>
+              <h3>${escapeHtml(tocHeading)}</h3>
               ${
                 tocListClone && tocListClone.children.length
                   ? tocListClone.outerHTML
@@ -520,7 +533,11 @@
       window.__PAPER_PDF_URL__,
       ...(Array.isArray(window.__PAPER_PDF_CANDIDATES__) ? window.__PAPER_PDF_CANDIDATES__ : [])
     ]);
-    if (seedPdfCandidates.length === 0) {
+    /* CNKI 四篇的出版社排版全文不再自存档，页面会显式声明这个标志：阅读页保留
+       作者自写的摘要 / 目录 / 元数据，正文改由 DOI、CNKI 官方链接承载。
+       只有「既没有本地 PDF、又没有声明这个标志」才算真正的配置错误，仍然抛异常。 */
+    const noLocalFulltext = window.__PAPER_NO_LOCAL_FULLTEXT__ === true;
+    if (seedPdfCandidates.length === 0 && !noLocalFulltext) {
       throw new Error("Missing __PAPER_PDF_URL__ (or __PAPER_PDF_CANDIDATES__) for paper reader.");
     }
     let pdfCandidates = seedPdfCandidates.slice();
@@ -530,7 +547,7 @@
     downloadLink = document.getElementById("downloadLink");
     themeToggleBtn = document.getElementById("themeToggleBtn");
     themeLabel = document.getElementById("themeLabel");
-    if (downloadLink) {
+    if (downloadLink && activePdfUrl) {
       downloadLink.href = activePdfUrl;
     }
 
@@ -810,6 +827,88 @@
       if (overlay) {
         overlay.classList.add("hidden");
       }
+    }
+
+    /* 「本站未存档全文」降级面板。CNKI 四篇不再自存档出版社排版全文：阅读页保留
+       作者自写的摘要 / 目录 / 元数据（侧栏照常可用），正文改由官方链接承载。
+       通知渲染进 #viewerContainer 而不是 loading overlay —— overlay 的 inset 会连
+       侧栏一起盖住，那样反而看不到摘要和目录，违背保留阅读页的目的。 */
+    function renderNoFulltextNotice(config) {
+      hideOverlay();
+
+      const linkLabels = { doi: "出版社 DOI", article: "CNKI 全文页", code: "代码仓库" };
+      const links = (Array.isArray(config && config.fulltext_links) ? config.fulltext_links : [])
+        .filter((link) => link && /^https?:\/\//i.test(String(link.href || "")))
+        .map((link) => {
+          const label = linkLabels[link.kind] || "官方链接";
+          return (
+            `<a class="btn tf-nofulltext-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener">` +
+            `<span class="btn-icon">${iconMarkup.link}</span> ${escapeHtml(label)}</a>`
+          );
+        });
+
+      if (viewerContainer) {
+        viewerContainer.innerHTML = `
+          <div class="tf-nofulltext" role="note" aria-live="polite">
+            <h2 class="tf-nofulltext-title">本站未存档全文</h2>
+            <p class="tf-nofulltext-note">
+              这篇论文由出版社（CNKI）发行，本站不再自行存档出版社排版的全文 PDF。
+              左侧的摘要、目录与元数据仍可正常浏览，正文请通过下列官方渠道获取。
+            </p>
+            ${links.length ? `<div class="tf-nofulltext-links">${links.join("")}</div>` : ""}
+          </div>
+        `;
+      }
+
+      // 停用依赖 PDF 文档的控件：没有文档时它们要么无效，要么会抛错
+      const pdfOnlyControls = [
+        "prevPageBtn",
+        "nextPageBtn",
+        "pageNumberInput",
+        "fullscreenBtn",
+        "zoomOutBtn",
+        "zoomInBtn",
+        "resetZoomBtn",
+        "fitWidthBtn",
+        "fitPageBtn",
+        "findToggleBtn",
+        "printBtn"
+      ];
+      pdfOnlyControls.forEach((id) => {
+        const control = document.getElementById(id);
+        if (!control) {
+          return;
+        }
+        control.disabled = true;
+        control.setAttribute("aria-disabled", "true");
+        control.title = "本站未存档全文，此功能不可用";
+      });
+      // 没有本地文件，下载入口无意义：直接移除，而不是留一个 href="#" 的死链接
+      if (downloadLink) {
+        downloadLink.remove();
+        downloadLink = null;
+      }
+      const totalPagesEl = document.getElementById("totalPages");
+      if (totalPagesEl) {
+        totalPagesEl.textContent = "—";
+      }
+
+      // 目录不再可跳页：移除 data-page 让 bindTocButton 既有的守卫自然短路，
+      // 文字保留为纯信息（它是作者自写内容，本身有价值）
+      if (primaryTocList) {
+        Array.from(primaryTocList.querySelectorAll(".toc-link")).forEach((button) => {
+          button.removeAttribute("data-page");
+          button.disabled = true;
+          button.setAttribute("aria-disabled", "true");
+          button.classList.add("is-static");
+          button.title = "本站未存档全文，目录仅供浏览";
+        });
+      }
+      Array.from(document.querySelectorAll(".tf-rail-btn[data-action='cover']")).forEach((button) => {
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.title = "本站未存档全文，此功能不可用";
+      });
     }
 
     function showZoomIndicator(text) {
@@ -1760,8 +1859,18 @@
     prebuiltTocApplied = applyGeneratedTocToSidebar(generatedTocEntry) || prebuiltTocApplied;
     pdfCandidates = buildPdfCandidates(paperConfig);
     activePdfUrl = pdfCandidates[0];
-    if (downloadLink) {
+    if (downloadLink && activePdfUrl) {
       downloadLink.href = activePdfUrl;
+    }
+
+    /* 没有本地全文：渲染降级面板（DOI / CNKI / 代码仓库），停用一切依赖 PDF
+       文档的控件，然后结束初始化。目录文字保留 —— 它是作者自写内容，只是不再可跳页。 */
+    if (pdfCandidates.length === 0) {
+      if (!noLocalFulltext) {
+        throw new Error("No PDF candidate resolved for paper reader.");
+      }
+      renderNoFulltextNotice(paperConfig);
+      return;
     }
 
     let lastLoadError = null;

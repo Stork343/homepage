@@ -115,6 +115,21 @@
           "title": "六、结论与展望",
           "page": 10
         }
+      ],
+      "no_local_fulltext": true,
+      "fulltext_links": [
+        {
+          "kind": "doi",
+          "href": "https://link.cnki.net/doi/10.20207/j.cnki.1007-3116.20250703.001"
+        },
+        {
+          "kind": "article",
+          "href": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxLM-sNUqgqtji90y0JFP5rdXlT4hvO3A6gizxtbtknOomDMbQ8M7rrA9C_XqZgKpPPmYTWPiJtfZ-gVC0H9Qat1QGomjPEEDgU3Yb9E3K4J4qoK2IG0WUOjykDNzjEFZHl5NLe7oMLJpmQ-XLaN8wygIOB91vMclJsGgIANeYoPKA==&uniplatform=NZKPT&language=CHS"
+        },
+        {
+          "kind": "code",
+          "href": "https://github.com/Stork343/saddlepoint-Poisson-RR"
+        }
       ]
     },
     {
@@ -147,6 +162,21 @@
           "title": "六、结论",
           "page": 10
         }
+      ],
+      "no_local_fulltext": true,
+      "fulltext_links": [
+        {
+          "kind": "doi",
+          "href": "https://doi.org/10.13860/j.cnki.sltj.20210722-025"
+        },
+        {
+          "kind": "article",
+          "href": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxK56Kgd9ABH6Lo_e7c3aH9WqLKEmBzW8_98sX2BxVr8GeS15dkfIHrGqzcbuKMZVCuJZnbkj0lFPdtoGVz7GkU2XWqZOCgGsjQDSO_AT6Ei3yTkYcQVDjtE_zWPf9ZM2hK2qFZ7PWTn1Yd1zyoIewIkglT7E-Eo7VkMQR7LpEmbkmCKXBtnYFc7GKrRuMAzh8iG6exQwu8Oqg==&uniplatform=NZKPT&language=CHS"
+        },
+        {
+          "kind": "code",
+          "href": "https://github.com/Stork343/GWQR"
+        }
       ]
     },
     {
@@ -171,6 +201,17 @@
           "title": "四、结论",
           "page": 7
         }
+      ],
+      "no_local_fulltext": true,
+      "fulltext_links": [
+        {
+          "kind": "doi",
+          "href": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001"
+        },
+        {
+          "kind": "article",
+          "href": "https://kns.cnki.net/kcms2/article/abstract?v=hQtzIo_70oFUZFb7MWoGAT-jp6ATSzoH-U4X-jUUHdZwFuINQ0AHfVZzT8-byZWtk0p6n8D1aegL5iOKUp1gLHfe4WAPMM1pVO9XY_TJL9UAxuHZnrPBtjHgFLQe522BEM45EWWurxPjXHeSjf1l9NzHC1l7l7fVmM-hV00n6B8Iq1S56ymreHRY997N5uTb8rdG5uj8UigB9OCnC118aA==&uniplatform=NZKPT&language=CHS"
+        }
       ]
     },
     {
@@ -194,6 +235,17 @@
         {
           "title": "四、结论",
           "page": 7
+        }
+      ],
+      "no_local_fulltext": true,
+      "fulltext_links": [
+        {
+          "kind": "doi",
+          "href": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxKCMbEWDev_9loJgYuDoEdTOxp0gEgxN_xFX-o0RaObjqY_9PB5ZGj312pulHPCoqVFx_uNif-lS0wzxpL7WiIHujKuypOKOBX_hRM48pxLbxjYDNPezg5lHV1sgEVVR8pcT0cbUiZp3BxmGFHR-XkneTy77VP28yo=&uniplatform=NZKPT"
+        },
+        {
+          "kind": "article",
+          "href": "https://kns.cnki.net/kcms2/article/abstract?v=uSrlZFhNZxIaiPP0FwufNgtmJfOYX12VwJao-XZrlpceSS3r0ANt97VHst_b-Vrp-fauxdZIGMJp2UwXmG02YldidmAEB-pUMgWQvr91SfME1ox5Cx48oDPZemdV04-Fc-fA54mS64r25exyDWTt3Nlvd4S69s5u-tzTQxdtUBPgYWmsCi4VHTzcYukMVrAsC5c4E5Y0-Nc9y-bJiJLXaA==&uniplatform=NZKPT&language=CHS"
         }
       ]
     }

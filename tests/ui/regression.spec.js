@@ -268,3 +268,92 @@ test('Paper reader chrome exposes working download, theme and fit controls', asy
     .toBe('page-fit');
 });
 
+
+const NO_FULLTEXT_PAGES = [
+  { id: 'poisson-rr', path: '/papers/2025/poisson-rr/poisson-rr.html' },
+  { id: 'gtwr-housing', path: '/papers/2022/gtwr-housing/gtwr.html' },
+  { id: 'bgtwr-housing', path: '/papers/2022/bgtwr-housing/bgtwr.html' },
+  { id: 'mgtwr-variable-selection', path: '/papers/2021/mgtwr-variable-selection/mgtwr.html' }
+];
+
+test('CNKI reader pages degrade gracefully without a local fulltext PDF', async ({ page }) => {
+  for (const target of NO_FULLTEXT_PAGES) {
+    const label = `[${target.id}]`;
+    const pageErrors = [];
+    const onError = (error) => pageErrors.push(String(error && error.message ? error.message : error));
+    page.on('pageerror', onError);
+
+    await page.goto(target.path);
+
+    // 降级面板必须出现，而不是抛异常后留一片空白
+    await expect(page.locator('.tf-nofulltext'), `${label} 降级面板应可见`).toBeVisible({ timeout: 60000 });
+    await expect(page.locator('.tf-nofulltext-title'), `${label} 标题文案`).toHaveText('本站未存档全文');
+
+    // loading overlay 必须已隐藏：它的 inset 会连侧栏一起盖住，那样就看不到摘要与目录
+    await expect(page.locator('#loadingOverlay'), `${label} 加载遮罩应已隐藏`).toHaveClass(/hidden/);
+
+    // 官方获取渠道必须由 SSOT 下发、指向站外、带 noopener
+    const links = page.locator('.tf-nofulltext-links a');
+    const linkCount = await links.count();
+    expect(linkCount, `${label} 应至少给出一条官方全文渠道`).toBeGreaterThan(0);
+    for (let index = 0; index < linkCount; index += 1) {
+      const link = links.nth(index);
+      expect(await link.getAttribute('href'), `${label} 第 ${index} 条链接`).toMatch(/^https?:\/\//);
+      expect(await link.getAttribute('rel'), `${label} 第 ${index} 条链接应带 noopener`).toContain('noopener');
+      expect(await link.getAttribute('target'), `${label} 第 ${index} 条链接应新窗口打开`).toBe('_blank');
+    }
+
+    // 侧栏（作者自写的摘要 / 目录 / 元数据）必须仍然可用 —— 这正是保留阅读页的理由
+    await expect(page.locator('.side-panel'), `${label} 侧栏应可见`).toBeVisible();
+    await expect(page.locator('.tf-side-rail'), `${label} 侧栏导轨应已重建`).toBeAttached();
+    const tocItems = page.locator('.side-panel .toc-list .toc-link');
+    const tocCount = await tocItems.count();
+    expect(tocCount, `${label} 作者自写目录应保留`).toBeGreaterThan(0);
+    // 目录退化为纯信息：不可点击，且 data-page 已移除（跳页在无文档时无意义）
+    await expect(tocItems.first(), `${label} 目录项应不可点`).toBeDisabled();
+    expect(await tocItems.first().getAttribute('data-page'), `${label} 目录项不应再带页码`).toBeNull();
+
+    // 作者自写的中文摘要必须真的渲染出来，而不是英文占位文案。
+    // 旧版按 /abstract/i、/content/i 匹配 h3 文字来识别区块，中文页匹配不上，
+    // 摘要与目录会被 buildReaderChrome 销毁后只剩占位文案。
+    const abstractText = ((await page.locator('.tf-sidebar-abstract').textContent()) || '').trim();
+    expect(abstractText.length, `${label} 摘要正文不应为空`).toBeGreaterThan(60);
+    expect(abstractText, `${label} 不应是英文占位文案`).not.toContain('Abstract will appear here');
+    expect(/[\u4e00-\u9fff]/u.test(abstractText), `${label} 摘要应保留中文原文`).toBe(true);
+    const sidebarHeadings = await page.locator('.side-panel h3').allTextContents();
+    expect(sidebarHeadings.join('|'), `${label} 目录标题应保留中文「目录」`).toContain('目录');
+    expect(
+      page.locator('.tf-empty-copy'),
+      `${label} 不应再出现 "Section links will appear after the PDF loads." 占位`
+    ).toHaveCount(0);
+
+    // 依赖 PDF 的控件必须停用；下载入口必须移除，而不是留一个 href="#" 的死链接
+    for (const id of ['#zoomInBtn', '#zoomOutBtn', '#fitWidthBtn', '#fitPageBtn', '#printBtn', '#findToggleBtn']) {
+      await expect(page.locator(id), `${label} ${id} 应停用`).toBeDisabled();
+    }
+    expect(await page.locator('#downloadLink').count(), `${label} 不应留下下载死链`).toBe(0);
+
+    // 主题切换不依赖 PDF，必须照常可用
+    const themeToggleBtn = page.locator('#themeToggleBtn');
+    await expect(themeToggleBtn, `${label} 主题切换应可用`).toBeEnabled();
+    const themeBefore = await page.locator('html').getAttribute('data-theme');
+    await themeToggleBtn.click();
+    await expect(page.locator('html'), `${label} 主题应真的翻转`).not.toHaveAttribute('data-theme', themeBefore);
+
+    expect(pageErrors, `${label} 阅读页不应抛未捕获异常：${pageErrors.join(' | ')}`).toEqual([]);
+    page.off('pageerror', onError);
+  }
+});
+
+test('Reader pages with a local PDF must not show the no-fulltext notice', async ({ page }) => {
+  // 反向守卫：hcqr / svcqr 有自存档 PDF，绝不能被误判成「本站未存档全文」
+  for (const path of ['/papers/2025/hcqr/hcqr.html', '/papers/2025/svcqr/svcqr.html']) {
+    await page.goto(path);
+    await expect
+      .poll(() => page.evaluate(() => Boolean(window.viewer && window.viewer.pdfDocument)), { timeout: 90000 })
+      .toBe(true);
+    expect(await page.locator('.tf-nofulltext').count(), `${path} 不应出现降级面板`).toBe(0);
+    await expect(page.locator('#downloadLink'), `${path} 下载入口应存在`).toBeVisible();
+    await expect(page.locator('#zoomInBtn'), `${path} 缩放应可用`).toBeEnabled();
+  }
+});

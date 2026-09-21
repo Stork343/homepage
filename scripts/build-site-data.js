@@ -50,6 +50,27 @@ function buildIndexHtml(root) {
   return html;
 }
 
+/* 六个阅读页共享 papers/shared/ 下的 paper-reader.js 与 paper-theme.css，
+   各自的 ?v= 缓存串此前纯手工维护且已过期（改过共享文件却不换串，回访用户
+   永远拿旧缓存）。改为与 index.html 同一套 sha1(10) 内容哈希自动同步。 */
+function readerAssetHashes(root) {
+  return {
+    js: hashText(fs.readFileSync(path.join(root, "papers", "shared", "paper-reader.js"), "utf8")),
+    css: hashText(fs.readFileSync(path.join(root, "papers", "shared", "paper-theme.css"), "utf8"))
+  };
+}
+
+function buildPaperPageHtml(root, relPath, hashes) {
+  const filePath = path.join(root, relPath);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Missing paper page: ${relPath}`);
+  }
+  return fs
+    .readFileSync(filePath, "utf8")
+    .replace(/(paper-reader\.js\?v=)[^"']+/g, `$1${hashes.js}`)
+    .replace(/(paper-theme\.css\?v=)[^"']+/g, `$1${hashes.css}`);
+}
+
 function normalizeRelPath(input) {
   return String(input || "").replace(/\\/g, "/").replace(/^\.?\//, "");
 }
@@ -123,6 +144,26 @@ function extractPaperPages(publications) {
       }
       if (Array.isArray(page.pdf_candidates) && page.pdf_candidates.length > 0) {
         output.pdf_candidates = page.pdf_candidates.map((item) => String(item));
+      }
+      /* 「本站未存档全文」的意图由阅读页自己声明（与 __PAPER_PDF_URL__ 同源），
+         生成器只负责把这个意图连同 SSOT 里的官方获取渠道一起下发给 paper-reader.js。
+         不能用「paper_page 里有没有配 pdf_url / pdf_candidates」来推断 —— hcqr 的本地
+         PDF 写在页面 HTML 的 __PAPER_PDF_URL__ 里，据此推断会把它误判为没有全文，
+         进而让好好的阅读页显示「本站未存档全文」。 */
+      const pageHtmlPath = path.join(ROOT, output.path);
+      const declaresNoLocalFulltext =
+        fs.existsSync(pageHtmlPath) &&
+        /window\.__PAPER_NO_LOCAL_FULLTEXT__\s*=\s*true/.test(fs.readFileSync(pageHtmlPath, "utf8"));
+      if (declaresNoLocalFulltext) {
+        const pageLinks = pub.links && typeof pub.links === "object" ? pub.links : {};
+        output.no_local_fulltext = true;
+        output.fulltext_links = [
+          ["doi", pageLinks.doi],
+          ["article", pageLinks.article],
+          ["code", pageLinks.code]
+        ]
+          .filter(([, href]) => typeof href === "string" && /^https?:\/\//i.test(href.trim()))
+          .map(([kind, href]) => ({ kind, href: href.trim() }));
       }
       return output;
     });
@@ -488,6 +529,8 @@ function main() {
   const paperSeo = buildPaperSeo(master, publications);
   const sitemap = buildSitemap(master);
 
+  const readerHashes = readerAssetHashes(ROOT);
+
   const outputs = [
     [OUTPUT_FILES.publications, jsonText(publications)],
     [OUTPUT_FILES.paperPages, jsonText(paperPages)],
@@ -497,7 +540,12 @@ function main() {
     [OUTPUT_FILES.paperSeo, jsonText(paperSeo)],
     [OUTPUT_FILES.sitemap, sitemap],
     [OUTPUT_FILES.siteUpdated, jsonText({ updated: todayInSiteTimeZone() })],
-    [OUTPUT_FILES.indexHtml, buildIndexHtml(ROOT)]
+    [OUTPUT_FILES.indexHtml, buildIndexHtml(ROOT)],
+    // 阅读页 HTML 也纳入同一套检查/写入：?v= 与共享资源内容哈希不一致即判红
+    ...paperPages.papers.map((page) => [
+      path.join(ROOT, page.path),
+      buildPaperPageHtml(ROOT, page.path, readerHashes)
+    ])
   ];
 
   if (checkMode) {

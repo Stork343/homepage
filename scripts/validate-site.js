@@ -198,6 +198,23 @@ function run() {
       fail(`paper-pages.json entry ${id} has empty toc.`);
     }
 
+    /* CNKI 四篇：出版社排版全文不再自存档。这类条目必须由 SSOT 下发官方获取渠道，
+       不得再配置任何本地 PDF，且阅读页 HTML 必须显式声明降级标志。 */
+    if (entry.no_local_fulltext) {
+      const officialLinks = (Array.isArray(entry.fulltext_links) ? entry.fulltext_links : []).filter((link) =>
+        isHttpUrl(String((link && link.href) || ""))
+      );
+      if (officialLinks.length === 0) {
+        fail(`paper-pages.json entry ${id} sets no_local_fulltext but has no official fulltext link.`);
+      }
+      if (entry.pdf_url || (Array.isArray(entry.pdf_candidates) && entry.pdf_candidates.length > 0)) {
+        fail(`paper-pages.json entry ${id} sets no_local_fulltext but still configures a PDF.`);
+      }
+      if (!/window\.__PAPER_NO_LOCAL_FULLTEXT__\s*=\s*true/.test(html)) {
+        fail(`${relPath} must declare window.__PAPER_NO_LOCAL_FULLTEXT__ = true.`);
+      }
+    }
+
     const configuredPdfCandidates = [];
     if (entry.pdf_url) {
       configuredPdfCandidates.push(entry.pdf_url);

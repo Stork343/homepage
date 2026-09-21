@@ -1618,3 +1618,73 @@ body.find-open .side-toggle-handle {
     break-inside: avoid;
   }
 }
+
+/* ── 「本站未存档全文」降级面板 ──────────────────────────────────────
+   CNKI 四篇不再自存档出版社排版全文；面板渲染在 #viewerContainer 内，
+   侧栏（摘要 / 目录 / 元数据）保持可用。置于文件末尾以取得最高源顺序，
+   避免被前面四代覆盖规则（含大量 !important）压掉。 */
+.tf-nofulltext {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 56px 28px 64px;
+  text-align: center;
+}
+
+.tf-nofulltext-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--tf-ink) !important;
+}
+
+.tf-nofulltext-note {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--tf-slate) !important;
+}
+
+.tf-nofulltext-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tf-nofulltext-links .tf-nofulltext-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px !important;
+  border-radius: 3px !important;
+  font-size: 13px !important;
+}
+
+.tf-nofulltext-links .btn-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* 目录在降级态下退化为纯信息：不可点击，但作者自写的文字保留 */
+.toc-link.is-static,
+.toc-link:disabled {
+  cursor: default !important;
+  opacity: 0.72;
+}
+
+.toc-link.is-static:hover,
+.toc-link:disabled:hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+@media (max-width: 640px) {
+  .tf-nofulltext {
+    padding: 36px 18px 44px;
+  }
+
+  .tf-nofulltext-title {
+    font-size: 18px;
+  }
+}
