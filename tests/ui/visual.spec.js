@@ -85,3 +85,60 @@ test("Paper reader visual baseline", async ({ page }) => {
     maxDiffPixelRatio: 0.03
   });
 });
+
+// 体检 D-9 覆盖缺口："暗色模式…无视觉基线"。新增深色 navbar 组件快照：
+// 与既有 navbar 基线同为组件级（不含论文列表），新增成果不会把它撑红。
+// 截图前必须确保主题色过渡完全结束：headless Chromium 的帧按需调度，waitForTimeout
+// 不产生帧，color 这类 paint 属性过渡可能长时间冻结在起始色（本机实测，accessibility
+// 的 zh-dark 门因此偶发红）。page.screenshot() 强制 BeginFrame 推动过渡走完。
+test("Homepage navbar dark visual baseline", async ({ page }) => {
+  await page.goto("/index.html");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("#publications-list .publication-card").first()).toBeVisible({ timeout: 45000 });
+  await page.locator("#theme-toggle").click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.waitForTimeout(500);
+  await expect
+    .poll(
+      async () => {
+        await page.screenshot({ timeout: 15000 });
+        return page.evaluate(
+          () =>
+            document
+              .getAnimations()
+              .filter((a) => a.constructor.name === "CSSTransition" && a.playState !== "finished")
+              .length
+        );
+      },
+      { timeout: 30000, intervals: [250], message: "主题色过渡应全部完成后再截图比对" }
+    )
+    .toBe(0);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect(page.locator(".navbar")).toHaveScreenshot("homepage-navbar-dark.png", {
+    maxDiffPixelRatio: 0.02
+  });
+});
+
+// 体检 D-9 修复优先级 ⑥（防止"跳过面无声扩大"）在 tests/ui 侧的实现：
+// V3 视口基线曾因"从未生成"导致对应用例在所有环境永久自跳过（D-9 表格：当前强度为零）。
+// CI 侧的 skipped 计数断言属于 workflow 文件（不在本次任务可修改范围），这里用文件存在性兜底：
+// 任何一张已提交基线消失，本用例立即红，而不是让对应视觉用例静默 skip。
+// （本文件在非 darwin 平台整体 skip，与视觉门禁"仅 macOS 有效"的既有边界一致。）
+const EXPECTED_BASELINES = [
+  "homepage-navbar-chromium-darwin.png",
+  "homepage-viewport-chromium-darwin.png",
+  "homepage-navbar-dark-chromium-darwin.png",
+  "paper-topbar-chromium-darwin.png",
+  "paper-sidebar-chromium-darwin.png"
+];
+
+test("Committed visual baselines exist so no visual test can silently self-skip", async () => {
+  for (const name of EXPECTED_BASELINES) {
+    const file = path.join(__dirname, "visual.spec.js-snapshots", name);
+    expect(
+      fs.existsSync(file),
+      `视觉基线 ${name} 必须已提交（缺失会让对应用例在 :37-38 的条件判断下静默自跳过）`
+    ).toBe(true);
+    expect(fs.statSync(file).size, `视觉基线 ${name} 不应是空文件`).toBeGreaterThan(1000);
+  }
+});
