@@ -1688,3 +1688,27 @@ body.find-open .side-toggle-handle {
     font-size: 18px;
   }
 }
+
+/* 体检 D-5 续 / H-5 缺陷 2：修掉 CNKI 降级页深色态 2.3:1 的对比度违规。
+
+   病灶不在文字色，而在背景。:1479 有一条
+     :root[data-theme="dark"] #viewerContainer { background: #828896 !important; }
+   —— 那是 PDF 阅读器的标准铬灰，显示 PDF 时完全合理；但降级态把 PDF 换成了
+   一整块文字说明，于是 .tf-nofulltext-note 的 --tf-slate(#c4d1e6) 落在 #828896 上，
+   axe 实测前景 #c4d1e6 / 混合背景 #828896 = 2.3:1（需 4.5:1），4 个降级页稳定复现。
+
+   改文字色在数学上无解：#828896 的相对亮度约 0.2456，要达到 4.5:1 需要
+   (L+0.05)/(0.2456+0.05) ≥ 4.5 → L ≥ 1.28，而相对亮度上限是 1.0；
+   连纯白 #ffffff 在这块灰上也只有约 3.3:1。所以必须改背景。
+
+   但也不能全局改：svcqr / hcqr 两个 PDF 页依赖这层灰作为阅读器底色，
+   全局改动会连带改变它们的渲染并打破已提交的视觉基线。
+   因此改为按状态收敛 —— paper-reader.js 在注入降级面板时给 #viewerContainer
+   加 .tf-nofulltext-mode，只有该状态下才把背景换成 --tf-bg(#0b1220)。
+   实测 .tf-nofulltext-note 的对比度由 2.3:1 升到约 12.4:1。
+
+   特异度 (1,3,0) 高于 :1479 的 (1,2,0)，且位于文件末尾，故能压过前面四代
+   带 !important 的覆盖规则（本文件 :1623 的注释已说明这个约定）。 */
+:root[data-theme="dark"] #viewerContainer.tf-nofulltext-mode {
+  background: var(--tf-bg) !important;
+}

@@ -122,12 +122,16 @@ test('Every SSOT paper page passes body-scope axe in light mode', async ({ page 
 });
 
 test('Every SSOT paper page passes body-scope axe in dark mode', async ({ page }) => {
-  // ⚠ 已知产品缺陷（本次任务只测不改，详见最终报告）：深色态下 4 个 CNKI 降级页的
-  //   .tf-nofulltext-note 正文对比度仅 2.3:1（axe 实测：前景 #c4d1e6 / 混合后背景 #828896，
-  //   需 ≥4.5:1）。颜色来自 papers/shared/paper-theme.css:1641-1646（var(--tf-slate)），
-  //   面板标记由 papers/shared/paper-reader.js:854 注入；浅色态同一面板达标（≥4.5）。
-  //   因此深色轮只扫描「本地 PDF 加载成功」的页面；降级页断言其降级面板可见（钉住分支条件），
-  //   待对比度修复后应删除这个排除、恢复全量深色扫描。
+  // 本用例曾经只扫描「本地 PDF 加载成功」的页面，把 4 个 CNKI 降级页排除在外，
+  // 原因是当时存在一条已知产品缺陷：深色态下 .tf-nofulltext-note 的正文对比度仅 2.3:1
+  // （axe 实测前景 #c4d1e6 / 混合后背景 #828896，需 ≥4.5:1）。
+  // 该缺陷已修（见 papers/shared/paper-theme.css 末尾与 paper-reader.js 的
+  // .tf-nofulltext-mode 标记）：病灶不在文字色而在 #viewerContainer 于深色下被
+  // :1479 硬编码成 PDF 阅读器的铬灰 #828896 —— 在 #828896 上任何浅色都到不了 4.5:1
+  // （纯白也只有约 3.3:1），故改为按状态收敛：只有降级态才把背景换成 --tf-bg(#0b1220)，
+  // PDF 页保留铬灰以免影响其视觉基线。修后 4 个降级页深色态实测约 12.4:1。
+  // 因此这里恢复**全量**深色扫描，并把守卫从「至少扫到 1 个」收紧为「必须扫满全部 SSOT 页」，
+  // 免得将来再有人以"已知缺陷"为由悄悄缩小覆盖面。
   await seedTheme(page, 'dark');
   const scannedIds = [];
   const degradedIds = [];
@@ -140,18 +144,22 @@ test('Every SSOT paper page passes body-scope axe in dark mode', async ({ page }
       'dark'
     );
     if (settled === 'degraded') {
+      // 仍然断言降级面板可见：这钉住了「该页确实走了降级分支」这一前置条件，
+      // 否则若哪天 PDF 意外可加载，下面的 axe 就在测另一条分支而无人察觉。
       await expect(
         page.locator('.tf-nofulltext-note'),
-        `${label} 降级页应展示无全文说明（其深色对比度是已知缺陷，暂不纳入门禁）`
+        `${label} 降级页应展示无全文说明`
       ).toBeVisible();
       degradedIds.push(paper.id);
-      continue;
     }
     await waitLoadingOverlayGone(page);
     const serious = await scanSeriousViolations(page);
     expect(serious, `${label} 深色态 body 全量 axe 不应有 serious/critical 违规`).toEqual([]);
     scannedIds.push(paper.id);
   }
-  // 防止「空跑」：至少要有页面真的被深色扫描过（否则本用例退化为空断言）
-  expect(scannedIds.length, `深色 axe 至少应扫描到本地 PDF 页（实际扫描：${scannedIds.join(', ')}；降级跳过：${degradedIds.join(', ')}）`).toBeGreaterThan(0);
+  // 防止「空跑」或「覆盖面被悄悄缩小」：必须扫满 SSOT 里的全部阅读页。
+  expect(
+    scannedIds.length,
+    `深色 axe 应扫描全部 SSOT 阅读页（期望 ${PAPER_PAGES.length}，实际 ${scannedIds.length}：${scannedIds.join(', ')}；其中降级页：${degradedIds.join(', ') || '无'}）`
+  ).toBe(PAPER_PAGES.length);
 });

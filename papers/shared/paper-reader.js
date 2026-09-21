@@ -848,6 +848,11 @@
         });
 
       if (viewerContainer) {
+        // 体检 H-5 缺陷 2：给容器打上降级态标记，供 CSS 只在「没有 PDF、只显示文字
+        // 说明」时替换深色背景。不用 #viewerContainer:has(.tf-nofulltext) 是因为
+        // :has() 在较老浏览器上会静默失效，而这里失效的后果是一条可访问性违规悄悄
+        // 回归 —— 显式 class 让该状态可断言、可测试。
+        viewerContainer.classList.add("tf-nofulltext-mode");
         viewerContainer.innerHTML = `
           <div class="tf-nofulltext" role="note" aria-live="polite">
             <h2 class="tf-nofulltext-title">本站未存档全文</h2>
