@@ -325,10 +325,15 @@
     ["mathematics in practice and theory", "https://ssjs.cbpt.cnki.net/WKA2/WebPublication/index.aspx?mid=SSJS"],
     ["数学的实践与认识", "https://ssjs.cbpt.cnki.net/WKA2/WebPublication/index.aspx?mid=SSJS"]
   ]);
+  // 体检 D-6 / 修复路线图第 25 条：这里原先还有一项 ".project-card"，已移除。
+  // 全站没有任何元素带这个类（index.html、data/*.json、scripts/*.js 全量检索，
+  // 唯一命中就是本选择器列表自己），enhanced-main.css 里配套的 .project-card /
+  // .project-* / .tech-tag 一整套规则同批删除。它是早期"项目展示"版块留下的残骸，
+  // 版块早已改成成果卡片，选择器却一直没清。留着不会报错，但会让人误以为
+  // 页面上存在 project 卡片、进而在排查样式问题时白找一遍。
   const REVEAL_SELECTOR = [
     ".research-item",
     ".publication-card",
-    ".project-card",
     ".cv-card",
     ".contact-item"
   ].join(", ");

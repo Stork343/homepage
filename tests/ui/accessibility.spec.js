@@ -48,18 +48,22 @@ test("Paper reader accessibility gate", async ({ page }) => {
 // 注意过滤条件必须是 playState !== "finished" 而不是 === "running"：切换后若一帧都没出过，
 // 过渡会停在未启动的 idle/pending 态（只数 running 会立刻得 0，axe 随即采到起始浅色）。
 //
-// 更深层的坑（本轮实测定位）：.publication-card/.research-item 带 content-visibility:auto
-// （enhanced-main.css:252/:103），Chromium 会锁定视口外子树并沿用**缓存的旧计算样式**——
-// 主题翻转时首屏外的卡片不参与样式重算，axe 会读到「浅色标题 + 深色卡片背景」的陈旧组合
-// （恒为列表末尾几张卡，对比度 1.01:1 的偶发红即此）。这是无头采样伪影而非用户可见缺陷
-// （真实用户滚动到时子树解锁、按正常级联渲染深色）。因此 settle 先注入测试侧解锁样式
-// 强制全量子树参与重算（不改任何颜色规则，不会掩盖真实对比度问题），再等过渡走完。
+// 曾经还有一层更深的坑，现已从源头消除：.publication-card/.research-item 当时带
+// content-visibility:auto（enhanced-main.css），Chromium 会锁定视口外子树并沿用**缓存的
+// 旧计算样式** —— 主题翻转时首屏外的卡片不参与样式重算，axe 于是读到「浅色标题 +
+// 深色卡片背景」的陈旧组合（恒为列表末尾几张卡，对比度 1.01:1 的偶发红即此），
+// 导致本文件所属的深色 axe 门约 40% 概率偶发红。当时的对策是在 settle 里注入
+// `.publication-card,.research-item{content-visibility:visible !important;}` 强制解锁全量子树。
+//
+// 该属性后来因另一个更严重的理由被整体移除（见 enhanced-main.css 中 .publication-card
+// 上方的说明与 regression.spec.js 的「文档高度必须恒定」用例）：contain-intrinsic-size
+// 的统一估值让文档高度在滚动中突变 976px，直接毁掉锚点导航。根因既已不存在，
+// 这段注入也就成了空操作，故删除 —— 少一处测试侧绕行，门禁的结论更可信。
+// 注意下面强制出帧的逻辑**保留**：它治的是另一件事（headless 的 waitForTimeout 不产帧，
+// 颜色过渡会冻结在未启动的 idle 态），与 content-visibility 无关。
 const STATE_SETTLE_MS = 500;
 
 async function settleAfterStateChange(page) {
-  await page.addStyleTag({
-    content: ".publication-card,.research-item{content-visibility:visible !important;}",
-  });
   await page.waitForTimeout(STATE_SETTLE_MS);
   await expect
     .poll(
