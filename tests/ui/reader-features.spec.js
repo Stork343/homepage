@@ -55,7 +55,8 @@ test('Reader print button opens the archived PDF in a new tab', async ({ page })
   expect(pdfHrefAttr).not.toBe('#');
   const resolvedPdfUrl = new URL(pdfHrefAttr, page.url()).href;
 
-  // printBtn 的处理器（paper-reader.js:1791-1805）调用 window.open(activePdfUrl, "_blank", "noopener")。
+  // printBtn 的处理器（见 paper-reader.js 中 `if (printBtn)` 一段）调用
+  // window.open(activePdfUrl, "_blank", "noopener")。
   // 按 HTML 规范，features 含 noopener 时 window.open 返回 null —— 用一个语义等价的
   // 记录器替换 window.open（同样返回 null），既避免无头环境里弹出真实 PDF 标签页/下载，
   // 又能断言点击确实以正确参数打开了正确地址。
@@ -68,6 +69,24 @@ test('Reader print button opens the archived PDF in a new tab', async ({ page })
   });
 
   await expect(page.locator('#printBtn')).toBeEnabled();
+  // 体检 H-5 缺陷 3：这个按钮曾经 title="Print PDF" / aria-label="Print PDF"，
+  // 但其处理器里 window.open(…, "noopener") 恒返回 null，紧跟的 if (!printWindow) return
+  // 每次都命中，后面的 print() 与 load 监听**永不可达** —— 按钮从未真正打印过，
+  // 只是一直在新标签打开 PDF。缺陷已按「如实描述行为」收敛，这里钉住文案，
+  // 防止将来又把标签改回一个做不到的承诺（图标也已从打印机换成外链，二者须一致）。
+  const printTitle = (await page.locator('#printBtn').getAttribute('title')) || '';
+  const printAria = (await page.locator('#printBtn').getAttribute('aria-label')) || '';
+  // 断言的是「不得承诺按钮自己会打印」，而不是「文案里不许出现 print 这个词」——
+  // title 里的 "(print from there)" 恰恰是有用的指引，告诉用户去哪儿打印。
+  // 所以要挡的是 ^Print PDF 这类以打印为主谓的写法。
+  expect(printTitle, 'title 不应把「打印」当作本按钮的动作').not.toMatch(/^\s*print/i);
+  expect(printAria, 'aria-label 不应把「打印」当作本按钮的动作').not.toMatch(/^\s*print/i);
+  expect(printAria, 'aria-label 不应出现 print 字样（读屏用户听到「打印」会预期弹打印对话框）').not.toMatch(/print/i);
+  expect(
+    printTitle,
+    'title 应说明是「在新标签打开」，与真实行为一致'
+  ).toMatch(/new tab/i);
+
   await page.locator('#printBtn').click();
   await expect
     .poll(() => page.evaluate(() => window.__openCalls.length), {

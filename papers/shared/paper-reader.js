@@ -322,8 +322,8 @@
             <button class="btn btn-ghost tf-icon-btn" id="findToggleBtn" title="Search document" type="button" aria-label="Search document">
               <span class="btn-icon">${iconMarkup.search}</span>
             </button>
-            <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Print PDF" type="button" aria-label="Print PDF">
-              <span class="btn-icon">${iconMarkup.print}</span>
+            <button class="btn btn-ghost tf-icon-btn" id="printBtn" title="Open PDF in a new tab (print from there)" type="button" aria-label="Open PDF in a new tab">
+              <span class="btn-icon">${iconMarkup.link}</span>
             </button>
             <a class="btn btn-ghost tf-icon-btn" id="downloadLink" href="#" download title="Download PDF" aria-label="Download PDF">
               <span class="btn-icon">${iconMarkup.download}</span>
@@ -1833,20 +1833,32 @@
     }
 
     if (printBtn) {
+      // 体检 H-5 缺陷 3：这里原先是一段**永不可达的死代码** ——
+      //   const printWindow = window.open(activePdfUrl, "_blank", "noopener");
+      //   if (!printWindow) { return; }                        // ← 每次都命中
+      //   printWindow.addEventListener("load", … print())      // ← 从未执行过
+      // 按 HTML 规范，window.open 的 features 里含 noopener 时**恒返回 null**，
+      // 所以那句 early return 每次都生效，后面的 triggerPrint 与 load 监听是纯装饰。
+      // 按钮的实际行为一直是「在新标签打开 PDF」，而 title 却写着 "Print PDF"。
+      //
+      // 去掉 noopener 也救不回来：Chrome 打开同源 PDF 时会把它包进内置 PDF 查看器，
+      // 那个窗口的 origin 变成查看器扩展而非本站，于是 printWindow.print() 会抛
+      // 跨域 SecurityError —— 这正是原代码要在 print() 外面套 try/catch 的原因。
+      //
+      // 真正的「一键打印」需要 pdf.js 自己的打印管线：把每一页按打印分辨率渲染进
+      // 一个 print container，再用打印样式隐藏页面其余部分。那是新增功能而非修缺陷，
+      // 且无法在本环境（headless Chromium 不带 PDF 插件）实证验证，故不在本次范围内。
+      // 这里如实收敛为「打开 PDF」：用户在浏览器自带的 PDF 查看器里用其原生打印
+      // 控件即可，比脚本跨文档调 print() 更可靠。按钮的 title / aria-label / 图标
+      // 已同步改为「打开」语义，不再承诺它做不到的事。
+      //
+      // 保留 noopener：新标签承载的是浏览器 PDF 查看器，与本站无同源关系，
+      // 没有必要把 window.opener 交出去。
       printBtn.addEventListener("click", () => {
-        const printWindow = window.open(activePdfUrl, "_blank", "noopener");
-        if (!printWindow) {
+        if (!activePdfUrl) {
           return;
         }
-        const triggerPrint = () => {
-          try {
-            printWindow.focus();
-            printWindow.print();
-          } catch (error) {
-            console.error("Print failed:", error);
-          }
-        };
-        printWindow.addEventListener("load", () => setTimeout(triggerPrint, 300), { once: true });
+        window.open(activePdfUrl, "_blank", "noopener");
       });
     }
 
