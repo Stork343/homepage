@@ -88,6 +88,11 @@ echo "Rollback bundle written locally (never uploaded): ${ROLLBACK_BUNDLE_FILE#"
 node scripts/build-site-data.js --check
 node scripts/validate-site.js
 node scripts/generate-paper-toc.js --check
+# 体检修复路线图第 14 条：这里原先漏了 sync-paper-seo --check，而 local-ci.sh:200
+# 与 npm run check:data 都有它。三处门禁清单不一致的后果是「本地全绿、发布时才炸」，
+# 或反过来「本地炸了但发布脚本照样放行」。补齐后 release / local-ci / check:data
+# 三者的 --check 集合完全一致。
+node scripts/sync-paper-seo.js --check
 node scripts/acceptance-check.js
 npm run check:contrast
 npm run test:ui

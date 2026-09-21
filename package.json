@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "description": "Personal academic homepage with paper subpages and PDF reader",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "check:syntax": "node scripts/check-syntax.js",
     "check:data": "node scripts/build-site-data.js --check && node scripts/validate-site.js && node scripts/generate-paper-toc.js --check && node scripts/sync-paper-seo.js --check",
