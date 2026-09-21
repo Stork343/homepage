@@ -71,6 +71,11 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.tag }}
           body_path: release-artifacts/${{ github.event.inputs.tag }}/CHANGELOG.generated.md
+          # 体检 B-3 / 路线图 16：此前这里还列出 rollback-main.bundle（含 main 完整历史，
+          # 约 70 MB）。本仓库是公开的，Release 资产任何人可下载，等于把整段 git 历史
+          # 打成一个便于批量抓取的单文件对外发布；而且它是发布那一刻的快照，日后极易被
+          # 误当成当前历史。release.sh 仍在本地生成该 bundle 供维护者回滚，只是改放到
+          # release-artifacts/<tag>-rollback/ 这个兄弟目录，既不进 Release 也不进上面
+          # upload-artifact 的 path，因此不会再被任何上传路径带出去。
           files: |
             release-artifacts/${{ github.event.inputs.tag }}/rollback-point.json
-            release-artifacts/${{ github.event.inputs.tag }}/rollback-main.bundle

@@ -128,7 +128,16 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright regression tests
-        run: npm run test:ui
+        # 体检 D-8 / 路线图 13：此前跑 `npm run test:ui`（全部三个 spec），于是
+        # accessibility.spec.js 在本 job 与 a11y-check job 各跑一遍，而 visual.spec.js
+        # 开头有 test.skip(process.platform !== "darwin")，在 ubuntu 上三个用例全数跳过、
+        # 白占一次浏览器启动。现按 job 名只跑 regression.spec.js，与 a11y-check
+        # （accessibility.spec.js）、visual-regression（visual.spec.js，macos）
+        # 形成 1:1 无重叠的三分。
+        # 路线图原文给的是「改用 test:ui:core 或删 a11y-check job」；test:ui:core 仍会
+        # 把 accessibility.spec.js 跑两遍，故取更彻底的按文件切分，达成同一条目要求的
+        # 「消除重复执行」而不牺牲任一 job 的独立信号。
+        run: npx playwright test tests/ui/regression.spec.js
 
   a11y-check:
     runs-on: ubuntu-latest

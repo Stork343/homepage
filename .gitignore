@@ -5,6 +5,9 @@
 node_modules/
 playwright-report/
 test-results/
+# Playwright 允许用自定义输出目录（例如并行跑多套测试时按端口区分的
+# test-results-agent4310/），原规则只盖住默认名，变体会漏网并可能被 git add -A 卷入。
+test-results-*/
 release-artifacts/
 
 # 体检 A-5：此处原有两条无路径限定的宽泛规则，现已删除，理由如下。

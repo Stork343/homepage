@@ -8,6 +8,9 @@ const INDEX_HTML = path.join(ROOT, "index.html");
 const PAPER_CONFIG_JSON = path.join(ROOT, "data", "paper-pages.json");
 const GENERATED_TOC_JSON = path.join(ROOT, "data", "paper-toc.generated.json");
 const PUBLICATIONS_JSON = path.join(ROOT, "data", "publications.json");
+// 体检 D-7 / 路线图 17：加载 SSOT，用于把「论文页数量」从写死的常量
+// 换成与 site-master.json 的集合一致性断言。
+const MASTER_JSON = path.join(ROOT, "data", "site-master.json");
 
 const results = [];
 
@@ -126,10 +129,40 @@ function run() {
   assertContains(indexHtml, "Home CSS version tag", /enhanced-main\.css\?v=[a-z0-9]+/i, "index.html");
   assertContains(indexHtml, "Home JS version tag", /scripts\/main\.js\?v=[a-z0-9]+/i, "index.html");
 
-  if (papers.length === 6) {
-    pass("Paper pages count", "paper-pages.json has 6 configured paper pages");
+  // 体检 D-7 / 路线图 17：此处原先写死 `papers.length === 6`。新增第 7 个阅读页时，
+  // 门禁会以一个与真实原因无关的理由失败（"Expected 6, got 7"），把排查引向错误方向；
+  // 反过来，若某个阅读页被误删到只剩 5 个而 SSOT 里仍有 6 条声明，这条断言给出的
+  // 也只是数字不符，指不出到底缺了哪一个。
+  // 现改为与 SSOT 的**集合一致性**断言：paper-pages.json 的 id 集合必须与
+  // site-master.json 中「未隐藏且声明了 paper_page」的出版物 id 集合完全相同，
+  // 差异时逐个点名 missing / unexpected。
+  // 谓词与 build-site-data.js:131 extractPaperPages 的过滤条件保持一致。
+  const masterData = readJson(MASTER_JSON);
+  const masterPaperIds = (Array.isArray(masterData.publications) ? masterData.publications : [])
+    .filter((pub) => pub && !pub.hidden && pub.paper_page && typeof pub.paper_page === "object")
+    .map((pub) => String(pub.id || "").trim())
+    .filter(Boolean)
+    .sort();
+  const configuredPaperIds = papers
+    .map((entry) => String(entry.id || "").trim())
+    .filter(Boolean)
+    .sort();
+  if (masterPaperIds.length === 0) {
+    fail("Paper pages id set", "site-master.json declares no non-hidden paper_page entries");
+  } else if (masterPaperIds.join(",") !== configuredPaperIds.join(",")) {
+    const missing = masterPaperIds.filter((id) => !configuredPaperIds.includes(id));
+    const unexpected = configuredPaperIds.filter((id) => !masterPaperIds.includes(id));
+    fail(
+      "Paper pages id set",
+      `paper-pages.json does not match the paper_page ids declared in site-master.json` +
+        `${missing.length ? `; missing from paper-pages.json: ${missing.join(", ")}` : ""}` +
+        `${unexpected.length ? `; not declared in site-master.json: ${unexpected.join(", ")}` : ""}`
+    );
   } else {
-    fail("Paper pages count", `Expected 6, got ${papers.length}`);
+    pass(
+      "Paper pages id set",
+      `${configuredPaperIds.length} paper pages match site-master.json: ${configuredPaperIds.join(", ")}`
+    );
   }
   if (generatedPapers.length === papers.length) {
     pass("Generated TOC paper count", `paper-toc.generated.json has ${generatedPapers.length} paper entries`);
@@ -304,21 +337,27 @@ function run() {
     fail("SVCQR PDF integrity", "svcqr.pdf missing");
   }
 
+  // 体检 D-7 / 路线图 17：以下 4 项此前都标着 "Manual check"，但它们的行为早已被
+  // tests/ui/regression.spec.js 自动化，输出却仍在要求人工复核 —— 一份会让人重复劳动、
+  // 进而被整段忽略的清单。现改为点名对应的真实测试（测试名逐个 grep 核实，非推断；
+  // 刻意不写行号，因为新增用例就会让行号漂移）。
+  // 仍保留在 MANUAL 计数里而不计入 PASS：acceptance-check 自身并没有验证它们，
+  // 验证者是 Playwright，这个区分不该被抹掉。
   manual(
-    "Manual check: dark mode",
-    "Toggle index and paper page dark mode and verify contrast + persistence after refresh."
+    "Automated elsewhere: dark mode",
+    "Covered by regression.spec.js test 'Dark mode persists after refresh and is inherited by paper pages'."
   );
   manual(
-    "Manual check: TOC jump",
-    "Open hcqr/svcqr pages, click 3+ TOC entries, verify jumps land on correct section start pages."
+    "Automated elsewhere: TOC jump",
+    "Covered by regression.spec.js tests 'HCQR TOC links jump to the expected query page' and 'SVCQR TOC links jump to the expected query page'."
   );
   manual(
-    "Manual check: bilingual display",
-    "Switch language on home page and verify SCI cards remain English titles while name rendering follows English mode rules."
+    "Automated elsewhere: bilingual display",
+    "Covered by regression.spec.js test 'Language rules: SCI cards keep English in zh, profile name becomes English in EN mode'."
   );
   manual(
-    "Manual check: citation export center",
-    "On home page, export BibTeX/RIS/EndNote in both full and filtered scope and verify downloaded files open correctly."
+    "Automated elsewhere: citation export center",
+    "Covered by regression.spec.js test 'Site-wide filters and citation export center work together'."
   );
 
   printAndExit();

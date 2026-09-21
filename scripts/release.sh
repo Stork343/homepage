@@ -15,7 +15,14 @@ RELEASE_DATE="$(date +%Y-%m-%d)"
 ARTIFACT_DIR="${ROOT_DIR}/release-artifacts/${TAG}"
 NOTES_FILE="${ARTIFACT_DIR}/CHANGELOG.generated.md"
 ROLLBACK_META_FILE="${ARTIFACT_DIR}/rollback-point.json"
-ROLLBACK_BUNDLE_FILE="${ARTIFACT_DIR}/rollback-main.bundle"
+# 体检 B-3 / 路线图 16：回滚 bundle 刻意放在 ARTIFACT_DIR 之外的兄弟目录。
+# 本仓库是公开的，而 release-automation.yml 会把整个 release-artifacts/<tag>/ 目录
+# 作为 workflow artifact 上传，并把其中列出的文件挂到 GitHub Release 上 ——
+# 一个含 main 完整历史的 70 MB bundle 因此会变成任何人可批量下载的公开资产，
+# 而且它是发布那一刻的历史快照，日后极易被误当成当前历史使用。
+# bundle 对维护者本地回滚仍然有用，所以照常生成，只是不再进入任何上传路径。
+ROLLBACK_DIR="${ROOT_DIR}/release-artifacts/${TAG}-rollback"
+ROLLBACK_BUNDLE_FILE="${ROLLBACK_DIR}/main.bundle"
 
 if [[ -n "$(git status --porcelain)" ]]; then
   echo "Working tree is dirty. Commit or stash changes before release." >&2
@@ -74,7 +81,9 @@ cat > "$ROLLBACK_META_FILE" <<EOF
 }
 EOF
 
+mkdir -p "$ROLLBACK_DIR"
 git bundle create "$ROLLBACK_BUNDLE_FILE" main
+echo "Rollback bundle written locally (never uploaded): ${ROLLBACK_BUNDLE_FILE#"${ROOT_DIR}/"}"
 
 node scripts/build-site-data.js --check
 node scripts/validate-site.js
