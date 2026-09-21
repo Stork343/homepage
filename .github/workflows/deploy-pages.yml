@@ -192,10 +192,23 @@ jobs:
             head -c 400 /tmp/pages.json 2>/dev/null; echo
             case "$code" in
               200|201|204) ;;
+              403)
+                # 实测结论（run 35602832914）：GITHUB_TOKEN 即便声明了 pages:write，
+                # 调 PUT /repos/{owner}/{repo}/pages 改 build_type 仍返回
+                #   403 {"message":"Must have admin rights to Repository."}
+                # 改部署源属于 administration 权限，工作流令牌拿不到；
+                # actions/configure-pages 的 enablement:true 走同一个端点，同样会 403。
+                # 因此这一步只能由仓库管理员手动完成 —— 不要再试别的 API 路径。
+                echo "::error::GITHUB_TOKEN 无权修改 Pages 部署源（403 Must have admin rights to Repository）。"
+                echo "::error::唯一可行路径：管理员打开 Settings → Pages → Build and deployment → Source，选 GitHub Actions 并保存。"
+                echo "::error::在完成之前，分支部署会继续公开整棵被跟踪的树（含 data/site-master.json 里 hidden 的未发表稿件 qapsm-icu-bp）。"
+                echo "::error::切换完成后本步骤自动变为幂等空操作，无需再改代码。"
+                exit 1
+                ;;
               *)
                 echo "::error::无法把 Pages 部署源切到 GitHub Actions（HTTP ${code}）。"
                 echo "::error::在切换成功之前，分支部署仍会公开整棵被跟踪的树（含未发表稿件元数据）。"
-                echo "::error::请手动到 Settings → Pages → Source 选择 GitHub Actions，或检查 GITHUB_TOKEN 是否具备 pages:write。"
+                echo "::error::请手动到 Settings → Pages → Build and deployment → Source 选择 GitHub Actions。"
                 exit 1
                 ;;
             esac
