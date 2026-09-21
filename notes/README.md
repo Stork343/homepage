@@ -26,10 +26,20 @@ GitBook 风格静态站点。访问入口：主页导航「笔记」→ `notes/_
 
 ## 本地渲染
 
-需要 R（≥ 3.5）与 pandoc。推荐直接使用本机 Quarto 自带的 pandoc：
+需要 R（≥ 3.5）与 pandoc。推荐直接使用本机 Quarto 自带的 pandoc（把
+`<Quarto 安装目录>` 换成本机实际路径）：
 
 ```powershell
-$env:PATH = "E:\Dev\Apps\Quarto\bin\tools;" + $env:PATH
+# Windows（PowerShell）
+$env:PATH = "<Quarto 安装目录>\bin\tools;" + $env:PATH
+cd notes
+Rscript -e "install.packages('bookdown', repos='https://cloud.r-project.org')"  # 首次
+Rscript -e "bookdown::render_book('index.Rmd')"
+```
+
+```bash
+# macOS / Linux（主力机现为 macOS，工作副本在 ~/dev/homepage）
+export PATH="<Quarto 安装目录>/bin/tools:$PATH"
 cd notes
 Rscript -e "install.packages('bookdown', repos='https://cloud.r-project.org')"  # 首次
 Rscript -e "bookdown::render_book('index.Rmd')"
@@ -50,6 +60,9 @@ python -m http.server 8000   # http://localhost:8000
 > Remove-Item -Recurse -Force _bookdown_files, notes-book_files
 > Rscript -e "bookdown::render_book('index.Rmd')"
 > ```
+>
+> macOS / Linux 等价命令：`rm -rf _bookdown_files notes-book_files`
+> 后重新渲染。
 >
 > 正式产物以 CI 渲染为准（workflow 在推送后自动渲染提交，环境无
 > 缓存，产物最稳定）。
@@ -84,8 +97,14 @@ python -m http.server 8000   # http://localhost:8000
 ## 自动构建
 
 `.github/workflows/build-bookdown-notes.yml` 在 `notes/**` 变更时自动
-渲染并提交 `_book/` 产物（与 `auto-sync-generated.yml` 模式一致），
-推送后 GitHub Pages 自动生效。
+渲染并提交 `_book/` 产物（与 `auto-sync-generated.yml` 模式一致）。
+渲染前会先 `rm -rf _book`，产物即本次渲染的全部输出——chunk 改名后遗留的
+孤儿 figure 不会再累积（2026-09 的清理中一次性删掉了 6 个这样的孤儿）。
+
+注意：Pages 部署源切换到 "GitHub Actions"（`deploy-pages.yml`）之后，机器人用
+`GITHUB_TOKEN` 的推送不会触发部署 workflow（GitHub 的递归保护），渲染产物将随
+下一次手动推送、或手动运行 Deploy site to Pages 一起上线；切换前（仍按分支部署）
+则是推送后自动生效。
 
 ## 新增章节
 
