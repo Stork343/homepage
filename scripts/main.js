@@ -1488,6 +1488,125 @@
       });
     }
 
+    // 体检 H-5 缺陷 4：scrollspy 哈希漂移，外加 hash 的双写者问题。
+    //
+    // 原实现是 IntersectionObserver + threshold:0.3，语义为「目标 section 有 30% 进入
+    // root 才算命中」。对**比视口还高**的 section（#publications、#research 都是），
+    // 30% 永远不可能同时可见，回调对它们从不触发；再叠加 rootMargin 把 root 压到
+    // 视口上半部，命中条件更苛刻。于是点「学术成果」后 click 处理器先把 hash 写成
+    // #publications，平滑滚动途中另一个高 section 偶然达到 30% 可见，observer 又把
+    // hash 改写掉 —— 终态与用户点击的条目不符（实测：点「学术成果」终态 #research、
+    // 点 #cv 终态 #contact、直载 #publications 也会被改写）。
+    //
+    // 同时 click 处理器与 observer 回调**各写一次 hash**，是两个独立维护同一状态的
+    // 写入者。负向对照 C3 已证实这种设计的危害：只破坏 click 那一处，用例并不变红，
+    // 因为 observer 的回写把差异掩盖了 —— 回归测试因此失去分辨力。
+    //
+    // 改为：以滚动位置为唯一依据计算当前 section（对任意高度都成立，不依赖可见比例），
+    // 且 hash 与高亮只由 applySection 这一个函数写，click 与 scrollspy 都只是它的调用方。
+    let activeSectionId = null;
+    // 点击/深链意图的粘滞值，仅在「目标节几何上无法被滚到导航栏下方」时启用。
+    let stickySectionId = null;
+
+    function isAtPageBottom() {
+      return (
+        window.innerHeight + window.pageYOffset >=
+        document.documentElement.scrollHeight - 2
+      );
+    }
+
+    function applySection(id) {
+      if (!id || id === activeSectionId) {
+        return;
+      }
+      activeSectionId = id;
+      setActiveLink(id);
+      history.replaceState(null, "", "#" + id);
+    }
+
+    function computeActiveSectionId() {
+      // 判定线放在导航栏底边再往下一点：某节顶端越过这条线，就算「已进入该节」。
+      const line = (navbar ? navbar.offsetHeight : 0) + 40;
+      let current = null;
+      sections.forEach((sec) => {
+        if (!sec.id) {
+          return;
+        }
+        if (sec.getBoundingClientRect().top - line <= 0) {
+          current = sec.id;
+        }
+      });
+      // 触底兜底：最后一节若很短，滚到页面底部时它的顶端可能仍在判定线之下，
+      // 此时应认定最后一节为当前节，否则用户明明已在底部、导航却高亮着上一节。
+      if (sections.length && isAtPageBottom()) {
+        const lastId = sections[sections.length - 1].id;
+        if (lastId) {
+          current = lastId;
+        }
+      }
+      return current;
+    }
+
+    let scrollspyQueued = false;
+    let scrollSettleTimer = 0;
+    // true 表示「有一次程序化滚动正在进行」（点击导航触发的平滑滚动，
+    // 或直载带 hash 时浏览器自己的锚点滚动）。
+    let programmaticScroll = false;
+
+    function updateScrollspyNow() {
+      let id = computeActiveSectionId();
+      if (stickySectionId) {
+        if (isAtPageBottom()) {
+          // 仍停在页面底部 —— 尊重用户点的那一节（详见 click 处理器里的说明）。
+          id = stickySectionId;
+        } else {
+          // 一旦滚离底部，说明用户在自己浏览，立刻把判定权交还给位置计算。
+          // 这条自动解除是刻意设计的：粘滞只在几何死结里生效，不会长期劫持 scrollspy。
+          stickySectionId = null;
+        }
+      }
+      applySection(id);
+    }
+
+    function updateScrollspy() {
+      // 滚动进行中不做判定。原因很具体：点击 #cv 后平滑滚动会**途经**大量非底部位置，
+      // 若每一帧都按位置重算，粘滞值会在半途被「已滚离底部」这条规则清掉，
+      // 等真正落到底部时意图已经丢了 —— 实测就是这样，终态仍漂到 #contact。
+      // 直载 #cv 同理：浏览器的锚点滚动也需要时间，第一帧时页面还在半路。
+      // 每次 scroll 事件都把「已静止」计时器往后推，静止 180 ms 后才做唯一一次判定。
+      window.clearTimeout(scrollSettleTimer);
+      scrollSettleTimer = window.setTimeout(() => {
+        programmaticScroll = false;
+        updateScrollspyNow();
+      }, 180);
+
+      if (programmaticScroll) {
+        return;
+      }
+      // 用户手动滚动时仍然实时更新，用 rAF 合帧：一次滚动里 scroll 事件会触发几十次，
+      // 每次都读 getBoundingClientRect 会强制同步布局（layout thrashing）。
+      if (scrollspyQueued) {
+        return;
+      }
+      scrollspyQueued = true;
+      window.requestAnimationFrame(() => {
+        scrollspyQueued = false;
+        updateScrollspyNow();
+      });
+    }
+
+    // 初次进入时以 URL 上的 hash 为准，避免 scrollspy 第一帧就把深链改写掉。
+    const initialSectionId = (window.location.hash || "").replace(/^#/, "");
+    if (initialSectionId && document.getElementById(initialSectionId)) {
+      activeSectionId = initialSectionId;
+      // 直载 #cv 这类「位于页面末尾且本身很矮」的锚点时，浏览器只能滚到页面底部，
+      // 落点处最后一节必然越过判定线；不设粘滞的话深链会在第一帧就被改写。
+      stickySectionId = initialSectionId;
+      // 浏览器的锚点滚动同样属于程序化滚动，交给上面同一个静止检测器处理。
+      programmaticScroll = true;
+      setActiveLink(initialSectionId);
+    }
+
     navLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
         const href = this.getAttribute("href") || "";
@@ -1500,10 +1619,28 @@
 
         const navHeight = navbar ? navbar.offsetHeight : 0;
         const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight + 1;
+        // 标记为程序化滚动：平滑滚动期间 updateScrollspy 不做判定，
+        // 静止 180 ms 后才做唯一一次，免得途经位置把粘滞意图清掉。
+        programmaticScroll = true;
         window.scrollTo({ top, behavior: "smooth" });
 
-        setActiveLink(id);
-        history.replaceState(null, "", "#" + id);
+        // 用户意图是明确的：点了哪一节，hash 就应该是哪一节。立即写入还能覆盖
+        // 「目标节本来就在视口内、压根不发生滚动」的情况 —— 那时不会有 scroll 事件，
+        // scrollspy 无从触发。平滑滚动结束后 scrollspy 会独立算出同一节
+        // （落点是 target.top = navHeight - 1，恰在判定线上方 41px），故二者收敛而不打架。
+        //
+        // 唯一例外是**几何死结**：目标节位于页面末尾且本身很矮时（#cv 自 cv/ 改为
+        // mailto 索取卡之后就只剩几行），它下方的内容不足一屏，浏览器无法把它滚到
+        // 导航栏下方 —— 上面这个 top 会被 clamp 到最大滚动位置，落点处最后一节
+        // （#contact）的顶端已越过判定线，按位置计算必然得出别的节。
+        // 这种情况下「用户点了哪一节」比「视口顶部是哪一节」更能表达意图，
+        // 故记下粘滞值；一旦用户滚离页面底部就自动解除（见 updateScrollspy）。
+        const maxScroll = Math.max(
+          0,
+          document.documentElement.scrollHeight - window.innerHeight
+        );
+        stickySectionId = top >= maxScroll - 1 ? id : null;
+        applySection(id);
 
         if (navMenu && navToggle) {
           navMenu.classList.remove("active");
@@ -1512,26 +1649,9 @@
       });
     });
 
-    if ("IntersectionObserver" in window) {
-      const navHeight = navbar ? navbar.offsetHeight : 0;
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const id = entry.target.getAttribute("id");
-              setActiveLink(id);
-              history.replaceState(null, "", "#" + id);
-            }
-          });
-        },
-        {
-          root: null,
-          threshold: 0.3,
-          rootMargin: `-${navHeight + 40}px 0px -50% 0px`
-        }
-      );
-      sections.forEach((sec) => observer.observe(sec));
-    }
+    window.addEventListener("scroll", updateScrollspy, { passive: true });
+    window.addEventListener("resize", updateScrollspy);
+    updateScrollspy();
 
     if (navToggle && navMenu) {
       navToggle.addEventListener("click", () => {
@@ -1654,6 +1774,26 @@
     setTheme(state.theme);
     applyI18nText();
     await loadPublications();
+    // 体检 H-5 缺陷 4 的另一半（与 scrollspy 判定逻辑无关）：
+    // 成果列表是异步 fetch 后才渲染的，就是上面这行 await；而浏览器的锚点定位发生在
+    // 文档解析阶段 —— 那时 #publications 还是空的，整篇文档比最终状态短近千像素
+    // （实测最终 docH 7732，列表渲染前远小于此）。等卡片插入后，后面的内容被整体
+    // 推下去，视口却停在原处，于是直载 #cv / #contact 会落在成果区中部，
+    // 紧接着 scrollspy 按位置一算就把 hash 改写成了 #publications。
+    // 所以这里在异步内容就位后重新对齐一次锚点。behavior 用 "auto"（瞬时）而非
+    // smooth，避免用户一进页面就看到一段莫名的滚动动画。
+    const anchorId = (window.location.hash || "").replace(/^#/, "");
+    const anchorTarget = anchorId ? document.getElementById(anchorId) : null;
+    if (anchorTarget) {
+      const nav = document.querySelector(".navbar") || document.getElementById("navbar");
+      const navHeight = nav ? nav.offsetHeight : 0;
+      const anchorTop =
+        anchorTarget.getBoundingClientRect().top + window.pageYOffset - navHeight + 1;
+      window.scrollTo({ top: anchorTop, behavior: "auto" });
+      // 这次滚动同样属于程序化滚动：让 initNavigation 里的静止检测器接管，
+      // 静止后再做唯一一次判定，别在途中按位置改写 hash。
+      window.dispatchEvent(new Event("scroll"));
+    }
     loadSiteMeta();
   });
 })();

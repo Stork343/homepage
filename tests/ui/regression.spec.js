@@ -357,3 +357,78 @@ test('Reader pages with a local PDF must not show the no-fulltext notice', async
     await expect(page.locator('#zoomInBtn'), `${path} 缩放应可用`).toBeEnabled();
   }
 });
+
+// 体检 H-5 缺陷 4 + D-7：导航 scrollspy 的哈希漂移，及其真正的根因。
+//
+// 漂移是两层问题叠加，缺一不可：
+// 1. 判定逻辑原先用 IntersectionObserver + threshold:0.3，语义是「section 有 30% 进入
+//    视口才算命中」。对比视口还高的 section（#publications 实测 5192px）这条件永远
+//    不可能满足，回调对它们从不触发；而 click 处理器与 observer 回调**各写一次 hash**，
+//    于是点击时写好的 hash 会在滚动途中被 observer 改写成别的节。
+// 2. 更底层的根因是 .publication-card 上的 content-visibility:auto +
+//    contain-intrinsic-size:320px —— 320px 是对**每张**卡片的统一估值，而真实高度
+//    因摘要长短、作者数、徽章、引用行各不相同。首屏外的卡片按估值占位，滚动经过时
+//    逐个真实渲染，实测文档高度从 8708 缩到 7732（#publications 6168 → 5192，
+//    缩水 976px）。点击时按旧几何算出的滚动目标因此超出新的 maxScroll 被 clamp，
+//    落点直接跑到页面底部 —— 点「个人简历」最终停在「联系方式」。
+//
+// 已改为：以滚动位置为唯一依据、hash 只由 applySection 一个函数写、程序化滚动期间
+// 用静止检测器延后判定、移除 content-visibility 声明、异步成果列表渲染完成后
+// 重新对齐一次锚点。下面两条用例分别钉住「点击意图」与「深链不被改写」，
+// 并把文档高度恒定作为 CLS 根因的直接守卫。
+test('Navigation hash must follow the clicked section, and document height must stay constant', async ({
+  page,
+}) => {
+  await waitForPublications(page);
+
+  const ids = await page.evaluate(() =>
+    [...document.querySelectorAll('.nav-link')]
+      .map((a) => a.getAttribute('href') || '')
+      .filter((h) => h.startsWith('#'))
+      .map((h) => h.slice(1))
+  );
+  expect(ids.length, '导航应至少有 5 个站内锚点').toBeGreaterThanOrEqual(5);
+
+  // 滚动全程文档高度必须恒定。这条断言直接守卫 D-7 的根因：一旦有人再把
+  // content-visibility:auto 配一个拍脑袋的 contain-intrinsic-size 加回来，
+  // 高度就会在滚动中变化，锚点导航随之失效。
+  const heightBefore = await page.evaluate(() => document.documentElement.scrollHeight);
+
+  for (const id of ids) {
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await page.waitForTimeout(400);
+    await page.click(`.nav-link[href="#${id}"]`);
+    // 平滑滚动 + 180ms 静止检测器，留足余量
+    await page.waitForTimeout(1600);
+
+    const hash = await page.evaluate(() => location.hash.replace(/^#/, ''));
+    expect(hash, `点击 #${id} 后 URL 哈希应停在 #${id}，不得漂到别的节`).toBe(id);
+
+    const active = await page.evaluate(() => {
+      const a = document.querySelector('.nav-link[aria-current="page"]');
+      return a ? (a.getAttribute('href') || '').replace(/^#/, '') : null;
+    });
+    expect(active, `点击 #${id} 后导航高亮项应是 #${id}`).toBe(id);
+  }
+
+  const heightAfter = await page.evaluate(() => document.documentElement.scrollHeight);
+  expect(
+    heightAfter,
+    '滚动全程文档高度必须恒定；一旦变化说明又有占位估值（content-visibility / contain-intrinsic-size）在作祟'
+  ).toBe(heightBefore);
+});
+
+test('Deep-linked section hash must survive load and the async publication render', async ({ page }) => {
+  // 成果列表是异步 fetch 后才渲染的，而浏览器的锚点定位发生在文档解析阶段 ——
+  // 那时 #publications 还是空的、整篇文档短近千像素，卡片插入后把后面的内容整体推下去，
+  // 视口却停在原处。main.js 在 loadPublications() 之后重新对齐一次锚点来修这件事。
+  for (const id of ['publications', 'research', 'cv', 'contact']) {
+    await page.goto(`/index.html#${id}`);
+    await expect(page.locator('#publications-list .publication-card').first()).toBeVisible({
+      timeout: 45000,
+    });
+    await page.waitForTimeout(1500);
+    const hash = await page.evaluate(() => location.hash.replace(/^#/, ''));
+    expect(hash, `直载 #${id} 后哈希不应被改写（异步渲染完成后须重新对齐锚点）`).toBe(id);
+  }
+});
