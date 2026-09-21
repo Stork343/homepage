@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-10T18:12:34.730Z",
+  "updated": "2026-09-21T02:13:10.108Z",
   "source": "site-master.json",
   "entries": [
     {
       "id": "mallows-llm-ranking",
-      "checked_at": "2026-08-10T18:12:07.067Z",
+      "checked_at": "2026-09-21T02:12:59.526Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -15,7 +15,7 @@
     },
     {
       "id": "jpdi-mixed-qr",
-      "checked_at": "2026-08-10T18:12:08.915Z",
+      "checked_at": "2026-09-21T02:13:01.210Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -26,9 +26,31 @@
     },
     {
       "id": "qapsm-icu-bp",
-      "checked_at": "2026-08-10T18:12:10.195Z",
+      "checked_at": "2026-09-21T02:13:04.112Z",
       "doi": "",
       "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "salcdi-scarce-outcomes",
+      "checked_at": "2026-09-21T02:13:05.083Z",
+      "doi": "",
+      "doi_url": "",
+      "arxiv_id": "",
+      "arxiv_abs": "",
+      "arxiv_pdf": "",
+      "source": "local-links",
+      "confidence": 1
+    },
+    {
+      "id": "qtr-oc",
+      "checked_at": "2026-09-21T02:13:05.275Z",
+      "doi": "10.1002/sim.70732",
+      "doi_url": "https://doi.org/10.1002/sim.70732",
       "arxiv_id": "",
       "arxiv_abs": "",
       "arxiv_pdf": "",
@@ -37,20 +59,20 @@
     },
     {
       "id": "qvsd-spatiotemporal-extremes",
-      "checked_at": "2026-08-10T18:12:11.613Z",
+      "checked_at": "2026-09-21T02:13:06.718Z",
       "doi": "",
       "doi_url": "",
-      "arxiv_id": "",
-      "arxiv_abs": "",
-      "arxiv_pdf": "",
-      "source": "crossref",
-      "confidence": 0.86
+      "arxiv_id": "2608.14294",
+      "arxiv_abs": "https://arxiv.org/abs/2608.14294",
+      "arxiv_pdf": "https://arxiv.org/pdf/2608.14294.pdf",
+      "source": "arxiv-api",
+      "confidence": 1
     },
     {
       "id": "tplaqr",
-      "checked_at": "2026-08-10T18:12:13.043Z",
-      "doi": "",
-      "doi_url": "",
+      "checked_at": "2026-09-21T02:13:06.780Z",
+      "doi": "10.1016/j.jmva.2026.105707",
+      "doi_url": "https://doi.org/10.1016/j.jmva.2026.105707",
       "arxiv_id": "",
       "arxiv_abs": "",
       "arxiv_pdf": "",
@@ -59,7 +81,7 @@
     },
     {
       "id": "toms-sssvcqr",
-      "checked_at": "2026-08-10T18:12:15.005Z",
+      "checked_at": "2026-09-21T02:13:07.957Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -70,7 +92,7 @@
     },
     {
       "id": "svcqr",
-      "checked_at": "2026-08-10T18:12:15.645Z",
+      "checked_at": "2026-09-21T02:13:08.021Z",
       "doi": "10.1016/j.spasta.2026.100983",
       "doi_url": "https://doi.org/10.1016/j.spasta.2026.100983",
       "arxiv_id": "2511.18106",
@@ -81,7 +103,7 @@
     },
     {
       "id": "hcqr",
-      "checked_at": "2026-08-10T18:12:16.035Z",
+      "checked_at": "2026-09-21T02:13:08.086Z",
       "doi": "10.1016/j.jspi.2026.106390",
       "doi_url": "https://doi.org/10.1016/j.jspi.2026.106390",
       "arxiv_id": "",
@@ -92,7 +114,7 @@
     },
     {
       "id": "snqesa",
-      "checked_at": "2026-08-10T18:12:16.449Z",
+      "checked_at": "2026-09-21T02:13:08.149Z",
       "doi": "10.1007/s00362-026-01882-3",
       "doi_url": "https://doi.org/10.1007/s00362-026-01882-3",
       "arxiv_id": "2510.24352",
@@ -103,7 +125,7 @@
     },
     {
       "id": "plgwqr",
-      "checked_at": "2026-08-21T00:00:00.000Z",
+      "checked_at": "2026-09-21T02:13:08.215Z",
       "doi": "10.20142/j.cnki.amas.202600069",
       "doi_url": "https://doi.org/10.20142/j.cnki.amas.202600069",
       "arxiv_id": "",
@@ -114,7 +136,7 @@
     },
     {
       "id": "poisson-rr",
-      "checked_at": "2026-08-10T18:12:18.511Z",
+      "checked_at": "2026-09-21T02:13:08.276Z",
       "doi": "10.20207/j.cnki.1007-3116.20250703.001",
       "doi_url": "https://doi.org/10.20207/j.cnki.1007-3116.20250703.001",
       "arxiv_id": "",
@@ -125,7 +147,7 @@
     },
     {
       "id": "gtwr-housing",
-      "checked_at": "2026-08-10T18:12:19.010Z",
+      "checked_at": "2026-09-21T02:13:08.341Z",
       "doi": "10.13860/j.cnki.sltj.20210722-025",
       "doi_url": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
       "arxiv_id": "",
@@ -136,7 +158,7 @@
     },
     {
       "id": "bgtwr-housing",
-      "checked_at": "2026-08-10T18:12:32.411Z",
+      "checked_at": "2026-09-21T02:13:08.403Z",
       "doi": "10.16722/j.issn.1674-537x.2022.10.001",
       "doi_url": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
       "arxiv_id": "",
@@ -147,7 +169,7 @@
     },
     {
       "id": "mgtwr-variable-selection",
-      "checked_at": "2026-08-10T18:12:34.729Z",
+      "checked_at": "2026-09-21T02:13:10.107Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",

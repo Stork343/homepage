@@ -60,7 +60,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:07.067Z"
+      "checked_at": "2026-09-21T02:12:59.526Z"
     }
   },
   {
@@ -122,7 +122,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:08.915Z"
+      "checked_at": "2026-09-21T02:13:01.210Z"
     }
   },
   {
@@ -179,6 +179,12 @@
         "distributional inference",
         "scarce reference data"
       ]
+    },
+    "metadata": {
+      "doi": "",
+      "arxiv_id": "",
+      "source": "local-links",
+      "checked_at": "2026-09-21T02:13:05.083Z"
     }
   },
   {
@@ -245,6 +251,12 @@
         "oesophageal carcinoma",
         "omics data integration"
       ]
+    },
+    "metadata": {
+      "doi": "10.1002/sim.70732",
+      "arxiv_id": "",
+      "source": "local-links",
+      "checked_at": "2026-09-21T02:13:05.275Z"
     }
   },
   {
@@ -306,9 +318,9 @@
     },
     "metadata": {
       "doi": "",
-      "arxiv_id": "",
-      "source": "crossref",
-      "checked_at": "2026-08-10T18:12:11.613Z"
+      "arxiv_id": "2608.14294",
+      "source": "arxiv-api",
+      "checked_at": "2026-09-21T02:13:06.718Z"
     }
   },
   {
@@ -377,10 +389,10 @@
       ]
     },
     "metadata": {
-      "doi": "",
+      "doi": "10.1016/j.jmva.2026.105707",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:13.043Z"
+      "checked_at": "2026-09-21T02:13:06.780Z"
     }
   },
   {
@@ -444,7 +456,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:15.005Z"
+      "checked_at": "2026-09-21T02:13:07.957Z"
     }
   },
   {
@@ -518,7 +530,7 @@
       "doi": "10.1016/j.spasta.2026.100983",
       "arxiv_id": "2511.18106",
       "source": "arxiv-api",
-      "checked_at": "2026-08-10T18:12:15.645Z"
+      "checked_at": "2026-09-21T02:13:08.021Z"
     }
   },
   {
@@ -589,7 +601,7 @@
       "doi": "10.1016/j.jspi.2026.106390",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:16.035Z"
+      "checked_at": "2026-09-21T02:13:08.086Z"
     }
   },
   {
@@ -661,7 +673,7 @@
       "doi": "10.1007/s00362-026-01882-3",
       "arxiv_id": "2510.24352",
       "source": "arxiv-api",
-      "checked_at": "2026-08-10T18:12:16.449Z"
+      "checked_at": "2026-09-21T02:13:08.149Z"
     }
   },
   {
@@ -729,7 +741,7 @@
       "doi": "10.20142/j.cnki.amas.202600069",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-21T00:00:00.000Z"
+      "checked_at": "2026-09-21T02:13:08.215Z"
     }
   },
   {
@@ -790,7 +802,7 @@
       "doi": "10.20207/j.cnki.1007-3116.20250703.001",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:18.511Z"
+      "checked_at": "2026-09-21T02:13:08.276Z"
     }
   },
   {
@@ -851,7 +863,7 @@
       "doi": "10.13860/j.cnki.sltj.20210722-025",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:19.010Z"
+      "checked_at": "2026-09-21T02:13:08.341Z"
     }
   },
   {
@@ -912,7 +924,7 @@
       "doi": "10.16722/j.issn.1674-537x.2022.10.001",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:32.411Z"
+      "checked_at": "2026-09-21T02:13:08.403Z"
     }
   },
   {
@@ -973,7 +985,7 @@
       "doi": "",
       "arxiv_id": "",
       "source": "local-links",
-      "checked_at": "2026-08-10T18:12:34.729Z"
+      "checked_at": "2026-09-21T02:13:10.107Z"
     }
   }
 ]
