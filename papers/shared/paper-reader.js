@@ -1681,6 +1681,11 @@
       showZoomIndicator(`${percent}%`);
     }
 
+    // 上一次实际发起搜索用的查询词。用于区分「新搜索」与「继续查找」：
+    // pdfjs 的 PDFFindController 靠 evt.type 分辨，"find" 会重置并选中首个命中，
+    // "findagain" 才会前进 / 后退到下一处。
+    let lastFindQuery = null;
+
     function runFind(findPrevious = false, forceNewSearch = false) {
       if (!findInput) {
         return;
@@ -1688,14 +1693,42 @@
       const query = findInput.value.trim();
       if (!query) {
         setFindStatus(0, 0);
+        lastFindQuery = null;
         return;
       }
-      findController.executeCommand(forceNewSearch ? "find" : "findagain", {
+      // 体检 D-0 的后续（测试子代理报告的严重缺陷）：此处原先调
+      //   findController.executeCommand("find" | "findagain", {...})
+      // 但项目锁定的 pdfjs-dist@4.6.82 的 PDFFindController 没有 executeCommand ——
+      // 浏览器实测其实例方法链只有 constructor / match / onIsPageVisible /
+      // scrollMatchIntoView / setDocument，状态则放在 _pageMatches、_matchesCountTotal、
+      // _selected 上。于是检索条的五个入口（Enter / Next / Prev / Match case /
+      // Highlight all）全部抛 TypeError，findStatus 恒为 "0 / 0"，阅读页内检索完全不可用。
+      // executeCommand 是旧版 PDFViewerApplication.findBar 时代的 API；
+      // 本页用的是 PDFViewer + 自建 EventBus（见上面 findController 的构造），
+      // 正确入口是向该 eventBus 派发 "find" 事件。
+      // 浏览器实测派发后：.textLayer 内 .highlight 由 0 变 11，_pageMatches 累计 81 处
+      // 命中，findController.selected = {pageIdx:0, matchIdx:0}，无 pageerror。
+      // 命中计数无需额外接线：本文件已在 updatefindmatchescount 上调 setFindStatus。
+      const isNewSearch = forceNewSearch || query !== lastFindQuery;
+      lastFindQuery = query;
+      // type 的取值不能想当然。pdfjs-dist@4.6.82 的 PDFFindController.#onFind 与
+      // #shouldDirtyMatch（web/pdf_viewer.mjs:871 / :984）实际逻辑是：
+      //   #shouldDirtyMatch 的 switch(state.type) 只特判 "again" 与 "highlightallchange"，
+      //   其余取值一律 return true → _dirtyMatch 置位 → #nextMatch 把 _selected 重置回
+      //   第一个命中。也就是说 "find" 和 "findagain" 这两个看起来最自然的名字，
+      //   行为完全相同：永远停在「1 / N」，Next / Prev 无法前进。
+      //   新搜索则应当**不传 type**：#onFind 走 `if (!type)` 分支，用 FIND_TIMEOUT 防抖。
+      // 实测佐证：type:"find" 时连按 Enter / Next，status 恒为 "1 / 81"、matchIdx 恒为 0；
+      // 改用 "again" 后逐个前进。
+      viewer.eventBus.dispatch("find", {
+        source: window,
+        ...(isNewSearch ? {} : { type: "again" }),
         query,
         phraseSearch: true,
         caseSensitive: Boolean(findCase && findCase.checked),
+        entireWord: false,
         highlightAll: Boolean(findHighlightAll && findHighlightAll.checked),
-        findPrevious,
+        findPrevious: Boolean(findPrevious),
         matchDiacritics: false
       });
     }
@@ -1766,22 +1799,28 @@
       findInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
           event.preventDefault();
-          runFind(event.shiftKey, true);
+          // 体检 D-0 后续：原先固定传 forceNewSearch=true，于是重复按 Enter 永远
+          // 重开搜索、停在第一个命中，无法逐个前进。改为交给 runFind 内部的
+          // 查询词比对：改了词就新搜索，没改词就前进（Shift+Enter 后退）。
+          runFind(event.shiftKey, false);
         }
       });
       findInput.addEventListener("input", () => {
         if (!findInput.value.trim()) {
           setFindStatus(0, 0);
+          lastFindQuery = null;
         }
       });
     }
     if (findNextBtn) {
-      findNextBtn.addEventListener("click", () => runFind(false, true));
+      // 同上：Next / Prev 必须是「继续查找」，重开搜索会让它们永远停在第一个命中。
+      findNextBtn.addEventListener("click", () => runFind(false, false));
     }
     if (findPrevBtn) {
-      findPrevBtn.addEventListener("click", () => runFind(true, true));
+      findPrevBtn.addEventListener("click", () => runFind(true, false));
     }
     if (findCase) {
+      // 切换匹配选项属于条件变更，确实需要重开搜索，故保留 forceNewSearch=true。
       findCase.addEventListener("change", () => runFind(false, true));
     }
     if (findHighlightAll) {
@@ -1847,6 +1886,20 @@
     eventBus.on("updatefindmatchescount", ({ matchesCount }) => {
       if (!matchesCount) {
         setFindStatus(0, 0);
+        return;
+      }
+      setFindStatus(matchesCount.current || 0, matchesCount.total || 0);
+    });
+    // 体检 D-0 后续（状态栏计数冻结在「1 / N」）：原先只监听 updatefindmatchescount。
+    // 实测事件序列表明该事件只在逐页扫描期间发出，其 matchesCount.current 恒为 1
+    // （此时 _selected 还停在 matchIdx 0），扫描结束后便不再发；真正携带全局序号的是
+    // updatefindcontrolstate —— 每导航一次发一次，实测依次为
+    //   {current:1,total:81} → {current:2,total:81} → {current:3,total:81}
+    // 而 PDFFindController.#requestMatchesCount 算的确实是全局序号
+    // （前面各页命中数之和 + matchIdx + 1），所以缺这个监听器时，
+    // Next/Prev 明明在前进，状态栏却永远显示第一个命中。
+    eventBus.on("updatefindcontrolstate", ({ matchesCount }) => {
+      if (!matchesCount) {
         return;
       }
       setFindStatus(matchesCount.current || 0, matchesCount.total || 0);

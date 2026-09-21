@@ -208,10 +208,18 @@ function run() {
       /window\.__PAPER_TOC_URL__\s*=\s*["']\.\.\/\.\.\/\.\.\/data\/paper-toc\.generated\.json["']/m,
       relPath
     );
+    // 体检 D-7：此处原为 /paper-reader\.js\?v=\d+/i。?v= 是 sha1 的十六进制前 10 位，
+    // 而 \d+ 未加锚定，只会匹配 ?v= 后面的**第一个字符**且要求它是数字 ——
+    // 于是这条断言等价于「哈希首字符恰好是 0-9」，命中率约 10/16 ≈ 62.5%，
+    // 与哈希本身是否正确毫无关系。旧值 9e9df9e3b1 以 9 开头所以侥幸通过；
+    // 本次把 paper-reader.js 改成 c8db7fdfdd（以 c 开头）后 6 个阅读页全部误红，
+    // 才把这个一直在掷骰子的门禁暴露出来。
+    // 改为与同文件 :129-130 对 index.html 的写法一致的 [a-z0-9]+。
+    // 哈希值是否真的等于文件内容摘要，由 build-site-data.js --check 负责（npm run check:data）。
     assertContains(
       html,
       `${label} has paper reader script version`,
-      /paper-reader\.js\?v=\d+/i,
+      /paper-reader\.js\?v=[a-z0-9]+/i,
       relPath
     );
     assertContains(html, `${label} has SEO block`, /SEO:BEGIN[\s\S]*SEO:END/i, relPath);
