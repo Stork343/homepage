@@ -432,3 +432,70 @@ test('Deep-linked section hash must survive load and the async publication rende
     expect(hash, `直载 #${id} 后哈希不应被改写（异步渲染完成后须重新对齐锚点）`).toBe(id);
   }
 });
+
+// 体检 D-4 / 修复路线图第 26 条：index.html 的静态文案与 main.js 的 I18N 字典曾是
+// 同一批文案的两份拷贝，实测漂移 28 处 —— 其中 15 处是整个 footer 与 skip-link 的
+// 静态文本写成英文，而页面 lang="zh-CN"、默认字典为 zh。后果有两个：无 JS 的用户
+// 在中文页看到英文页脚；有 JS 的用户首帧渲染英文、随后被 applyI18nText 改写成中文，
+// 肉眼可见文案闪变。另有 6 处内容性漂移（半角/全角标点、用词不同）与 7 处
+// aria-label 英文单写。
+//
+// 修法是在 buildIndexHtml 里按字典回填静态文案，使 index.html 的那部分成为派生产物；
+// check:data 跑的 --check 会逐字节比对生成结果与磁盘文件，漂移当场判红，
+// 因此不需要另建一条门禁。下面这条用例从**用户可见行为**这一侧再钉一次：
+// 阻断 main.js 得到纯静态态，与正常加载后的运行态逐字段比对。
+test('Static HTML text must already match the zh dictionary (no first-paint i18n flash)', async ({
+  browser,
+}) => {
+  const grab = `(() => {
+    const o = {};
+    document.querySelectorAll('[data-i18n]').forEach((n) => {
+      o['T:' + n.getAttribute('data-i18n')] = n.textContent;
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach((n) => {
+      o['A:' + n.getAttribute('data-i18n-aria-label')] = n.getAttribute('aria-label');
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((n) => {
+      o['P:' + n.getAttribute('data-i18n-placeholder')] = n.getAttribute('placeholder');
+    });
+    o.__lang = document.documentElement.lang;
+    return o;
+  })()`;
+
+  // A) 阻断 main.js：等价于无 JS 用户，也等价于 JS 执行前的首帧
+  const staticCtx = await browser.newContext();
+  await staticCtx.route('**/scripts/main.js**', (route) => route.abort());
+  const staticPage = await staticCtx.newPage();
+  await staticPage.goto('/index.html');
+  await staticPage.waitForLoadState('domcontentloaded');
+  await staticPage.waitForTimeout(600);
+  const staticState = await staticPage.evaluate(grab);
+  await staticCtx.close();
+
+  // B) 正常加载：applyI18nText 与 loadSiteMeta 都跑完之后的运行态
+  const liveCtx = await browser.newContext();
+  const livePage = await liveCtx.newPage();
+  await livePage.goto('/index.html');
+  await livePage.waitForLoadState('networkidle').catch(() => {});
+  await livePage
+    .waitForSelector('#publications-list .publication-card', { timeout: 45000 })
+    .catch(() => {});
+  await livePage.waitForTimeout(1500);
+  const liveState = await livePage.evaluate(grab);
+  await liveCtx.close();
+
+  expect(staticState.__lang, '静态 HTML 的 lang 就应是 zh-CN').toBe('zh-CN');
+  const keys = Object.keys(staticState).filter((k) => k !== '__lang');
+  expect(keys.length, '应比到足够多的 i18n 字段（62 文本 + 7 aria-label + 1 placeholder）').toBeGreaterThanOrEqual(70);
+
+  // footer_text 是**唯一**记录在案的例外：它的日期后缀由 loadSiteMeta() 在运行时
+  // 取 data/site-updated.generated.json 后补上。静态文件里不可能烤进"今天"——
+  // 那个 JSON 写的是 todayInSiteTimeZone()，天天在变（--check 也因此对它专门豁免），
+  // 烤进去会让 index.html 天天不同、check:data 天天判红。故静态侧只放兜底值
+  // "© 2026 HOU Jian."，日期属有意的渐进增强，不算文案闪变。
+  const diff = keys.filter((k) => staticState[k] !== liveState[k] && k !== 'T:footer_text');
+  expect(
+    diff.map((k) => `${k}: 静态=${JSON.stringify(staticState[k])} 运行=${JSON.stringify(liveState[k])}`),
+    '除 footer_text 的日期后缀外，静态态与运行态必须逐字段一致，否则首帧仍有文案闪变'
+  ).toEqual([]);
+});

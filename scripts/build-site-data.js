@@ -37,16 +37,164 @@ function hashText(text) {
   return crypto.createHash("sha1").update(normalized, "utf8").digest("hex").slice(0, 10);
 }
 
+/* ═══ 体检 D-4 / 修复路线图第 26 条：消除 index.html 与 I18N 字典的双数据源 ═══
+
+   index.html 里带 data-i18n / data-i18n-aria-label / data-i18n-placeholder 的静态文案，
+   与 scripts/main.js 的 I18N.zh 字典是**同一批文案的两份拷贝**，实测已漂移 28 处：
+
+   · 语言性漂移（15 处）：整个 footer 与 skip-link 的静态文本是英文
+     （"Skip to main content" / "Information" / "Open Access" / "Sign me up" …），
+     而页面 lang="zh-CN"、默认字典为 zh。后果是两件事：无 JS 时中文页配英文页脚；
+     有 JS 时首帧渲染英文、随后被 applyI18nText 改写成中文 —— 用户能看见文案闪变。
+   · 内容性漂移（6 处）：profile_desc 用半角标点而字典用全角；research_qr_desc
+     写作「混合效应数据的分析」而字典是「混合效应数据分析」；
+     publications_search_label 静态是「检索成果」而字典是「全站检索（按标题、作者、
+     关键词）」；research_spa_desc / research_mixed_desc / placeholder 同类。
+   · aria-label 漂移（7 处）：4 个筛选 select 的 aria-label 是英文单写
+     （"Year filter" / "Venue filter" …），字典里已有中文却对不上。
+
+   审计给的两条路是「加 CI 断言」或「构建时回填」。这里选回填，因为它顺带把断言
+   也解决了：index.html 本就是本脚本的生成产物（见 outputs 里的 indexHtml 项），
+   静态文案一旦由字典推导，check:data 跑的 --check 就会拿生成结果与磁盘文件逐字节比对，
+   **任何漂移都会当场判红**，不需要再单独建一条门禁。
+
+   为什么不把字典抽成 data/i18n.json 当 SSOT：main.js 是无打包器的纯浏览器脚本，
+   字典必须在首帧同步可用（改成 fetch 会让文案闪变更严重，正是要修的东西）。
+   故字典仍留在 main.js，构建时从源码中按括号配平取出该字面量再求值 ——
+   不猜行号（行号会漂），且字典里若混进非字面量会立刻抛错而不是静默出错。 */
+function extractI18nDict(jsSource) {
+  const marker = "const I18N = {";
+  const start = jsSource.indexOf(marker);
+  if (start < 0) {
+    throw new Error("build-site-data: 在 scripts/main.js 中找不到 `const I18N = {`，无法回填静态文案");
+  }
+  let i = jsSource.indexOf("{", start);
+  let depth = 0;
+  let end = -1;
+  let quote = null;
+  let escaped = false;
+  for (; i < jsSource.length; i++) {
+    const ch = jsSource[i];
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (ch === "\\") escaped = true;
+      else if (ch === quote) quote = null;
+      continue;
+    }
+    if (ch === '"' || ch === "'" || ch === "`") { quote = ch; continue; }
+    if (ch === "/" && jsSource[i + 1] === "/") {
+      while (i < jsSource.length && jsSource[i + 1] !== "\n") i++;
+      continue;
+    }
+    if (ch === "{") depth++;
+    else if (ch === "}") { depth--; if (depth === 0) { end = i; break; } }
+  }
+  if (end < 0) {
+    throw new Error("build-site-data: I18N 字典字面量括号未配平，无法回填静态文案");
+  }
+  const dict = new Function(`return ${jsSource.slice(jsSource.indexOf("{", start), end + 1)}`)();
+  if (!dict || typeof dict.zh !== "object" || dict.zh === null) {
+    throw new Error("build-site-data: I18N 字典缺少 zh 分支，无法回填静态文案");
+  }
+  return dict;
+}
+
+function escapeHtmlText(value) {
+  return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function escapeHtmlAttr(value) {
+  return escapeHtmlText(value).replace(/"/g, "&quot;");
+}
+
+function backfillI18nText(html, dict) {
+  const zh = dict.zh;
+  // 刻意比运行时更严：t(key) 在缺键时会退化成键名本身，把 "footer_info" 这种字符串
+  // 直接显示给用户；构建期则宁可报错，让缺翻译在 CI 就暴露，而不是上线后才发现。
+  const value = (key) => {
+    if (typeof zh[key] !== "string" || !zh[key]) {
+      throw new Error(`build-site-data: I18N.zh 缺少键 "${key}"，index.html 却引用了它`);
+    }
+    return zh[key];
+  };
+  const countAttr = (name) => (html.match(new RegExp(`[\\s]${name}="`, "g")) || []).length;
+
+  let textCount = 0;
+  let ariaCount = 0;
+  let placeholderCount = 0;
+
+  // 1) 文本节点。已实测确认这 62 个 [data-i18n] 节点**元素子节点数全为 0**
+  //    （applyI18nText 用的是 node.textContent 赋值，若有子节点早就会被吃掉），
+  //    故 [^<]* 足以覆盖整个文本，替换结果与运行时逐字节一致。
+  //    注意副作用：原本为排版而写在元素内的换行与缩进会被压平 —— 这是必须的，
+  //    因为 textContent 不含那些空白，留着就永远比不平、闪变也消不掉。
+  html = html.replace(
+    /(<[a-zA-Z][^>]*\bdata-i18n="([^"]+)"[^>]*>)([^<]*)(<\/[a-zA-Z][\w-]*>)/g,
+    (whole, open, key, oldText, close) => {
+      textCount++;
+      return open + escapeHtmlText(value(key)) + close;
+    }
+  );
+
+  // 2) aria-label。绝大多数目标本来就带该属性（纯替换）；唯一例外是
+  //    #pub-search-input，它只有 data-i18n-aria-label 而没有 aria-label ——
+  //    运行时由 setAttribute 创建，静态文件里则需在结束尖括号前插入。
+  //    匹配属性时刻意要求前面是空白：否则 \baria-label 会命中
+  //    data-i18n-aria-label 内部（"-" 与 "a" 之间就是一个词边界），把键名当成属性值。
+  //    本次排查中我自己就先踩了这个坑，得到 8 条假阳性。
+  html = html.replace(/<[a-zA-Z][^>]*\bdata-i18n-aria-label="([^"]+)"[^>]*>/g, (tag, key) => {
+    ariaCount++;
+    const attr = `aria-label="${escapeHtmlAttr(value(key))}"`;
+    if (/(^|\s)aria-label="[^"]*"/.test(tag)) {
+      return tag.replace(/(\s)aria-label="[^"]*"/, `$1${attr}`);
+    }
+    return tag.replace(/>$/, ` ${attr}>`);
+  });
+
+  // 3) placeholder，同 aria-label。
+  html = html.replace(/<[a-zA-Z][^>]*\bdata-i18n-placeholder="([^"]+)"[^>]*>/g, (tag, key) => {
+    placeholderCount++;
+    const attr = `placeholder="${escapeHtmlAttr(value(key))}"`;
+    if (/(^|\s)placeholder="[^"]*"/.test(tag)) {
+      return tag.replace(/(\s)placeholder="[^"]*"/, `$1${attr}`);
+    }
+    return tag.replace(/>$/, ` ${attr}>`);
+  });
+
+  // 强断言：三类替换的命中数必须与源文件里对应属性的出现次数完全相等。
+  // 少一处就说明正则没覆盖到某种写法（属性顺序、自闭合、跨行标签等），
+  // 那会造成「一部分回填了、一部分没回填」的静默半吊子状态 —— 比不回填更难查。
+  const expectedText = countAttr("data-i18n");
+  const expectedAria = countAttr("data-i18n-aria-label");
+  const expectedPlaceholder = countAttr("data-i18n-placeholder");
+  if (textCount !== expectedText) {
+    throw new Error(`build-site-data: data-i18n 文本回填 ${textCount} 处，但源文件有 ${expectedText} 处`);
+  }
+  if (ariaCount !== expectedAria) {
+    throw new Error(`build-site-data: aria-label 回填 ${ariaCount} 处，但源文件有 ${expectedAria} 处`);
+  }
+  if (placeholderCount !== expectedPlaceholder) {
+    throw new Error(`build-site-data: placeholder 回填 ${placeholderCount} 处，但源文件有 ${expectedPlaceholder} 处`);
+  }
+  return html;
+}
+
 function buildIndexHtml(root) {
   const indexPath = path.join(root, "index.html");
   const cssPath = path.join(root, "enhanced-main.css");
   const jsPath = path.join(root, "scripts", "main.js");
+  const jsSource = fs.readFileSync(jsPath, "utf8");
   let html = fs.readFileSync(indexPath, "utf8");
   const cssHash = hashText(fs.readFileSync(cssPath, "utf8"));
-  const jsHash = hashText(fs.readFileSync(jsPath, "utf8"));
+  const jsHash = hashText(jsSource);
   html = html.replace(/(enhanced-main\.css\?v=)[^"']+/g, `$1${cssHash}`);
   html = html.replace(/(scripts\/main\.js\?v=)[^"']+/g, `$1${jsHash}`);
-  return html;
+  // footer_text 刻意回填**静态兜底值**（"© 2026 HOU Jian."）而非带日期的模板渲染结果：
+  // site-updated.generated.json 写的是 todayInSiteTimeZone()，每天都在变（--check 模式
+  // 也因此对它专门豁免）。若把当天日期烤进 index.html，这个文件就会天天不同、
+  // check:data 天天判红。日期由 loadSiteMeta() 在运行时取到后调 applyI18nText() 补上，
+  // 属有意的渐进增强，不是文案闪变。
+  return backfillI18nText(html, extractI18nDict(jsSource));
 }
 
 /* 六个阅读页共享 papers/shared/ 下的 paper-reader.js 与 paper-theme.css，
