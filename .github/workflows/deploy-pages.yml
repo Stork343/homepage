@@ -40,6 +40,7 @@ jobs:
   validate:
     name: Validate before publishing
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
@@ -56,6 +57,7 @@ jobs:
   build:
     name: Build whitelisted artifact
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: validate
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -158,6 +160,7 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: build
     environment:
       name: github-pages

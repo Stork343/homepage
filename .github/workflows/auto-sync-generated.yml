@@ -14,19 +14,38 @@ concurrency:
   group: main-writers
   cancel-in-progress: false
 
+# 体检 D-8：三处修正
+#   1) 此前用 `git add -A`，会把工作区里任何散落文件（构建产物、临时文件、
+#      甚至被误改的 SSOT data/site-master.json）一并提交进公开仓库。现改为显式
+#      白名单，并额外断言生成器没有改动 SSOT。
+#   2) 此前 checkout 后直接 commit + push，没有 `git pull --rebase`、没有重试。
+#      姊妹 workflow build-bookdown-notes.yml 有 rebase，本文件却没有；一旦与
+#      人工推送或另一个机器人撞上，push 被拒后整个 job 直接失败，而用
+#      GITHUB_TOKEN 完成的 push 不会再触发任何 workflow，所以既不会重跑也没有告警。
+#      现改为 rebase + 最多 3 次重试，最终失败以 ::error:: 显式上报。
+#   3) 补 timeout-minutes、把 action 固定到 commit SHA、给 setup-node 开 npm 缓存。
+#
+# 注意：本 workflow 用 GITHUB_TOKEN 推送，按 GitHub 的递归保护，这次推送**不会**
+# 触发 deploy-pages.yml。这是安全的 —— 本 workflow 只在生成物与已提交内容不一致时
+# 才会产生提交，而这种状态下 site-checks 与 deploy-pages 的 --check 本来就都是红的、
+# 不会部署；机器人把仓库修正后，下一次推送即会正常部署。旧的「从分支部署」反而会在
+# 完全不跑任何检查的情况下立即把这个不一致状态发布出去。
+
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -37,16 +56,67 @@ jobs:
           node scripts/sync-paper-seo.js --write
           node scripts/generate-paper-toc.js --write
 
+      - name: Guard the SSOT against generator writes
+        run: |
+          set -euo pipefail
+          # data/site-master.json 是唯一手写的真相源，任何生成器都不应改动它。
+          # 旧的 `git add -A` 会把这种意外改动静默提交，等于让机器人改写 SSOT。
+          if ! git diff --quiet -- data/site-master.json; then
+            echo "::error::生成器改动了 SSOT data/site-master.json，拒绝提交"
+            git --no-pager diff --stat -- data/site-master.json
+            exit 1
+          fi
+          echo "SSOT 未被改动。"
+
       - name: Commit and push generated changes
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: sync generated site data"
-            git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
-          else
+
+          # 显式白名单：三个生成器的全部输出路径，且不含任何手写输入
+          GENERATED=(
+            data/publications.json
+            data/paper-pages.json
+            data/paper-toc.generated.json
+            data/search-index.generated.json
+            data/publications-jsonld.generated.json
+            data/paper-seo.generated.json
+            data/site-updated.generated.json
+            sitemap.xml
+            index.html
+          )
+          git add -- "${GENERATED[@]}"
+          # 六个阅读页：build-site-data 重写 ?v= 资产哈希，sync-paper-seo 重写 SEO 块
+          git add -- $(git ls-files 'papers/*/*/*.html')
+
+          if git diff --cached --quiet; then
             echo "No generated changes."
+            exit 0
           fi
+
+          echo "── 将要提交的改动 ──"
+          git --no-pager diff --cached --stat
+
+          git commit -m "chore: sync generated site data"
+
+          REMOTE="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          for attempt in 1 2 3; do
+            if git push "$REMOTE" HEAD:main; then
+              echo "Pushed on attempt ${attempt}."
+              exit 0
+            fi
+            echo "::warning::push 被拒（第 ${attempt}/3 次），rebase 后重试"
+            git pull --rebase "$REMOTE" main || git rebase --abort || true
+          done
+          echo "::error::三次重试后仍无法推送生成物"
+          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Report failure context
+        if: failure()
+        run: |
+          echo "::error::自动同步失败；以下为工作区状态，供排查"
+          git --no-pager status --short || true
+          git --no-pager log --oneline -3 || true

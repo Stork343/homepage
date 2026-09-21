@@ -7,6 +7,13 @@ on:
   pull_request:
   workflow_dispatch:
 
+# 体检 B-3 / D-8：本 workflow 此前是唯一未声明 permissions 的，6 个只读 job 全部
+# 持有仓库默认（可能可写）的 GITHUB_TOKEN，其中 link-check 还把这个 token 交给
+# 第三方 action。现收敛为只读，并把所有 action 固定到 commit SHA（注释保留 tag），
+# 同时给每个 job 加 timeout-minutes —— 此前任一 job 挂住都会白烧 6 小时 runner。
+permissions:
+  contents: read
+
 concurrency:
   group: site-checks-${{ github.ref }}
   cancel-in-progress: true
@@ -14,26 +21,30 @@ concurrency:
 jobs:
   syntax-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
 
-      - name: Check JavaScript syntax
-        run: node --check scripts/main.js
+      # 体检 D-8：此前只硬编码检查 main.js 与 paper-reader.js 两个文件。
+      # 改为调用自我维护的检查器 scripts/check-syntax.js —— 它扫描 scripts/、
+      # papers/shared/、tests/ui/ 与 playwright.config.js（当前 16 个文件），
+      # 新增脚本自动纳入，不会再出现「加了脚本但忘了加进门禁」的漂移。
+      - name: Check JavaScript syntax (all project scripts)
+        run: npm --silent run check:syntax
 
-      - name: Check paper reader syntax
-        run: node --check papers/shared/paper-reader.js
-
+      # htmlhint 此前用 `npx --yes htmlhint`，等于每次运行都从 registry 拉最新版执行，
+      # 是一个未固定的供应链入口；现固定到 1.9.2。
       - name: Check HTML syntax (home page)
-        run: npx --yes htmlhint index.html
+        run: npx --yes htmlhint@1.9.2 index.html
 
       - name: Check HTML syntax (paper pages)
-        run: find papers -name '*.html' -print0 | xargs -0 npx --yes htmlhint
+        run: find papers -name '*.html' -print0 | xargs -0 npx --yes htmlhint@1.9.2
 
       - name: Validate publications data JSON
         run: python3 -m json.tool data/publications.json > /dev/null
@@ -73,12 +84,13 @@ jobs:
 
   link-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Check links
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           args: >-
             --no-progress
@@ -95,19 +107,22 @@ jobs:
             --exclude "https://cdn.jsdelivr.net/.*"
             --exclude "https://www.sciencedirect.com/.*"
             index.html papers
+        # 顶层 permissions 已把该 token 收敛为 contents:read，第三方 action 拿不到写权限
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ui-regression:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -120,14 +135,16 @@ jobs:
 
   a11y-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -140,14 +157,17 @@ jobs:
 
   visual-regression:
     runs-on: macos-latest
+    # macOS runner 冷启动 + 三个基线截图，比 Linux job 慢得多
+    timeout-minutes: 30
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -160,7 +180,7 @@ jobs:
 
       - name: Upload visual regression diagnostics
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: visual-regression-diagnostics
           path: test-results/
@@ -169,14 +189,16 @@ jobs:
 
   lighthouse-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci

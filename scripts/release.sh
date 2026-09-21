@@ -83,7 +83,17 @@ node scripts/acceptance-check.js
 npm run check:contrast
 npm run test:ui
 npm run test:a11y
-npm run test:visual
+# 体检 D-8：visual.spec.js 开头有 test.skip(process.platform !== "darwin")，
+# 在 Linux 上跑 test:visual 会让 3 个用例全部 skip 并以 exit 0 收场 —— 一个空绿门禁。
+# 而 release-automation.yml 跑在 ubuntu-latest，所以发布前的视觉把关此前从未真正生效。
+# 视觉基线已由 site-checks.yml 的 visual-regression job 在 macos-latest 上对每次推送
+# 真实执行；此处在非 darwin 平台显式说明并跳过，而不是伪造一次通过。
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  npm run test:visual
+else
+  echo "跳过 test:visual：视觉基线为 macOS 专属，本平台会全部 skip（空绿门禁）。"
+  echo "  该门禁由 CI 的 visual-regression job（macos-latest）在每次推送时真实执行。"
+fi
 npm run lighthouse
 
 git tag -a "$TAG" -F "$NOTES_FILE"

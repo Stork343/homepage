@@ -20,37 +20,62 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-latest
+    # 本 job 迄今从未运行过（notes/** 路径过滤未触发过），没有实测耗时可依据，
+    # 因此超时按「R + pandoc + bookdown 依赖即使走源码编译也够」的余量给。
+    # 已启用 use-public-rspm 走二进制装包，正常应在数分钟内完成。
+    timeout-minutes: 40
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 1
 
       - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+        uses: r-lib/actions/setup-r@465b7d8e732ca3921382b1674c59bada9cbf3399 # v2.13.0
+        with:
+          use-public-rspm: true
 
       - name: Setup pandoc
-        uses: r-lib/actions/setup-pandoc@v2
+        uses: r-lib/actions/setup-pandoc@465b7d8e732ca3921382b1674c59bada9cbf3399 # v2.13.0
 
       - name: Install bookdown
-        uses: r-lib/actions/setup-r-dependencies@v2
+        uses: r-lib/actions/setup-r-dependencies@465b7d8e732ca3921382b1674c59bada9cbf3399 # v2.13.0
         with:
           packages: bookdown
 
       - name: Render book
         working-directory: notes
-        run: Rscript -e "bookdown::render_book('index.Rmd')"
+        run: |
+          set -euo pipefail
+          # 体检 D-3 根因：bookdown 渲染只写不删，chunk 改名后旧 figure 会一直留在
+          # _book/notes-book_files/figure-html/ 里被持续发布。本次体检就清出了 6 个
+          # 这样的孤儿（含一对字节完全相同的 spa-plot-1.png / spa-summary-1.png）。
+          # 渲染前清空输出目录，产物即「本次渲染的全部输出」，孤儿无从累积。
+          rm -rf _book
+          Rscript -e "bookdown::render_book('index.Rmd')"
 
       - name: Commit and push rendered book
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add notes/_book
+          # -A 确保上一步清空造成的删除也被记录；范围仍严格限定在 notes/_book
+          git add -A -- notes/_book
           if ! git diff --cached --quiet; then
+            echo "── 将要提交的渲染产物 ──"
+            git --no-pager diff --cached --stat | tail -20
             git commit -m "chore: render bookdown notes"
             REMOTE="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-            git pull --rebase "$REMOTE" main
-            git push "$REMOTE" HEAD:main
+            for attempt in 1 2 3; do
+              if git push "$REMOTE" HEAD:main; then
+                echo "Pushed on attempt ${attempt}."
+                exit 0
+              fi
+              echo "::warning::push 被拒（第 ${attempt}/3 次），rebase 后重试"
+              git pull --rebase "$REMOTE" main || git rebase --abort || true
+            done
+            echo "::error::三次重试后仍无法推送渲染产物"
+            exit 1
           else
             echo "No rendered changes."
           fi
