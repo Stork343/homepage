@@ -74,21 +74,18 @@ node scripts/enrich-metadata.js --write-cache --apply
 ```
 
 ## Backup And Restore
-- Backup script: `scripts/ops/backup-homepage.sh`
-- Restore script: `scripts/ops/restore-homepage.sh`
-
-Examples:
-```bash
-./scripts/ops/backup-homepage.sh
-./scripts/ops/restore-homepage.sh --backup /path/to/backup-dir
-```
+> 运维脚本（`scripts/ops/`）与内部审计 / 流程文档（`docs/`）**不在本仓库内**。
+> 本仓库是公开的，这些资料含主机目录结构、launchd 标签、局域网预览端口等运维
+> 细节，现仅保留在维护者本机（见 `.gitignore`）；如需版本管理请放入独立私有仓库。
+>
+> 站点内容本身的备份等价于克隆本仓库；`data/*.generated.json`、`sitemap.xml`
+> 等生成物可随时由 `node scripts/build-site-data.js --write` 重建。
 
 ## Release And Rollback
 - Release helper: `scripts/release.sh`
 - Manual release workflow: `.github/workflows/release-automation.yml`
-- Process guide: `docs/RELEASE_ROLLBACK.md`
-- QA checklist: `docs/QA_CHECKLIST.md`
 - Changelog: `CHANGELOG.md`
+- 流程指南与 QA 清单（`docs/RELEASE_ROLLBACK.md`、`docs/QA_CHECKLIST.md`）为维护者本机文档，不在本仓库内。
 
 ## Auto-Sync Generated Data Workflow
 

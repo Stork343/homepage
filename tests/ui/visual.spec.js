@@ -26,8 +26,8 @@ test("Homepage visual baseline", async ({ page }) => {
 // 基线 1440x7776 vs 实测 1440x8181）。
 // 现在：像素覆盖改为「视口尺寸」快照（与页面总高度无关），另有布局不变量断言兜底。
 //
-// 基线首次生成只能在 macOS 上做（见 docs/MACMINI.md）：
-//   ./scripts/ops/local-ci.sh --update-visual-baseline
+// 基线首次生成只能在 macOS 上做（本仓库的运维脚本不随仓库分发，故直接给命令）：
+//   UPDATE_MAIN_BASELINE=1 npx playwright test tests/ui/visual.spec.js --update-snapshots
 // 基线文件存在时才断言，不存在则跳过——避免在基线落地前把 CI 卡红。
 const VIEWPORT_BASELINE = path.join(
   __dirname,
@@ -57,7 +57,7 @@ test("Homepage layout invariants", async ({ page }) => {
 test("Homepage viewport baseline", async ({ page }) => {
   test.skip(
     !VIEWPORT_BASELINE_READY,
-    "视口基线尚未生成；请在 macOS 上运行 ./scripts/ops/local-ci.sh --update-visual-baseline"
+    "视口基线尚未生成；请在 macOS 上运行 UPDATE_MAIN_BASELINE=1 npx playwright test tests/ui/visual.spec.js --update-snapshots"
   );
   await page.goto("/index.html");
   await page.emulateMedia({ reducedMotion: "reduce" });

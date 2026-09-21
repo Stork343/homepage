@@ -19,3 +19,13 @@ notes/notes-book_files/
 
 # DSH agent runtime workspace (sessions / paste attachments)
 .dsh/
+
+# 内部审计 / 运维资料（本仓库是公开的，且 Pages 曾按「从分支部署」发布整个工作树）
+# 这些文件含主机目录结构、launchd 标签、局域网预览与端口、CI 运行器配置，
+# 以及聚合后可被 grep / 搜索引擎索引的个人信息，不应公开分发。
+# 需要版本管理请放到独立的私有仓库；参见 docs/audit/ 内的体检报告 B-1 / B-2。
+/docs/
+/scripts/ops/
+
+# Pages 白名单部署产物（deploy-pages.yml 在 runner 上生成）
+_site/
