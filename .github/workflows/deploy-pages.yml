@@ -152,6 +152,65 @@ jobs:
           du -sh _site
           find _site -maxdepth 2 -type d | sort | sed 's/^/  /'
 
+      - name: Ensure Pages deploys from GitHub Actions, not from the branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          # 体检 B-1/B-2 的收尾一步。此前仓库的 Pages 源是「Deploy from a branch」，
+          # Jekyll 会把 main 上整棵被跟踪的树原样发布。实测（curl 生产 URL）：
+          #   data/site-master.json  200 / 45,687 B —— 内含 hidden=true 的未发表稿件
+          #                                             qapsm-icu-bp 的完整元数据
+          #   notes/book.bib         200 /  5,054 B
+          #   notes/index.Rmd        200 /  1,717 B
+          #   beamer_presentation.tex 200 / 8,852 B
+          #   package-lock.json      200 / 58,335 B
+          #   tests/ui/regression.spec.js、scripts/check-syntax.js 等同样 200
+          # 156 个跟踪文件里有 50 个落在下面这份 _site 白名单之外，全部在公开。
+          # 白名单只有在部署源为 GitHub Actions 时才生效，故此处用 pages:write 把源切过来。
+          # 该动作经仓库所有者明确授权（原先保留为人工步骤）。
+          API="https://api.github.com/repos/${REPO}/pages"
+          HDR=(-H "Accept: application/vnd.github+json"
+               -H "Authorization: Bearer ${GH_TOKEN}"
+               -H "X-GitHub-Api-Version: 2022-11-28")
+          read_build_type() {
+            curl -sf "${HDR[@]}" "$API" 2>/dev/null \
+              | python3 -c 'import sys,json; print(json.load(sys.stdin).get("build_type",""))' 2>/dev/null || true
+          }
+
+          before="$(read_build_type)"
+          echo "切换前 build_type: ${before:-（读取失败或站点未创建）}"
+
+          if [ "$before" != "workflow" ]; then
+            code="$(curl -s -o /tmp/pages.json -w '%{http_code}' -X PUT "${HDR[@]}" "$API" -d '{"build_type":"workflow"}')"
+            if [ "$code" != "204" ] && [ "$code" != "200" ]; then
+              # 站点尚未创建时 PUT 不适用，退回 POST
+              code="$(curl -s -o /tmp/pages.json -w '%{http_code}' -X POST "${HDR[@]}" "$API" -d '{"build_type":"workflow"}')"
+            fi
+            echo "切换请求返回 HTTP ${code}"
+            head -c 400 /tmp/pages.json 2>/dev/null; echo
+            case "$code" in
+              200|201|204) ;;
+              *)
+                echo "::error::无法把 Pages 部署源切到 GitHub Actions（HTTP ${code}）。"
+                echo "::error::在切换成功之前，分支部署仍会公开整棵被跟踪的树（含未发表稿件元数据）。"
+                echo "::error::请手动到 Settings → Pages → Source 选择 GitHub Actions，或检查 GITHUB_TOKEN 是否具备 pages:write。"
+                exit 1
+                ;;
+            esac
+          fi
+
+          after="$(read_build_type)"
+          echo "切换后 build_type: ${after:-（读取失败）}"
+          # 不做这层复核就会出现「artifact 上传成功、线上却仍是分支部署」的假绿：
+          # 本次推送正是如此 —— 三个 job 全 success，而生产 URL 上 site-master.json 仍 200。
+          if [ "$after" != "workflow" ]; then
+            echo "::error::部署源仍不是 workflow（读到 '${after}'），拒绝上传 artifact。"
+            exit 1
+          fi
+          echo "✓ Pages 部署源已确认为 GitHub Actions，白名单 artifact 将会真正生效。"
+
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
