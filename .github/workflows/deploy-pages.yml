@@ -17,8 +17,9 @@ name: Deploy site to Pages
 #   运行时被 <script src> 引用的只有 scripts/main.js；
 #   运行时被 fetch 的数据只有 data/{publications,paper-pages,paper-toc.generated,
 #   publications-jsonld.generated,site-updated.generated}.json；
-#   站点检索是在内存里基于 publications.json 做的，search-index.generated.json
-#   只被构建与校验脚本引用。
+#   站点检索是在内存里基于 publications.json 做的；search-index.generated.json 曾是
+#   一个零运行时消费者的死产物，已在体检 D-6 中连生成器一起删除。下面 FORBIDDEN 清单
+#   里仍保留它，作为「不许复活」的绊线。
 
 on:
   push:

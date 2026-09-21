@@ -52,9 +52,13 @@ jobs:
 
       - name: Regenerate site data and SEO blocks
         run: |
+          # 体检 D-6：这里原先还有第三行 `node scripts/generate-paper-toc.js --write`。
+          # data/paper-toc.generated.json 已经由上一行的 build-site-data.js 写出
+          # （见其 OUTPUT_FILES.paperToc），第二个写入者只会带来「日期回退语义不一致时
+          # 互相覆盖」的风险，故删除。generate-paper-toc.js 现仅作为独立校验器保留，
+          # 由 site-checks.yml 与 npm run check:data 以 --check 调用。
           node scripts/build-site-data.js --write
           node scripts/sync-paper-seo.js --write
-          node scripts/generate-paper-toc.js --write
 
       - name: Guard the SSOT against generator writes
         run: |
@@ -79,7 +83,6 @@ jobs:
             data/publications.json
             data/paper-pages.json
             data/paper-toc.generated.json
-            data/search-index.generated.json
             data/publications-jsonld.generated.json
             data/paper-seo.generated.json
             data/site-updated.generated.json

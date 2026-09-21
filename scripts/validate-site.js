@@ -8,7 +8,6 @@ const MASTER_JSON = path.join(ROOT, "data", "site-master.json");
 const PUBLICATIONS_JSON = path.join(ROOT, "data", "publications.json");
 const PAPER_CONFIG_JSON = path.join(ROOT, "data", "paper-pages.json");
 const GENERATED_TOC_JSON = path.join(ROOT, "data", "paper-toc.generated.json");
-const SEARCH_INDEX_JSON = path.join(ROOT, "data", "search-index.generated.json");
 const PUBLICATIONS_JSONLD = path.join(ROOT, "data", "publications-jsonld.generated.json");
 const PAPER_SEO_JSON = path.join(ROOT, "data", "paper-seo.generated.json");
 
@@ -139,10 +138,6 @@ function run() {
     fail(`Missing file: ${GENERATED_TOC_JSON}`);
     return;
   }
-  if (!fs.existsSync(SEARCH_INDEX_JSON)) {
-    fail(`Missing file: ${SEARCH_INDEX_JSON}`);
-    return;
-  }
   if (!fs.existsSync(PUBLICATIONS_JSONLD)) {
     fail(`Missing file: ${PUBLICATIONS_JSONLD}`);
     return;
@@ -156,12 +151,10 @@ function run() {
   const publications = readJson(PUBLICATIONS_JSON);
   const paperConfig = readJson(PAPER_CONFIG_JSON);
   const generatedToc = readJson(GENERATED_TOC_JSON);
-  const searchIndex = readJson(SEARCH_INDEX_JSON);
   const publicationsJsonLd = readJson(PUBLICATIONS_JSONLD);
   const paperSeo = readJson(PAPER_SEO_JSON);
   const papers = Array.isArray(paperConfig.papers) ? paperConfig.papers : [];
   const generatedPapers = Array.isArray(generatedToc.papers) ? generatedToc.papers : [];
-  const searchEntries = Array.isArray(searchIndex.entries) ? searchIndex.entries : [];
   const seoEntries = Array.isArray(paperSeo.papers) ? paperSeo.papers : [];
 
   if (!Array.isArray(master.publications) || master.publications.length === 0) {
@@ -179,11 +172,6 @@ function run() {
   if (generatedPapers.length === 0) {
     fail("data/paper-toc.generated.json must contain a non-empty papers array.");
     return;
-  }
-  if (searchEntries.length !== publications.length) {
-    fail(
-      `data/search-index.generated.json entries mismatch: ${searchEntries.length} != publications ${publications.length}`
-    );
   }
   if (!Array.isArray(publicationsJsonLd.itemListElement) || publicationsJsonLd.itemListElement.length !== publications.length) {
     fail("data/publications-jsonld.generated.json itemListElement must match publications length.");
@@ -484,7 +472,6 @@ function run() {
     "publications.json",
     "paper-pages.json",
     "paper-toc.generated.json",
-    "search-index.generated.json",
     "publications-jsonld.generated.json",
     "paper-seo.generated.json",
     "site-updated.generated.json",

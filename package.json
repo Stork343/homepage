@@ -9,7 +9,6 @@
     "check:acceptance": "node scripts/acceptance-check.js",
     "check:contrast": "node scripts/check-contrast.js",
     "data:build": "node scripts/build-site-data.js --write",
-    "toc:build": "node scripts/generate-paper-toc.js --write",
     "seo:sync": "node scripts/sync-paper-seo.js --write",
     "metadata:enrich": "node scripts/enrich-metadata.js --write-cache",
     "test:ui": "playwright test",

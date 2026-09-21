@@ -7,10 +7,6 @@ const ROOT = path.resolve(__dirname, '..');
 const SOURCE_FILE = path.join(ROOT, 'data', 'paper-pages.json');
 const OUTPUT_FILE = path.join(ROOT, 'data', 'paper-toc.generated.json');
 
-function formatDate(date) {
-  return date.toISOString().slice(0, 10);
-}
-
 function normalizeItems(list) {
   return (Array.isArray(list) ? list : [])
     .map((item) => {
@@ -30,7 +26,12 @@ function normalizeItems(list) {
 }
 
 function buildPayload(source) {
-  const updated = String(source.updated || formatDate(new Date()));
+  // 体检 D-6：本文件已降级为纯校验器，输出必须与 build-site-data.js 的 buildPaperToc()
+  // 逐字节一致，否则 --check 会假红。此前这里回退到「今天」，而 build-site-data.js:243
+  // 回退到 1970-01-01 —— data_version 一旦为空，两个生成器就会互判 OUTDATED。
+  // 现完全对齐 build-site-data.js 的语义：updated 原样透传（允许为空串），
+  // 只有 generated_at 才做 1970-01-01 回退。
+  const updated = String(source.updated == null ? '' : source.updated);
   const papers = (Array.isArray(source.papers) ? source.papers : []).map((entry) => {
     const id = String(entry.id || '').trim();
     const relPath = String(entry.path || '').replace(/\\/g, '/').replace(/^\/?/, '');
@@ -51,7 +52,7 @@ function buildPayload(source) {
 
   return {
     updated,
-    generated_at: `${updated}T00:00:00.000Z`,
+    generated_at: `${updated || '1970-01-01'}T00:00:00.000Z`,
     papers
   };
 }
@@ -69,8 +70,24 @@ function readSource() {
 
 function main() {
   const args = new Set(process.argv.slice(2));
-  const writeMode = args.has('--write');
-  const checkMode = args.has('--check') || !writeMode;
+
+  // 体检 D-6：本文件降级为纯校验器。data/paper-toc.generated.json 此前有两个生成器
+  // （build-site-data.js 的 buildPaperToc() 与此处的 buildPayload()），且日期回退语义
+  // 不一致 —— data_version 一旦为空，两边就会互判 OUTDATED。现只保留 build-site-data.js
+  // 这一个写入者；本脚本仍独立复算一遍并逐字节比对，等于给 SSOT 链条加了一道交叉校验，
+  // 但已经不可能再产生「谁覆盖谁」的分歧写入。
+  if (args.has('--write')) {
+    console.error(
+      [
+        `REMOVED: ${path.relative(ROOT, __filename)} 不再写盘。`,
+        'data/paper-toc.generated.json 的唯一写入者是 build-site-data.js，请改用：',
+        '  node scripts/build-site-data.js --write',
+        '本脚本只作为独立校验器保留（--check）。'
+      ].join('\n')
+    );
+    process.exitCode = 1;
+    return;
+  }
 
   const source = readSource();
   const payload = buildPayload(source);
@@ -80,29 +97,23 @@ function main() {
   }
 
   const output = serialize(payload);
+  const rel = path.relative(ROOT, OUTPUT_FILE);
+  const rerunHint = '(run: node scripts/build-site-data.js --write)';
 
-  if (writeMode) {
-    fs.writeFileSync(OUTPUT_FILE, output, 'utf8');
-    console.log(`WROTE: ${path.relative(ROOT, OUTPUT_FILE)} (${payload.papers.length} papers)`);
+  if (!fs.existsSync(OUTPUT_FILE)) {
+    console.error(`MISSING: ${rel} ${rerunHint}`);
+    process.exitCode = 1;
     return;
   }
 
-  if (checkMode) {
-    if (!fs.existsSync(OUTPUT_FILE)) {
-      console.error(`MISSING: ${path.relative(ROOT, OUTPUT_FILE)} (run: node scripts/generate-paper-toc.js --write)`);
-      process.exitCode = 1;
-      return;
-    }
-
-    const current = fs.readFileSync(OUTPUT_FILE, 'utf8');
-    if (current !== output) {
-      console.error(`OUTDATED: ${path.relative(ROOT, OUTPUT_FILE)} (run: node scripts/generate-paper-toc.js --write)`);
-      process.exitCode = 1;
-      return;
-    }
-
-    console.log(`OK: ${path.relative(ROOT, OUTPUT_FILE)} is up-to-date.`);
+  const current = fs.readFileSync(OUTPUT_FILE, 'utf8');
+  if (current !== output) {
+    console.error(`OUTDATED: ${rel} ${rerunHint}`);
+    process.exitCode = 1;
+    return;
   }
+
+  console.log(`OK: ${rel} is up-to-date (${payload.papers.length} papers).`);
 }
 
 try {

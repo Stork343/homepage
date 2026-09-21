@@ -11,7 +11,6 @@ const OUTPUT_FILES = {
   publications: path.join(ROOT, "data", "publications.json"),
   paperPages: path.join(ROOT, "data", "paper-pages.json"),
   paperToc: path.join(ROOT, "data", "paper-toc.generated.json"),
-  searchIndex: path.join(ROOT, "data", "search-index.generated.json"),
   publicationsJsonLd: path.join(ROOT, "data", "publications-jsonld.generated.json"),
   paperSeo: path.join(ROOT, "data", "paper-seo.generated.json"),
   sitemap: path.join(ROOT, "sitemap.xml"),
@@ -263,49 +262,6 @@ function buildPaperToc(master) {
   };
 }
 
-function buildSearchIndex(master, publications) {
-  const paperPages = extractPaperPages(Array.isArray(master.publications) ? master.publications : []);
-  const pathById = new Map(paperPages.map((entry) => [entry.id, entry.path]));
-  return {
-    updated: masterDataVersion(master),
-    generated_at: `${masterDataVersion(master) || "1970-01-01"}T00:00:00.000Z`,
-    entries: publications.map((pub) => {
-      const id = String(pub.id || "").trim();
-      const keywordsZh = uniqueStringList(pub && pub.keywords && pub.keywords.zh);
-      const keywordsEn = uniqueStringList(pub && pub.keywords && pub.keywords.en);
-      return {
-        id,
-        year: Number(pub.year || 0),
-        title: {
-          zh: localizedText(pub.title, "zh"),
-          en: localizedText(pub.title, "en")
-        },
-        authors: {
-          zh: localizedText(pub.authors, "zh"),
-          en: localizedText(pub.authors, "en")
-        },
-        venue: {
-          zh: localizedText(pub.venue, "zh"),
-          en: localizedText(pub.venue, "en")
-        },
-        status: {
-          zh: localizedText(pub.status, "zh"),
-          en: localizedText(pub.status, "en")
-        },
-        keywords: {
-          zh: keywordsZh,
-          en: keywordsEn
-        },
-        links: {
-          article: pub && pub.links ? pub.links.article || null : null,
-          pdf: pub && pub.links ? pub.links.pdf || null : null
-        },
-        paper_path: pathById.get(id) || null
-      };
-    })
-  };
-}
-
 function buildPublicationsJsonLd(master, publications) {
   const baseUrl = String(master && master.site && master.site.base_url ? master.site.base_url : "").replace(
     /\/+$/,
@@ -524,7 +480,6 @@ function main() {
   const publications = buildPublications(master, metadataById);
   const paperPages = buildPaperPages(master);
   const paperToc = buildPaperToc(master);
-  const searchIndex = buildSearchIndex(master, publications);
   const publicationsJsonLd = buildPublicationsJsonLd(master, publications);
   const paperSeo = buildPaperSeo(master, publications);
   const sitemap = buildSitemap(master);
@@ -535,7 +490,6 @@ function main() {
     [OUTPUT_FILES.publications, jsonText(publications)],
     [OUTPUT_FILES.paperPages, jsonText(paperPages)],
     [OUTPUT_FILES.paperToc, jsonText(paperToc)],
-    [OUTPUT_FILES.searchIndex, jsonText(searchIndex)],
     [OUTPUT_FILES.publicationsJsonLd, jsonText(publicationsJsonLd)],
     [OUTPUT_FILES.paperSeo, jsonText(paperSeo)],
     [OUTPUT_FILES.sitemap, sitemap],

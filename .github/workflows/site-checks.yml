@@ -55,9 +55,6 @@ jobs:
       - name: Validate generated TOC cache JSON
         run: python3 -m json.tool data/paper-toc.generated.json > /dev/null
 
-      - name: Validate search index JSON
-        run: python3 -m json.tool data/search-index.generated.json > /dev/null
-
       - name: Validate generated publications JSON-LD
         run: python3 -m json.tool data/publications-jsonld.generated.json > /dev/null
 
