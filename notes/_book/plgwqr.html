@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 8 部分线性地理加权分位回归模型 | 统计方法笔记</title>
   <meta name="description" content="第 8 部分线性地理加权分位回归模型 | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
-  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 8 部分线性地理加权分位回归模型 | 统计方法笔记" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-22" />
+<meta name="date" content="2026-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -444,7 +444,7 @@ x_i^\top \hat\beta(u_i; \gamma)\bigr),
 <span id="cb30-32"><a href="plgwqr.html#cb30-32" tabindex="-1"></a>b_rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((fit<span class="sc">$</span>beta_hat[<span class="dv">2</span>, ] <span class="sc">-</span> b_true)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb30-33"><a href="plgwqr.html#cb30-33" tabindex="-1"></a>c_rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((<span class="fu">mean</span>(b_true) <span class="sc">-</span> b_true)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb30-34"><a href="plgwqr.html#cb30-34" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;gamma hat:&quot;</span>, <span class="fu">round</span>(fit<span class="sc">$</span>gamma, <span class="dv">3</span>), <span class="st">&quot; (true&quot;</span>, g_true, <span class="st">&quot;)</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## gamma hat: 1.491  (true 1.5 )</code></pre>
+<pre><code>## gamma hat: 1.49  (true 1.5 )</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="plgwqr.html#cb32-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;beta(u) RMSE:&quot;</span>, <span class="fu">round</span>(b_rmse, <span class="dv">3</span>),</span>
 <span id="cb32-2"><a href="plgwqr.html#cb32-2" tabindex="-1"></a>    <span class="st">&quot; | constant-fit RMSE:&quot;</span>, <span class="fu">round</span>(c_rmse, <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## beta(u) RMSE: 0.535  | constant-fit RMSE: 1.411</code></pre>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记</title>
   <meta name="description" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记：分位回归、鞍点逼近与时空地理加权回归方向的数学工具、推导与数值实现。" />
-  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
   <meta property="og:title" content="第 5 分层数据鲁棒回归：复合分位与 EM | 统计方法笔记" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="侯健" />
 
 
-<meta name="date" content="2026-08-22" />
+<meta name="date" content="2026-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -507,7 +507,7 @@ v_j^* = \sigma^{-2} T^* X_j^\top\bigl(Y_j - X_j Z_j \gamma\bigr).
 <span id="cb21-30"><a href="hcqr.html#cb21-30" tabindex="-1"></a>rmse_mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">light_tail =</span> res_light<span class="sc">$</span>rmse, <span class="at">heavy_tail =</span> res_heavy<span class="sc">$</span>rmse)</span>
 <span id="cb21-31"><a href="hcqr.html#cb21-31" tabindex="-1"></a><span class="fu">round</span>(rmse_mat, <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##     light_tail heavy_tail
-## CQR     0.0852     0.1670
+## CQR     0.0853     0.1677
 ## LAD     0.1231     0.1580
 ## OLS     0.0944     0.1621</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hcqr-plot"></span>
