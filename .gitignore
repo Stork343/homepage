@@ -1,17 +1,25 @@
 # macOS Finder metadata
 .DS_Store
 
-# Local downloaded reference CSS assets
-*~product.css
-
 # Node / test artifacts
 node_modules/
 playwright-report/
 test-results/
 release-artifacts/
 
-# OneDrive multi-device sync artifacts
-*MacBook*
+# 体检 A-5：此处原有两条无路径限定的宽泛规则，现已删除，理由如下。
+#
+#   *MacBook*            —— 本意是忽略 OneDrive 多设备同步冲突副本
+#                           （形如 data/publications-HouJian的MacBook Pro.json）。
+#                           但它没有路径限定，而 macOS 文件系统大小写不敏感，
+#                           实测会静默忽略 docs/macbook-setup.md、MACBOOK.md、
+#                           notes/MacBook-notes.Rmd、scripts/ops/macbook-ci.sh
+#                           这类完全正常的文件名 —— 静默忽略正是地雷本身。
+#   *~product.css        —— Windows 时代「本地下载的参考 CSS」，实测当前匹配 0 个文件。
+#
+# 仓库已迁出 OneDrive（~/dev/homepage），同步冲突副本无从产生；即便真的出现，
+# 现在也会以「未跟踪文件」的形式在 git status 里可见，并被 validate-site.js 的
+# data/ 目录白名单判为失败，而不是被悄悄藏起来。
 
 # bookdown render intermediates
 notes/_bookdown_files/

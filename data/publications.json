@@ -271,10 +271,10 @@
       "article": null
     },
     "image": {
-      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg?v=aoas-cover",
-      "webp": null,
-      "width": 223,
-      "height": 330,
+      "src": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.jpg",
+      "webp": "./papers/2026/qvsd-spatiotemporal-extremes/qvsd-spatiotemporal-extremes-cover.webp",
+      "width": 400,
+      "height": 521,
       "alt": {
         "zh": "Annals of Applied Statistics 期刊封面",
         "en": "Annals of Applied Statistics journal cover"

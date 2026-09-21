@@ -44,6 +44,84 @@ function resolveCandidatePath(pageRelPath, candidate) {
   return normalizeRelPath(joined);
 }
 
+// 体检 A-6：qvsd 封面曾出现 image.width/height 声明 223x330、而磁盘上的图实际是
+// 400x521（宽高比 0.676 vs 0.768），足以造成布局抖动，而且此前只能靠人工发现。
+// 现按纯 JS 解析 PNG / JPEG / WebP 头部拿真实尺寸，把「声明尺寸必须等于真实尺寸」
+// 与「webp 必须与主图同尺寸（否则 <picture> 回退会跳变）」变成门禁。
+// 不依赖 sips / ImageMagick 等外部工具，因此在 ubuntu CI 上与 macOS 本地表现一致。
+function readImageSize(filePath) {
+  const buf = fs.readFileSync(filePath);
+
+  // PNG：8 字节签名，IHDR 的宽/高在偏移 16 / 20（大端 uint32）
+  if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+  }
+
+  // WebP：RIFF....WEBP + 三种 chunk 变体
+  if (
+    buf.length > 30 &&
+    buf.toString("ascii", 0, 4) === "RIFF" &&
+    buf.toString("ascii", 8, 12) === "WEBP"
+  ) {
+    const fourcc = buf.toString("ascii", 12, 16);
+    if (fourcc === "VP8X") {
+      // 扩展格式：画布宽高是 24 位小端，存的是 width-1 / height-1
+      return {
+        width: 1 + (buf[24] | (buf[25] << 8) | (buf[26] << 16)),
+        height: 1 + (buf[27] | (buf[28] << 8) | (buf[29] << 16))
+      };
+    }
+    if (fourcc === "VP8 ") {
+      // 有损：起始码 9d 01 2a 之后是 14 位小端的宽与高
+      const start = buf.indexOf(Buffer.from([0x9d, 0x01, 0x2a]), 20);
+      if (start > 0 && start + 7 <= buf.length) {
+        return {
+          width: buf.readUInt16LE(start + 3) & 0x3fff,
+          height: buf.readUInt16LE(start + 5) & 0x3fff
+        };
+      }
+      return null;
+    }
+    if (fourcc === "VP8L") {
+      // 无损：偏移 20 是签名 0x2f，随后 32 位里低 14 位是 width-1、再 14 位是 height-1
+      if (buf[20] !== 0x2f) return null;
+      const bits = buf.readUInt32LE(21);
+      return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
+    }
+    return null;
+  }
+
+  // JPEG：扫描 SOFn 段（0xC0–0xCF，排除 0xC4 DHT / 0xC8 JPG / 0xCC DAC）
+  if (buf.length > 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+    let i = 2;
+    while (i + 9 < buf.length) {
+      if (buf[i] !== 0xff) {
+        i += 1;
+        continue;
+      }
+      const marker = buf[i + 1];
+      if (marker === 0xff) {
+        i += 1;
+        continue;
+      }
+      // 无长度的独立标记
+      if (marker === 0x01 || marker === 0xd8 || (marker >= 0xd0 && marker <= 0xd9)) {
+        i += 2;
+        continue;
+      }
+      const segLen = buf.readUInt16BE(i + 2);
+      if (segLen < 2) return null;
+      if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+        return { height: buf.readUInt16BE(i + 5), width: buf.readUInt16BE(i + 7) };
+      }
+      i += 2 + segLen;
+    }
+    return null;
+  }
+
+  return null;
+}
+
 function run() {
   if (!fs.existsSync(MASTER_JSON)) {
     fail(`Missing file: ${MASTER_JSON}`);
@@ -351,8 +429,91 @@ function run() {
     fail("Missing papers/shared/paper-reader.js");
   }
 
+  // 体检 A-6：封面图的声明尺寸必须等于磁盘上图片的真实尺寸。
+  // qvsd 曾声明 223x330 而实际是 400x521，宽高比不同会造成布局抖动。
+  // 同时要求 webp 与主图同尺寸，否则 <picture> 在回退时会跳变。
+  let imageSizeChecked = 0;
+  master.publications.forEach((pub) => {
+    if (!pub || !pub.image) return;
+    const id = pub.id || "(unknown id)";
+    ["src", "webp"].forEach((key) => {
+      const raw = pub.image[key];
+      if (typeof raw !== "string" || !raw.trim() || isHttpUrl(raw)) return;
+      const rel = normalizeRelPath(raw.split("?")[0]);
+      const abs = path.join(ROOT, rel);
+      if (!fs.existsSync(abs)) {
+        fail(`publication ${id}: image.${key} points at missing file ${rel}`);
+        return;
+      }
+      let size = null;
+      try {
+        size = readImageSize(abs);
+      } catch (err) {
+        fail(`publication ${id}: cannot read ${rel} (${err.message})`);
+        return;
+      }
+      if (!size || !Number.isFinite(size.width) || !Number.isFinite(size.height)) {
+        fail(`publication ${id}: cannot parse real dimensions of ${rel} (unsupported format?)`);
+        return;
+      }
+      imageSizeChecked += 1;
+      const declaredW = Number(pub.image.width);
+      const declaredH = Number(pub.image.height);
+      if (key === "src") {
+        if (declaredW !== size.width || declaredH !== size.height) {
+          fail(
+            `publication ${id}: image declares ${declaredW}x${declaredH} but ${rel} is really ` +
+              `${size.width}x${size.height} (aspect ratio mismatch causes layout shift)`
+          );
+        }
+      } else if (Number.isFinite(declaredW) && (size.width !== declaredW || size.height !== declaredH)) {
+        fail(
+          `publication ${id}: webp ${rel} is ${size.width}x${size.height} but the primary image ` +
+            `declares ${declaredW}x${declaredH} (<picture> fallback would jump)`
+        );
+      }
+    });
+  });
+
+  // 体检 A-5：data/ 目录白名单。OneDrive 冲突副本（*-HouJian的MacBook Pro.json）曾堆在
+  // data/ 下共 4 个 100,935 B。当前所有脚本对 data/ 都走显式路径，所以尚未污染构建，
+  // 但 .gitignore 的忽略规则会把它藏起来 —— 静默忽略正是地雷本身。
+  // 现改为：data/ 下任何计划外文件都判失败，新增生成物时必须显式登记到这里。
+  const DATA_ALLOWLIST = new Set([
+    "site-master.json",
+    "publications.json",
+    "paper-pages.json",
+    "paper-toc.generated.json",
+    "search-index.generated.json",
+    "publications-jsonld.generated.json",
+    "paper-seo.generated.json",
+    "site-updated.generated.json",
+    "metadata-cache.generated.json"
+  ]);
+  const dataDir = path.join(ROOT, "data");
+  if (fs.existsSync(dataDir)) {
+    fs.readdirSync(dataDir)
+      .filter((entry) => entry !== ".DS_Store")
+      .forEach((entry) => {
+        const abs = path.join(dataDir, entry);
+        if (fs.statSync(abs).isDirectory()) {
+          fail(`data/ must not contain subdirectory: ${entry}`);
+          return;
+        }
+        if (!DATA_ALLOWLIST.has(entry)) {
+          fail(
+            `data/ contains unplanned file "${entry}" (OneDrive conflict copy or stray output?). ` +
+              `Delete it, or register it in validate-site.js DATA_ALLOWLIST if it is a new generated artifact.`
+          );
+        }
+      });
+  }
+
   if (!process.exitCode) {
-    ok("Publications data, paper page config, and reader capabilities are valid.");
+    ok(
+      `Publications data, paper page config, and reader capabilities are valid ` +
+        `(${imageSizeChecked} cover image dimensions verified).`
+    );
   }
 }
 
