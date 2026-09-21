@@ -85,6 +85,17 @@
       publications_venue_all: "全部期刊/来源",
       publications_keyword_all: "全部关键词",
       publications_status_all: "全部状态",
+      // 体检 D-9 / 修复路线图第 20 条：4 个筛选 select 原先只有英文 aria-label
+      // （"Year filter" 等），中文模式下屏幕阅读器仍念英文。补专用键，并接到
+      // index.html 的 data-i18n-aria-label。
+      // 刻意不复用上面的 *_all 键 —— 那是下拉里「全部年份」这个**选项**的文案，
+      // 而这里需要的是**控件本身**的名字，两者语义不同，混用会让读屏用户
+      // 听到「全部年份 组合框 全部年份」这类重复。
+      publications_year_filter: "年份筛选",
+      publications_venue_filter: "期刊/来源筛选",
+      publications_keyword_filter: "关键词筛选",
+      publications_status_filter: "状态筛选",
+      language_switch_label: "语言切换",
       publications_clear: "清空",
       publications_result_count: "显示 {shown} / {total} 篇",
       publications_empty: "没有匹配的成果，请调整筛选条件。",
@@ -185,6 +196,12 @@
       publications_venue_all: "All Venues",
       publications_keyword_all: "All Keywords",
       publications_status_all: "All Status",
+      // See the zh block above for why these are separate keys rather than reusing *_all.
+      publications_year_filter: "Year filter",
+      publications_venue_filter: "Venue filter",
+      publications_keyword_filter: "Keyword filter",
+      publications_status_filter: "Status filter",
+      language_switch_label: "Language switch",
       publications_clear: "Clear",
       publications_result_count: "Showing {shown} / {total} items",
       publications_empty: "No matching publications. Try a different filter.",
@@ -410,7 +427,13 @@
     });
 
     document.querySelectorAll(".lang-btn").forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.lang === state.lang);
+      const isActive = btn.dataset.lang === state.lang;
+      btn.classList.toggle("active", isActive);
+      // 体检 D-9 / 修复路线图第 20 条：语言按钮原先只用 .active 这个纯视觉 class
+      // 表达「当前语言」，读屏用户无从得知哪个是选中态。补 aria-pressed 与之同步。
+      // 刻意放在同一个 forEach 里、共用同一个 isActive，避免出现两个真相源
+      // （class 与 aria 各算各的、哪天走偏了也没人发现）。
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
     updateThemeToggle();
     renderPublicationFilterOptions();
@@ -1568,6 +1591,24 @@
       window.clearTimeout(searchDebounceTimer);
       searchDebounceTimer = window.setTimeout(applyFilters, 120);
     });
+
+    // 体检 H-5 缺陷 1 / 修复路线图第 20 条：<form id="pub-search-form"> 原先没有
+    // submit 拦截（本文件 grep "submit" 曾零命中），于是在检索框里按 Enter 会触发
+    // 浏览器的**隐式 GET 提交** —— 整页刷新到 index.html?#about，检索词与全部筛选
+    // 状态一并丢失。这是真实访客很容易踩到的：检索本来就是 input 事件实时过滤的，
+    // 按 Enter 只应「立即生效」，绝不该导航。
+    // 用 input.form 取宿主表单，而不是再 getElementById 一次 —— 避免同一个元素
+    // 有两处引用、哪天 DOM 结构调整就走偏。
+    // 顺带清掉待触发的 debounce 定时器：Enter 表达的是「我现在就要结果」，
+    // 不该再等那 120 ms，也不该让定时器随后再跑一次造成重复渲染。
+    const searchForm = input.form;
+    if (searchForm) {
+      searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        window.clearTimeout(searchDebounceTimer);
+        applyFilters();
+      });
+    }
 
     yearSelect.addEventListener("change", applyFilters);
     venueSelect.addEventListener("change", applyFilters);

@@ -82,9 +82,9 @@
                     <li><a href="#contact" class="nav-link" data-i18n="nav_contact">联系方式</a></li>
                 </ul>
                 <div class="nav-tools">
-                    <div class="lang-switch" aria-label="Language switch">
-                        <button type="button" class="lang-btn active" data-lang="zh">中</button>
-                        <button type="button" class="lang-btn" data-lang="en">EN</button>
+                    <div class="lang-switch" role="group" data-i18n-aria-label="language_switch_label" aria-label="Language switch">
+                        <button type="button" class="lang-btn active" data-lang="zh" aria-pressed="true">中</button>
+                        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
                     </div>
                     <button type="button" class="theme-btn" id="theme-toggle" aria-label="切换到夜间" aria-pressed="false">☾ 夜间</button>
                     <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="education-section">
-                        <h3 class="education-title" data-i18n="education_title">求学经历</h3>
+                        <h2 class="education-title" data-i18n="education_title">求学经历</h2>
                         <ul class="education-list">
                             <li class="education-item">
                                 <span class="education-period">2015.9–2019.6</span>
@@ -219,10 +219,10 @@
                 <form class="pub-search" id="pub-search-form" role="search" aria-label="Search publications">
                     <label class="sr-only" for="pub-search-input" data-i18n="publications_search_label">检索成果</label>
                     <input id="pub-search-input" type="search" data-i18n-placeholder="publications_search_placeholder" data-i18n-aria-label="publications_search_label" placeholder="按标题、作者、期刊或关键词检索…">
-                    <select id="pub-year-filter" aria-label="Year filter"></select>
-                    <select id="pub-venue-filter" aria-label="Venue filter"></select>
-                    <select id="pub-keyword-filter" aria-label="Keyword filter"></select>
-                    <select id="pub-status-filter" aria-label="Status filter"></select>
+                    <select id="pub-year-filter" data-i18n-aria-label="publications_year_filter" aria-label="Year filter"></select>
+                    <select id="pub-venue-filter" data-i18n-aria-label="publications_venue_filter" aria-label="Venue filter"></select>
+                    <select id="pub-keyword-filter" data-i18n-aria-label="publications_keyword_filter" aria-label="Keyword filter"></select>
+                    <select id="pub-status-filter" data-i18n-aria-label="publications_status_filter" aria-label="Status filter"></select>
                     <button id="pub-clear-btn" type="button" class="pub-clear-btn" data-i18n="publications_clear">清空</button>
                 </form>
                 <div class="citation-export" id="citation-export" aria-label="Citation export center">
@@ -319,7 +319,7 @@
             <div class="footer-bottom">
                 <p class="footer-text" data-i18n="footer_text">© 2026 HOU Jian.</p>
                 <div class="footer-meta">
-                    <div class="footer-stats" data-i18n-aria-label="footer_stats_label" aria-label="访问量统计">
+                    <div class="footer-stats" role="group" data-i18n-aria-label="footer_stats_label" aria-label="访问量统计">
                         <span class="footer-stat" id="busuanzi_container_site_pv">
                             <span data-i18n="footer_stat_pv">访问量</span> <strong id="busuanzi_value_site_pv">--</strong>
                         </span>
@@ -332,6 +332,6 @@
 
     <div id="copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
 
-    <script src="scripts/main.js?v=fb4248cb1a"></script>
+    <script src="scripts/main.js?v=396942e3e9"></script>
 </body>
 </html>

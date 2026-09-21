@@ -3,10 +3,12 @@
 //   · "APA/GB-T 引用格式切换（main.js:1078-1082，CHANGELOG 声称的新功能）零覆盖"
 //     （RIS/EndNote/BibTeX 批量导出已由 regression.spec.js 的导出中心用例覆盖，此处不重复）
 //
-// ⚠ 已知产品缺陷（本次任务只测不改，详见最终报告）：
-//   index.html:219 的 <form id="pub-search-form"> 没有 submit 拦截（main.js 全文 grep "submit" 0 命中），
-//   在检索框按回车会触发 HTML 隐式提交 → GET 整页刷新且 ?q= 丢失（实测 URL 从 ?q=quantile 变成 ?）。
-//   因此本文件全程不向检索框发送 Enter —— 该行为修好之前（路线图第 20 条）不可断言。
+// 历史记录（该缺陷已修，断言见本文件末尾的 Enter 用例）：
+//   index.html 的 <form id="pub-search-form"> 原先没有 submit 拦截（main.js 全文 grep
+//   "submit" 曾 0 命中），在检索框按回车会触发 HTML 隐式提交 → GET 整页刷新且 ?q= 丢失
+//   （实测 URL 从 ?q=quantile 变成 ?）。本文件因此一度全程不向检索框发送 Enter，
+//   等于这条最容易被真实访客触发的路径**零覆盖**。
+//   修复落点：main.js 的 initPublicationSearch 内 searchForm 的 submit 拦截。
 const { test, expect } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
@@ -145,4 +147,63 @@ test('Per-card citation format select copies distinct APA / GB-T / default varia
   );
   expect(def, 'default 与 APA 必须可区分').not.toBe(apa);
   expect(def, 'default 与 GB/T 必须可区分').not.toBe(gbt);
+});
+
+// 体检 H-5 缺陷 1 / 修复路线图第 20 条。
+//
+// 断言方式刻意不用「按 Enter 后 URL 是否变化」：本站有 ?q= 深链回填
+// （main.js 会用 URL 上的 q 预填输入框并重跑过滤），所以即便真的发生了整页 reload，
+// 检索词与结果集也会被恢复成一模一样，URL 前后相同 —— 那样断言必然假绿。
+// 这里用两把互相独立的锁：
+//   1. 文档级存活标记：按 Enter 前在 window 上挂一个对象，reload 后必然消失；
+//   2. load 事件计数：文档级加载会让它 +1，same-document 的 hash/pushState 不会。
+// 对照组已实测有效：临时摘掉 main.js 里的 submit 拦截后，存活标记消失、load 由 1 变 2、
+// URL 退化为 /?#research、检索词清空 —— 精确复现了修复前的症状。
+test('Enter in the search box must not trigger an implicit form submission', async ({ page }) => {
+  let documentLoads = 0;
+  page.on('load', () => {
+    documentLoads += 1;
+  });
+
+  await waitForPublications(page);
+
+  await page.click('#pub-search-input');
+  await page.fill('#pub-search-input', SEARCH_TERM);
+  // 等 debounce（120 ms）落地，确保按 Enter 前 URL 与结果集已是过滤后的状态
+  await expect(page).toHaveURL(new RegExp(`[?&]q=${SEARCH_TERM}`), { timeout: 10000 });
+  const filteredCount = await cardCount(page);
+  expect(
+    filteredCount,
+    `前置条件：检索 "${SEARCH_TERM}" 应已收窄结果集`
+  ).toBeGreaterThan(0);
+
+  const marker = `alive-${Date.now()}`;
+  await page.evaluate((value) => {
+    window.__SEARCH_ENTER_ALIVE__ = value;
+  }, marker);
+  const loadsBeforeEnter = documentLoads;
+
+  await page.press('#pub-search-input', 'Enter');
+  // 给足时间：若真发生隐式 GET 提交，此时早已完成文档级加载
+  await page.waitForTimeout(1500);
+
+  expect(
+    await page.evaluate(() => window.__SEARCH_ENTER_ALIVE__ || null),
+    '按 Enter 后文档级存活标记应仍在 —— 消失即说明发生了整页 reload（隐式表单提交）'
+  ).toBe(marker);
+
+  expect(
+    documentLoads,
+    `按 Enter 不应产生新的文档级 load（Enter 前 ${loadsBeforeEnter} 次，之后 ${documentLoads} 次）`
+  ).toBe(loadsBeforeEnter);
+
+  await expect(page.locator('#pub-search-input')).toHaveValue(
+    SEARCH_TERM,
+    // 这一条单独看并不充分（深链回填会伪装成通过），但与上面两条合起来就能钉死行为
+  );
+  await expect(page).toHaveURL(new RegExp(`[?&]q=${SEARCH_TERM}`));
+  expect(
+    await cardCount(page),
+    '按 Enter 后结果集应保持不变（Enter 只应立即生效，不该导航或重置）'
+  ).toBe(filteredCount);
 });
