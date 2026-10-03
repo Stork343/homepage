@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # 这三个脚本只依赖 node 内置模块（fs/path/crypto），无需 npm ci
       - name: Generated data in sync with SSOT
@@ -61,7 +61,7 @@ jobs:
     timeout-minutes: 10
     needs: validate
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Collect site artifacts (whitelist only)
         run: |
