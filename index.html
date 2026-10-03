@@ -41,7 +41,19 @@
     <link rel="robots" href="robots.txt">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8E%93</text></svg>">
     <script defer data-domain="stork343.github.io" src="https://plausible.io/js/script.js"></script>
-    <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script>
+      // 访问量计数器改为 window load 之后注入。busuanzi 的 JSONP 回调脚本是在
+      // defer 阶段同步插入文档的，会推迟 window load；而其数据端点间歇性挂起
+      // （2026-09-28 实测：8 次首屏加载有 6 次 load 事件 >15s 不触发，本地 UI
+      // 回归因此结构性超时）。后置注入后，计数器再慢也只影响 footer 的占位数字
+      // （保持 "--"），不再拖住浏览器的加载指示器与依赖 load 的自动化测试。
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+        document.body.appendChild(s);
+      });
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

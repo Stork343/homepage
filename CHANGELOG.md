@@ -56,6 +56,7 @@ All notable changes to this project will be documented in this file.
 - The `ui-regression` CI job runs only `tests/ui/regression.spec.js`, giving a 1:1 split with `a11y-check` and `visual-regression` instead of re-running the accessibility spec and launching a browser for tests that skip on Linux.
 
 ### Fixed
+- The busuanzi pageview script no longer blocks the page load: its JSONP callback script is inserted during the defer phase and delays `window load`, and the data endpoint hangs intermittently (measured 2026-09-28: 6 of 8 first loads never fired `load` within 15 s, which structurally timed out `page.goto`/`page.reload` in the UI suite). `index.html` now injects the counter only after `window load`, so a slow counter leaves the footer placeholder at `--` instead of hijacking the browser loading indicator for every visitor.
 - Visual regression tests now skip on non-macOS platforms until Linux baselines are regenerated (current baselines are macOS-only).
 - `papers/README.md` maintenance instructions now point to `data/site-master.json`.
 - OneDrive sync artifacts are now caught loudly instead of silently ignored: the unanchored `*MacBook*` and vestigial `*~product.css` rules were removed from `.gitignore` (the former also swallowed legitimate names such as `docs/macbook-setup.md`, `MACBOOK.md` and `notes/MacBook-notes.Rmd` on a case-insensitive filesystem), and `validate-site.js` now fails on any unplanned file under `data/`.
