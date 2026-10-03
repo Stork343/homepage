@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-21T02:13:10.108Z",
+  "updated": "2026-10-03T15:18:52.089Z",
   "source": "site-master.json",
   "entries": [
     {
       "id": "mallows-llm-ranking",
-      "checked_at": "2026-09-21T02:12:59.526Z",
+      "checked_at": "2026-10-03T15:18:33.780Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -15,7 +15,7 @@
     },
     {
       "id": "jpdi-mixed-qr",
-      "checked_at": "2026-09-21T02:13:01.210Z",
+      "checked_at": "2026-10-03T15:18:36.268Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "qapsm-icu-bp",
-      "checked_at": "2026-09-21T02:13:04.112Z",
+      "checked_at": "2026-10-03T15:18:39.550Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -37,7 +37,7 @@
     },
     {
       "id": "salcdi-scarce-outcomes",
-      "checked_at": "2026-09-21T02:13:05.083Z",
+      "checked_at": "2026-10-03T15:18:42.495Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -48,7 +48,7 @@
     },
     {
       "id": "qtr-oc",
-      "checked_at": "2026-09-21T02:13:05.275Z",
+      "checked_at": "2026-10-03T15:18:42.983Z",
       "doi": "10.1002/sim.70732",
       "doi_url": "https://doi.org/10.1002/sim.70732",
       "arxiv_id": "",
@@ -59,7 +59,7 @@
     },
     {
       "id": "qvsd-spatiotemporal-extremes",
-      "checked_at": "2026-09-21T02:13:06.718Z",
+      "checked_at": "2026-10-03T15:18:46.029Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "2608.14294",
@@ -70,7 +70,7 @@
     },
     {
       "id": "tplaqr",
-      "checked_at": "2026-09-21T02:13:06.780Z",
+      "checked_at": "2026-10-03T15:18:46.392Z",
       "doi": "10.1016/j.jmva.2026.105707",
       "doi_url": "https://doi.org/10.1016/j.jmva.2026.105707",
       "arxiv_id": "",
@@ -81,7 +81,7 @@
     },
     {
       "id": "toms-sssvcqr",
-      "checked_at": "2026-09-21T02:13:07.957Z",
+      "checked_at": "2026-10-03T15:18:47.574Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
@@ -92,7 +92,7 @@
     },
     {
       "id": "svcqr",
-      "checked_at": "2026-09-21T02:13:08.021Z",
+      "checked_at": "2026-10-03T15:18:47.972Z",
       "doi": "10.1016/j.spasta.2026.100983",
       "doi_url": "https://doi.org/10.1016/j.spasta.2026.100983",
       "arxiv_id": "2511.18106",
@@ -103,7 +103,7 @@
     },
     {
       "id": "hcqr",
-      "checked_at": "2026-09-21T02:13:08.086Z",
+      "checked_at": "2026-10-03T15:18:48.303Z",
       "doi": "10.1016/j.jspi.2026.106390",
       "doi_url": "https://doi.org/10.1016/j.jspi.2026.106390",
       "arxiv_id": "",
@@ -114,7 +114,7 @@
     },
     {
       "id": "snqesa",
-      "checked_at": "2026-09-21T02:13:08.149Z",
+      "checked_at": "2026-10-03T15:18:48.687Z",
       "doi": "10.1007/s00362-026-01882-3",
       "doi_url": "https://doi.org/10.1007/s00362-026-01882-3",
       "arxiv_id": "2510.24352",
@@ -125,7 +125,7 @@
     },
     {
       "id": "plgwqr",
-      "checked_at": "2026-09-21T02:13:08.215Z",
+      "checked_at": "2026-10-03T15:18:49.099Z",
       "doi": "10.20142/j.cnki.amas.202600069",
       "doi_url": "https://doi.org/10.20142/j.cnki.amas.202600069",
       "arxiv_id": "",
@@ -136,7 +136,7 @@
     },
     {
       "id": "poisson-rr",
-      "checked_at": "2026-09-21T02:13:08.276Z",
+      "checked_at": "2026-10-03T15:18:49.419Z",
       "doi": "10.20207/j.cnki.1007-3116.20250703.001",
       "doi_url": "https://doi.org/10.20207/j.cnki.1007-3116.20250703.001",
       "arxiv_id": "",
@@ -147,7 +147,7 @@
     },
     {
       "id": "gtwr-housing",
-      "checked_at": "2026-09-21T02:13:08.341Z",
+      "checked_at": "2026-10-03T15:18:49.743Z",
       "doi": "10.13860/j.cnki.sltj.20210722-025",
       "doi_url": "https://doi.org/10.13860/j.cnki.sltj.20210722-025",
       "arxiv_id": "",
@@ -158,7 +158,7 @@
     },
     {
       "id": "bgtwr-housing",
-      "checked_at": "2026-09-21T02:13:08.403Z",
+      "checked_at": "2026-10-03T15:18:50.061Z",
       "doi": "10.16722/j.issn.1674-537x.2022.10.001",
       "doi_url": "https://doi.org/10.16722/j.issn.1674-537x.2022.10.001",
       "arxiv_id": "",
@@ -169,7 +169,7 @@
     },
     {
       "id": "mgtwr-variable-selection",
-      "checked_at": "2026-09-21T02:13:10.107Z",
+      "checked_at": "2026-10-03T15:18:52.089Z",
       "doi": "",
       "doi_url": "",
       "arxiv_id": "",
