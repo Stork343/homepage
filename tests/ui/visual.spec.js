@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { test, expect } = require("@playwright/test");
+const { test, expect } = require('./fixtures');
 
 test.use({
   viewport: { width: 1440, height: 1024 }

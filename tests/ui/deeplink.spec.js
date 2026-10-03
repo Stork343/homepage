@@ -14,7 +14,7 @@
 // （实测 TOC 点击后 current 页可在加载未稳时跳变）。因此所有落页断言都遵循
 // 「先 poll 到位 → 再等两拍页码不变（stabilize）→ 最后用单次 evaluate 原子快照断言」的顺序，
 // 避免对加载中间态采样。
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('./fixtures');
 const fs = require('fs');
 const path = require('path');
 

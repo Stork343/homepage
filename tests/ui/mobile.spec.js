@@ -8,7 +8,7 @@
 // Playwright 的 hit-test 因此误判汉堡/主题按钮被 .nav-content 覆盖而无法真实点击。
 // 这里改用纯窄视口 412×915（不启用 isMobile）：同样命中 max-width:768px 的移动端 CSS
 // （enhanced-main.css:48-49/293 的汉堡与抽屉规则全部生效），且 hit-test 正常（已实测）。
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('./fixtures');
 const AxeBuilder = require('@axe-core/playwright').default;
 
 test.use({ viewport: { width: 412, height: 915 } });

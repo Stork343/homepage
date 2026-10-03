@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Shared Playwright fixture `tests/ui/fixtures.js` used by all eight UI specs: blocks the busuanzi counter and plausible analytics endpoints at the context level so tests never depend on third-party availability (Google Fonts and the jsdelivr PDF.js viewer intentionally stay reachable).
 - One-click citation format switching (default / APA / GB/T 7714) on publication cards.
 - Footer pageview counter via busuanzi; the unreliable unique-visitor metric was removed.
 - Automatic publication PDF guard: unpublished entries are stripped of PDF/full-text links, and the validator rejects any unreferenced PDF in `papers/`.

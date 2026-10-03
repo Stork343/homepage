@@ -11,7 +11,7 @@
 //   TypeError: findController.executeCommand is not a function，findStatus 永远 "0 / 0"。
 //   检索的"能搜出匹配"行为当前不可测（断言它必然红），本文件只覆盖检索条自身
 //   真实可达的行为：打开/聚焦/关闭。缺陷修复后应再补匹配计数断言。
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('./fixtures');
 
 const HCQR = '/papers/2025/hcqr/hcqr.html';
 

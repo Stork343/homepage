@@ -9,7 +9,7 @@
 //   （实测 URL 从 ?q=quantile 变成 ?）。本文件因此一度全程不向检索框发送 Enter，
 //   等于这条最容易被真实访客触发的路径**零覆盖**。
 //   修复落点：main.js 的 initPublicationSearch 内 searchForm 的 submit 拦截。
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('./fixtures');
 const fs = require('fs');
 const path = require('path');
 

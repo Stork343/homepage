@@ -7,7 +7,7 @@
 //   · D-9 覆盖缺口："暗色模式无 axe"（本文件暗色轮覆盖全部论文页；首页暗色在 accessibility.spec.js）
 //
 // 路径与清单不硬编码：新增第 7 个论文页进入 SSOT 后，本文件自动把它纳入全部三轮断言。
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('./fixtures');
 const AxeBuilder = require('@axe-core/playwright').default;
 const fs = require('fs');
 const path = require('path');
