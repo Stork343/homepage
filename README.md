@@ -53,8 +53,9 @@ papers render a degraded "no local fulltext" state that points to the official c
 - `tests/ui/regression.spec.js`: Playwright UI regression tests (reader chrome, degraded pages, exports, language rules, dark mode).
 - `tests/ui/accessibility.spec.js`: Playwright + axe accessibility tests.
 - `tests/ui/visual.spec.js`: Playwright screenshot baseline tests; darwin-only baselines (viewport-sized homepage baseline plus navbar and reader topbar/sidebar).
+- `tests/ui/fixtures.js`: shared Playwright fixture that blocks third-party analytics/counter endpoints (`busuanzi`, `plausible`) at the context level, so UI tests never depend on external network availability; Google Fonts and the jsdelivr-hosted PDF.js viewer stay reachable (visual baselines were recorded with real fonts, reader pages need the viewer).
 - `notes/`: bookdown notes sub-site; the rendered `notes/_book/` output is committed and served.
-- `.github/workflows/`: `site-checks.yml` (six gate jobs on push/PR), `auto-sync-generated.yml`, `build-bookdown-notes.yml`, `release-automation.yml`, `deploy-pages.yml` (whitelisted Pages deployment).
+- `.github/workflows/`: `site-checks.yml` (six gate jobs on push/PR), `auto-sync-generated.yml`, `build-bookdown-notes.yml`, `release-automation.yml`, `deploy-pages.yml` (whitelisted Pages deployment), `pages-source-monitor.yml` (daily black-box probe that the live Pages site still serves only the whitelisted artifact).
 
 ## Local Development
 

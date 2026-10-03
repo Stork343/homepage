@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Daily Pages source monitor workflow (`.github/workflows/pages-source-monitor.yml`): a zero-permission black-box probe of the live site that fails loudly if any out-of-whitelist sentinel file (SSOT, package manifests, notes sources, tests, scripts) becomes publicly reachable again — the failure mode of the Pages source silently reverting to branch deployment — plus a liveness check on the runtime artifacts. Closes the last open item of the 2026-09-25 health check.
 - Shared Playwright fixture `tests/ui/fixtures.js` used by all eight UI specs: blocks the busuanzi counter and plausible analytics endpoints at the context level so tests never depend on third-party availability (Google Fonts and the jsdelivr PDF.js viewer intentionally stay reachable).
 - One-click citation format switching (default / APA / GB/T 7714) on publication cards.
 - Footer pageview counter via busuanzi; the unreliable unique-visitor metric was removed.

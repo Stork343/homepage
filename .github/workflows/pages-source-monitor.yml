@@ -1,0 +1,87 @@
+# Pages 部署源外部监控（修复路线图遗留项，2026-09-25 体检「仍值得考虑」第 1 条）
+#
+# 背景：2026-09-25 已把 Pages 部署源从 branch 切到 GitHub Actions（build_type=workflow），
+# 越界的 50 个文件随之全部下线。但 deploy-pages.yml 里那道「确认部署源」的步骤此后
+# 变成幂等空操作——如果将来有人把 Settings → Pages 的 Source 改回 branch，仓库侧
+# 不会有任何信号，整棵被跟踪的树（含 data/site-master.json 里 hidden 的未发表稿件）
+# 会被静默重新公开。
+#
+# 本工作流不依赖任何仓库权限，直接对生产 URL 做黑盒探测：
+#   · 运行时产物必须 200（站点活着，且白名单部署链路没断）；
+#   · 白名单外的哨兵文件必须 404（部署源一旦回退成整树发布，它们立刻变 200）。
+# 黑盒探测比读 build_type 更可靠：它验证的是「实际公开了什么」，而非「配置写了什么」。
+#
+# 每天跑一次（UTC 01:17，避开整点拥堵）；也支持 workflow_dispatch 手动触发。
+name: Pages Source Monitor
+
+on:
+  schedule:
+    - cron: '17 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-source-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    name: Black-box check that Pages serves only the whitelisted artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Probe the live site
+        run: |
+          set -uo pipefail
+          BASE="https://stork343.github.io/homepage"
+          fail=0
+
+          fetch() {
+            # 两次机会，规避瞬时网络抖动造成的假红
+            local code
+            code="$(curl -sS -o /dev/null -w '%{http_code}' -m 30 "$1")"
+            if [ "$code" = "000" ] || [ "$code" = "502" ] || [ "$code" = "503" ] || [ "$code" = "504" ]; then
+              sleep 5
+              code="$(curl -sS -o /dev/null -w '%{http_code}' -m 30 "$1")"
+            fi
+            printf '%s' "$code"
+          }
+
+          echo "── 运行时产物必须在线（200）──"
+          for p in "" "enhanced-main.css" "scripts/main.js" "data/publications.json" "robots.txt" "sitemap.xml"; do
+            code="$(fetch "$BASE/$p")"
+            printf '  %-26s %s\n' "/$p" "$code"
+            if [ "$code" != "200" ]; then
+              echo "::error::/$p 应为 200 却返回 $code（站点不可用，或白名单部署链路断了）"
+              fail=1
+            fi
+          done
+
+          echo "── 白名单外哨兵文件必须 404（变 200 = 部署源疑似被改回 branch 整树发布）──"
+          for p in \
+            "data/site-master.json" \
+            "package.json" \
+            "package-lock.json" \
+            "README.md" \
+            "CHANGELOG.md" \
+            "notes/index.Rmd" \
+            "notes/book.bib" \
+            "beamer_presentation.tex" \
+            "tests/ui/regression.spec.js" \
+            "scripts/build-site-data.js" \
+            ".gitignore"; do
+            code="$(fetch "$BASE/$p")"
+            printf '  %-34s %s\n' "/$p" "$code"
+            if [ "$code" != "404" ]; then
+              echo "::error::/$p 应为 404 却返回 $code —— Pages 疑似在整树发布！立刻检查 Settings → Pages → Source 是否仍为 GitHub Actions"
+              fail=1
+            fi
+          done
+
+          if [ "$fail" = "1" ]; then
+            echo "::error::监控失败。排查顺序：1) Settings → Pages 的 Source 是否仍是 GitHub Actions；2) 最近一次 Deploy site to Pages 是否成功；3) 上面返回了异常状态码的具体路径。"
+            exit 1
+          fi
+          echo "✓ 线上仍在且仅在发布白名单产物。"
