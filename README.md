@@ -38,7 +38,11 @@ papers render a degraded "no local fulltext" state that points to the official c
 - `papers/*/*/*.html`: paper reader pages (six); `papers/README.md` documents the directory layout and the fulltext policy.
 - `papers/shared/paper-reader.js`: shared reader runtime (PDF.js integration, degraded state, exports).
 - `papers/shared/paper-theme.css`: shared reader theme; single source of truth for the `--tf-*` color variables resolved by the contrast gate.
-- `scripts/serve.js`: cross-platform static dev server with directory-containment and malformed-URL guards; also Playwright's `webServer` (default port 4173).
+- `papers/shared/vendor/pdfjs-4.6.82/`: self-hosted PDF.js runtime (build, viewer, cmaps, standard_fonts) vendored from the official npm tarball — the reader pages load everything same-origin instead of hitting cdn.jsdelivr.net (intermittently unreachable in mainland China). The version-suffixed directory name doubles as the cache-buster on upgrades.
+- `papers/shared/paper-page.css`: the page-layout stylesheet extracted (byte-identical) from the six reader pages' formerly duplicated inline `<style>` blocks.
+- `fonts/`: self-hosted web fonts (Source Serif 4, Source Sans 3, Montserrat as variable woff2 + unicode-range subsets) linked via `fonts/fonts.css` from `index.html` and all six reader pages; replaces the Google Fonts css2 stylesheet/link and the `paper-theme.css` `@import`, both render-blocking and unreachable in mainland China.
+- `deck-assets/`: images used only by `beamer_presentation.tex` (the local LaTeX deck). Tracked but never deployed; `validate-site.js` fails on any web-unreferenced image left under `papers/` so deck assets cannot silently re-enter the deploy surface.
+- `scripts/serve.js`: cross-platform static dev server with directory-containment and malformed-URL guards; also Playwright's `webServer` (default port 4173). Serves correct MIME types for `.mjs`/`.woff2`/`.ttf` (module scripts and workers are rejected by browsers on wrong MIME).
 - `scripts/validate-site.js`: structural/data consistency validation, including the fulltext policy guard.
 - `scripts/acceptance-check.js`: acceptance smoke checks.
 - `scripts/build-site-data.js`: generate/check derived data from `site-master.json`.
@@ -51,11 +55,16 @@ papers render a degraded "no local fulltext" state that points to the official c
 - `scripts/release.sh`: release helper (tag + rollback artifacts + re-run gates).
 - `playwright.config.js`: Playwright configuration (webServer `scripts/serve.js`, port 4173; non-CI runs use the system Google Chrome via `channel: 'chrome'`).
 - `tests/ui/regression.spec.js`: Playwright UI regression tests (reader chrome, degraded pages, exports, language rules, dark mode).
+- `tests/ui/deeplink.spec.js`: reader deep links (`?page=` / `?sec=` / `#sec-`) and homepage anchor navigation with URL state in sync.
+- `tests/ui/mobile.spec.js`: mobile-viewport behaviors (dark-mode inheritance, layout).
+- `tests/ui/paper-pages.spec.js`: per-paper-page contracts over every SSOT entry (theme inheritance, body-scope axe in light and dark).
+- `tests/ui/reader-features.spec.js`: reader feature-level behaviors (find bar, print, fullscreen).
+- `tests/ui/search-citation.spec.js`: site-wide search, filters, and the citation export center.
 - `tests/ui/accessibility.spec.js`: Playwright + axe accessibility tests.
 - `tests/ui/visual.spec.js`: Playwright screenshot baseline tests; darwin-only baselines (viewport-sized homepage baseline plus navbar and reader topbar/sidebar).
-- `tests/ui/fixtures.js`: shared Playwright fixture that blocks third-party analytics/counter endpoints (`busuanzi`, `plausible`) at the context level, so UI tests never depend on external network availability; Google Fonts and the jsdelivr-hosted PDF.js viewer stay reachable (visual baselines were recorded with real fonts, reader pages need the viewer).
+- `tests/ui/fixtures.js`: shared Playwright fixture that aborts every non-localhost request at the context level. With fonts and PDF.js self-hosted the site has zero third-party subresources left (analytics and the pageview counter remain external by design), so the suite is fully hermetic — and any future re-introduction of a CDN dependency fails loudly in tests instead of silently degrading in production.
 - `notes/`: bookdown notes sub-site; the rendered `notes/_book/` output is committed and served.
-- `.github/workflows/`: `site-checks.yml` (six gate jobs on push/PR), `auto-sync-generated.yml`, `build-bookdown-notes.yml`, `release-automation.yml`, `deploy-pages.yml` (whitelisted Pages deployment), `pages-source-monitor.yml` (daily black-box probe that the live Pages site still serves only the whitelisted artifact).
+- `.github/workflows/`: `site-checks.yml` (six gate jobs on push/PR), `auto-sync-generated.yml`, `build-bookdown-notes.yml`, `release-automation.yml`, `deploy-pages.yml` (whitelisted Pages deployment), `pages-source-monitor.yml` (daily black-box probe that the live Pages site still serves only the whitelisted artifact), `dependabot-automerge.yml` (auto-merge for minor/patch dependabot bumps once CI is green; majors stay manual).
 
 ## Local Development
 
