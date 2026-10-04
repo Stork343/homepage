@@ -270,9 +270,13 @@
       const journalText = (journalEntry && journalEntry.text) || "Journal article";
       const journalName = journalText.split(",")[0].trim() || journalText;
       const journalMeta = journalText.replace(/^([^,]+),\s*/, "").trim() || "Research Article";
-      const coverUrl =
+      const rawCoverUrl =
         (document.querySelector('meta[property="og:image"]')?.getAttribute("content") || "").trim() ||
         (document.querySelector('meta[name="twitter:image"]')?.getAttribute("content") || "").trim();
+      // og:image / twitter:image 里是指向生产域名的绝对 URL；而封面文件按
+      // data/site-master.json 的约定与阅读页同目录。取 basename 相对当前文档解析，
+      // 本地预览与封闭网络的测试不再回源生产域名，站点更换域名也不受影响。
+      const coverUrl = rawCoverUrl ? `./${rawCoverUrl.split("/").pop().split("?")[0]}` : "";
 
       if (topbarEl) {
         topbarEl.innerHTML = `
@@ -1631,12 +1635,17 @@
       return filtered.slice(0, 32);
     }
 
-    const pdfjsLib = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.mjs");
-    const viewerModule = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/web/pdf_viewer.mjs");
+    // PDF.js 全套自托管（vendor 目录名带版本号：升级换目录即自动失效旧缓存）。
+    // 此前运行时依赖 cdn.jsdelivr.net —— jsdelivr 在大陆间歇性不可达时，阅读功能
+    // 整片失效；vendor 化后运行时供应链完全收归本仓库。动态 import 的相对说明符
+    // 按模块 URL 解析（papers/shared/）；worker 与 cMap/standard_fonts 的 URL 由
+    // pdf.js 按文档基址解析，故用 ../../shared/（六个阅读页同为该深度）。
+    const pdfjsLib = await import("./vendor/pdfjs-4.6.82/build/pdf.mjs");
+    const viewerModule = await import("./vendor/pdfjs-4.6.82/web/pdf_viewer.mjs");
     const { EventBus, PDFLinkService, PDFFindController, PDFViewer } = viewerModule;
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
-      "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.mjs";
+      "../../shared/vendor/pdfjs-4.6.82/build/pdf.worker.mjs";
 
     const eventBus = new EventBus();
     const linkService = new PDFLinkService({ eventBus });
@@ -1951,9 +1960,9 @@
       }
       const loadingTask = pdfjsLib.getDocument({
         url: candidateUrl,
-        cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/cmaps/",
+        cMapUrl: "../../shared/vendor/pdfjs-4.6.82/cmaps/",
         cMapPacked: true,
-        standardFontDataUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/standard_fonts/"
+        standardFontDataUrl: "../../shared/vendor/pdfjs-4.6.82/standard_fonts/"
       });
 
       loadingTask.onProgress = ({ loaded, total }) => {

@@ -50,7 +50,10 @@ jobs:
           }
 
           echo "── 运行时产物必须在线（200）──"
-          for p in "" "enhanced-main.css" "scripts/main.js" "data/publications.json" "robots.txt" "sitemap.xml"; do
+          for p in "" "enhanced-main.css" "scripts/main.js" "data/publications.json" "robots.txt" "sitemap.xml" \
+                   "fonts/fonts.css" "fonts/source-sans-3-latin-var.woff2" \
+                   "papers/shared/paper-page.css" \
+                   "papers/shared/vendor/pdfjs-4.6.82/build/pdf.mjs"; do
             code="$(fetch "$BASE/$p")"
             printf '  %-26s %s\n' "/$p" "$code"
             if [ "$code" != "200" ]; then
@@ -69,6 +72,7 @@ jobs:
             "notes/index.Rmd" \
             "notes/book.bib" \
             "beamer_presentation.tex" \
+            "deck-assets/SVCQR.png" \
             "tests/ui/regression.spec.js" \
             "scripts/build-site-data.js" \
             ".gitignore"; do

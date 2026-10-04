@@ -24,6 +24,12 @@ const ROOT = path.resolve(__dirname, "..");
 const FILES = {
   home: path.join(ROOT, "enhanced-main.css"),
   reader: path.join(ROOT, "papers", "shared", "paper-theme.css"),
+  /* paper-page.css：六个阅读页共享的页面布局样式（2026-10-03 从各页逐字节相同的
+     内联 <style> 模板化抽取而来）。它用的是硬编码色值而非 --tf-* 变量，因此
+     下面的色对用「选择器 + 属性」声明；暗色规则形如 :root[data-theme="dark"] X，
+     由选择器直接命中。半透明的 topbar / loading-overlay 背景用 over 声明其在
+     body 底色上的合成结果（rgba 合成，拒绝凭空假设白底）。 */
+  readerPage: path.join(ROOT, "papers", "shared", "paper-page.css"),
   notes: path.join(ROOT, "notes", "style.css")
 };
 
@@ -438,6 +444,154 @@ const CHECKS = [
     label: "Reader TOC link in dark side panel",
     fg: { file: "reader", variable: "--tf-link" },
     bg: { file: "reader", variable: "--tf-paper" }
+  },
+
+  // ---- 论文阅读页布局样式（paper-page.css，硬编码色值 → 选择器声明） ----
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader page body text on page background",
+    fg: { file: "readerPage", selector: "body", property: "color" },
+    bg: { file: "readerPage", selector: "body", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader topbar title on translucent topbar over body",
+    fg: { file: "readerPage", selector: ".topbar-title", property: "color" },
+    bg: {
+      file: "readerPage",
+      selector: ".topbar",
+      property: "background",
+      over: { file: "readerPage", selector: "body", property: "background" }
+    }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader toolbar button label on button surface",
+    fg: { file: "readerPage", selector: ".btn", property: "color" },
+    bg: { file: "readerPage", selector: ".btn", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader page indicator text on indicator chip",
+    fg: { file: "readerPage", selector: ".page-indicator", property: "color" },
+    bg: { file: "readerPage", selector: ".page-indicator", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader side panel heading on panel surface",
+    fg: { file: "readerPage", selector: ".side-panel-title", property: "color" },
+    bg: { file: "readerPage", selector: ".side-panel", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader meta value text on panel surface",
+    fg: { file: "readerPage", selector: ".meta-list .meta-value", property: "color" },
+    bg: { file: "readerPage", selector: ".side-panel", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader meta label text on panel surface",
+    fg: { file: "readerPage", selector: ".meta-label", property: "color" },
+    bg: { file: "readerPage", selector: ".side-panel", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader side panel subtitle on panel surface",
+    fg: { file: "readerPage", selector: ".side-panel-subtitle", property: "color" },
+    bg: { file: "readerPage", selector: ".side-panel", property: "background" }
+  },
+  {
+    scope: "readerPage.light",
+    theme: "light",
+    min: 4.5,
+    label: "Reader TOC link on panel surface",
+    fg: { file: "readerPage", selector: ".toc-link", property: "color" },
+    bg: { file: "readerPage", selector: ".side-panel", property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader page body text on dark page background",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] body', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] body', property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark topbar title on translucent dark topbar",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .topbar-title', property: "color" },
+    bg: {
+      file: "readerPage",
+      selector: ':root[data-theme="dark"] .topbar',
+      property: "background",
+      over: { file: "readerPage", selector: ':root[data-theme="dark"] body', property: "background" }
+    }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark toolbar button label on button surface",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .btn', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] .btn', property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark page indicator text on indicator chip",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .page-indicator', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] .page-indicator', property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark side panel heading on dark panel surface",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .side-panel-title', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] .side-panel', property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark meta value text on dark panel surface",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .meta-list .meta-value', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] .side-panel', property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark meta label text on dark panel surface",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .meta-label', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] .side-panel', property: "background" }
+  },
+  {
+    scope: "readerPage.dark",
+    theme: "dark",
+    min: 4.5,
+    label: "Reader dark TOC link on dark panel surface",
+    fg: { file: "readerPage", selector: ':root[data-theme="dark"] .toc-link', property: "color" },
+    bg: { file: "readerPage", selector: ':root[data-theme="dark"] .side-panel', property: "background" }
   },
 
   // ---- Bookdown 阅读页 ----

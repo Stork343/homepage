@@ -183,12 +183,15 @@ function buildIndexHtml(root) {
   const indexPath = path.join(root, "index.html");
   const cssPath = path.join(root, "enhanced-main.css");
   const jsPath = path.join(root, "scripts", "main.js");
+  const fontsCssPath = path.join(root, "fonts", "fonts.css");
   const jsSource = fs.readFileSync(jsPath, "utf8");
   let html = fs.readFileSync(indexPath, "utf8");
   const cssHash = hashText(fs.readFileSync(cssPath, "utf8"));
   const jsHash = hashText(jsSource);
+  const fontsHash = hashText(fs.readFileSync(fontsCssPath, "utf8"));
   html = html.replace(/(enhanced-main\.css\?v=)[^"']+/g, `$1${cssHash}`);
   html = html.replace(/(scripts\/main\.js\?v=)[^"']+/g, `$1${jsHash}`);
+  html = html.replace(/(fonts\/fonts\.css\?v=)[^"']+/g, `$1${fontsHash}`);
   // footer_text 刻意回填**静态兜底值**（"© 2026 HOU Jian."）而非带日期的模板渲染结果：
   // site-updated.generated.json 写的是 todayInSiteTimeZone()，每天都在变（--check 模式
   // 也因此对它专门豁免）。若把当天日期烤进 index.html，这个文件就会天天不同、
@@ -199,11 +202,15 @@ function buildIndexHtml(root) {
 
 /* 六个阅读页共享 papers/shared/ 下的 paper-reader.js 与 paper-theme.css，
    各自的 ?v= 缓存串此前纯手工维护且已过期（改过共享文件却不换串，回访用户
-   永远拿旧缓存）。改为与 index.html 同一套 sha1(10) 内容哈希自动同步。 */
+   永远拿旧缓存）。改为与 index.html 同一套 sha1(10) 内容哈希自动同步。
+   fonts/fonts.css 同为 index.html 与六个阅读页共享的自托管字体表，一并纳入；
+   paper-page.css 是从六页抽取的共享布局样式（原内联块的模板化），同样纳入。 */
 function readerAssetHashes(root) {
   return {
     js: hashText(fs.readFileSync(path.join(root, "papers", "shared", "paper-reader.js"), "utf8")),
-    css: hashText(fs.readFileSync(path.join(root, "papers", "shared", "paper-theme.css"), "utf8"))
+    css: hashText(fs.readFileSync(path.join(root, "papers", "shared", "paper-theme.css"), "utf8")),
+    pageCss: hashText(fs.readFileSync(path.join(root, "papers", "shared", "paper-page.css"), "utf8")),
+    fontsCss: hashText(fs.readFileSync(path.join(root, "fonts", "fonts.css"), "utf8"))
   };
 }
 
@@ -215,7 +222,9 @@ function buildPaperPageHtml(root, relPath, hashes) {
   return fs
     .readFileSync(filePath, "utf8")
     .replace(/(paper-reader\.js\?v=)[^"']+/g, `$1${hashes.js}`)
-    .replace(/(paper-theme\.css\?v=)[^"']+/g, `$1${hashes.css}`);
+    .replace(/(paper-theme\.css\?v=)[^"']+/g, `$1${hashes.css}`)
+    .replace(/(paper-page\.css\?v=)[^"']+/g, `$1${hashes.pageCss}`)
+    .replace(/(fonts\/fonts\.css\?v=)[^"']+/g, `$1${hashes.fontsCss}`);
 }
 
 function normalizeRelPath(input) {

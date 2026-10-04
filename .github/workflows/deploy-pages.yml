@@ -74,6 +74,9 @@ jobs:
           cp index.html enhanced-main.css robots.txt sitemap.xml hj.jpg hj.webp _site/
           cp .nojekyll _site/
 
+          # ── 自托管字体（原 Google Fonts css2：render-blocking 且大陆不可达）──
+          cp -R fonts _site/fonts
+
           # ── 运行时唯一被引用的脚本 ──
           cp scripts/main.js _site/scripts/
 
@@ -86,6 +89,8 @@ jobs:
              _site/data/
 
           # ── 图标、论文封面与阅读页 ──
+          # papers/ 整目录复制（含 shared/vendor 的自托管 PDF.js 与 paper-page.css）；
+          # deck 专用图片已迁 deck-assets/（不复制），validate-site.js 有防回流断言。
           cp -R icon _site/icon
           cp -R papers _site/papers
           rm -f _site/papers/README.md
@@ -128,7 +133,7 @@ jobs:
               exit 1
             fi
           done
-          for forbidden_dir in tests .github docs scripts/ops .vscode; do
+          for forbidden_dir in tests .github docs scripts/ops .vscode deck-assets; do
             if [ -e "_site/$forbidden_dir" ]; then
               echo "::error::白名单越界：_site/$forbidden_dir 不应被发布"
               exit 1

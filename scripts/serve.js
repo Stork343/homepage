@@ -8,13 +8,24 @@ const PORT = Number(process.argv[2] || process.env.PORT || 4173);
 const MIME = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript",
-  ".json": "application/json",
+  // 2026-10-03：papers/shared/vendor/（自托管 PDF.js）与 fonts/（自托管字体）上线后，
+  // serve.js 必须正确伺服这些类型——模块脚本与 module worker 对 MIME 做严格校验，
+  // application/octet-stream 会被浏览器直接拒绝执行（动态 import 与 Worker 均失败，
+  // 症状为阅读页 16 个用例集体超时）。GitHub Pages 对这些扩展名本就返回正确 MIME，
+  // 此处补齐只是让本地/CI 预览与生产行为一致。
+  ".mjs": "text/javascript",
   ".css": "text/css",
+  ".json": "application/json",
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
+  ".gif": "image/gif",
   ".svg": "image/svg+xml",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+  ".otf": "font/otf",
   ".pdf": "application/pdf",
   ".tex": "text/plain",
   ".txt": "text/plain",

@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap");
+/* 2026-10-03：原先此处 @import fonts.googleapis.com（Montserrat + Source Serif 4 +
+   Source Sans 3）。该 @import 是渲染阻塞链的一环，且 fonts.googleapis.com 在大陆
+   不可达会让阅读页长时间白屏。字体已全部自托管：六个阅读页统一经由
+   ../../fonts/fonts.css 加载（Montserrat / Source Serif 4 / Source Sans 3，
+   variable woff2 + unicode-range 子集），本文件只保留字体家族的引用。 */
 
 :root {
   --tf-blue: #204c8b;
