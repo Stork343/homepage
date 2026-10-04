@@ -52,6 +52,11 @@ jobs:
           RELEASE_MESSAGE: ${{ github.event.inputs.message }}
         run: |
           set -euo pipefail
+          # release.sh 会 `git tag -a`（附注 tag）并向 main 推 tag 与提交：
+          # CI runner 默认没有 git 身份，附注 tag 会以「empty ident name」失败
+          # （run 37186371441 的实测教训 —— 本 workflow 历史上首次真实运行）。
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if ! printf '%s' "$RELEASE_TAG" | grep -Eq '^v[0-9]{4}\.[0-9]{2}\.[0-9]{2}(-[0-9A-Za-z.]+)?$'; then
             echo "::error::非法 tag 形状：${RELEASE_TAG}（期望 vYYYY.MM.DD，与现有 v2026.02.24 一致）"
             exit 1
