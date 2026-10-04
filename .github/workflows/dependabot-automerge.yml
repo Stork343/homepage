@@ -1,0 +1,75 @@
+# Dependabot PR 的自动合并（仅 minor/patch）
+#
+# 背景（2026-10-03）：6 个 dependabot PR 积压了 5 天没人理。依赖更新本该是
+# 「CI 绿即并入」的低风险操作——积压反而制造风险（落后越多越难合）。
+#
+# 策略（保守）：
+#   · 只对**单依赖**、且版本变化为 minor 或 patch 的 PR 启用 GitHub 原生
+#     auto-merge（CI 全绿后自动 squash 并入）；
+#   · major 升级（如 actions/checkout v4 → v7）必须人工评审——破坏性变更
+#     无法靠「CI 绿」排除（部署 workflow 的行为只有真部署才验证得到）；
+#   · 分组更新（"bump the X group with N updates"）标题不含版本信息，
+#     一律留给人工。
+#   · PR 被改标题/加提交会重新触发（synchronize），重新评估。
+#
+# 权限：GITHUB_TOKEN 需 contents:write + pull-requests:write（合并）与
+# workflows:write（被合并 PR 若修改 workflow 文件；OAuth token 的同类限制
+# 不适用于 GITHUB_TOKEN）。
+# 注意：依赖 enable-auto-merge 的仓库设置（已开启）。若将来关掉该设置，
+# `gh pr merge --auto` 会报错，错误信息会出现在本 job 日志里。
+
+name: Dependabot Auto-merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+  workflows: write
+
+concurrency:
+  group: dependabot-automerge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  automerge:
+    name: Enable auto-merge for safe dependency bumps
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Classify the bump and enable auto-merge when safe
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+
+          echo "PR: $PR_TITLE"
+
+          # 提取 "from A to B"（单依赖 PR 的标题约定）。分组更新不含该模式 → 跳过。
+          if ! [[ "$PR_TITLE" =~ from[[:space:]]([^[:space:]]+)[[:space:]]to[[:space:]]([^[:space:]]+) ]]; then
+            echo "→ 无逐版本信息（分组更新或非标准标题），留给人工评审。"
+            exit 0
+          fi
+          FROM="${BASH_REMATCH[1]#v}"
+          TO="${BASH_REMATCH[2]#v}"
+
+          major_of() { printf '%s' "$1" | cut -d. -f1; }
+
+          # 非语义化版本（SHA 引用等）→ 无法判定，保守跳过
+          if ! [[ "$(major_of "$FROM")" =~ ^[0-9]+$ ]] || ! [[ "$(major_of "$TO")" =~ ^[0-9]+$ ]]; then
+            echo "→ 版本号不可解析（$FROM → $TO），留给人工评审。"
+            exit 0
+          fi
+
+          if [ "$(major_of "$FROM")" != "$(major_of "$TO")" ]; then
+            echo "→ major 升级（$FROM → $TO），留给人工评审。"
+            exit 0
+          fi
+
+          echo "→ minor/patch 升级（$FROM → $TO），启用 auto-merge（CI 全绿后自动 squash）。"
+          gh pr merge "$PR_URL" --auto --squash
