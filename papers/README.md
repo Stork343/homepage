@@ -10,10 +10,30 @@ This directory is organized by publication year and paper id:
   - `paper-reader.js` — reader runtime shared by every reader page
   - `paper-theme.css` — reader theme; the single source of truth for the
     `--tf-*` colour variables that `scripts/check-contrast.js` resolves
+  - `paper-page.css` — page-layout stylesheet shared by every reader page
+    (extracted byte-identically from the six pages' formerly duplicated
+    inline `<style>` blocks; layout fixes now land once instead of six
+    times, and the runtime sidebar rebuild no longer discards them)
+  - `vendor/pdfjs-4.6.82/` — the PDF.js runtime (build, viewer, cmaps,
+    standard fonts) vendored from the official `pdfjs-dist` npm tarball so
+    reader pages load everything same-origin instead of from
+    cdn.jsdelivr.net (intermittently unreachable in mainland China). The
+    version-suffixed directory name doubles as the cache-buster when the
+    library is upgraded: replace the directory, update the four paths in
+    `paper-reader.js` plus the `pdf_viewer.css` link in the reader pages.
 
-Both shared files are content-hashed into the `?v=` query string of the six
-reader pages by `scripts/build-site-data.js`, so editing either one and
-forgetting to re-run the generator is caught by `npm run check:data`.
+All four shared runtime files are content-hashed into the `?v=` query string
+of the six reader pages by `scripts/build-site-data.js` (together with
+`fonts/fonts.css`, which the reader pages reference via `../../../fonts/`),
+so editing any of them and forgetting to re-run the generator is caught by
+`npm run check:data`.
+
+Images used only by the local Beamer deck (`beamer_presentation.tex`) live
+in `deck-assets/` at the repository root, **not** here: this directory is
+copied wholesale into the deploy artifact, and `scripts/validate-site.js`
+fails on any image under `papers/` that no site file or data entry
+references, so deck-only assets cannot silently re-enter the published
+surface.
 
 ## Fulltext policy
 
@@ -49,7 +69,8 @@ caught in CI rather than after publication.
   `poisson-rr/`, `snqesa/`, `svcqr/`
 - `2026/` — `qapsm-icu-bp/`, `qtr-oc/`, `qvsd-spatiotemporal-extremes/`,
   `salcdi-scarce-outcomes/`, `toms-sssvcqr/`, `tplaqr/`
-- `shared/` — `paper-reader.js`, `paper-theme.css`
+- `shared/` — `paper-reader.js`, `paper-theme.css`, `paper-page.css`,
+  `vendor/pdfjs-4.6.82/`
 
 Directories without a reader page hold cover or figure images only.
 

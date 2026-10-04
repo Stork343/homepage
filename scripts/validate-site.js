@@ -496,10 +496,65 @@ function run() {
       });
   }
 
+  // 体检遗留（audit-2026-09-18 §2.1 的建议，2026-10-03 实施）：papers/ 只许放站点
+  // 运行时内容。beamer deck 专用图片此前混在 papers/ 下（web 侧零引用），却随
+  // deploy 的 `cp -R papers` 整目录进入 _site——9 张图约 7.7MB 死重公开可下载。
+  // 现已迁至 deck-assets/（入库、不部署）。本断言遍历 papers/ 下的图片文件
+  // （papers/shared/vendor/ 的 PDF.js 资产除外），与站点引用面求差：
+  //   index.html + data/*.json（含 SSOT，hidden 条目的封面也计入）
+  //   + papers/**/*.html + scripts/main.js + papers/shared/paper-reader.js
+  // 出现孤儿即判失败——deck 专用图片请放 deck-assets/，别再放回 papers/。
+  // 匹配用 basename：任何真实引用（含 og:image 的绝对 URL）都会出现同名串，
+  // 只可能放过不可能误伤。
+  const PAPER_IMAGE_RE = /\.(png|jpe?g|webp)$/i;
+  const collectFiles = (dir, filter) => {
+    const out = [];
+    if (!fs.existsSync(dir)) return out;
+    for (const entry of fs.readdirSync(dir).sort()) {
+      const abs = path.join(dir, entry);
+      if (fs.statSync(abs).isDirectory()) {
+        out.push(...collectFiles(abs, filter));
+      } else if (filter(entry)) {
+        out.push(abs);
+      }
+    }
+    return out;
+  };
+  const referencePaths = [
+    path.join(ROOT, "index.html"),
+    path.join(ROOT, "scripts", "main.js"),
+    path.join(ROOT, "papers", "shared", "paper-reader.js"),
+    ...collectFiles(path.join(ROOT, "data"), (name) => name.endsWith(".json")),
+    ...collectFiles(path.join(ROOT, "papers"), (name) => name.endsWith(".html"))
+  ];
+  const referenceText = referencePaths
+    .map((abs) => {
+      try {
+        return fs.readFileSync(abs, "utf8");
+      } catch {
+        return "";
+      }
+    })
+    .join("\n");
+  const paperImages = collectFiles(path.join(ROOT, "papers"), (name) => PAPER_IMAGE_RE.test(name)).filter(
+    (abs) => !abs.split(path.sep).includes("vendor")
+  );
+  const orphanImages = paperImages.filter((abs) => !referenceText.includes(path.basename(abs)));
+  if (orphanImages.length > 0) {
+    for (const abs of orphanImages) {
+      fail(
+        `papers/ contains web-unreferenced image "${path.relative(ROOT, abs)}" (deck-only asset?). ` +
+          `Deck images belong in deck-assets/; if this file is really used by the site, ` +
+          `reference it from data/site-master.json or a page.`
+      );
+    }
+    return;
+  }
+
   if (!process.exitCode) {
     ok(
       `Publications data, paper page config, and reader capabilities are valid ` +
-        `(${imageSizeChecked} cover image dimensions verified).`
+        `(${imageSizeChecked} cover image dimensions verified, ${paperImages.length}/${paperImages.length} papers/ images web-referenced).`
     );
   }
 }
