@@ -12,11 +12,15 @@
 #     一律留给人工。
 #   · PR 被改标题/加提交会重新触发（synchronize），重新评估。
 #
-# 权限：GITHUB_TOKEN 需 contents:write + pull-requests:write（合并）与
-# workflows:write（被合并 PR 若修改 workflow 文件；OAuth token 的同类限制
-# 不适用于 GITHUB_TOKEN）。
-# 注意：依赖 enable-auto-merge 的仓库设置（已开启）。若将来关掉该设置，
-# `gh pr merge --auto` 会报错，错误信息会出现在本 job 日志里。
+# 权限：GITHUB_TOKEN 需要 contents:write（squash 合并产生提交）与
+# pull-requests:write（写 auto-merge 状态）。
+# 注意：GITHUB_TOKEN 的 permissions 块不承认 workflows scope（合并「修改了
+# workflow 文件的 PR」靠 contents:write 即可，OAuth 用户 token 才受 workflow
+# scope 限制）——多写它会令整个文件在解析层被拒（run 37185841984 的
+# 0 秒失败即由此而来）。
+# 前置：仓库设置 allow_auto_merge 已开启（gh api -X PATCH -f
+# allow_auto_merge=true）；若将来关掉，`gh pr merge --auto` 会报错，错误
+# 信息会出现在本 job 日志里。
 
 name: Dependabot Auto-merge
 
@@ -27,7 +31,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  workflows: write
 
 concurrency:
   group: dependabot-automerge-${{ github.event.pull_request.number }}
